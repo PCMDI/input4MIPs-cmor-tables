@@ -1,0 +1,54 @@
+{
+"CV": {
+    "required_global_attributes":
+        [
+        "activity_id",
+        "Conventions",
+        "creation_date",
+        "dataset_version",
+        "mip_era",
+        "further_info_url",
+        "frequency",
+        "grid",
+        "grid_label",
+        "grid_resolution",
+        "institution",
+        "institution_id",
+        "license",
+        "product",
+        "realm",
+        "source",
+        "source_id",
+        "table_id",
+        "title",
+        "tracking_id",
+        "variable_id"
+        ],
+
+    "product": [ "derived", "observations", "reanalysis" ] ,
+
+    "mip_era": [ "CMIP6" ],
+
+    "frequency": [ "3hr", "6hr", "day", "fx", "mon", "monClim", "subhr", "yr" ],
+
+    "further_info_url": [ "[[:alpha:]]\\{1,\\}" ],
+
+    "activity_id": [ "input4MIPs" ],
+
+    "source_ids": { "PCMDI": "PCMDI:" },
+
+    "institution_ids": { "PCMDI":"Program for Climate Model Diagnosis and Intercomparison (LLNL), Livermore, CA, USA" },
+
+    "grid_labels": {
+        "gs1x1":     { "grid_resolution":"1x1 degree" },
+        "gs1x1 gn":  { "grid_resolution":"1x1 degree" },
+        "gs1x1 gr":  { "grid_resolution":"1x1 degree" },
+        "gn": { "grid_resolution":[  "5 km",   "10 km",   "25 km",   "50 km",   "100 km", "250 km",
+                "500 km", "1000 km", "2500 km", "5000 km", "10000 km" ] },
+        "gr":  { "grid_resolution":[  "5 km",   "10 km",   "25 km",   "50 km",   "100 km", "250 km",
+                "500 km", "1000 km", "2500 km", "5000 km", "10000 km" ] }
+         },
+
+    "#license": [ "CMIP6 model data produced by [[:alpha:]]\\{1,\\} is licensed under a Creative Commons Attribution \\“[NonCommercial] Share Alike\\” 4.0 International License \\(http\\://creativecommons.org/licenses/by/4.0/). Use of the data should be acknowledged following guidelines found at https://pcmdi.llnl.gov/home/CMIP6/citation.html. The data is made available via the Earth System Grid Federation. [Permissions beyond the scope of this license may be available at [[:alpha:]]\\{1,\\} .]   Individuals using this data should register at [[:alpha:]]\\{1,\\} to receive notice of selected categories of errata and updates. [Further information about this data, including some limitations, can be found at [[:alpha:]]\\{1,\\} .]  The data producers and data providers make no warranty, either express or implied, including but not limited to, warranties of merchantability and fitness for a particular purpose. All liabilities arising from the supply of the information (including any liability arising in negligence) are excluded to the fullest extent permitted by law." ],
+    }
+}
