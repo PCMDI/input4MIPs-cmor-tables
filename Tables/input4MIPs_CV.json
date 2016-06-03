@@ -15,6 +15,7 @@
         "institution",
         "institution_id",
         "license",
+        "mip_era",
         "product",
         "realm",
         "source",
@@ -37,7 +38,7 @@
 
     "source_ids": { "PCMDI": "PCMDI:" },
 
-    "institution_ids": { "PCMDI":"Program for Climate Model Diagnosis and Intercomparison (LLNL), Livermore, CA, USA" },
+    "institution_ids": { "PCMDI": "Program for Climate Model Diagnosis and Intercomparison (LLNL), Livermore, CA, USA" },
 
     "grid_labels": {
         "gs1x1":     { "grid_resolution":"1x1 degree" },
