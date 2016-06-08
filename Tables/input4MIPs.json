@@ -79,6 +79,28 @@
             "valid_max": "",
             "axis": "T"
         },
+        "time2": {
+            "requested": "",
+            "stored_direction": "increasing",
+            "z_factors": "",
+            "positive": "",
+            "must_have_bounds": "no",
+            "valid_min": "",
+            "requested_bounds": "",
+            "z_bounds_factors": "",
+            "bounds_values": "",
+            "long_name": "time",
+            "standard_name": "time",
+            "value": "",
+            "out_name": "time",
+            "type": "double",
+            "units": "days since ?",
+            "formula": "",
+            "climatology": "",
+            "tolerance": "",
+            "valid_max": "",
+            "axis": "T"
+        },
     },
     "variable_entry": {
         "areacello": {
@@ -119,7 +141,7 @@
     	},
         "siconcbcs": {
             "comment": "Area fraction of grid cell covered by sea ice",
-            "dimensions": "longitude latitude time",
+            "dimensions": "longitude latitude time2",
             "positive": "",
             "long_name": "Constructed mid-month Sea-ice area fraction",
             "standard_name": "sea_ice_area_fraction",
@@ -155,7 +177,7 @@
         },
         "tosbcs": {
             "comment": "this may differ from 'surface temperature' in regions of sea ice.",
-            "dimensions": "longitude latitude time",
+            "dimensions": "longitude latitude time2",
             "positive": "",
             "long_name": "Constructed mid-month Sea Surface Temperature",
             "standard_name": "sea_surface_temperature",
