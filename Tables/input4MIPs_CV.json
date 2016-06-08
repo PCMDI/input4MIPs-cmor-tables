@@ -5,7 +5,7 @@
         "activity_id",
         "Conventions",
         "creation_date",
-        "dataset_version",
+        "dataset_version_number",
         "mip_era",
         "further_info_url",
         "frequency",
@@ -26,7 +26,7 @@
         "variable_id"
         ],
 
-    "product": [ "derived", "observations", "reanalysis" ] ,
+    "product": [ "derived", "observations", "reanalysis" ],
 
     "mip_era": [ "CMIP6" ],
 
