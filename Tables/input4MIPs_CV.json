@@ -21,6 +21,7 @@
         "source",
         "source_id",
         "table_id",
+        "target_mip",
         "title",
         "tracking_id",
         "variable_id"
