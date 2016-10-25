@@ -3,14 +3,14 @@
         "mip_era": "CMIP6",
         "approx_interval": "30.00000",
         "realm": "ocean seaIce",
-        "cmor_version": "3.0",
+        "cmor_version": "3.1",
         "Conventions": "CF-1.7 CMIP-6.0",
         "frequency": "mon",
         "table_id": "input4MIPs",
-        "data_specs_version": "0.1.beta.29",
+        "data_specs_version": "0.1.beta.37",
         "generic_levels": "",
         "missing_value": "1e20",
-        "table_date": "2 June 2016"
+        "table_date": "20 October 2016"
     },
     "axis_entry": {
         "latitude": {
