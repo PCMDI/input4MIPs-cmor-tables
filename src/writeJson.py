@@ -8,6 +8,7 @@ Paul J. Durack 12th July 2016
 This script generates all json files residing this this subdirectory
 
 PJD 27 Feb 2017     - Copied from obs4MIPs-cmor-tables and updated inputs
+PJD  6 Apr 2017     - Updated to include IACETH institution_id
                     - TODO:
 
 @author: durack1
@@ -81,6 +82,7 @@ for count2,table in enumerate(tableSource):
 institution_id = {}
 institution_id['institution_id'] = {}
 institution_id['institution_id']['CNRM-Cerfacs'] = 'CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31100, France)'
+institution_id['institution_id']['IACETH'] = 'Institute for Atmosphere and Climate, ETH Zurich, Zurich 8092, Switzerland'
 institution_id['institution_id']['PCMDI'] = 'Program for Climate Model Diagnosis and Intercomparison, Lawrence Livermore National Laboratory, Livermore, CA 94550, USA'
 institution_id['institution_id']['PNNL-JGCRI'] = 'Pacific Northwest National Laboratory - Joint Global Change Research Institute, Richland, WA 99352, USA '
 institution_id['institution_id']['SOLARIS-HEPPA'] = 'SOLARIS-HEPPA, GEOMAR Helmholtz Centre for Ocean Research, Kiel 24105, Germany'
