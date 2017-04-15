@@ -233,7 +233,7 @@ institution_id['SOLARIS-HEPPA'] = 'SOLARIS-HEPPA, GEOMAR Helmholtz Centre for Oc
 institution_id['UColorado'] = 'University of Colorado, Boulder, CO 80309, USA'
 institution_id['UReading'] = 'University of Reading, Reading RG6 6UA, UK'
 institution_id['UoM'] = 'Australian-German Climate & Energy College, The University of Melbourne (UoM), Parkville, Victoria 3010, Australia'
-institution_id['UofMD'] = 'University of Maryland(UofMD), College Park, MD 20742, USA'
+institution_id['UofMD'] = 'University of Maryland (UofMD), College Park, MD 20742, USA'
 institution_id['VUA'] = 'Vrije Universiteit Amsterdam, De Boelelaan 1105, 1081 HV Amsterdam, Netherlands'
 #==============================================================================
 # Example new experiment_id entry
