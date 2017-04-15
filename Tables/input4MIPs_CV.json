@@ -1,60 +1,141 @@
 {
-"CV": {
-    "required_global_attributes":
-        [
-        "activity_id",
-        "Conventions",
-        "creation_date",
-        "dataset_version_number",
-        "mip_era",
-        "further_info_url",
-        "frequency",
-        "grid",
-        "grid_label",
-        "grid_resolution",
-        "institution",
-        "institution_id",
-        "license",
-        "mip_era",
-        "product",
-        "realm",
-        "source",
-        "source_id",
-        "table_id",
-        "target_mip",
-        "title",
-        "tracking_id",
-        "variable_id"
+    "CV":{
+        "activity_id":[
+            "input4MIPs"
         ],
-
-    "product": [ "derived", "observations", "reanalysis" ],
-
-    "mip_era": [ "CMIP6" ],
-
-    "frequency": [ "3hr", "6hr", "day", "fx", "mon", "monClim", "subhr", "yr" ],
-
-    "further_info_url": [ "[[:alpha:]]\\{1,\\}" ],
-
-    "activity_id": [ "input4MIPs" ],
-
-    "source_ids": { "PCMDI": "PCMDI:" },
-
-    "institution_ids": { "PCMDI": "Program for Climate Model Diagnosis and Intercomparison (LLNL), Livermore, CA, USA" },
-
-    "grid_labels": [
-        "gn",
-        "gr",
-        "gr1",
-        "gr2",
-        "gr3",
-        "gr4",
-        "gr5",
-        "gr6",
-        "gr7",
-        "gr8",
-        "gr9"
-    ],
-
-    "#license": [ "CMIP6 model data produced by [[:alpha:]]\\{1,\\} is licensed under a Creative Commons Attribution \\“[NonCommercial] Share Alike\\” 4.0 International License \\(http\\://creativecommons.org/licenses/by/4.0/). Use of the data should be acknowledged following guidelines found at https://pcmdi.llnl.gov/home/CMIP6/citation.html. The data is made available via the Earth System Grid Federation. [Permissions beyond the scope of this license may be available at [[:alpha:]]\\{1,\\} .]   Individuals using this data should register at [[:alpha:]]\\{1,\\} to receive notice of selected categories of errata and updates. [Further information about this data, including some limitations, can be found at [[:alpha:]]\\{1,\\} .]  The data producers and data providers make no warranty, either express or implied, including but not limited to, warranties of merchantability and fitness for a particular purpose. All liabilities arising from the supply of the information (including any liability arising in negligence) are excluded to the fullest extent permitted by law." ],
+        "frequency":[
+            "1hr",
+            "1hrClimMon",
+            "3hr",
+            "3hrClim",
+            "6hr",
+            "day",
+            "decadal",
+            "fx",
+            "mon",
+            "monClim",
+            "subhr",
+            "yr",
+            "yrClim"
+        ],
+        "further_info_url":[
+            "[[:alpha:]]\\{1,\\}"
+        ],
+        "grid_label":[
+            "gm",
+            "gn",
+            "gna",
+            "gng",
+            "gnz",
+            "gr",
+            "gr1",
+            "gr1a",
+            "gr1g",
+            "gr1z",
+            "gr2",
+            "gr2a",
+            "gr2g",
+            "gr2z",
+            "gr3",
+            "gr3a",
+            "gr3g",
+            "gr3z",
+            "gr4",
+            "gr4a",
+            "gr4g",
+            "gr4z",
+            "gr5",
+            "gr5a",
+            "gr5g",
+            "gr5z",
+            "gr6",
+            "gr6a",
+            "gr6g",
+            "gr6z",
+            "gr7",
+            "gr7a",
+            "gr7g",
+            "gr7z",
+            "gr8",
+            "gr8a",
+            "gr8g",
+            "gr8z",
+            "gr9",
+            "gr9a",
+            "gr9g",
+            "gr9z",
+            "gra",
+            "grg",
+            "grz"
+        ],
+        "institution_id":{
+            "CNRM-Cerfacs":"CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31100, France)",
+            "IACETH":"Institute for Atmosphere and Climate, ETH Zurich, Zurich 8092, Switzerland",
+            "PCMDI":"Program for Climate Model Diagnosis and Intercomparison, Lawrence Livermore National Laboratory, Livermore, CA 94550, USA",
+            "PNNL-JGCRI":"Pacific Northwest National Laboratory - Joint Global Change Research Institute, Richland, WA 99352, USA ",
+            "SOLARIS-HEPPA":"SOLARIS-HEPPA, GEOMAR Helmholtz Centre for Ocean Research, Kiel 24105, Germany",
+            "UColorado":"University of Colorado, Boulder, CO 80309, USA",
+            "UReading":"University of Reading, Reading RG6 6UA, UK",
+            "UoM":"Australian-German Climate & Energy College, The University of Melbourne (UoM), Parkville, Victoria 3010, Australia",
+            "UofMD":"University of Maryland(UofMD), College Park, MD 20742, USA",
+            "VUA":"Vrije Universiteit Amsterdam, De Boelelaan 1105, 1081 HV Amsterdam, Netherlands"
+        },
+        "license":"<Your_Data_Identifier> data produced by <Your_Centre_Name> is licensed under a Creative Commons Attribution-[NonCommercial-]ShareAlike 4.0 International License (https://creativecommons.org/licenses). Consult https://pcmdi.llnl.gov/CMIP6/TermsOfUse for terms of use governing input4MIPs output, including citation requirements and proper acknowledgment. Further information about this data, including some limitations, can be found via the further_info_url (recorded as a global attribute in this file). The data producers and data providers make no warranty, either express or implied, including, but not limited to, warranties of merchantability and fitness for a particular purpose. All liabilities arising from the supply of the information (including any liability arising in negligence) are excluded to the fullest extent permitted by law.",
+        "mip_era":[
+            "CMIP1",
+            "CMIP2",
+            "CMIP3",
+            "CMIP5",
+            "CMIP6"
+        ],
+        "nominal_resolution":[
+            "0.5 km",
+            "1 km",
+            "10 km",
+            "100 km",
+            "1000 km",
+            "10000 km",
+            "1x1 degree",
+            "2.5 km",
+            "25 km",
+            "250 km",
+            "2500 km",
+            "5 km",
+            "50 km",
+            "500 km",
+            "5000 km"
+        ],
+        "product":[
+            "derived",
+            "observations",
+            "reanalysis"
+        ],
+        "required_global_attributes":[
+            "Conventions",
+            "activity_id",
+            "contact",
+            "creation_date",
+            "dataset_category",
+            "dataset_version_number",
+            "frequency",
+            "further_info_url",
+            "grid_label",
+            "institution",
+            "institution_id",
+            "license",
+            "mip_era",
+            "nominal_resolution",
+            "realm",
+            "source",
+            "source_id",
+            "table_id",
+            "target_mip",
+            "title",
+            "tracking_id",
+            "variable_id"
+        ],
+        "source_id":{
+            "PCMDI":"PCMDI:"
+        }
     }
 }

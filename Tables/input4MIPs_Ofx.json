@@ -1,0 +1,52 @@
+{
+    "Header":{
+        "Conventions":"CF-1.7 CMIP-6.0",
+        "approx_interval":"",
+        "cmor_version":"3.2",
+        "data_specs_version":"01.00.06",
+        "frequency":"fx",
+        "generic_levels":"",
+        "mip_era":"CMIP6",
+        "missing_value":"1e20",
+        "product":"input4MIPs",
+        "realm":"ocean",
+        "table_date":"14 April 2017",
+        "table_id":"Table input4MIPs_Ofx"
+    },
+    "variable_entry":{
+        "areacello":{
+            "cell_measures":"area: areacello",
+            "cell_methods":"area: mean",
+            "comment":"Horizontal area of ocean grid cells",
+            "dimensions":"longitude latitude",
+            "long_name":"Ocean Grid-Cell Area",
+            "modeling_realm":"ocean",
+            "ok_max_mean_abs":"",
+            "ok_min_mean_abs":"",
+            "out_name":"areacello",
+            "positive":"",
+            "standard_name":"cell_area",
+            "type":"real",
+            "units":"m2",
+            "valid_max":"",
+            "valid_min":""
+        },
+        "sftof":{
+            "cell_measures":"area: areacello",
+            "cell_methods":"area: mean",
+            "comment":"This is the area fraction at the ocean surface.",
+            "dimensions":"longitude latitude",
+            "long_name":"Sea Area Fraction",
+            "modeling_realm":"ocean",
+            "ok_max_mean_abs":"",
+            "ok_min_mean_abs":"",
+            "out_name":"sftof",
+            "positive":"",
+            "standard_name":"sea_area_fraction",
+            "type":"real",
+            "units":"%",
+            "valid_max":"",
+            "valid_min":""
+        }
+    }
+}
