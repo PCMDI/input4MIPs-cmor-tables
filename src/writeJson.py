@@ -14,6 +14,8 @@ PJD 14 Apr 2017     - Updated to deal with table quirks
 PJD 14 Apr 2017     - Corrected cell_methods for Omon and SImon tables
 PJD 14 Apr 2017     - Updated table_id
 PJD 14 Apr 2017     - Updated Omon tos entry, corrected erroneous standard_name and comment
+PJD 18 Apr 2017     - Updated inputs again and upgraded to CMOR 3.2.3
+PJD 18 Apr 2017     - Corrected siconc cell_methods format
                     - TODO:
 
 @author: durack1
@@ -197,10 +199,11 @@ SImonCleanup = ['siage','sialb','siareaacrossline','siarean','siareas',
                 'sndmasssubl','sndmasswindrif','snmassacrossline']
 for clean in SImonCleanup:
     tmp = SImon['variable_entry'].pop(clean)
-SImon['variable_entry']['siconc']['cell_methods'] = 'time: mean'
+SImon['variable_entry']['siconc']['cell_methods'] = 'area: time: mean'
+SImon['variable_entry']['siconc']['cell_measures'] = 'area: areacello'
 SImon['variable_entry']['siconcbcs'] = copy.deepcopy(SImon['variable_entry']['siconc'])
-SImon['variable_entry']['siconcbcs']['cell_measures'] = 'area: areacello'
-SImon['variable_entry']['siconcbcs']['cell_methods'] = 'time: point'
+#SImon['variable_entry']['siconcbcs']['cell_measures'] = 'area: areacello' ; # footprint
+SImon['variable_entry']['siconcbcs']['cell_methods'] = 'time: point' ; # area: time: mean
 SImon['variable_entry']['siconcbcs']['dimensions'] = 'longitude latitude time2'
 SImon['variable_entry']['siconcbcs']['long_name'] = 'Constructed mid-month Sea-ice area fraction'
 SImon['variable_entry']['siconcbcs']['out_name'] = 'siconcbcs'

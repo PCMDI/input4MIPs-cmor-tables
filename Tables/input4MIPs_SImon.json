@@ -10,13 +10,13 @@
         "missing_value":"1e20",
         "product":"input4MIPs",
         "realm":"seaIce",
-        "table_date":"14 April 2017",
+        "table_date":"18 April 2017",
         "table_id":"Table input4MIPs_SImon"
     },
     "variable_entry":{
         "siconc":{
-            "cell_measures":"area: areacella",
-            "cell_methods":"time: mean",
+            "cell_measures":"area: areacello",
+            "cell_methods":"area: time: mean",
             "comment":"Area fraction of grid cell covered by sea ice",
             "dimensions":"longitude latitude time",
             "long_name":"Sea Ice Area Fraction",
