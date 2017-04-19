@@ -19,6 +19,7 @@ PJD 18 Apr 2017     - Corrected siconc cell_methods format
 PJD 19 Apr 2017     - Revised siconcbcs min and max [-2000, 2000]
 PJD 19 Apr 2017     - Corrected sftof comment
 PJD 19 Apr 2017     - Corrected tos/tosbcs units to degrees_C
+PJD 19 Apr 2017     - Corrected tosbcs valid min/max to account for K -> degC
                     - TODO:
 
 @author: durack1
@@ -178,8 +179,8 @@ Omon['variable_entry']['tosbcs']['cell_methods'] = 'time: point'
 Omon['variable_entry']['tosbcs']['dimensions'] = 'longitude latitude time2'
 Omon['variable_entry']['tosbcs']['long_name'] = 'Constructed mid-month Sea Surface Temperature'
 Omon['variable_entry']['tosbcs']['out_name'] = 'tosbcs'
-Omon['variable_entry']['tosbcs']['valid_min'] = '250'
-Omon['variable_entry']['tosbcs']['valid_max'] = '340'
+Omon['variable_entry']['tosbcs']['valid_min'] = '-25' ; # Updated K -> degC
+Omon['variable_entry']['tosbcs']['valid_max'] = '65' ; # Updated K -> degC
 Omon['Header']['realm'] = 'ocean'
 # SImon
 SImonCleanup = ['siage','sialb','siareaacrossline','siarean','siareas',

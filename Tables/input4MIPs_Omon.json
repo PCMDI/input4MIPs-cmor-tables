@@ -45,8 +45,8 @@
             "standard_name":"sea_surface_temperature",
             "type":"real",
             "units":"degC",
-            "valid_max":"340",
-            "valid_min":"250"
+            "valid_max":"65",
+            "valid_min":"-25"
         }
     }
 }
