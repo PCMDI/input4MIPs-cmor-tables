@@ -10,7 +10,7 @@
         "missing_value":"1e20",
         "product":"input4MIPs",
         "realm":"ocean",
-        "table_date":"18 April 2017",
+        "table_date":"19 April 2017",
         "table_id":"Table input4MIPs_Omon"
     },
     "variable_entry":{
@@ -27,7 +27,7 @@
             "positive":"",
             "standard_name":"sea_surface_temperature",
             "type":"real",
-            "units":"K",
+            "units":"degC",
             "valid_max":"",
             "valid_min":""
         },
@@ -44,7 +44,7 @@
             "positive":"",
             "standard_name":"sea_surface_temperature",
             "type":"real",
-            "units":"K",
+            "units":"degC",
             "valid_max":"340",
             "valid_min":"250"
         }

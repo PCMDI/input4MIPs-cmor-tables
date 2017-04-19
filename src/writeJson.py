@@ -16,6 +16,9 @@ PJD 14 Apr 2017     - Updated table_id
 PJD 14 Apr 2017     - Updated Omon tos entry, corrected erroneous standard_name and comment
 PJD 18 Apr 2017     - Updated inputs again and upgraded to CMOR 3.2.3
 PJD 18 Apr 2017     - Corrected siconc cell_methods format
+PJD 19 Apr 2017     - Revised siconcbcs min and max [-2000, 2000]
+PJD 19 Apr 2017     - Corrected sftof comment
+PJD 19 Apr 2017     - Corrected tos/tosbcs units to degrees_C
                     - TODO:
 
 @author: durack1
@@ -112,6 +115,7 @@ OfxCleanup = ['basin','deptho','hfgeou','masscello','thkcello','volcello']
 for clean in OfxCleanup:
     tmp = Ofx['variable_entry'].pop(clean)
 Ofx['Header']['product'] = 'input4MIPs'
+Ofx['variable_entry']['sftof']['comment'] = 'This is the area fraction at the ocean surface'
 
 # Omon
 OmonCleanup = ['agessc','arag','aragos','bacc','baccos','bfe','bfeos',
@@ -167,6 +171,7 @@ for clean in OmonCleanup:
 Omon['variable_entry']['tos']['cell_methods'] = 'time: mean'
 Omon['variable_entry']['tos']['comment'] = ''
 Omon['variable_entry']['tos']['standard_name'] = 'sea_surface_temperature'
+Omon['variable_entry']['tos']['units'] = 'degC'
 Omon['variable_entry']['tosbcs'] = copy.deepcopy(Omon['variable_entry']['tos'])
 Omon['variable_entry']['tosbcs']['cell_measures'] = 'area: areacello'
 Omon['variable_entry']['tosbcs']['cell_methods'] = 'time: point'
@@ -207,8 +212,8 @@ SImon['variable_entry']['siconcbcs']['cell_methods'] = 'time: point' ; # area: t
 SImon['variable_entry']['siconcbcs']['dimensions'] = 'longitude latitude time2'
 SImon['variable_entry']['siconcbcs']['long_name'] = 'Constructed mid-month Sea-ice area fraction'
 SImon['variable_entry']['siconcbcs']['out_name'] = 'siconcbcs'
-SImon['variable_entry']['siconcbcs']['valid_min'] = '-1000'
-SImon['variable_entry']['siconcbcs']['valid_max'] = '1000'
+SImon['variable_entry']['siconcbcs']['valid_min'] = '-2000'
+SImon['variable_entry']['siconcbcs']['valid_max'] = '2000'
 SImon['Header']['realm'] = 'seaIce'
 
 #%% Activity id
@@ -228,10 +233,11 @@ activity_id = ['input4MIPs']
 
 # Fix issues
 institution_id = {}
-institution_id['CNRM-Cerfacs'] = 'CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France), CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31100, France)'
+institution_id['CNRM-Cerfacs'] = ('CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France),'
+              ' CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31100, France)')
 institution_id['IACETH'] = 'Institute for Atmosphere and Climate, ETH Zurich, Zurich 8092, Switzerland'
 institution_id['PCMDI'] = 'Program for Climate Model Diagnosis and Intercomparison, Lawrence Livermore National Laboratory, Livermore, CA 94550, USA'
-institution_id['PNNL-JGCRI'] = 'Pacific Northwest National Laboratory - Joint Global Change Research Institute, Richland, WA 99352, USA '
+institution_id['PNNL-JGCRI'] = 'Pacific Northwest National Laboratory - Joint Global Change Research Institute, Richland, WA 99352, USA'
 institution_id['SOLARIS-HEPPA'] = 'SOLARIS-HEPPA, GEOMAR Helmholtz Centre for Ocean Research, Kiel 24105, Germany'
 institution_id['UColorado'] = 'University of Colorado, Boulder, CO 80309, USA'
 institution_id['UReading'] = 'University of Reading, Reading RG6 6UA, UK'
