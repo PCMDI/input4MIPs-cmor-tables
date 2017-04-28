@@ -20,6 +20,7 @@ PJD 19 Apr 2017     - Revised siconcbcs min and max [-2000, 2000]
 PJD 19 Apr 2017     - Corrected sftof comment
 PJD 19 Apr 2017     - Corrected tos/tosbcs units to degrees_C
 PJD 19 Apr 2017     - Corrected tosbcs valid min/max to account for K -> degC
+PJD 28 Apr 2017     - Registered institution_id ImperialCollege https://github.com/PCMDI/input4MIPs-cmor-tables/issues/3
                     - TODO:
 
 @author: durack1
@@ -112,7 +113,8 @@ for count2,table in enumerate(tableSource):
 
 #%% Cleanup imported tables
 # Ofx
-OfxCleanup = ['basin','deptho','hfgeou','masscello','thkcello','volcello']
+OfxCleanup = ['basin','deptho','hfgeou','masscello','thkcello','volcello',
+              'ugrid']
 for clean in OfxCleanup:
     tmp = Ofx['variable_entry'].pop(clean)
 Ofx['Header']['product'] = 'input4MIPs'
@@ -200,7 +202,7 @@ SImonCleanup = ['siage','sialb','siareaacrossline','siarean','siareas',
                 'sisnconc','sisnhc','sisnmass','sisnthick','sispeed',
                 'sistremax','sistresave','sistrxdtop','sistrxubot',
                 'sistrydtop','sistryubot','sitempbot','sitempsnic','sitemptop',
-                'sitimefrac','siu','siv','sivol','sivoln','sivols',
+                'sithick','sitimefrac','siu','siv','sivol','sivoln','sivols',
                 'sndmassdyn','sndmassmelt','sndmasssi','sndmasssnf',
                 'sndmasssubl','sndmasswindrif','snmassacrossline']
 for clean in SImonCleanup:
@@ -237,6 +239,7 @@ institution_id = {}
 institution_id['CNRM-Cerfacs'] = ('CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France),'
               ' CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31100, France)')
 institution_id['IACETH'] = 'Institute for Atmosphere and Climate, ETH Zurich, Zurich 8092, Switzerland'
+institution_id['ImperialCollege'] = 'Imperial College London, South Kensington, London SW7 2AZ, UK'
 institution_id['PCMDI'] = 'Program for Climate Model Diagnosis and Intercomparison, Lawrence Livermore National Laboratory, Livermore, CA 94550, USA'
 institution_id['PNNL-JGCRI'] = 'Pacific Northwest National Laboratory - Joint Global Change Research Institute, Richland, WA 99352, USA'
 institution_id['SOLARIS-HEPPA'] = 'SOLARIS-HEPPA, GEOMAR Helmholtz Centre for Ocean Research, Kiel 24105, Germany'
