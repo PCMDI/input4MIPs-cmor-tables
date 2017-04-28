@@ -3,14 +3,14 @@
         "Conventions":"CF-1.7 CMIP-6.0",
         "approx_interval":"",
         "cmor_version":"3.2",
-        "data_specs_version":"01.00.06",
+        "data_specs_version":"01.00.07",
         "frequency":"fx",
         "generic_levels":"",
         "mip_era":"CMIP6",
         "missing_value":"1e20",
         "product":"input4MIPs",
         "realm":"ocean",
-        "table_date":"19 April 2017",
+        "table_date":"28 April 2017",
         "table_id":"Table input4MIPs_Ofx"
     },
     "variable_entry":{
@@ -45,6 +45,23 @@
             "standard_name":"sea_area_fraction",
             "type":"real",
             "units":"%",
+            "valid_max":"",
+            "valid_min":""
+        },
+        "ugrid":{
+            "cell_measures":"--UGRID",
+            "cell_methods":"",
+            "comment":"",
+            "dimensions":"longitude latitude",
+            "long_name":"UGRID Grid Information",
+            "modeling_realm":"ocean",
+            "ok_max_mean_abs":"",
+            "ok_min_mean_abs":"",
+            "out_name":"ugrid",
+            "positive":"",
+            "standard_name":"",
+            "type":"float",
+            "units":"",
             "valid_max":"",
             "valid_min":""
         }

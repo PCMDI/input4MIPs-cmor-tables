@@ -3,14 +3,14 @@
         "Conventions":"CF-1.7 CMIP-6.0",
         "approx_interval":"30.00000",
         "cmor_version":"3.2",
-        "data_specs_version":"01.00.06",
+        "data_specs_version":"01.00.07",
         "frequency":"mon",
         "generic_levels":"",
         "mip_era":"CMIP6",
         "missing_value":"1e20",
         "product":"input4MIPs",
         "realm":"seaIce",
-        "table_date":"19 April 2017",
+        "table_date":"28 April 2017",
         "table_id":"Table input4MIPs_SImon"
     },
     "variable_entry":{
@@ -47,6 +47,23 @@
             "units":"%",
             "valid_max":"2000",
             "valid_min":"-2000"
+        },
+        "sithick":{
+            "cell_measures":"area: areacella",
+            "cell_methods":"area: time: mean where sea_ice (comment: mask=siconc)",
+            "comment":"Actual (floe) thickness of sea ice (NOT volume divided by grid area as was done in CMIP5)",
+            "dimensions":"longitude latitude time",
+            "long_name":"Sea Ice Thickness",
+            "modeling_realm":"seaIce ocean",
+            "ok_max_mean_abs":"",
+            "ok_min_mean_abs":"",
+            "out_name":"sithick",
+            "positive":"",
+            "standard_name":"sea_ice_thickness",
+            "type":"real",
+            "units":"m",
+            "valid_max":"",
+            "valid_min":""
         }
     }
 }
