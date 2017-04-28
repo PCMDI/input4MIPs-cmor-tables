@@ -113,7 +113,8 @@ for count2,table in enumerate(tableSource):
 
 #%% Cleanup imported tables
 # Ofx
-OfxCleanup = ['basin','deptho','hfgeou','masscello','thkcello','volcello']
+OfxCleanup = ['basin','deptho','hfgeou','masscello','thkcello','volcello',
+              'ugrid']
 for clean in OfxCleanup:
     tmp = Ofx['variable_entry'].pop(clean)
 Ofx['Header']['product'] = 'input4MIPs'
@@ -201,7 +202,7 @@ SImonCleanup = ['siage','sialb','siareaacrossline','siarean','siareas',
                 'sisnconc','sisnhc','sisnmass','sisnthick','sispeed',
                 'sistremax','sistresave','sistrxdtop','sistrxubot',
                 'sistrydtop','sistryubot','sitempbot','sitempsnic','sitemptop',
-                'sitimefrac','siu','siv','sivol','sivoln','sivols',
+                'sithick','sitimefrac','siu','siv','sivol','sivoln','sivols',
                 'sndmassdyn','sndmassmelt','sndmasssi','sndmasssnf',
                 'sndmasssubl','sndmasswindrif','snmassacrossline']
 for clean in SImonCleanup:

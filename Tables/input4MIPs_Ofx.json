@@ -47,23 +47,6 @@
             "units":"%",
             "valid_max":"",
             "valid_min":""
-        },
-        "ugrid":{
-            "cell_measures":"--UGRID",
-            "cell_methods":"",
-            "comment":"",
-            "dimensions":"longitude latitude",
-            "long_name":"UGRID Grid Information",
-            "modeling_realm":"ocean",
-            "ok_max_mean_abs":"",
-            "ok_min_mean_abs":"",
-            "out_name":"ugrid",
-            "positive":"",
-            "standard_name":"",
-            "type":"float",
-            "units":"",
-            "valid_max":"",
-            "valid_min":""
         }
     }
 }
