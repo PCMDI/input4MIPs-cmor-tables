@@ -1,16 +1,15 @@
 {
     "Header":{
         "Conventions":"CF-1.7 CMIP-6.0",
-        "approx_interval":"",
+        "approx_interval":"0.00000",
         "cmor_version":"3.2",
-        "data_specs_version":"01.00.07",
-        "frequency":"fx",
-        "generic_levels":"",
+        "data_specs_version":"01.00.12",
+        "generic_levels":"olevel",
         "mip_era":"CMIP6",
         "missing_value":"1e20",
         "product":"input4MIPs",
         "realm":"ocean",
-        "table_date":"28 April 2017",
+        "table_date":"26 June 2017",
         "table_id":"Table input4MIPs_Ofx"
     },
     "variable_entry":{
@@ -19,6 +18,7 @@
             "cell_methods":"area: mean",
             "comment":"Horizontal area of ocean grid cells",
             "dimensions":"longitude latitude",
+            "frequency":"fx",
             "long_name":"Ocean Grid-Cell Area",
             "modeling_realm":"ocean",
             "ok_max_mean_abs":"",
@@ -35,7 +35,8 @@
             "cell_measures":"area: areacello",
             "cell_methods":"area: mean",
             "comment":"This is the area fraction at the ocean surface",
-            "dimensions":"longitude latitude",
+            "dimensions":"longitude latitude typesea",
+            "frequency":"fx",
             "long_name":"Sea Area Fraction",
             "modeling_realm":"ocean",
             "ok_max_mean_abs":"",

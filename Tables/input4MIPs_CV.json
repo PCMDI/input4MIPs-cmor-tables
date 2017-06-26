@@ -3,21 +3,19 @@
         "activity_id":[
             "input4MIPs"
         ],
-        "frequency":[
-            "1hr",
-            "1hrClimMon",
-            "3hr",
-            "3hrClim",
-            "6hr",
-            "day",
-            "decadal",
-            "fx",
-            "mon",
-            "monClim",
-            "subhr",
-            "yr",
-            "yrClim"
-        ],
+        "frequency":{
+            "1hr":"sampled hourly",
+            "1hrClimMon":"monthly climatology of diurnal cycle computed from hourly samples",
+            "3hr":"sampled every 3 hours",
+            "6hr":"sampled every 6 hours",
+            "day":"daily mean samples",
+            "dec":"decadal mean samples",
+            "fx":"fixed (time invariant) field",
+            "mon":"monthly mean samples",
+            "monClim":"monthly climatology computed from monthly mean samples",
+            "subhr":"sampled sub-hourly",
+            "yr":"annual mean samples"
+        },
         "further_info_url":[
             "[[:alpha:]]\\{1,\\}"
         ],
@@ -73,7 +71,7 @@
             "IACETH":"Institute for Atmosphere and Climate, ETH Zurich, Zurich 8092, Switzerland",
             "ImperialCollege":"Imperial College London, South Kensington Campus, London SW7 2AZ, UK",
             "PCMDI":"Program for Climate Model Diagnosis and Intercomparison, Lawrence Livermore National Laboratory, Livermore, CA 94550, USA",
-            "PNNL-JGCRI":"Pacific Northwest National Laboratory - Joint Global Change Research Institute, Richland, WA 99352, USA",
+            "PNNL-JGCRI":"Pacific Northwest National Laboratory - Joint Global Change Research Institute, College Park, MD 20740, USA",
             "SOLARIS-HEPPA":"SOLARIS-HEPPA, GEOMAR Helmholtz Centre for Ocean Research, Kiel 24105, Germany",
             "UColorado":"University of Colorado, Boulder, CO 80309, USA",
             "UReading":"University of Reading, Reading RG6 6UA, UK",
