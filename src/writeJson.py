@@ -22,6 +22,7 @@ PJD 19 Apr 2017     - Corrected tos/tosbcs units to degrees_C
 PJD 19 Apr 2017     - Corrected tosbcs valid min/max to account for K -> degC
 PJD 28 Apr 2017     - Registered institution_id ImperialCollege https://github.com/PCMDI/input4MIPs-cmor-tables/issues/3
 PJD 28 Apr 2017     - Revise institution_id ImperialCollege https://github.com/PCMDI/input4MIPs-cmor-tables/issues/3
+PJD 23 Jun 2017     - Revise institution_id PNNL-JGCRI https://github.com/PCMDI/input4MIPs-cmor-tables/issues/6
                     - TODO: Deal with lab cert issue https://raw.githubusercontent.com -> http://rawgit.com (see requests library)
 
 @author: durack1
@@ -181,7 +182,7 @@ Omon['variable_entry']['tosbcs']['valid_min'] = '-25' ; # Updated K -> degC
 Omon['variable_entry']['tosbcs']['valid_max'] = '65' ; # Updated K -> degC
 Omon['Header']['realm'] = 'ocean'
 # SImon
-SImonCleanup = ['siage','sialb','siareaacrossline','siarean','siareas',
+SImonCleanup = ['siage','siareaacrossline','siarean','siareas',
                 'sicompstren','sidconcdyn','sidconcth','sidivvel','sidmassdyn',
                 'sidmassevapsubl','sidmassgrowthbot','sidmassgrowthwat',
                 'sidmasslat','sidmassmeltbot','sidmassmelttop','sidmasssi',
@@ -200,7 +201,8 @@ SImonCleanup = ['siage','sialb','siareaacrossline','siarean','siareas',
                 'sistrydtop','sistryubot','sitempbot','sitempsnic','sitemptop',
                 'sithick','sitimefrac','siu','siv','sivol','sivoln','sivols',
                 'sndmassdyn','sndmassmelt','sndmasssi','sndmasssnf',
-                'sndmasssubl','sndmasswindrif','snmassacrossline']
+                'sndmasssubl','sndmasswindrif','snmassacrossline'] ;
+                # 'sialb',
 for clean in SImonCleanup:
     tmp = SImon['variable_entry'].pop(clean)
 SImon['variable_entry']['siconc']['cell_methods'] = 'area: time: mean'
@@ -237,7 +239,7 @@ institution_id['CNRM-Cerfacs'] = ('CNRM (Centre National de Recherches Meteorolo
 institution_id['IACETH'] = 'Institute for Atmosphere and Climate, ETH Zurich, Zurich 8092, Switzerland'
 institution_id['ImperialCollege'] = 'Imperial College London, South Kensington Campus, London SW7 2AZ, UK'
 institution_id['PCMDI'] = 'Program for Climate Model Diagnosis and Intercomparison, Lawrence Livermore National Laboratory, Livermore, CA 94550, USA'
-institution_id['PNNL-JGCRI'] = 'Pacific Northwest National Laboratory - Joint Global Change Research Institute, Richland, WA 99352, USA'
+institution_id['PNNL-JGCRI'] = 'Pacific Northwest National Laboratory - Joint Global Change Research Institute, College Park, MD 20740, USA'
 institution_id['SOLARIS-HEPPA'] = 'SOLARIS-HEPPA, GEOMAR Helmholtz Centre for Ocean Research, Kiel 24105, Germany'
 institution_id['UColorado'] = 'University of Colorado, Boulder, CO 80309, USA'
 institution_id['UReading'] = 'University of Reading, Reading RG6 6UA, UK'
