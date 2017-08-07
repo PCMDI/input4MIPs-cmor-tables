@@ -24,22 +24,16 @@ PJD 28 Apr 2017     - Registered institution_id ImperialCollege https://github.c
 PJD 28 Apr 2017     - Revise institution_id ImperialCollege https://github.com/PCMDI/input4MIPs-cmor-tables/issues/3
 PJD 23 Jun 2017     - Revise institution_id PNNL-JGCRI https://github.com/PCMDI/input4MIPs-cmor-tables/issues/6
 PJD 26 Jun 2017     - Register institution_id MPI-M https://github.com/PCMDI/input4MIPs-cmor-tables/issues/7
+PJD  7 Aug 2017     - Register institution_id CCCma https://github.com/PCMDI/input4MIPs-cmor-tables/issues/10
                     - TODO: Deal with lab cert issue https://raw.githubusercontent.com -> http://rawgit.com (see requests library)
 
 @author: durack1
 """
 
 #%% Import statements
-import copy,gc,json,os,ssl,sys,time
+import copy,gc,json,os,sys,time
 sys.path.append('/export/durack1/git/durolib/lib/')
 from durolib import readJsonCreateDict
-
-#%% Kludge for json/encoder warning
-#import warnings
-##warnings.filterwarnings('ignore', category=DeprecationWarning)
-#with warnings.catch_warnings():
-#    warnings.filterwarnings('ignore', category=DeprecationWarning)
-#    import vcs
 
 #%% Determine path
 homePath = os.path.join('/','/'.join(os.path.realpath(__file__).split('/')[0:-1]))
@@ -119,16 +113,20 @@ Ofx['Header']['product'] = 'input4MIPs'
 Ofx['variable_entry']['sftof']['comment'] = 'This is the area fraction at the ocean surface'
 
 # Omon
-OmonCleanup = ['agessc','arag','aragos','bacc','baccos','bfe','bfeos',
-               'bigthetao','bigthetaoga','bsi','bsios','calc','calcos','cfc11',
+# Cleanup 'aragos','baccos','calcos','co3abioos','co3natos','co3os',
+# 'co3sataragos','co3satcalcos','detocos','dissicos','dissocos','dms','nh4os',
+# 'phos','phycalcos','phydiatos','phydiazos','phymiscos','phypicoos','po4os',
+# 'talkos','zmesoos','zmicroos','zmiscos','zoocos',
+OmonCleanup = ['agessc','arag','bacc','bfe','bfeos',
+               'bigthetao','bigthetaoga','bsi','bsios','calc','cfc11',
                'cfc12','chl','chlcalc','chlcalcos','chldiat','chldiatos',
                'chldiaz','chldiazos','chlmisc','chlmiscos','chlos','chlpico',
-               'chlpicoos','co3','co3abio','co3abioos','co3nat','co3natos',
-               'co3os','co3satarag','co3sataragos','co3satcalc','co3satcalcos',
-               'detoc','detocos','dfe','dfeos','dissi13c','dissi13cos',
+               'chlpicoos','co3','co3abio','co3nat',
+               'co3satarag','co3satcalc',
+               'detoc','dfe','dfeos','dissi13c','dissi13cos',
                'dissi14cabio','dissi14cabioos','dissic','dissicabio',
-               'dissicabioos','dissicnat','dissicnatos','dissicos','dissoc',
-               'dissocos','dms','dmso','dmsos','dpco2','dpco2abio','dpco2nat',
+               'dissicabioos','dissicnat','dissicnatos','dissoc',
+               'dmso','dmsos','dpco2','dpco2abio','dpco2nat',
                'dpo2','eparag100','epc100','epcalc100','epfe100','epn100',
                'epp100','epsi100','evs','expc','fbddtalk','fbddtdic',
                'fbddtdife','fbddtdin','fbddtdip','fbddtdisi','fddtalk',
@@ -150,23 +148,23 @@ OmonCleanup = ['agessc','arag','aragos','bacc','baccos','bfe','bfeos',
                'limnpico','masscello','masso','mfo','mlotst','mlotstmax',
                'mlotstmin','mlotstsq','msftbarot','msftmrho','msftmrhompa',
                'msftmyz','msftmzmpa','msftmzsmpa','msftyrho','msftyrhompa',
-               'msftyyz','msftyzmpa','msftyzsmpa','nh4','nh4os','no3','no3os',
+               'msftyyz','msftyzmpa','msftyzsmpa','nh4','no3','no3os',
                'o2','o2min','o2os','o2sat','o2satos','obvfsq','ocfriver',
                'pbfe','pbo','pbsi','ph','phabio','phabioos','phnat','phnatos',
-               'phos','phyc','phycalc','phycalcos','phycos','phydiat',
-               'phydiatos','phydiaz','phydiazos','phyfe','phyfeos','phymisc',
-               'phymiscos','phyn','phynos','phyp','phypico','phypicoos',
-               'phypos','physi','physios','pnitrate','po4','po4os','pon',
+               'phyc','phycalc','phycos','phydiat',
+               'phydiaz','phyfe','phyfeos','phymisc',
+               'phyn','phynos','phyp','phypico',
+               'phypos','physi','physios','pnitrate','po4','pon',
                'ponos','pop','popos','pp','prra','prsn','pso','rlntds','rsdo',
                'rsntds','sf6','sfdsi','sfriver','si','sios','sltovgyre',
                'sltovovrt','so','sob','soga','sos','sosga','sossq','spco2',
-               'spco2abio',u'spco2nat','talk','talknat','talknatos','talkos',
+               'spco2abio',u'spco2nat','talk','talknat','talknatos',
                'tauucorr','tauuo','tauvcorr','tauvo','thetao','thetaoga',
                'thkcello','tob','tosga','tossq','umo','uo','vmo','vo','volo',
                'vsf','vsfcorr','vsfevap','vsfpr','vsfriver','vsfsit','wfcorr',
                'wfo','wfonocorr','wmo','wo','zfullo','zhalfo','zmeso',
-               'zmesoos','zmicro','zmicroos','zmisc','zmiscos','zo2min','zooc',
-               'zoocos','zos','zossq','zostoga','zsatarag','zsatcalc']
+               'zmicro','zmisc','zo2min','zooc',
+               'zos','zossq','zostoga','zsatarag','zsatcalc']
 for clean in OmonCleanup:
     tmp = Omon['variable_entry'].pop(clean)
 Omon['variable_entry']['tos']['cell_methods'] = 'time: mean'
@@ -183,6 +181,7 @@ Omon['variable_entry']['tosbcs']['valid_min'] = '-25' ; # Updated K -> degC
 Omon['variable_entry']['tosbcs']['valid_max'] = '65' ; # Updated K -> degC
 Omon['Header']['realm'] = 'ocean'
 # SImon
+# Cleanup 'siflsaltbot',
 SImonCleanup = ['siage','siareaacrossline','siarean','siareas',
                 'sicompstren','sidconcdyn','sidconcth','sidivvel','sidmassdyn',
                 'sidmassevapsubl','sidmassgrowthbot','sidmassgrowthwat',
@@ -190,7 +189,7 @@ SImonCleanup = ['siage','siareaacrossline','siarean','siareas',
                 'sidmassth','sidmasstranx','sidmasstrany','sidragbot',
                 'sidragtop','siextentn','siextents','sifb','siflcondbot',
                 'siflcondtop','siflfwbot','siflfwdrain','sifllatstop',
-                'sifllwdtop','sifllwutop','siflsaltbot','siflsenstop',
+                'sifllwdtop','sifllwutop','siflsenstop',
                 'siflsensupbot','siflswdbot','siflswdtop','siflswutop',
                 'siforcecoriolx','siforcecorioly','siforceintstrx',
                 'siforceintstry','siforcetiltx','siforcetilty','sihc',
@@ -235,6 +234,7 @@ activity_id = ['input4MIPs']
 
 # Fix issues
 institution_id = {}
+institution_id['CCCma'] = 'Canadian Centre for Climate Modelling and Analysis, Victoria, BC V8P 5C2, Canada'
 institution_id['CNRM-Cerfacs'] = ('CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France),'
               ' CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31100, France)')
 institution_id['IACETH'] = 'Institute for Atmosphere and Climate, ETH Zurich, Zurich 8092, Switzerland'
