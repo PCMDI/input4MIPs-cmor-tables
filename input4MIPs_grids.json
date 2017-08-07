@@ -2,10 +2,10 @@
     "Header":{
         "Conventions":"CF-1.7 CMIP-6.0",
         "cmor_version":"3.2",
-        "data_specs_version":"01.00.12",
+        "data_specs_version":"01.00.15",
         "missing_value":"1e20",
         "product":"input4MIPs",
-        "table_date":"26 June 2017",
+        "table_date":"07 August 2017",
         "table_id":"Table input4MIPs_grids"
     },
     "axis_entry":{

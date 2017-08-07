@@ -3,13 +3,13 @@
         "Conventions":"CF-1.7 CMIP-6.0",
         "approx_interval":"30.00000",
         "cmor_version":"3.2",
-        "data_specs_version":"01.00.12",
+        "data_specs_version":"01.00.15",
         "generic_levels":"olevel",
         "mip_era":"CMIP6",
         "missing_value":"1e20",
         "product":"input4MIPs",
         "realm":"ocean",
-        "table_date":"26 June 2017",
+        "table_date":"07 August 2017",
         "table_id":"Table input4MIPs_Omon"
     },
     "variable_entry":{
