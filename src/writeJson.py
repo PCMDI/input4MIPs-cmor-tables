@@ -182,7 +182,8 @@ Omon['variable_entry']['tosbcs']['valid_max'] = '65' ; # Updated K -> degC
 Omon['Header']['realm'] = 'ocean'
 # SImon
 # Cleanup 'siflsaltbot',
-SImonCleanup = ['siage','siareaacrossline','siarean','siareas',
+# New 'sfdsi'
+SImonCleanup = ['sfdsi','siage','siareaacrossline','siarean','siareas',
                 'sicompstren','sidconcdyn','sidconcth','sidivvel','sidmassdyn',
                 'sidmassevapsubl','sidmassgrowthbot','sidmassgrowthwat',
                 'sidmasslat','sidmassmeltbot','sidmassmelttop','sidmasssi',

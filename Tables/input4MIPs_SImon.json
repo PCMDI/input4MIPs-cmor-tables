@@ -13,24 +13,6 @@
         "table_id":"Table input4MIPs_SImon"
     },
     "variable_entry":{
-        "sfdsi":{
-            "cell_measures":"area: areacella",
-            "cell_methods":"area: time: mean where sea_ice (comment: mask=siconc)",
-            "comment":"This field is physical, and it arises since sea ice has a nonzero salt content, so it exchanges salt with the liquid ocean upon melting and freezing.",
-            "dimensions":"longitude latitude time",
-            "frequency":"mon",
-            "long_name":"Salt flux from sea ice",
-            "modeling_realm":"seaIce",
-            "ok_max_mean_abs":"",
-            "ok_min_mean_abs":"",
-            "out_name":"sfdsi",
-            "positive":"down",
-            "standard_name":"downward_sea_ice_basal_salt_flux",
-            "type":"",
-            "units":"kg m-2 s-1",
-            "valid_max":"",
-            "valid_min":""
-        },
         "siconc":{
             "cell_measures":"area: areacello",
             "cell_methods":"area: time: mean",
