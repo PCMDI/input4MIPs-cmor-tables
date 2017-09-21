@@ -25,6 +25,8 @@ PJD 28 Apr 2017     - Revise institution_id ImperialCollege https://github.com/P
 PJD 23 Jun 2017     - Revise institution_id PNNL-JGCRI https://github.com/PCMDI/input4MIPs-cmor-tables/issues/6
 PJD 26 Jun 2017     - Register institution_id MPI-M https://github.com/PCMDI/input4MIPs-cmor-tables/issues/7
 PJD  7 Aug 2017     - Register institution_id CCCma https://github.com/PCMDI/input4MIPs-cmor-tables/issues/10
+PJD 18 Sep 2017     - Added versioning info for ES-DOC usage https://github.com/PCMDI/input4MIPs-cmor-tables/issues/12
+PJD 18 Sep 2017     - Added MOHC from https://github.com/WCRP-CMIP/CMIP6_CVs/blob/master/CMIP6_institution_id.json
                     - TODO: Deal with lab cert issue https://raw.githubusercontent.com -> http://rawgit.com (see requests library)
 
 @author: durack1
@@ -240,6 +242,7 @@ institution_id['CNRM-Cerfacs'] = ('CNRM (Centre National de Recherches Meteorolo
               ' CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31100, France)')
 institution_id['IACETH'] = 'Institute for Atmosphere and Climate, ETH Zurich, Zurich 8092, Switzerland'
 institution_id['ImperialCollege'] = 'Imperial College London, South Kensington Campus, London SW7 2AZ, UK'
+institution_id['MOHC'] = 'Met Office Hadley Centre, Fitzroy Road, Exeter, Devon, EX1 3PB, UK'
 institution_id['MPI-M'] = 'Max Planck Institute for Meteorology, Hamburg 20146, Germany'
 institution_id['PCMDI'] = 'Program for Climate Model Diagnosis and Intercomparison, Lawrence Livermore National Laboratory, Livermore, CA 94550, USA'
 institution_id['PNNL-JGCRI'] = 'Pacific Northwest National Laboratory - Joint Global Change Research Institute, College Park, MD 20740, USA'
@@ -374,3 +377,90 @@ for jsonName in masterTargets:
 del(jsonName,outFile) ; gc.collect()
 
 # Validate - only necessary if files are not written by json module
+
+#%% Incorporate JSON versioning info - see https://docs.google.com/document/d/1pU9IiJvPJwRvIgVaSDdJ4O0Jeorv_2ekEtted34K9cA/edit#heading=h.w4kchhc266o3
+versionId = '6.2.0'
+input4MIPs = {}
+input4MIPs['data'] = {}
+# Generate institutions
+keys = institution_id.keys(); keys.sort()
+for inst in keys:
+    input4MIPs['data'][inst] = {}
+# Drop in version identifiers
+input4MIPs['version'] = versionId
+input4MIPs['version_release'] = '11th September 2017'
+# Initiate and complete fields
+input4MIPs['data']['CCCma']['DAMIP'] = {}
+input4MIPs['data']['CCCma']['DAMIP']['ozone'] = {}
+input4MIPs['data']['CCCma']['DAMIP']['ozone']['currentVersion'] = '1.0'
+input4MIPs['data']['CNRM-Cerfacs']['DCPP'] = {}
+input4MIPs['data']['CNRM-Cerfacs']['DCPP']['SSTsAndSeaIce'] = {}
+input4MIPs['data']['CNRM-Cerfacs']['DCPP']['SSTsAndSeaIce']['currentVersion'] = '1.1'
+input4MIPs['data']['IACETH']['CMIP'] = {}
+input4MIPs['data']['IACETH']['CMIP']['aerosolProperties'] = {}
+input4MIPs['data']['IACETH']['CMIP']['aerosolProperties']['currentVersion'] = '3.0.0'
+input4MIPs['data']['IACETH']['CMIP']['aerosolProperties']['deprecatedVersion'] = '2.1.0'
+input4MIPs['data']['ImperialCollege']['C4MIP'] = {}
+input4MIPs['data']['ImperialCollege']['C4MIP']['atmosphericState'] = {}
+input4MIPs['data']['ImperialCollege']['C4MIP']['atmosphericState']['currentVersion'] = ['1.1', '2.0']
+input4MIPs['data']['ImperialCollege']['C4MIP']['atmosphericState']['deprecatedVersion'] = '1.0'
+input4MIPs['data']['ImperialCollege']['OMIP'] = {}
+input4MIPs['data']['ImperialCollege']['OMIP']['atmosphericState'] = {}
+input4MIPs['data']['ImperialCollege']['OMIP']['atmosphericState']['currentVersion'] = ['1.1', '2.0']
+input4MIPs['data']['ImperialCollege']['OMIP']['atmosphericState']['deprecatedVersion'] = '1.0'
+input4MIPs['data']['MOHC']['HighResMIP'] = {}
+input4MIPs['data']['MOHC']['HighResMIP']['SSTsAndSeaIce'] = {}
+input4MIPs['data']['MOHC']['HighResMIP']['SSTsAndSeaIce']['currentVersion'] = '2.2.0.0-r0'
+input4MIPs['data']['MPI-M']['RFMIP'] = {}
+input4MIPs['data']['MPI-M']['RFMIP']['aerosolProperties'] = {}
+input4MIPs['data']['MPI-M']['RFMIP']['aerosolProperties']['currentVersion'] = '1.0'
+input4MIPs['data']['MPI-M']['CMIP'] = {}
+input4MIPs['data']['MPI-M']['CMIP']['aerosolProperties'] = {}
+input4MIPs['data']['MPI-M']['CMIP']['aerosolProperties']['currentVersion'] = '1.0'
+input4MIPs['data']['PCMDI']['CMIP'] = {}
+input4MIPs['data']['PCMDI']['CMIP']['SSTsAndSeaIce'] = {}
+input4MIPs['data']['PCMDI']['CMIP']['SSTsAndSeaIce']['currentVersion'] = '1.1.2'
+input4MIPs['data']['PCMDI']['CMIP']['SSTsAndSeaIce']['deprecatedVersion'] = ['1.0.0', '1.0.1', '1.1.0', '1.1.1']
+input4MIPs['data']['PNNL-JGCRI']['CMIP'] = {}
+input4MIPs['data']['PNNL-JGCRI']['CMIP']['emissions'] = {}
+input4MIPs['data']['PNNL-JGCRI']['CMIP']['emissions']['currentVersion'] = ['2017-05-18','2017-08-30']
+input4MIPs['data']['PNNL-JGCRI']['CMIP']['emissions']['currentVersionNotes'] = 'latest *_AIR_* datasets are 2017-08-30, which deprecate 2017-05-18'
+input4MIPs['data']['PNNL-JGCRI']['CMIP']['emissions']['deprecatedVersion'] = ['2016-06-18', '2016-06-18-sectorDimV2',
+                                                                      '2016-07-26', '2016-07-26-sectorDim', '2017-05-18 (*_AIR_*)']
+input4MIPs['data']['SOLARIS-HEPPA']['CMIP'] = {}
+input4MIPs['data']['SOLARIS-HEPPA']['CMIP']['solar'] = {}
+input4MIPs['data']['SOLARIS-HEPPA']['CMIP']['solar']['currentVersion'] = '3.2'
+input4MIPs['data']['UColorado']['RFMIP'] = {}
+input4MIPs['data']['UColorado']['RFMIP']['radiation'] = {}
+input4MIPs['data']['UColorado']['RFMIP']['radiation']['currentVersion'] = '0.4'
+input4MIPs['data']['UReading']['CMIP'] = {}
+input4MIPs['data']['UReading']['CMIP']['ozone'] = {}
+input4MIPs['data']['UReading']['CMIP']['ozone']['currentVersion'] = 'v1.0'
+input4MIPs['data']['UReading']['CMIP']['surfaceFluxes'] = {}
+input4MIPs['data']['UReading']['CMIP']['surfaceFluxes']['currentVersion'] = '2.0'
+input4MIPs['data']['UoM']['CMIP'] = {}
+input4MIPs['data']['UoM']['CMIP']['GHGConcentrations'] = {}
+input4MIPs['data']['UoM']['CMIP']['GHGConcentrations']['currentVersion'] = '1.2.0'
+input4MIPs['data']['UofMD']['CMIP'] = {}
+input4MIPs['data']['UofMD']['CMIP']['landState'] = {}
+input4MIPs['data']['UofMD']['CMIP']['landState']['currentVersion'] = '2.1h'
+input4MIPs['data']['VUA']['CMIP'] = {}
+input4MIPs['data']['VUA']['CMIP']['emissions'] = {}
+input4MIPs['data']['VUA']['CMIP']['emissions']['currentVersion'] = '1.2'
+input4MIPs['data']['VUA']['CMIP']['emissions']['deprecatedVersion'] = '1.0'
+# Write version file
+outFile = ''.join(['../Versions/',versionId,'.json'])
+# Check file exists
+if os.path.exists(outFile):
+    print 'File existing, purging:',outFile
+    os.remove(outFile)
+if not os.path.exists('../Versions'):
+    os.mkdir('../Versions')
+# Create host dictionary
+jsonDict = {}
+jsonDict['input4MIPs_version'] = {}
+jsonDict['input4MIPs_version'] = input4MIPs
+# Write to file
+fH = open(outFile,'w')
+json.dump(jsonDict,fH,ensure_ascii=True,sort_keys=True,indent=4,separators=(',',':'),encoding="utf-8")
+fH.close()
