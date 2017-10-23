@@ -27,6 +27,7 @@ PJD 26 Jun 2017     - Register institution_id MPI-M https://github.com/PCMDI/inp
 PJD  7 Aug 2017     - Register institution_id CCCma https://github.com/PCMDI/input4MIPs-cmor-tables/issues/10
 PJD 18 Sep 2017     - Added versioning info for ES-DOC usage https://github.com/PCMDI/input4MIPs-cmor-tables/issues/12
 PJD 18 Sep 2017     - Added MOHC from https://github.com/WCRP-CMIP/CMIP6_CVs/blob/master/CMIP6_institution_id.json
+PJD 23 Oct 2017     - Update version format https://github.com/PCMDI/input4MIPs-cmor-tables/issues/12
                     - TODO: Deal with lab cert issue https://raw.githubusercontent.com -> http://rawgit.com (see requests library)
 
 @author: durack1
@@ -354,7 +355,8 @@ for jsonName in masterTargets:
     # Write file
     if jsonName == 'license1':
         outFile = ''.join(['../input4MIPs_license.json'])
-    elif jsonName in ['Ofx','Omon','SImon','CV']:
+    elif jsonName in ['Ofx','Omon','SImon','CV','coordinate','formula_terms',
+                      'grids']:
         outFile = ''.join(['../Tables/input4MIPs_',jsonName,'.json'])
     else:
         outFile = ''.join(['../input4MIPs_',jsonName,'.json'])
@@ -379,75 +381,89 @@ del(jsonName,outFile) ; gc.collect()
 # Validate - only necessary if files are not written by json module
 
 #%% Incorporate JSON versioning info - see https://docs.google.com/document/d/1pU9IiJvPJwRvIgVaSDdJ4O0Jeorv_2ekEtted34K9cA/edit#heading=h.w4kchhc266o3
-versionId = '6.2.0'
+versionId = '6.2.1'
 input4MIPs = {}
 input4MIPs['data'] = {}
 # Generate institutions
 keys = institution_id.keys(); keys.sort()
-for inst in keys:
-    input4MIPs['data'][inst] = {}
+#for inst in keys:
+#    input4MIPs['data'][inst] = {}
 # Drop in version identifiers
 input4MIPs['version'] = versionId
-input4MIPs['version_release'] = '11th September 2017'
+input4MIPs['version_release'] = '6th October 2017'
 # Initiate and complete fields
-input4MIPs['data']['CCCma']['DAMIP'] = {}
-input4MIPs['data']['CCCma']['DAMIP']['ozone'] = {}
-input4MIPs['data']['CCCma']['DAMIP']['ozone']['currentVersion'] = '1.0'
-input4MIPs['data']['CNRM-Cerfacs']['DCPP'] = {}
-input4MIPs['data']['CNRM-Cerfacs']['DCPP']['SSTsAndSeaIce'] = {}
-input4MIPs['data']['CNRM-Cerfacs']['DCPP']['SSTsAndSeaIce']['currentVersion'] = '1.1'
-input4MIPs['data']['IACETH']['CMIP'] = {}
-input4MIPs['data']['IACETH']['CMIP']['aerosolProperties'] = {}
-input4MIPs['data']['IACETH']['CMIP']['aerosolProperties']['currentVersion'] = '3.0.0'
-input4MIPs['data']['IACETH']['CMIP']['aerosolProperties']['deprecatedVersion'] = '2.1.0'
-input4MIPs['data']['ImperialCollege']['C4MIP'] = {}
-input4MIPs['data']['ImperialCollege']['C4MIP']['atmosphericState'] = {}
-input4MIPs['data']['ImperialCollege']['C4MIP']['atmosphericState']['currentVersion'] = ['1.1', '2.0']
-input4MIPs['data']['ImperialCollege']['C4MIP']['atmosphericState']['deprecatedVersion'] = '1.0'
-input4MIPs['data']['ImperialCollege']['OMIP'] = {}
-input4MIPs['data']['ImperialCollege']['OMIP']['atmosphericState'] = {}
-input4MIPs['data']['ImperialCollege']['OMIP']['atmosphericState']['currentVersion'] = ['1.1', '2.0']
-input4MIPs['data']['ImperialCollege']['OMIP']['atmosphericState']['deprecatedVersion'] = '1.0'
-input4MIPs['data']['MOHC']['HighResMIP'] = {}
-input4MIPs['data']['MOHC']['HighResMIP']['SSTsAndSeaIce'] = {}
-input4MIPs['data']['MOHC']['HighResMIP']['SSTsAndSeaIce']['currentVersion'] = '2.2.0.0-r0'
-input4MIPs['data']['MPI-M']['RFMIP'] = {}
-input4MIPs['data']['MPI-M']['RFMIP']['aerosolProperties'] = {}
-input4MIPs['data']['MPI-M']['RFMIP']['aerosolProperties']['currentVersion'] = '1.0'
-input4MIPs['data']['MPI-M']['CMIP'] = {}
-input4MIPs['data']['MPI-M']['CMIP']['aerosolProperties'] = {}
-input4MIPs['data']['MPI-M']['CMIP']['aerosolProperties']['currentVersion'] = '1.0'
-input4MIPs['data']['PCMDI']['CMIP'] = {}
-input4MIPs['data']['PCMDI']['CMIP']['SSTsAndSeaIce'] = {}
-input4MIPs['data']['PCMDI']['CMIP']['SSTsAndSeaIce']['currentVersion'] = '1.1.2'
-input4MIPs['data']['PCMDI']['CMIP']['SSTsAndSeaIce']['deprecatedVersion'] = ['1.0.0', '1.0.1', '1.1.0', '1.1.1']
-input4MIPs['data']['PNNL-JGCRI']['CMIP'] = {}
-input4MIPs['data']['PNNL-JGCRI']['CMIP']['emissions'] = {}
-input4MIPs['data']['PNNL-JGCRI']['CMIP']['emissions']['currentVersion'] = ['2017-05-18','2017-08-30']
-input4MIPs['data']['PNNL-JGCRI']['CMIP']['emissions']['currentVersionNotes'] = 'latest *_AIR_* datasets are 2017-08-30, which deprecate 2017-05-18'
-input4MIPs['data']['PNNL-JGCRI']['CMIP']['emissions']['deprecatedVersion'] = ['2016-06-18', '2016-06-18-sectorDimV2',
-                                                                      '2016-07-26', '2016-07-26-sectorDim', '2017-05-18 (*_AIR_*)']
-input4MIPs['data']['SOLARIS-HEPPA']['CMIP'] = {}
-input4MIPs['data']['SOLARIS-HEPPA']['CMIP']['solar'] = {}
-input4MIPs['data']['SOLARIS-HEPPA']['CMIP']['solar']['currentVersion'] = '3.2'
-input4MIPs['data']['UColorado']['RFMIP'] = {}
-input4MIPs['data']['UColorado']['RFMIP']['radiation'] = {}
-input4MIPs['data']['UColorado']['RFMIP']['radiation']['currentVersion'] = '0.4'
-input4MIPs['data']['UReading']['CMIP'] = {}
-input4MIPs['data']['UReading']['CMIP']['ozone'] = {}
-input4MIPs['data']['UReading']['CMIP']['ozone']['currentVersion'] = 'v1.0'
-input4MIPs['data']['UReading']['CMIP']['surfaceFluxes'] = {}
-input4MIPs['data']['UReading']['CMIP']['surfaceFluxes']['currentVersion'] = '2.0'
-input4MIPs['data']['UoM']['CMIP'] = {}
-input4MIPs['data']['UoM']['CMIP']['GHGConcentrations'] = {}
-input4MIPs['data']['UoM']['CMIP']['GHGConcentrations']['currentVersion'] = '1.2.0'
-input4MIPs['data']['UofMD']['CMIP'] = {}
-input4MIPs['data']['UofMD']['CMIP']['landState'] = {}
-input4MIPs['data']['UofMD']['CMIP']['landState']['currentVersion'] = '2.1h'
-input4MIPs['data']['VUA']['CMIP'] = {}
-input4MIPs['data']['VUA']['CMIP']['emissions'] = {}
-input4MIPs['data']['VUA']['CMIP']['emissions']['currentVersion'] = '1.2'
-input4MIPs['data']['VUA']['CMIP']['emissions']['deprecatedVersion'] = '1.0'
+input4MIPs['data']['DAMIP'] = {}
+input4MIPs['data']['DAMIP']['CCCma'] = {}
+input4MIPs['data']['DAMIP']['CCCma']['ozone'] = {}
+input4MIPs['data']['DAMIP']['CCCma']['ozone']['currentVersion'] = '1.0'
+input4MIPs['data']['DCPP'] = {}
+input4MIPs['data']['DCPP']['CNRM-Cerfacs'] = {}
+input4MIPs['data']['DCPP']['CNRM-Cerfacs']['SSTsAndSeaIce'] = {}
+input4MIPs['data']['DCPP']['CNRM-Cerfacs']['SSTsAndSeaIce']['currentVersion'] = '1.1'
+input4MIPs['data']['CMIP'] = {}
+input4MIPs['data']['CMIP']['IACETH'] = {}
+input4MIPs['data']['CMIP']['IACETH']['aerosolProperties'] = {}
+input4MIPs['data']['CMIP']['IACETH']['aerosolProperties']['currentVersion'] = '3.0.0'
+input4MIPs['data']['CMIP']['IACETH']['aerosolProperties']['deprecatedVersion'] = '2.1.0'
+input4MIPs['data']['C4MIP'] = {}
+input4MIPs['data']['C4MIP']['ImperialCollege'] = {}
+input4MIPs['data']['C4MIP']['ImperialCollege']['atmosphericState'] = {}
+input4MIPs['data']['C4MIP']['ImperialCollege']['atmosphericState']['currentVersion'] = ['1.1', '2.0']
+input4MIPs['data']['C4MIP']['ImperialCollege']['atmosphericState']['deprecatedVersion'] = '1.0'
+input4MIPs['data']['OMIP'] = {}
+input4MIPs['data']['OMIP']['ImperialCollege'] = {}
+input4MIPs['data']['OMIP']['ImperialCollege']['atmosphericState'] = {}
+input4MIPs['data']['OMIP']['ImperialCollege']['atmosphericState']['currentVersion'] = ['1.1', '2.0']
+input4MIPs['data']['OMIP']['ImperialCollege']['atmosphericState']['deprecatedVersion'] = '1.0'
+input4MIPs['data']['HighResMIP'] = {}
+input4MIPs['data']['HighResMIP']['MOHC'] = {}
+input4MIPs['data']['HighResMIP']['MOHC']['SSTsAndSeaIce'] = {}
+input4MIPs['data']['HighResMIP']['MOHC']['SSTsAndSeaIce']['currentVersion'] = '2.2.0.0-r0'
+input4MIPs['data']['RFMIP'] = {}
+input4MIPs['data']['RFMIP']['MPI-M'] = {}
+input4MIPs['data']['RFMIP']['MPI-M']['aerosolProperties'] = {}
+input4MIPs['data']['RFMIP']['MPI-M']['aerosolProperties']['currentVersion'] = '1.0'
+input4MIPs['data']['CMIP']['MPI-M'] = {}
+input4MIPs['data']['CMIP']['MPI-M']['aerosolProperties'] = {}
+input4MIPs['data']['CMIP']['MPI-M']['aerosolProperties']['currentVersion'] = '1.0'
+input4MIPs['data']['CMIP']['PCMDI'] = {}
+input4MIPs['data']['CMIP']['PCMDI']['SSTsAndSeaIce'] = {}
+input4MIPs['data']['CMIP']['PCMDI']['SSTsAndSeaIce']['currentVersion'] = '1.1.2'
+input4MIPs['data']['CMIP']['PCMDI']['SSTsAndSeaIce']['deprecatedVersion'] = ['1.0.0', '1.0.1', '1.1.0', '1.1.1']
+input4MIPs['data']['CMIP']['PNNL-JGCRI'] = {}
+input4MIPs['data']['CMIP']['PNNL-JGCRI']['emissions'] = {}
+input4MIPs['data']['CMIP']['PNNL-JGCRI']['emissions']['currentVersion'] = ['2017-05-18','2017-08-30','2017-10-05']
+input4MIPs['data']['CMIP']['PNNL-JGCRI']['emissions']['currentVersionNotes'] = ('latest *_AIR_* datasets are 2017-08-30 (except',
+                                                                                ' SO2), and SO2 aircraft emission files 2017-10-05',
+                                                                                ', which deprecate 2017-05-18')
+input4MIPs['data']['CMIP']['PNNL-JGCRI']['emissions']['deprecatedVersion'] = ['2016-06-18', '2016-06-18-sectorDimV2',
+                                                                      '2016-07-26', '2016-07-26-sectorDim', '2017-05-18 (*-AIR-*)',
+                                                                      '2017-08-30 (SO2-em-AIR*)']
+input4MIPs['data']['CMIP']['SOLARIS-HEPPA'] = {}
+input4MIPs['data']['CMIP']['SOLARIS-HEPPA']['solar'] = {}
+input4MIPs['data']['CMIP']['SOLARIS-HEPPA']['solar']['currentVersion'] = '3.2'
+input4MIPs['data']['RFMIP']['UColorado'] = {}
+input4MIPs['data']['RFMIP']['UColorado']['radiation'] = {}
+input4MIPs['data']['RFMIP']['UColorado']['radiation']['currentVersion'] = '0.4'
+input4MIPs['data']['CMIP']['UReading'] = {}
+input4MIPs['data']['CMIP']['UReading']['ozone'] = {}
+input4MIPs['data']['CMIP']['UReading']['ozone']['currentVersion'] = 'v1.0'
+input4MIPs['data']['CMIP']['UReading']['surfaceFluxes'] = {}
+input4MIPs['data']['CMIP']['UReading']['surfaceFluxes']['currentVersion'] = '2.0'
+input4MIPs['data']['CMIP']['UoM'] = {}
+input4MIPs['data']['CMIP']['UoM']['GHGConcentrations'] = {}
+input4MIPs['data']['CMIP']['UoM']['GHGConcentrations']['currentVersion'] = '1.2.0'
+input4MIPs['data']['CMIP']['UofMD'] = {}
+input4MIPs['data']['CMIP']['UofMD']['landState'] = {}
+input4MIPs['data']['CMIP']['UofMD']['landState']['currentVersion'] = '2.1h'
+input4MIPs['data']['ScenarioMIP'] = {}
+input4MIPs['data']['ScenarioMIP']['UofMD'] = {}
+input4MIPs['data']['ScenarioMIP']['UofMD']['landState'] = {}
+input4MIPs['data']['ScenarioMIP']['UofMD']['landState']['currentVersion'] = '2.1f'
+input4MIPs['data']['CMIP']['VUA'] = {}
+input4MIPs['data']['CMIP']['VUA']['emissions'] = {}
+input4MIPs['data']['CMIP']['VUA']['emissions']['currentVersion'] = '1.2'
+input4MIPs['data']['CMIP']['VUA']['emissions']['deprecatedVersion'] = '1.0'
 # Write version file
 outFile = ''.join(['../Versions/',versionId,'.json'])
 # Check file exists

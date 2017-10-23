@@ -39,15 +39,21 @@
                     "emissions":{
                         "currentVersion":[
                             "2017-05-18",
-                            "2017-08-30"
+                            "2017-08-30",
+                            "2017-10-05"
                         ],
-                        "currentVersionNotes":"latest *_AIR_* datasets are 2017-08-30, which deprecate 2017-05-18",
+                        "currentVersionNotes":[
+                            "latest *_AIR_* datasets are 2017-08-30 (except",
+                            " SO2), and SO2 aircraft emission files 2017-10-05",
+                            ", which deprecate 2017-05-18"
+                        ],
                         "deprecatedVersion":[
                             "2016-06-18",
                             "2016-06-18-sectorDimV2",
                             "2016-07-26",
                             "2016-07-26-sectorDim",
-                            "2017-05-18 (*_AIR_*)"
+                            "2017-05-18 (*-AIR-*)",
+                            "2017-08-30 (SO2-em-AIR*)"
                         ]
                     }
                 },
@@ -124,9 +130,16 @@
                         "currentVersion":"0.4"
                     }
                 }
+            },
+            "ScenarioMIP":{
+                "UofMD":{
+                    "landState":{
+                        "currentVersion":"2.1f"
+                    }
+                }
             }
         },
-        "version":"6.2.0",
-        "version_release":"11th September 2017"
+        "version":"6.2.1",
+        "version_release":"6th October 2017"
     }
 }
