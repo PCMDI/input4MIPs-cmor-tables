@@ -34,9 +34,6 @@
             "yr":"annual mean samples",
             "yrPt":"sampled yearly, at specified time point within the time period"
         },
-        "further_info_url":[
-            "[[:alpha:]]\\{1,\\}"
-        ],
         "grid_label":{
             "gm":"global mean data",
             "gn":"data reported on a model's native grid",
