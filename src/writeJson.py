@@ -355,7 +355,8 @@ for jsonName in masterTargets:
     # Write file
     if jsonName == 'license1':
         outFile = ''.join(['../input4MIPs_license.json'])
-    elif jsonName in ['Ofx','Omon','SImon','CV']:
+    elif jsonName in ['Ofx','Omon','SImon','CV','coordinate','formula_terms',
+                      'grids']:
         outFile = ''.join(['../Tables/input4MIPs_',jsonName,'.json'])
     else:
         outFile = ''.join(['../input4MIPs_',jsonName,'.json'])
