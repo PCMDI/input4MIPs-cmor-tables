@@ -1,15 +1,15 @@
 {
     "Header":{
-        "Conventions":"CF-1.7 CMIP-6.0",
+        "Conventions":"CF-1.7 CMIP-6.2",
         "approx_interval":"0.00000",
         "cmor_version":"3.2",
-        "data_specs_version":"01.00.15",
+        "data_specs_version":"01.00.16",
         "generic_levels":"olevel",
         "mip_era":"CMIP6",
         "missing_value":"1e20",
         "product":"input4MIPs",
         "realm":"ocean",
-        "table_date":"18 September 2017",
+        "table_date":"23 October 2017",
         "table_id":"Table input4MIPs_Ofx"
     },
     "variable_entry":{

@@ -1,69 +1,30 @@
 {
     "input4MIPs_version":{
         "data":{
-            "CCCma":{
-                "DAMIP":{
-                    "ozone":{
-                        "currentVersion":"1.0"
+            "C4MIP":{
+                "ImperialCollege":{
+                    "atmosphericState":{
+                        "currentVersion":[
+                            "1.1",
+                            "2.0"
+                        ],
+                        "deprecatedVersion":"1.0"
                     }
                 }
             },
-            "CNRM-Cerfacs":{
-                "DCPP":{
-                    "SSTsAndSeaIce":{
-                        "currentVersion":"1.1"
-                    }
-                }
-            },
-            "IACETH":{
-                "CMIP":{
+            "CMIP":{
+                "IACETH":{
                     "aerosolProperties":{
                         "currentVersion":"3.0.0",
                         "deprecatedVersion":"2.1.0"
                     }
-                }
-            },
-            "ImperialCollege":{
-                "C4MIP":{
-                    "atmosphericState":{
-                        "currentVersion":[
-                            "1.1",
-                            "2.0"
-                        ],
-                        "deprecatedVersion":"1.0"
-                    }
                 },
-                "OMIP":{
-                    "atmosphericState":{
-                        "currentVersion":[
-                            "1.1",
-                            "2.0"
-                        ],
-                        "deprecatedVersion":"1.0"
-                    }
-                }
-            },
-            "MOHC":{
-                "HighResMIP":{
-                    "SSTsAndSeaIce":{
-                        "currentVersion":"2.2.0.0-r0"
-                    }
-                }
-            },
-            "MPI-M":{
-                "CMIP":{
+                "MPI-M":{
                     "aerosolProperties":{
                         "currentVersion":"1.0"
                     }
                 },
-                "RFMIP":{
-                    "aerosolProperties":{
-                        "currentVersion":"1.0"
-                    }
-                }
-            },
-            "PCMDI":{
-                "CMIP":{
+                "PCMDI":{
                     "SSTsAndSeaIce":{
                         "currentVersion":"1.1.2",
                         "deprecatedVersion":[
@@ -73,10 +34,8 @@
                             "1.1.1"
                         ]
                     }
-                }
-            },
-            "PNNL-JGCRI":{
-                "CMIP":{
+                },
+                "PNNL-JGCRI":{
                     "emissions":{
                         "currentVersion":[
                             "2017-05-18",
@@ -91,51 +50,78 @@
                             "2017-05-18 (*_AIR_*)"
                         ]
                     }
-                }
-            },
-            "SOLARIS-HEPPA":{
-                "CMIP":{
+                },
+                "SOLARIS-HEPPA":{
                     "solar":{
                         "currentVersion":"3.2"
                     }
-                }
-            },
-            "UColorado":{
-                "RFMIP":{
-                    "radiation":{
-                        "currentVersion":"0.4"
-                    }
-                }
-            },
-            "UReading":{
-                "CMIP":{
+                },
+                "UReading":{
                     "ozone":{
                         "currentVersion":"v1.0"
                     },
                     "surfaceFluxes":{
                         "currentVersion":"2.0"
                     }
-                }
-            },
-            "UoM":{
-                "CMIP":{
+                },
+                "UoM":{
                     "GHGConcentrations":{
                         "currentVersion":"1.2.0"
                     }
-                }
-            },
-            "UofMD":{
-                "CMIP":{
+                },
+                "UofMD":{
                     "landState":{
                         "currentVersion":"2.1h"
                     }
-                }
-            },
-            "VUA":{
-                "CMIP":{
+                },
+                "VUA":{
                     "emissions":{
                         "currentVersion":"1.2",
                         "deprecatedVersion":"1.0"
+                    }
+                }
+            },
+            "DAMIP":{
+                "CCCma":{
+                    "ozone":{
+                        "currentVersion":"1.0"
+                    }
+                }
+            },
+            "DCPP":{
+                "CNRM-Cerfacs":{
+                    "SSTsAndSeaIce":{
+                        "currentVersion":"1.1"
+                    }
+                }
+            },
+            "HighResMIP":{
+                "MOHC":{
+                    "SSTsAndSeaIce":{
+                        "currentVersion":"2.2.0.0-r0"
+                    }
+                }
+            },
+            "OMIP":{
+                "ImperialCollege":{
+                    "atmosphericState":{
+                        "currentVersion":[
+                            "1.1",
+                            "2.0"
+                        ],
+                        "deprecatedVersion":"1.0"
+                    }
+                }
+            },
+            "RFMIP":{
+                "MPI-M":{
+                    "aerosolProperties":{
+                        "currentVersion":"1.0"
+                    }
+                },
+                "UColorado":{
+                    "radiation":{
+                        "currentVersion":"0.4"
                     }
                 }
             }
