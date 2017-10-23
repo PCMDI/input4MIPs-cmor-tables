@@ -381,7 +381,7 @@ del(jsonName,outFile) ; gc.collect()
 # Validate - only necessary if files are not written by json module
 
 #%% Incorporate JSON versioning info - see https://docs.google.com/document/d/1pU9IiJvPJwRvIgVaSDdJ4O0Jeorv_2ekEtted34K9cA/edit#heading=h.w4kchhc266o3
-versionId = '6.2.0'
+versionId = '6.2.1'
 input4MIPs = {}
 input4MIPs['data'] = {}
 # Generate institutions
@@ -390,7 +390,7 @@ keys = institution_id.keys(); keys.sort()
 #    input4MIPs['data'][inst] = {}
 # Drop in version identifiers
 input4MIPs['version'] = versionId
-input4MIPs['version_release'] = '11th September 2017'
+input4MIPs['version_release'] = '6th October 2017'
 # Initiate and complete fields
 input4MIPs['data']['DAMIP'] = {}
 input4MIPs['data']['DAMIP']['CCCma'] = {}
@@ -432,10 +432,13 @@ input4MIPs['data']['CMIP']['PCMDI']['SSTsAndSeaIce']['currentVersion'] = '1.1.2'
 input4MIPs['data']['CMIP']['PCMDI']['SSTsAndSeaIce']['deprecatedVersion'] = ['1.0.0', '1.0.1', '1.1.0', '1.1.1']
 input4MIPs['data']['CMIP']['PNNL-JGCRI'] = {}
 input4MIPs['data']['CMIP']['PNNL-JGCRI']['emissions'] = {}
-input4MIPs['data']['CMIP']['PNNL-JGCRI']['emissions']['currentVersion'] = ['2017-05-18','2017-08-30']
-input4MIPs['data']['CMIP']['PNNL-JGCRI']['emissions']['currentVersionNotes'] = 'latest *_AIR_* datasets are 2017-08-30, which deprecate 2017-05-18'
+input4MIPs['data']['CMIP']['PNNL-JGCRI']['emissions']['currentVersion'] = ['2017-05-18','2017-08-30','2017-10-05']
+input4MIPs['data']['CMIP']['PNNL-JGCRI']['emissions']['currentVersionNotes'] = ('latest *_AIR_* datasets are 2017-08-30 (except',
+                                                                                ' SO2), and SO2 aircraft emission files 2017-10-05',
+                                                                                ', which deprecate 2017-05-18')
 input4MIPs['data']['CMIP']['PNNL-JGCRI']['emissions']['deprecatedVersion'] = ['2016-06-18', '2016-06-18-sectorDimV2',
-                                                                      '2016-07-26', '2016-07-26-sectorDim', '2017-05-18 (*_AIR_*)']
+                                                                      '2016-07-26', '2016-07-26-sectorDim', '2017-05-18 (*-AIR-*)',
+                                                                      '2017-08-30 (SO2-em-AIR*)']
 input4MIPs['data']['CMIP']['SOLARIS-HEPPA'] = {}
 input4MIPs['data']['CMIP']['SOLARIS-HEPPA']['solar'] = {}
 input4MIPs['data']['CMIP']['SOLARIS-HEPPA']['solar']['currentVersion'] = '3.2'
@@ -453,6 +456,10 @@ input4MIPs['data']['CMIP']['UoM']['GHGConcentrations']['currentVersion'] = '1.2.
 input4MIPs['data']['CMIP']['UofMD'] = {}
 input4MIPs['data']['CMIP']['UofMD']['landState'] = {}
 input4MIPs['data']['CMIP']['UofMD']['landState']['currentVersion'] = '2.1h'
+input4MIPs['data']['ScenarioMIP'] = {}
+input4MIPs['data']['ScenarioMIP']['UofMD'] = {}
+input4MIPs['data']['ScenarioMIP']['UofMD']['landState'] = {}
+input4MIPs['data']['ScenarioMIP']['UofMD']['landState']['currentVersion'] = '2.1f'
 input4MIPs['data']['CMIP']['VUA'] = {}
 input4MIPs['data']['CMIP']['VUA']['emissions'] = {}
 input4MIPs['data']['CMIP']['VUA']['emissions']['currentVersion'] = '1.2'
