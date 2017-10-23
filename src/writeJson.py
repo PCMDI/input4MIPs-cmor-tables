@@ -28,6 +28,9 @@ PJD  7 Aug 2017     - Register institution_id CCCma https://github.com/PCMDI/inp
 PJD 18 Sep 2017     - Added versioning info for ES-DOC usage https://github.com/PCMDI/input4MIPs-cmor-tables/issues/12
 PJD 18 Sep 2017     - Added MOHC from https://github.com/WCRP-CMIP/CMIP6_CVs/blob/master/CMIP6_institution_id.json
 PJD 23 Oct 2017     - Update version format https://github.com/PCMDI/input4MIPs-cmor-tables/issues/12
+PJD 23 Oct 2017     - Updated version 6.2.1 of input4MIPs datasets
+PJD 23 Oct 2017     - Reorganized table files
+PJD 23 Oct 2017     - Sync repo with guidance doc by adding dataset_category CV https://github.com/PCMDI/input4MIPs-cmor-tables/issues/15
                     - TODO: Deal with lab cert issue https://raw.githubusercontent.com -> http://rawgit.com (see requests library)
 
 @author: durack1
@@ -48,6 +51,7 @@ os.chdir(homePath)
 masterTargets = [
  'activity_id',
  'coordinate',
+ 'dataset_category',
  'frequency',
  'grid_label',
  'grids',
@@ -226,6 +230,21 @@ activity_id = ['input4MIPs']
 
 #%% Coordinate
 
+#%% Dataset category
+dataset_category = [
+ 'GHGConcentrations',
+ 'SSTsAndSeaIce',
+ 'aerosolProperties',
+ 'atmosphericState',
+ 'emissions',
+ 'landState',
+ 'ozone',
+ 'radiation',
+ 'solar',
+ 'surfaceAir',
+ 'surfaceFluxes'
+]
+
 #%% Frequency
 
 #%% Grid label
@@ -321,6 +340,7 @@ required_global_attributes = [
 CV = {}
 CV['CV'] = {}
 CV['CV']['activity_id'] = ['input4MIPs']
+CV['CV']['dataset_category'] = dataset_category
 CV['CV']['frequency'] = frequency
 CV['CV']['further_info_url'] = ['[[:alpha:]]\\{1,\\}']
 CV['CV']['grid_label'] = grid_label

@@ -3,6 +3,19 @@
         "activity_id":[
             "input4MIPs"
         ],
+        "dataset_category":[
+            "GHGConcentrations",
+            "SSTsAndSeaIce",
+            "aerosolProperties",
+            "atmosphericState",
+            "emissions",
+            "landState",
+            "ozone",
+            "radiation",
+            "solar",
+            "surfaceAir",
+            "surfaceFluxes"
+        ],
         "frequency":{
             "1hr":"sampled hourly",
             "1hrCM":"monthly climatology of diurnal cycle computed from hourly samples",
