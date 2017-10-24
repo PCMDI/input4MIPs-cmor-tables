@@ -35,7 +35,7 @@
             "cell_measures":"area: areacello",
             "cell_methods":"time: point",
             "comment":"",
-            "dimensions":"longitude latitude time2",
+            "dimensions":"longitude latitude time1",
             "frequency":"mon",
             "long_name":"Constructed mid-month Sea Surface Temperature",
             "modeling_realm":"ocean",
