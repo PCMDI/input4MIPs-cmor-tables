@@ -31,6 +31,7 @@ PJD 23 Oct 2017     - Update version format https://github.com/PCMDI/input4MIPs-
 PJD 23 Oct 2017     - Updated version 6.2.1 of input4MIPs datasets
 PJD 23 Oct 2017     - Reorganized table files
 PJD 23 Oct 2017     - Sync repo with guidance doc by adding dataset_category CV https://github.com/PCMDI/input4MIPs-cmor-tables/issues/15
+PJD 24 Oct 2017     - Updated siconc definition and dimensions to resolve typesi problem https://github.com/PCMDI/input4MIPs-cmor-tables/issues/18
                     - TODO: Deal with lab cert issue https://raw.githubusercontent.com -> http://rawgit.com (see requests library)
 
 @author: durack1
@@ -224,6 +225,9 @@ SImon['variable_entry']['siconcbcs']['out_name'] = 'siconcbcs'
 SImon['variable_entry']['siconcbcs']['valid_min'] = '-2000'
 SImon['variable_entry']['siconcbcs']['valid_max'] = '2000'
 SImon['Header']['realm'] = 'seaIce'
+# Fix issue with typesi dimension
+SImon['variable_entry']['siconc']['dimensions'] = 'longitude latitude time'
+SImon['variable_entry']['siconco']['dimensions'] = 'longitude latitude time'
 
 #%% Activity id
 activity_id = ['input4MIPs']
