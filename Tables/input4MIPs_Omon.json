@@ -9,7 +9,7 @@
         "missing_value":"1e20",
         "product":"input4MIPs",
         "realm":"ocean",
-        "table_date":"23 October 2017",
+        "table_date":"24 October 2017",
         "table_id":"Table input4MIPs_Omon"
     },
     "variable_entry":{
@@ -35,7 +35,7 @@
             "cell_measures":"area: areacello",
             "cell_methods":"time: point",
             "comment":"",
-            "dimensions":"longitude latitude time2",
+            "dimensions":"longitude latitude time1",
             "frequency":"mon",
             "long_name":"Constructed mid-month Sea Surface Temperature",
             "modeling_realm":"ocean",
