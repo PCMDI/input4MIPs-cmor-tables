@@ -33,6 +33,7 @@ PJD 23 Oct 2017     - Reorganized table files
 PJD 23 Oct 2017     - Sync repo with guidance doc by adding dataset_category CV https://github.com/PCMDI/input4MIPs-cmor-tables/issues/15
 PJD 24 Oct 2017     - Updated siconc definition and dimensions to resolve typesi problem https://github.com/PCMDI/input4MIPs-cmor-tables/issues/18
 PJD 24 Oct 2017     - Fix issue with time2 being climatology axis, revert to time1 for *bcs variables
+PJD 25 Oct 2017     - Added in region CV from obs4MIPs
                     - TODO: Deal with lab cert issue https://raw.githubusercontent.com -> http://rawgit.com (see requests library)
 
 @author: durack1
@@ -64,6 +65,7 @@ masterTargets = [
  'product',
  'nominal_resolution',
  'realm',
+ 'region',
  'required_global_attributes',
  'CV',
  'Ofx',
@@ -82,10 +84,11 @@ tableSource = [
  ['Ofx','https://raw.githubusercontent.com/PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_Ofx.json'],
  ['coordinate','https://raw.githubusercontent.com/PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_coordinate.json'],
  ['formula_terms','https://raw.githubusercontent.com/PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_formula_terms.json'],
- ['grids','https://raw.githubusercontent.com/PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_grids.json']
+ ['grids','https://raw.githubusercontent.com/PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_grids.json'],
+ ['region','https://raw.githubusercontent.com/PCMDI/obs4MIPs-cmor-tables/master/obs4MIPs_region.json']
  ] ;
 
-headerFree = ['coordinate','frequency','formula_terms','grid_label','nominal_resolution','realm']
+headerFree = ['coordinate','frequency','formula_terms','grid_label','nominal_resolution','realm','region']
 
 #%% Loop through tables and create in-memory objects
 # Loop through tableSource and create output tables
@@ -318,6 +321,8 @@ product = [
 
 #%% Realm
 
+#%% Region
+
 #%% Required global attributes
 required_global_attributes = [
  'Conventions',
@@ -335,6 +340,7 @@ required_global_attributes = [
  'mip_era',
  'nominal_resolution',
  'realm',
+ 'region',
  'source',
  'source_id',
  'table_id',
@@ -357,6 +363,8 @@ CV['CV']['license'] = license1
 CV['CV']['mip_era'] = mip_era
 CV['CV']['nominal_resolution'] = nominal_resolution
 CV['CV']['product'] = product
+CV['CV']['realm'] = realm
+CV['CV']['region'] = region
 CV['CV']['required_global_attributes'] = required_global_attributes
 CV['CV']['source_id'] = {'PCMDI':'PCMDI:'}
 

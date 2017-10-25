@@ -15,6 +15,7 @@
         "mip_era",
         "nominal_resolution",
         "realm",
+        "region",
         "source",
         "source_id",
         "table_id",
