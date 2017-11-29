@@ -36,6 +36,7 @@ PJD 24 Oct 2017     - Fix issue with time2 being climatology axis, revert to tim
 PJD 25 Oct 2017     - Added in region CV from obs4MIPs
 PJD 29 Nov 2017     - Updated all upstream tables
 PJD 29 Nov 2017     - Updated version 6.2.2 of input4MIPs datasets
+PJD 29 Nov 2017     - Updated version 6.2.3 of input4MIPs datasets
                     - TODO: Deal with lab cert issue https://raw.githubusercontent.com -> http://rawgit.com (see requests library)
 
 @author: durack1
@@ -418,7 +419,7 @@ del(jsonName,outFile) ; gc.collect()
 # Validate - only necessary if files are not written by json module
 
 #%% Incorporate JSON versioning info - see https://docs.google.com/document/d/1pU9IiJvPJwRvIgVaSDdJ4O0Jeorv_2ekEtted34K9cA/edit#heading=h.w4kchhc266o3
-versionId = '6.2.2'
+versionId = '6.2.3'
 input4MIPs = {}
 input4MIPs['data'] = {}
 # Generate institutions
@@ -427,7 +428,7 @@ keys = institution_id.keys(); keys.sort()
 #    input4MIPs['data'][inst] = {}
 # Drop in version identifiers
 input4MIPs['version'] = versionId
-input4MIPs['version_release'] = '1st November 2017'
+input4MIPs['version_release'] = '29th November 2017'
 # Initiate and complete fields
 input4MIPs['data']['DAMIP'] = {}
 input4MIPs['data']['DAMIP']['CCCma'] = {}
@@ -497,6 +498,11 @@ input4MIPs['data']['ScenarioMIP'] = {}
 input4MIPs['data']['ScenarioMIP']['UofMD'] = {}
 input4MIPs['data']['ScenarioMIP']['UofMD']['landState'] = {}
 input4MIPs['data']['ScenarioMIP']['UofMD']['landState']['currentVersion'] = '2.1f'
+input4MIPs['data']['ScenarioMIP']['UofMD']['landState']['currentVersionNotes'] = ('All ScenarioMIP scenario datasets are now',
+                                                                                ' available. New GCAM-ssp434 and GCAM-ssp460',
+                                                                                ' datasets added to existing IMAGE-ssp126,'
+                                                                                ' AIM-ssp370 and MAGPIE-ssp585 datasets',
+                                                                                ' published as part of the 6.2.1 release')
 input4MIPs['data']['CMIP']['VUA'] = {}
 input4MIPs['data']['CMIP']['VUA']['emissions'] = {}
 input4MIPs['data']['CMIP']['VUA']['emissions']['currentVersion'] = '1.2'
