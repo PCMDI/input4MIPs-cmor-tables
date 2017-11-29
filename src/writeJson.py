@@ -34,6 +34,7 @@ PJD 23 Oct 2017     - Sync repo with guidance doc by adding dataset_category CV 
 PJD 24 Oct 2017     - Updated siconc definition and dimensions to resolve typesi problem https://github.com/PCMDI/input4MIPs-cmor-tables/issues/18
 PJD 24 Oct 2017     - Fix issue with time2 being climatology axis, revert to time1 for *bcs variables
 PJD 25 Oct 2017     - Added in region CV from obs4MIPs
+PJD 29 Nov 2017     - Updated all upstream tables
                     - TODO: Deal with lab cert issue https://raw.githubusercontent.com -> http://rawgit.com (see requests library)
 
 @author: durack1
@@ -196,13 +197,13 @@ Omon['Header']['realm'] = 'ocean'
 # Cleanup 'siflsaltbot',
 # New 'sfdsi'
 SImonCleanup = ['sfdsi','siage','siareaacrossline','siarean','siareas',
-                'sicompstren','sidconcdyn','sidconcth','sidivvel','sidmassdyn',
-                'sidmassevapsubl','sidmassgrowthbot','sidmassgrowthwat',
-                'sidmasslat','sidmassmeltbot','sidmassmelttop','sidmasssi',
-                'sidmassth','sidmasstranx','sidmasstrany','sidragbot',
-                'sidragtop','siextentn','siextents','sifb','siflcondbot',
-                'siflcondtop','siflfwbot','siflfwdrain','sifllatstop',
-                'sifllwdtop','sifllwutop','siflsenstop',
+                'sicompstren','siconca','sidconcdyn','sidconcth','sidivvel',
+                'sidmassdyn','sidmassevapsubl','sidmassgrowthbot',
+                'sidmassgrowthwat','sidmasslat','sidmassmeltbot',
+                'sidmassmelttop','sidmasssi','sidmassth','sidmasstranx',
+                'sidmasstrany','sidragbot','sidragtop','siextentn','siextents',
+                'sifb','siflcondbot','siflcondtop','siflfwbot','siflfwdrain',
+                'sifllatstop','sifllwdtop','sifllwutop','siflsenstop',
                 'siflsensupbot','siflswdbot','siflswdtop','siflswutop',
                 'siforcecoriolx','siforcecorioly','siforceintstrx',
                 'siforceintstry','siforcetiltx','siforcetilty','sihc',
@@ -231,7 +232,6 @@ SImon['variable_entry']['siconcbcs']['valid_max'] = '2000'
 SImon['Header']['realm'] = 'seaIce'
 # Fix issue with typesi dimension
 SImon['variable_entry']['siconc']['dimensions'] = 'longitude latitude time'
-SImon['variable_entry']['siconco']['dimensions'] = 'longitude latitude time'
 # Fix issue with climatology time axis
 Omon['variable_entry']['tosbcs']['dimensions'] = 'longitude latitude time1'
 SImon['variable_entry']['siconcbcs']['dimensions'] = 'longitude latitude time1'
