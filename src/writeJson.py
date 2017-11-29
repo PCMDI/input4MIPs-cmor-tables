@@ -35,6 +35,7 @@ PJD 24 Oct 2017     - Updated siconc definition and dimensions to resolve typesi
 PJD 24 Oct 2017     - Fix issue with time2 being climatology axis, revert to time1 for *bcs variables
 PJD 25 Oct 2017     - Added in region CV from obs4MIPs
 PJD 29 Nov 2017     - Updated all upstream tables
+PJD 29 Nov 2017     - Updated version 6.2.2 of input4MIPs datasets
                     - TODO: Deal with lab cert issue https://raw.githubusercontent.com -> http://rawgit.com (see requests library)
 
 @author: durack1
@@ -417,7 +418,7 @@ del(jsonName,outFile) ; gc.collect()
 # Validate - only necessary if files are not written by json module
 
 #%% Incorporate JSON versioning info - see https://docs.google.com/document/d/1pU9IiJvPJwRvIgVaSDdJ4O0Jeorv_2ekEtted34K9cA/edit#heading=h.w4kchhc266o3
-versionId = '6.2.1'
+versionId = '6.2.2'
 input4MIPs = {}
 input4MIPs['data'] = {}
 # Generate institutions
@@ -426,7 +427,7 @@ keys = institution_id.keys(); keys.sort()
 #    input4MIPs['data'][inst] = {}
 # Drop in version identifiers
 input4MIPs['version'] = versionId
-input4MIPs['version_release'] = '6th October 2017'
+input4MIPs['version_release'] = '1st November 2017'
 # Initiate and complete fields
 input4MIPs['data']['DAMIP'] = {}
 input4MIPs['data']['DAMIP']['CCCma'] = {}
@@ -464,7 +465,7 @@ input4MIPs['data']['CMIP']['MPI-M']['aerosolProperties'] = {}
 input4MIPs['data']['CMIP']['MPI-M']['aerosolProperties']['currentVersion'] = '1.0'
 input4MIPs['data']['CMIP']['PCMDI'] = {}
 input4MIPs['data']['CMIP']['PCMDI']['SSTsAndSeaIce'] = {}
-input4MIPs['data']['CMIP']['PCMDI']['SSTsAndSeaIce']['currentVersion'] = '1.1.2'
+input4MIPs['data']['CMIP']['PCMDI']['SSTsAndSeaIce']['currentVersion'] = ['1.1.2','1.1.3']
 input4MIPs['data']['CMIP']['PCMDI']['SSTsAndSeaIce']['deprecatedVersion'] = ['1.0.0', '1.0.1', '1.1.0', '1.1.1']
 input4MIPs['data']['CMIP']['PNNL-JGCRI'] = {}
 input4MIPs['data']['CMIP']['PNNL-JGCRI']['emissions'] = {}
