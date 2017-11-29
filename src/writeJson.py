@@ -37,6 +37,7 @@ PJD 25 Oct 2017     - Added in region CV from obs4MIPs
 PJD 29 Nov 2017     - Updated all upstream tables
 PJD 29 Nov 2017     - Updated version 6.2.2 of input4MIPs datasets
 PJD 29 Nov 2017     - Updated version 6.2.3 of input4MIPs datasets
+PJD 29 Nov 2017     - Register institution_id NCAS https://github.com/PCMDI/input4MIPs-cmor-tables/issues/22
                     - TODO: Deal with lab cert issue https://raw.githubusercontent.com -> http://rawgit.com (see requests library)
 
 @author: durack1
@@ -277,6 +278,7 @@ institution_id['IACETH'] = 'Institute for Atmosphere and Climate, ETH Zurich, Zu
 institution_id['ImperialCollege'] = 'Imperial College London, South Kensington Campus, London SW7 2AZ, UK'
 institution_id['MOHC'] = 'Met Office Hadley Centre, Fitzroy Road, Exeter, Devon, EX1 3PB, UK'
 institution_id['MPI-M'] = 'Max Planck Institute for Meteorology, Hamburg 20146, Germany'
+institution_id['NCAS'] = 'National Centre for Atmospheric Science, University of Reading, Reading RG6 6BB, UK'
 institution_id['PCMDI'] = 'Program for Climate Model Diagnosis and Intercomparison, Lawrence Livermore National Laboratory, Livermore, CA 94550, USA'
 institution_id['PNNL-JGCRI'] = 'Pacific Northwest National Laboratory - Joint Global Change Research Institute, College Park, MD 20740, USA'
 institution_id['SOLARIS-HEPPA'] = 'SOLARIS-HEPPA, GEOMAR Helmholtz Centre for Ocean Research, Kiel 24105, Germany'
