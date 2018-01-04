@@ -38,6 +38,7 @@ PJD 29 Nov 2017     - Updated all upstream tables
 PJD 29 Nov 2017     - Updated version 6.2.2 of input4MIPs datasets
 PJD 29 Nov 2017     - Updated version 6.2.3 of input4MIPs datasets
 PJD 29 Nov 2017     - Register institution_id NCAS https://github.com/PCMDI/input4MIPs-cmor-tables/issues/22
+PJD  4 Jan 2018     - Updated from upstreams 01.00.20
 PJD  4 Jan 2018     - Adding yrC to address an issue with IACETH-SAGE3lambda-3-0-0 data https://github.com/PCMDI/input4MIPs-cmor-tables/issues/25
                     - TODO: Deal with lab cert issue https://raw.githubusercontent.com -> http://rawgit.com (see requests library)
 
@@ -262,7 +263,7 @@ dataset_category = [
 ]
 
 #%% Frequency
-#frequency['yrC'] = 'annual climatology computed from annual mean samples'
+frequency['yrC'] = 'annual climatology computed from annual mean samples'
 
 #%% Grid label
 

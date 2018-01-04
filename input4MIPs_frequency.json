@@ -15,6 +15,7 @@
         "monPt":"sampled monthly, at specified time point within the time period",
         "subhrPt":"sampled sub-hourly, at specified time point within an hour",
         "yr":"annual mean samples",
+        "yrC":"annual climatology computed from annual mean samples",
         "yrPt":"sampled yearly, at specified time point within the time period"
     }
 }
