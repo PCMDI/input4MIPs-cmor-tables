@@ -38,6 +38,7 @@ PJD 29 Nov 2017     - Updated all upstream tables
 PJD 29 Nov 2017     - Updated version 6.2.2 of input4MIPs datasets
 PJD 29 Nov 2017     - Updated version 6.2.3 of input4MIPs datasets
 PJD 29 Nov 2017     - Register institution_id NCAS https://github.com/PCMDI/input4MIPs-cmor-tables/issues/22
+PJD  4 Jan 2018     - Adding yrC to address an issue with IACETH-SAGE3lambda-3-0-0 data https://github.com/PCMDI/input4MIPs-cmor-tables/issues/25
                     - TODO: Deal with lab cert issue https://raw.githubusercontent.com -> http://rawgit.com (see requests library)
 
 @author: durack1
@@ -133,6 +134,7 @@ Ofx['variable_entry']['sftof']['comment'] = 'This is the area fraction at the oc
 # 'co3sataragos','co3satcalcos','detocos','dissicos','dissocos','dms','nh4os',
 # 'phos','phycalcos','phydiatos','phydiazos','phymiscos','phypicoos','po4os',
 # 'talkos','zmesoos','zmicroos','zmiscos','zoocos',
+# 'msftmyz','msftyyz',
 OmonCleanup = ['agessc','arag','bacc','bfe','bfeos',
                'bigthetao','bigthetaoga','bsi','bsios','calc','cfc11',
                'cfc12','chl','chlcalc','chlcalcos','chldiat','chldiatos',
@@ -163,8 +165,8 @@ OmonCleanup = ['agessc','arag','bacc','bfe','bfeos',
                'limirrpico','limncalc','limndiat','limndiaz','limnmisc',
                'limnpico','masscello','masso','mfo','mlotst','mlotstmax',
                'mlotstmin','mlotstsq','msftbarot','msftmrho','msftmrhompa',
-               'msftmyz','msftmzmpa','msftmzsmpa','msftyrho','msftyrhompa',
-               'msftyyz','msftyzmpa','msftyzsmpa','nh4','no3','no3os',
+               'msftmzmpa','msftmzsmpa','msftyrho','msftyrhompa',
+               'msftyzmpa','msftyzsmpa','nh4','no3','no3os',
                'o2','o2min','o2os','o2sat','o2satos','obvfsq','ocfriver',
                'pbfe','pbo','pbsi','ph','phabio','phabioos','phnat','phnatos',
                'phyc','phycalc','phycos','phydiat',
@@ -260,6 +262,7 @@ dataset_category = [
 ]
 
 #%% Frequency
+#frequency['yrC'] = 'annual climatology computed from annual mean samples'
 
 #%% Grid label
 
