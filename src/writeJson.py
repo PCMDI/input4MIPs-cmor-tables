@@ -74,6 +74,7 @@ masterTargets = [
  'realm',
  'region',
  'required_global_attributes',
+ 'target_mip',
  'CV',
  'Ofx',
  'Omon',
@@ -92,10 +93,12 @@ tableSource = [
  ['coordinate','https://raw.githubusercontent.com/PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_coordinate.json'],
  ['formula_terms','https://raw.githubusercontent.com/PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_formula_terms.json'],
  ['grids','https://raw.githubusercontent.com/PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_grids.json'],
- ['region','https://raw.githubusercontent.com/PCMDI/obs4MIPs-cmor-tables/master/obs4MIPs_region.json']
+ ['region','https://raw.githubusercontent.com/PCMDI/obs4MIPs-cmor-tables/master/obs4MIPs_region.json'],
+ ['target_mip','https://raw.githubusercontent.com/WCRP-CMIP/CMIP6_CVs/master/CMIP6_activity_id.json']
  ] ;
 
-headerFree = ['coordinate','frequency','formula_terms','grid_label','nominal_resolution','realm','region']
+headerFree = ['coordinate','frequency','formula_terms','grid_label','nominal_resolution',
+              'realm','region','target_mip']
 
 #%% Loop through tables and create in-memory objects
 # Loop through tableSource and create output tables
@@ -104,6 +107,8 @@ for count,table in enumerate(tmp.keys()):
     print 'table:', table
     if table in ['coordinate','formula_terms']:
         vars()[table] = tmp[table]
+    elif table == 'target_mip':
+        vars()[table] = tmp[table].get('activity_id')
     elif table in headerFree:
         vars()[table] = tmp[table].get(table)
     else:
