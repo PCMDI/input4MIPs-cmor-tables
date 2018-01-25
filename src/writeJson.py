@@ -43,6 +43,7 @@ PJD  4 Jan 2018     - Adding yrC to address an issue with IACETH-SAGE3lambda-3-0
 PJD  8 Jan 2018     - Register institution_id NCAR https://github.com/PCMDI/input4MIPs-cmor-tables/issues/27
 PJD 23 Jan 2018     - Added target_mip CV from CMIP6_CVs/activity_id https://github.com/PCMDI/input4MIPs-cmor-tables/issues/29
 PJD 23 Jan 2018     - Add A3hr/A3hrPt/Oday tables for JRA55-do OMIP datasets https://github.com/PCMDI/input4MIPs-cmor-tables/issues/30
+PJD 23 Jan 2018     - Add OmonC table for JRA55-do OMIP salinity restoring dataset
                     - TODO: Deal with lab cert issue https://raw.githubusercontent.com -> http://rawgit.com (see requests library)
 
 @author: durack1
@@ -83,7 +84,8 @@ masterTargets = [
  'SImon',
  'A3hr',
  'A3hrPt',
- 'Oday'
+ 'Oday',
+ 'OmonC'
  ] ;
 
 #%% Tables
@@ -148,7 +150,7 @@ Ofx['variable_entry']['sftof']['comment'] = 'This is the area fraction at the oc
 # 'co3sataragos','co3satcalcos','detocos','dissicos','dissocos','dms','nh4os',
 # 'phos','phycalcos','phydiatos','phydiazos','phymiscos','phypicoos','po4os',
 # 'talkos','zmesoos','zmicroos','zmiscos','zoocos',
-# 'msftmyz','msftyyz','sos'
+# 'msftmyz','msftyyz'
 OmonCleanup = ['agessc','arag','bacc','bfe','bfeos',
                'bigthetao','bigthetaoga','bsi','bsios','calc','cfc11',
                'cfc12','chl','chlcalc','chlcalcos','chldiat','chldiatos',
@@ -189,7 +191,7 @@ OmonCleanup = ['agessc','arag','bacc','bfe','bfeos',
                'phypos','physi','physios','pnitrate','po4','pon',
                'ponos','pop','popos','pp','prra','prsn','pso','rlntds','rsdo',
                'rsntds','sf6','sfdsi','sfriver','si','sios','sltovgyre',
-               'sltovovrt','so','sob','soga','sosga','sossq','spco2',
+               'sltovovrt','so','sob','sos','soga','sosga','sossq','spco2',
                'spco2abio',u'spco2nat','talk','talknat','talknatos',
                'tauucorr','tauuo','tauvcorr','tauvo','thetao','thetaoga',
                'thkcello','tob','tosga','tossq','umo','uo','vmo','vo','volo',
@@ -205,6 +207,16 @@ Oday['variable_entry']['friver']['frequency'] = 'day'
 Oday['Header'] = copy.deepcopy(Omon['Header'])
 Oday['Header']['table_id'] = 'Table input4MIPs_Oday'
 Oday['Header']['realm'] = 'ocean'
+
+# OmonC
+OmonC = {}
+OmonC['variable_entry'] = {}
+OmonC['variable_entry']['sos'] = copy.deepcopy(Omon['variable_entry']['sos'])
+OmonC['variable_entry']['sos']['frequency'] = 'monC'
+OmonC['variable_entry']['sos']['dimensions'] = 'longitude latitude time2'
+OmonC['Header'] = copy.deepcopy(Omon['Header'])
+OmonC['Header']['table_id'] = 'Table input4MIPs_OmonC'
+OmonC['Header']['realm'] = 'ocean'
 
 # Omon
 for clean in OmonCleanup:
@@ -447,7 +459,7 @@ for jsonName in masterTargets:
     if jsonName == 'license1':
         outFile = ''.join(['../input4MIPs_license.json'])
     elif jsonName in ['Ofx','Omon','SImon','CV','coordinate','formula_terms',
-                      'grids','A3hr','A3hrPt','Oday']:
+                      'grids','A3hr','A3hrPt','Oday','OmonC']:
         outFile = ''.join(['../Tables/input4MIPs_',jsonName,'.json'])
     else:
         outFile = ''.join(['../input4MIPs_',jsonName,'.json'])
@@ -459,7 +471,7 @@ for jsonName in masterTargets:
         os.mkdir('../Tables')
     # Create host dictionary
     if jsonName not in ['coordinate','formula_terms','grids','CV','institution_id',
-                        'Ofx','Omon','SImon','A3hr','A3hrPt','Oday']:
+                        'Ofx','Omon','SImon','A3hr','A3hrPt','Oday','OmonC']:
         jsonDict = {}
         jsonDict[jsonName] = eval(jsonName)
     else:

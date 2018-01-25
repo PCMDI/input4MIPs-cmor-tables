@@ -49,24 +49,6 @@
             "valid_max":"",
             "valid_min":""
         },
-        "sos":{
-            "cell_measures":"area: areacello",
-            "cell_methods":"area: mean where sea time: mean",
-            "comment":"",
-            "dimensions":"longitude latitude time",
-            "frequency":"mon",
-            "long_name":"Sea Surface Salinity",
-            "modeling_realm":"ocean",
-            "ok_max_mean_abs":"",
-            "ok_min_mean_abs":"",
-            "out_name":"sos",
-            "positive":"",
-            "standard_name":"sea_surface_salinity",
-            "type":"real",
-            "units":"0.001",
-            "valid_max":"",
-            "valid_min":""
-        },
         "tos":{
             "cell_measures":"area: areacello",
             "cell_methods":"time: mean",
