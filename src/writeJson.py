@@ -43,7 +43,8 @@ PJD  4 Jan 2018     - Adding yrC to address an issue with IACETH-SAGE3lambda-3-0
 PJD  8 Jan 2018     - Register institution_id NCAR https://github.com/PCMDI/input4MIPs-cmor-tables/issues/27
 PJD 23 Jan 2018     - Added target_mip CV from CMIP6_CVs/activity_id https://github.com/PCMDI/input4MIPs-cmor-tables/issues/29
 PJD 23 Jan 2018     - Add A3hr/A3hrPt/Oday tables for JRA55-do OMIP datasets https://github.com/PCMDI/input4MIPs-cmor-tables/issues/30
-PJD 23 Jan 2018     - Add OmonC table for JRA55-do OMIP salinity restoring dataset
+PJD 24 Jan 2018     - Add OmonC table for JRA55-do OMIP salinity restoring dataset
+PJD 25 Jan 2018     - Register institution_id MRI https://github.com/PCMDI/input4MIPs-cmor-tables/issues/33
                     - TODO: Deal with lab cert issue https://raw.githubusercontent.com -> http://rawgit.com (see requests library)
 
 @author: durack1
@@ -340,6 +341,7 @@ institution_id['IACETH'] = 'Institute for Atmosphere and Climate, ETH Zurich, Zu
 institution_id['ImperialCollege'] = 'Imperial College London, South Kensington Campus, London SW7 2AZ, UK'
 institution_id['MOHC'] = 'Met Office Hadley Centre, Fitzroy Road, Exeter, Devon, EX1 3PB, UK'
 institution_id['MPI-M'] = 'Max Planck Institute for Meteorology, Hamburg 20146, Germany'
+institution_id['MRI'] = 'Meteorological Research Institute, Tsukuba, Ibaraki 305-0052, Japan'
 institution_id['NCAR'] = 'National Center for Atmospheric Research, Boulder, CO 80307, USA'
 institution_id['NCAS'] = 'National Centre for Atmospheric Science, University of Reading, Reading RG6 6BB, UK'
 institution_id['PCMDI'] = 'Program for Climate Model Diagnosis and Intercomparison, Lawrence Livermore National Laboratory, Livermore, CA 94550, USA'
