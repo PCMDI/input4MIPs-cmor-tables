@@ -45,6 +45,7 @@ PJD 23 Jan 2018     - Added target_mip CV from CMIP6_CVs/activity_id https://git
 PJD 23 Jan 2018     - Add A3hr/A3hrPt/Oday tables for JRA55-do OMIP datasets https://github.com/PCMDI/input4MIPs-cmor-tables/issues/30
 PJD 24 Jan 2018     - Add OmonC table for JRA55-do OMIP salinity restoring dataset
 PJD 25 Jan 2018     - Register institution_id MRI https://github.com/PCMDI/input4MIPs-cmor-tables/issues/33
+PJD 25 Jan 2018     - Added source_id MRI-JRA55-do-1-3 https://github.com/PCMDI/input4MIPs-cmor-tables/issues/30
                     - TODO: Deal with lab cert issue https://raw.githubusercontent.com -> http://rawgit.com (see requests library)
 
 @author: durack1
@@ -435,7 +436,7 @@ CV['CV']['product'] = product
 CV['CV']['realm'] = realm
 CV['CV']['region'] = region
 CV['CV']['required_global_attributes'] = required_global_attributes
-CV['CV']['source_id'] = {'PCMDI':'PCMDI:'}
+CV['CV']['source_id'] = {'PCMDI':'PCMDI:','MRI-JRA55-do-1-3':'MRI-JRA55-do-1-3:'}
 
 #%% Write variables to files
 for jsonName in masterTargets:
