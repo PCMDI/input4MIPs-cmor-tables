@@ -458,7 +458,8 @@ for jsonName in masterTargets:
     if not os.path.exists('../Tables'):
         os.mkdir('../Tables')
     # Create host dictionary
-    if jsonName not in ['coordinate','formula_terms','grids','CV','institution_id','Ofx','Omon','SImon']:
+    if jsonName not in ['coordinate','formula_terms','grids','CV','institution_id',
+                        'Ofx','Omon','SImon','A3hr','A3hrPt','Oday']:
         jsonDict = {}
         jsonDict[jsonName] = eval(jsonName)
     else:
