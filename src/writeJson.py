@@ -41,6 +41,9 @@ PJD 29 Nov 2017     - Register institution_id NCAS https://github.com/PCMDI/inpu
 PJD  4 Jan 2018     - Updated from upstreams 01.00.20
 PJD  4 Jan 2018     - Adding yrC to address an issue with IACETH-SAGE3lambda-3-0-0 data https://github.com/PCMDI/input4MIPs-cmor-tables/issues/25
 PJD  8 Jan 2018     - Register institution_id NCAR https://github.com/PCMDI/input4MIPs-cmor-tables/issues/27
+PJD 23 Jan 2018     - Added target_mip CV from CMIP6_CVs/activity_id https://github.com/PCMDI/input4MIPs-cmor-tables/issues/29
+PJD 23 Jan 2018     - Add A3hr/A3hrPt/Oday tables for JRA55-do OMIP datasets https://github.com/PCMDI/input4MIPs-cmor-tables/issues/30
+PJD 23 Jan 2018     - Add OmonC table for JRA55-do OMIP salinity restoring dataset
                     - TODO: Deal with lab cert issue https://raw.githubusercontent.com -> http://rawgit.com (see requests library)
 
 @author: durack1
@@ -52,9 +55,9 @@ sys.path.append('/export/durack1/git/durolib/lib/')
 from durolib import readJsonCreateDict
 
 #%% Determine path
-homePath = os.path.join('/','/'.join(os.path.realpath(__file__).split('/')[0:-1]))
+#homePath = os.path.join('/','/'.join(os.path.realpath(__file__).split('/')[0:-1]))
 #homePath = '/export/durack1/git/input4MIPs-cmor-tables/' ; # Linux
-#homePath = '/sync/git/obs4MIPs-cmor-tables/src' ; # OS-X
+homePath = '/sync/git/input4MIPs-cmor-tables/src' ; # OS-X
 os.chdir(homePath)
 
 #%% List target tables
@@ -78,7 +81,11 @@ masterTargets = [
  'CV',
  'Ofx',
  'Omon',
- 'SImon'
+ 'SImon',
+ 'A3hr',
+ 'A3hrPt',
+ 'Oday',
+ 'OmonC'
  ] ;
 
 #%% Tables
@@ -94,7 +101,9 @@ tableSource = [
  ['formula_terms','https://raw.githubusercontent.com/PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_formula_terms.json'],
  ['grids','https://raw.githubusercontent.com/PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_grids.json'],
  ['region','https://raw.githubusercontent.com/PCMDI/obs4MIPs-cmor-tables/master/obs4MIPs_region.json'],
- ['target_mip','https://raw.githubusercontent.com/WCRP-CMIP/CMIP6_CVs/master/CMIP6_activity_id.json']
+ ['target_mip','https://raw.githubusercontent.com/WCRP-CMIP/CMIP6_CVs/master/CMIP6_activity_id.json'],
+ ['A3hr','https://raw.githubusercontent.com/PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_3hr.json'],
+ ['E3hr','https://raw.githubusercontent.com/PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_E3hr.json']
  ] ;
 
 headerFree = ['coordinate','frequency','formula_terms','grid_label','nominal_resolution',
@@ -141,7 +150,7 @@ Ofx['variable_entry']['sftof']['comment'] = 'This is the area fraction at the oc
 # 'co3sataragos','co3satcalcos','detocos','dissicos','dissocos','dms','nh4os',
 # 'phos','phycalcos','phydiatos','phydiazos','phymiscos','phypicoos','po4os',
 # 'talkos','zmesoos','zmicroos','zmiscos','zoocos',
-# 'msftmyz','msftyyz',
+# 'msftmyz','msftyyz'
 OmonCleanup = ['agessc','arag','bacc','bfe','bfeos',
                'bigthetao','bigthetaoga','bsi','bsios','calc','cfc11',
                'cfc12','chl','chlcalc','chlcalcos','chldiat','chldiatos',
@@ -182,7 +191,7 @@ OmonCleanup = ['agessc','arag','bacc','bfe','bfeos',
                'phypos','physi','physios','pnitrate','po4','pon',
                'ponos','pop','popos','pp','prra','prsn','pso','rlntds','rsdo',
                'rsntds','sf6','sfdsi','sfriver','si','sios','sltovgyre',
-               'sltovovrt','so','sob','soga','sos','sosga','sossq','spco2',
+               'sltovovrt','so','sob','sos','soga','sosga','sossq','spco2',
                'spco2abio',u'spco2nat','talk','talknat','talknatos',
                'tauucorr','tauuo','tauvcorr','tauvo','thetao','thetaoga',
                'thkcello','tob','tosga','tossq','umo','uo','vmo','vo','volo',
@@ -190,6 +199,26 @@ OmonCleanup = ['agessc','arag','bacc','bfe','bfeos',
                'wfo','wfonocorr','wmo','wo','zfullo','zhalfo','zmeso',
                'zmicro','zmisc','zo2min','zooc',
                'zos','zossq','zostoga','zsatarag','zsatcalc']
+# Oday
+Oday = {}
+Oday['variable_entry'] = {}
+Oday['variable_entry']['friver'] = copy.deepcopy(Omon['variable_entry']['friver'])
+Oday['variable_entry']['friver']['frequency'] = 'day'
+Oday['Header'] = copy.deepcopy(Omon['Header'])
+Oday['Header']['table_id'] = 'Table input4MIPs_Oday'
+Oday['Header']['realm'] = 'ocean'
+
+# OmonC
+OmonC = {}
+OmonC['variable_entry'] = {}
+OmonC['variable_entry']['sos'] = copy.deepcopy(Omon['variable_entry']['sos'])
+OmonC['variable_entry']['sos']['frequency'] = 'monC'
+OmonC['variable_entry']['sos']['dimensions'] = 'longitude latitude time2'
+OmonC['Header'] = copy.deepcopy(Omon['Header'])
+OmonC['Header']['table_id'] = 'Table input4MIPs_OmonC'
+OmonC['Header']['realm'] = 'ocean'
+
+# Omon
 for clean in OmonCleanup:
     tmp = Omon['variable_entry'].pop(clean)
 Omon['variable_entry']['tos']['cell_methods'] = 'time: mean'
@@ -205,6 +234,7 @@ Omon['variable_entry']['tosbcs']['out_name'] = 'tosbcs'
 Omon['variable_entry']['tosbcs']['valid_min'] = '-25' ; # Updated K -> degC
 Omon['variable_entry']['tosbcs']['valid_max'] = '65' ; # Updated K -> degC
 Omon['Header']['realm'] = 'ocean'
+
 # SImon
 # Cleanup 'siflsaltbot',
 # New 'sfdsi'
@@ -247,6 +277,28 @@ SImon['variable_entry']['siconc']['dimensions'] = 'longitude latitude time'
 # Fix issue with climatology time axis
 Omon['variable_entry']['tosbcs']['dimensions'] = 'longitude latitude time1'
 SImon['variable_entry']['siconcbcs']['dimensions'] = 'longitude latitude time1'
+
+# A3hr
+A3hrCleanup = ['clt','hfls','hfss','mrro','mrsos','prc','ps','rldscs','rlus',
+               'rsdscs','rsdsdiff','rsus','rsuscs','tos','tslsi']
+for clean in A3hrCleanup:
+    tmp = A3hr['variable_entry'].pop(clean)
+# Create A3hrPt
+A3hrPt = {}
+A3hrPt['variable_entry'] = {}
+A3hrPt['Header'] = copy.deepcopy(A3hr['Header'])
+A3hrPt['Header']['table_id'] = 'Table input4MIPs_A3hrPt'
+A3hrPt['variable_entry']['huss'] = A3hr['variable_entry'].pop('huss')
+A3hrPt['variable_entry']['huss']['comment'] = 'Near-surface (usually, 2 meter) specific humidity'
+A3hrPt['variable_entry']['psl'] = copy.deepcopy(E3hr['variable_entry']['psl'])
+A3hrPt['variable_entry']['psl']['frequency'] = '3hrPt'
+A3hrPt['variable_entry']['psl']['dimensions'] = 'longitude latitude time1'
+A3hrPt['variable_entry']['psl']['cell_methods'] = 'area: mean time: point'
+A3hrPt['variable_entry']['tas'] = A3hr['variable_entry'].pop('tas')
+A3hrPt['variable_entry']['uas'] = A3hr['variable_entry'].pop('uas')
+A3hrPt['variable_entry']['uas']['comment'] = 'Eastward component of the near-surface wind'
+A3hrPt['variable_entry']['vas'] = A3hr['variable_entry'].pop('vas')
+
 
 #%% Activity id
 activity_id = ['input4MIPs']
@@ -407,7 +459,7 @@ for jsonName in masterTargets:
     if jsonName == 'license1':
         outFile = ''.join(['../input4MIPs_license.json'])
     elif jsonName in ['Ofx','Omon','SImon','CV','coordinate','formula_terms',
-                      'grids']:
+                      'grids','A3hr','A3hrPt','Oday','OmonC']:
         outFile = ''.join(['../Tables/input4MIPs_',jsonName,'.json'])
     else:
         outFile = ''.join(['../input4MIPs_',jsonName,'.json'])
@@ -418,7 +470,8 @@ for jsonName in masterTargets:
     if not os.path.exists('../Tables'):
         os.mkdir('../Tables')
     # Create host dictionary
-    if jsonName not in ['coordinate','formula_terms','grids','CV','institution_id','Ofx','Omon','SImon']:
+    if jsonName not in ['coordinate','formula_terms','grids','CV','institution_id',
+                        'Ofx','Omon','SImon','A3hr','A3hrPt','Oday','OmonC']:
         jsonDict = {}
         jsonDict[jsonName] = eval(jsonName)
     else:
