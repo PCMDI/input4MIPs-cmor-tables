@@ -46,6 +46,7 @@ PJD 23 Jan 2018     - Add A3hr/A3hrPt/Oday tables for JRA55-do OMIP datasets htt
 PJD 24 Jan 2018     - Add OmonC table for JRA55-do OMIP salinity restoring dataset
 PJD 25 Jan 2018     - Register institution_id MRI https://github.com/PCMDI/input4MIPs-cmor-tables/issues/33
 PJD 25 Jan 2018     - Added source_id MRI-JRA55-do-1-3 https://github.com/PCMDI/input4MIPs-cmor-tables/issues/30
+PJD 21 Feb 2018     - Updated source_id to include as dedicated CV https://github.com/PCMDI/input4MIPs-cmor-tables/issues/36
                     - TODO: Deal with lab cert issue https://raw.githubusercontent.com -> http://rawgit.com (see requests library)
 
 @author: durack1
@@ -57,9 +58,9 @@ sys.path.append('/export/durack1/git/durolib/lib/')
 from durolib import readJsonCreateDict
 
 #%% Determine path
-#homePath = os.path.join('/','/'.join(os.path.realpath(__file__).split('/')[0:-1]))
+homePath = os.path.join('/','/'.join(os.path.realpath(__file__).split('/')[0:-1]))
 #homePath = '/export/durack1/git/input4MIPs-cmor-tables/' ; # Linux
-homePath = '/sync/git/input4MIPs-cmor-tables/src' ; # OS-X
+#homePath = '/sync/git/input4MIPs-cmor-tables/src' ; # OS-X
 os.chdir(homePath)
 
 #%% List target tables
@@ -79,6 +80,7 @@ masterTargets = [
  'realm',
  'region',
  'required_global_attributes',
+ 'source_id',
  'target_mip',
  'CV',
  'Ofx',
@@ -301,7 +303,6 @@ A3hrPt['variable_entry']['uas'] = A3hr['variable_entry'].pop('uas')
 A3hrPt['variable_entry']['uas']['comment'] = 'Eastward component of the near-surface wind'
 A3hrPt['variable_entry']['vas'] = A3hr['variable_entry'].pop('vas')
 
-
 #%% Activity id
 activity_id = ['input4MIPs']
 
@@ -420,6 +421,13 @@ required_global_attributes = [
  'variable_id'
  ];
 
+#%% Source id
+source_id = {}
+source_id['PCMDI-AMIP-1-1-3'] = {}
+source_id['PCMDI-AMIP-1-1-3']['source'] = 'PCMDI-AMIP 1.1.3: Merged SST based on UK MetOffice HadISST and NCEP OI2'
+source_id['MRI-JRA55-do-1-3'] = {}
+source_id['MRI-JRA55-do-1-3']['source'] = 'MRI JRA55-do 1.3: Atmospheric state generated for OMIP based on the MRI JRA55 reanalysis'
+
 #%% Create CV master
 CV = {}
 CV['CV'] = {}
@@ -436,7 +444,7 @@ CV['CV']['product'] = product
 CV['CV']['realm'] = realm
 CV['CV']['region'] = region
 CV['CV']['required_global_attributes'] = required_global_attributes
-CV['CV']['source_id'] = {'PCMDI':'PCMDI:','MRI-JRA55-do-1-3':'MRI-JRA55-do-1-3:'}
+CV['CV']['source_id'] = source_id
 
 #%% Write variables to files
 for jsonName in masterTargets:
