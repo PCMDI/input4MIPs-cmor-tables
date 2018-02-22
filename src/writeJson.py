@@ -47,6 +47,9 @@ PJD 24 Jan 2018     - Add OmonC table for JRA55-do OMIP salinity restoring datas
 PJD 25 Jan 2018     - Register institution_id MRI https://github.com/PCMDI/input4MIPs-cmor-tables/issues/33
 PJD 25 Jan 2018     - Added source_id MRI-JRA55-do-1-3 https://github.com/PCMDI/input4MIPs-cmor-tables/issues/30
 PJD 21 Feb 2018     - Updated source_id to include as dedicated CV https://github.com/PCMDI/input4MIPs-cmor-tables/issues/36
+PJD 21 Feb 2018     - Updated friver comment from upstream
+PJD 21 Feb 2018     - Updated to point source_id source to remote
+                    - TODO: Update to include MRI-JRA55-do-1-3 demo zip archive
                     - TODO: Deal with lab cert issue https://raw.githubusercontent.com -> http://rawgit.com (see requests library)
 
 @author: durack1
@@ -105,13 +108,14 @@ tableSource = [
  ['formula_terms','https://raw.githubusercontent.com/PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_formula_terms.json'],
  ['grids','https://raw.githubusercontent.com/PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_grids.json'],
  ['region','https://raw.githubusercontent.com/PCMDI/obs4MIPs-cmor-tables/master/obs4MIPs_region.json'],
+ ['source_id','https://raw.githubusercontent.com/PCMDI/input4MIPs-cmor-tables/master/input4MIPs_source_id.json'],
  ['target_mip','https://raw.githubusercontent.com/WCRP-CMIP/CMIP6_CVs/master/CMIP6_activity_id.json'],
  ['A3hr','https://raw.githubusercontent.com/PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_3hr.json'],
  ['E3hr','https://raw.githubusercontent.com/PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_E3hr.json']
  ] ;
 
 headerFree = ['coordinate','frequency','formula_terms','grid_label','nominal_resolution',
-              'realm','region','target_mip']
+              'realm','region','source_id','target_mip']
 
 #%% Loop through tables and create in-memory objects
 # Loop through tableSource and create output tables
@@ -208,6 +212,7 @@ Oday = {}
 Oday['variable_entry'] = {}
 Oday['variable_entry']['friver'] = copy.deepcopy(Omon['variable_entry']['friver'])
 Oday['variable_entry']['friver']['frequency'] = 'day'
+Oday['variable_entry']['friver']['comment'] = 'computed as the river flux of water into the ocean divided by the area of the ocean portion of the grid cell'
 Oday['Header'] = copy.deepcopy(Omon['Header'])
 Oday['Header']['table_id'] = 'Table input4MIPs_Oday'
 Oday['Header']['realm'] = 'ocean'
@@ -422,11 +427,17 @@ required_global_attributes = [
  ];
 
 #%% Source id
-source_id = {}
-source_id['PCMDI-AMIP-1-1-3'] = {}
-source_id['PCMDI-AMIP-1-1-3']['source'] = 'PCMDI-AMIP 1.1.3: Merged SST based on UK MetOffice HadISST and NCEP OI2'
-source_id['MRI-JRA55-do-1-3'] = {}
-source_id['MRI-JRA55-do-1-3']['source'] = 'MRI JRA55-do 1.3: Atmospheric state generated for OMIP based on the MRI JRA55 reanalysis'
+#tmp = [['source_id','https://raw.githubusercontent.com/PCMDI/input4mips-cmor-tables/master/input4MIPs_source_id.json']
+#      ] ;
+#source_id = readJsonCreateDict(tmp)
+#source_id = institution_id.get('source_id')
+
+# Fix issues
+#source_id = {}
+#source_id['PCMDI-AMIP-1-1-3'] = {}
+#source_id['PCMDI-AMIP-1-1-3']['source'] = 'PCMDI-AMIP 1.1.3: Merged SST based on UK MetOffice HadISST and NCEP OI2'
+#source_id['MRI-JRA55-do-1-3'] = {}
+#source_id['MRI-JRA55-do-1-3']['source'] = 'MRI JRA55-do 1.3: Atmospheric state generated for OMIP based on the MRI JRA55 reanalysis'
 
 #%% Create CV master
 CV = {}
