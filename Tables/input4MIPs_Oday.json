@@ -17,7 +17,7 @@
         "friver":{
             "cell_measures":"area: areacello",
             "cell_methods":"area: mean where sea time: mean",
-            "comment":"computed as the river flux of water into the ocean divided by the area of the ocean portion of the grid cell.",
+            "comment":"computed as the river flux of water into the ocean divided by the area of the ocean portion of the grid cell",
             "dimensions":"longitude latitude time",
             "frequency":"day",
             "long_name":"Water Flux into Sea Water From Rivers",
