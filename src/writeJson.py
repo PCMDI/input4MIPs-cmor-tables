@@ -49,14 +49,14 @@ PJD 25 Jan 2018     - Added source_id MRI-JRA55-do-1-3 https://github.com/PCMDI/
 PJD 21 Feb 2018     - Updated source_id to include as dedicated CV https://github.com/PCMDI/input4MIPs-cmor-tables/issues/36
 PJD 21 Feb 2018     - Updated friver comment from upstream
 PJD 21 Feb 2018     - Updated to point source_id source to remote
-                    - TODO: Update to include MRI-JRA55-do-1-3 demo zip archive
+PJD 22 Feb 2018     - Updated to include MRI-JRA55-do-1-3 demo zip archive
                     - TODO: Deal with lab cert issue https://raw.githubusercontent.com -> http://rawgit.com (see requests library)
 
 @author: durack1
 """
 
 #%% Import statements
-import copy,gc,json,os,sys,time
+import copy,gc,json,os,shutil,subprocess,sys,time
 sys.path.append('/export/durack1/git/durolib/lib/')
 from durolib import readJsonCreateDict
 
@@ -611,3 +611,46 @@ jsonDict['input4MIPs_version'] = input4MIPs
 fH = open(outFile,'w')
 json.dump(jsonDict,fH,ensure_ascii=True,sort_keys=True,indent=4,separators=(',',':'),encoding="utf-8")
 fH.close()
+
+#%% Generate MRI-JMA-JRA55-do-1-3 demo directory
+demoPath = os.path.join('/','/'.join(os.path.realpath(__file__).split('/')[0:-2]),'demo')
+demoPath = os.path.join(demoPath,'MRI-JMA-JRA55-do-1-3')
+outPath = os.path.join(demoPath,'Tables')
+# First purge existing
+if os.path.exists(outPath):
+    shutil.rmtree(outPath) ; # Purge all existing
+    os.makedirs(outPath)
+else:
+    os.makedirs(outPath)
+os.chdir(demoPath)
+
+# Now fill Tables subdir with required files
+cvTables = ['A3hr','A3hrPt','CV','Oday','OmonC','coordinate']
+for count,tableId in enumerate(cvTables):
+    fileName = ''.join(['input4MIPs_',tableId,'.json'])
+    sourcePath = os.path.join('..','..','Tables',fileName)
+    shutil.copy(sourcePath,'Tables')
+
+#%% Generate zip archive
+env7za = os.environ.copy()
+env7za['PATH'] = env7za['PATH'] + ':/export/durack1/bin/downloads/p7zip16.02/180204_build/p7zip_16.02/bin'
+# Cleanup rogue files
+#os.chdir(demoPath)
+if os.path.exists('.DS_Store'):
+    os.remove('.DS_Store')
+if os.path.exists('demo.zip'):
+    os.remove('demo.zip')
+if os.path.exists('MRI-JMA-JRA55-do-1-3/demo.zip'):
+    os.remove('MRI-JMA-JRA55-do-1-3/demo.zip')
+if os.path.exists('../MRI-JMA-JRA55-do-1-3/demo.zip'):
+    os.remove('../MRI-JMA-JRA55-do-1-3/demo.zip')
+# Jump up one directory
+os.chdir(demoPath.replace('/MRI-JMA-JRA55-do-1-3',''))
+# Zip demo dir
+p = subprocess.Popen(['7za','a','demo.zip','MRI-JMA-JRA55-do-1-3','tzip','-xr!demo/MRI-JMA-JRA55-do-1-3'],
+                         stdout=subprocess.PIPE,stderr=subprocess.PIPE,
+                         cwd=os.getcwd(),env=env7za)
+stdout = p.stdout.read() ; # Use persistent variables for tests below
+stderr = p.stderr.read()
+# Move to demo dir
+shutil.move('demo.zip', 'MRI-JMA-JRA55-do-1-3/demo.zip')
