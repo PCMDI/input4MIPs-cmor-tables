@@ -9,6 +9,7 @@ from calendar import isleap
 # Notes
 # PJD  5 Feb 2018   - Started
 # PJD 21 Feb 2018   - Updated for CMOR3.3.1
+# PJD 24 Feb 2018   - Updated paths for demo dir
 #                   TODO: Fix missing_value assignment problem
 
 #%% Create input decks for all variables - 'fileList' will need to be amended to include all files 1958-2018
@@ -16,8 +17,8 @@ inputDict = {}
 inputDict['A3hr'] = {}
 inputDict['A3hr']['rain'] = {}
 inputDict['A3hr']['rain']['fileList'] = [
-        '../180120/rain.2017.14Jan2018.nc', # All these 'fileList' entries will require updating to include all files to be processed
-        '../180120/rain.2018.14Jan2018.nc'
+        'testFiles/rain.2017.14Jan2018.nc', # All these 'fileList' entries will require updating to include all files to be processed
+        'testFiles/rain.2018.14Jan2018.nc'
         ]
 inputDict['A3hr']['rain']['inputVarName'] = 'prrn'
 inputDict['A3hr']['rain']['outputVarName'] = 'pr'
@@ -25,7 +26,7 @@ inputDict['A3hr']['rain']['outputUnits'] = 'kg m-2 s-1'
 inputDict['A3hr']['rain']['positive'] = 'down'
 inputDict['A3hr']['rlds'] = {}
 inputDict['A3hr']['rlds']['fileList'] = [
-        '../180120/rlds.1996.18Oct2017.nc'
+        'testFiles/rlds.1996.18Oct2017.nc'
         ]
 inputDict['A3hr']['rlds']['inputVarName'] = 'rlds'
 inputDict['A3hr']['rlds']['outputVarName'] = 'rlds'
@@ -33,7 +34,7 @@ inputDict['A3hr']['rlds']['outputUnits'] = 'W m-2'
 inputDict['A3hr']['rlds']['positive'] = 'down'
 inputDict['A3hr']['rsds'] = {}
 inputDict['A3hr']['rsds']['fileList'] = [
-        '../180120/rsds.1965.18Oct2017.nc'
+        'testFiles/rsds.1965.18Oct2017.nc'
         ]
 inputDict['A3hr']['rsds']['inputVarName'] = 'rsds'
 inputDict['A3hr']['rsds']['outputVarName'] = 'rsds'
@@ -41,7 +42,7 @@ inputDict['A3hr']['rsds']['outputUnits'] = 'W m-2'
 inputDict['A3hr']['rsds']['positive'] = 'down'
 inputDict['A3hr']['snow'] = {}
 inputDict['A3hr']['snow']['fileList'] = [
-        '../180120/snow.1978.18Oct2017.nc'
+        'testFiles/snow.1978.18Oct2017.nc'
         ]
 inputDict['A3hr']['snow']['inputVarName'] = 'prsn'
 inputDict['A3hr']['snow']['outputVarName'] = 'prsn'
@@ -50,7 +51,7 @@ inputDict['A3hr']['snow']['positive'] = ''
 inputDict['A3hrPt'] = {}
 inputDict['A3hrPt']['q_10'] = {}
 inputDict['A3hrPt']['q_10']['fileList'] = [
-        '../180120/q_10.1958.18Oct2017.nc'
+        'testFiles/q_10.1958.18Oct2017.nc'
         ]
 inputDict['A3hrPt']['q_10']['inputVarName'] = 'huss_10m'
 inputDict['A3hrPt']['q_10']['outputVarName'] = 'huss'
@@ -58,7 +59,7 @@ inputDict['A3hrPt']['q_10']['outputUnits'] = '1.0'
 inputDict['A3hrPt']['q_10']['positive'] = ''
 inputDict['A3hrPt']['slp'] = {}
 inputDict['A3hrPt']['slp']['fileList'] = [
-        '../180120/slp.2008.18Aug2017.nc'
+        'testFiles/slp.2008.18Aug2017.nc'
         ]
 inputDict['A3hrPt']['slp']['inputVarName'] = 'psl'
 inputDict['A3hrPt']['slp']['outputVarName'] = 'psl'
@@ -66,7 +67,7 @@ inputDict['A3hrPt']['slp']['outputUnits'] = 'Pa'
 inputDict['A3hrPt']['slp']['positive'] = ''
 inputDict['A3hrPt']['t_10'] = {}
 inputDict['A3hrPt']['t_10']['fileList'] = [
-        '../180120/t_10.1987.18Oct2017.nc'
+        'testFiles/t_10.1987.18Oct2017.nc'
         ]
 inputDict['A3hrPt']['t_10']['inputVarName'] = 'tas_10m'
 inputDict['A3hrPt']['t_10']['outputVarName'] = 'tas'
@@ -74,7 +75,7 @@ inputDict['A3hrPt']['t_10']['outputUnits'] = 'K'
 inputDict['A3hrPt']['t_10']['positive'] = ''
 inputDict['A3hrPt']['u_10'] = {}
 inputDict['A3hrPt']['u_10']['fileList'] = [
-        '../180120/u_10.1979.18Oct2017.nc'
+        'testFiles/u_10.1979.18Oct2017.nc'
         ]
 inputDict['A3hrPt']['u_10']['inputVarName'] = 'uas_10m'
 inputDict['A3hrPt']['u_10']['outputVarName'] = 'uas'
@@ -82,7 +83,7 @@ inputDict['A3hrPt']['u_10']['outputUnits'] = 'm s-1'
 inputDict['A3hrPt']['u_10']['positive'] = ''
 inputDict['A3hrPt']['v_10'] = {}
 inputDict['A3hrPt']['v_10']['fileList'] = [
-        '../180120/v_10.1966.18Oct2017.nc'
+        'testFiles/v_10.1966.18Oct2017.nc'
         ]
 inputDict['A3hrPt']['v_10']['inputVarName'] = 'vas_10m'
 inputDict['A3hrPt']['v_10']['outputVarName'] = 'vas'
@@ -91,7 +92,7 @@ inputDict['A3hrPt']['v_10']['positive'] = ''
 inputDict['Oday'] = {}
 inputDict['Oday']['runoff_all'] = {}
 inputDict['Oday']['runoff_all']['fileList'] = [
-        '../180120/runoff_all.1962.15Dec2016.nc'
+        'testFiles/runoff_all.1962.15Dec2016.nc'
         ]
 inputDict['Oday']['runoff_all']['inputVarName'] = 'friver'
 inputDict['Oday']['runoff_all']['outputVarName'] = 'friver'
@@ -100,7 +101,7 @@ inputDict['Oday']['runoff_all']['positive'] = ''
 inputDict['OmonC'] = {}
 inputDict['OmonC']['s_u10a'] = {}
 inputDict['OmonC']['s_u10a']['fileList'] = [
-        '../180125/woa13_decav_s_0-10m.mon_01v2_filled.nc'
+        'testFiles/woa13_decav_s_0-10m.mon_01v2_filled.nc'
         ]
 inputDict['OmonC']['s_u10a']['inputVarName'] = 's_u10a'
 inputDict['OmonC']['s_u10a']['outputVarName'] = 'sos'
