@@ -50,6 +50,7 @@ PJD 21 Feb 2018     - Updated source_id to include as dedicated CV https://githu
 PJD 21 Feb 2018     - Updated friver comment from upstream
 PJD 21 Feb 2018     - Updated to point source_id source to remote
 PJD 22 Feb 2018     - Updated to include MRI-JRA55-do-1-3 demo zip archive
+PJD 24 Feb 2018     - Updated demo to include formula_terms
                     - TODO: Deal with lab cert issue https://raw.githubusercontent.com -> http://rawgit.com (see requests library)
 
 @author: durack1
@@ -625,7 +626,7 @@ else:
 os.chdir(demoPath)
 
 # Now fill Tables subdir with required files
-cvTables = ['A3hr','A3hrPt','CV','Oday','OmonC','coordinate']
+cvTables = ['A3hr','A3hrPt','CV','Oday','OmonC','coordinate','formula_terms']
 for count,tableId in enumerate(cvTables):
     fileName = ''.join(['input4MIPs_',tableId,'.json'])
     sourcePath = os.path.join('..','..','Tables',fileName)

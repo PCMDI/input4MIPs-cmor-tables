@@ -111,7 +111,7 @@ inputDict['OmonC']['s_u10a']['positive'] = ''
 #%% Loop through entries and process file lists
 for key in inputDict.keys():
     # User provided input
-    cmorTable = ''.join(['input4MIPs-cmor-tables/Tables/input4MIPs_',key,'.json']) ; # Aday,Amon,Lmon,Omon,SImon,fx - Load target table, axis info (coordinates, grid*) and CVs
+    cmorTable = ''.join(['Tables/input4MIPs_',key,'.json']) ; # Aday,Amon,Lmon,Omon,SImon,fx - Load target table, axis info (coordinates, grid*) and CVs
     cmorJson = json.load(open(cmorTable))
     inputJson = 'mriJRA55-do-input.json' ; # Update contents of this file to set your global_attributes
     newJson = json.load(open(inputJson))
