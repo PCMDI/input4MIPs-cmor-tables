@@ -11,6 +11,7 @@ from calendar import isleap
 # PJD 21 Feb 2018   - Updated for CMOR3.3.1
 # PJD 24 Feb 2018   - Updated paths for demo dir
 # PJD  7 Mar 2018   - Updated pr to prra
+# PJD  8 Mar 2018   - Correct prra 'positive'; Added ficeberg2d placeholder
 #                   TODO: Fix missing_value assignment problem
 
 #%% Create input decks for all variables - 'fileList' will need to be amended to include all files 1958-2018
@@ -24,7 +25,7 @@ inputDict['A3hr']['rain']['fileList'] = [
 inputDict['A3hr']['rain']['inputVarName'] = 'prrn'
 inputDict['A3hr']['rain']['outputVarName'] = 'prra' ; # Was pr
 inputDict['A3hr']['rain']['outputUnits'] = 'kg m-2 s-1'
-inputDict['A3hr']['rain']['positive'] = 'down'
+inputDict['A3hr']['rain']['positive'] = ''
 inputDict['A3hr']['rlds'] = {}
 inputDict['A3hr']['rlds']['fileList'] = [
         'testFiles/rlds.1996.18Oct2017.nc'
@@ -91,6 +92,14 @@ inputDict['A3hrPt']['v_10']['outputVarName'] = 'vas'
 inputDict['A3hrPt']['v_10']['outputUnits'] = 'm s-1'
 inputDict['A3hrPt']['v_10']['positive'] = ''
 inputDict['Oday'] = {}
+#inputDict['Oday']['ficeberg2d'] = {}
+#inputDict['Oday']['ficeberg2d']['fileList'] = [
+#        'testFiles/ficeberg.1962.15Dec2016.nc'
+#        ]
+#inputDict['Oday']['ficeberg2d']['inputVarName'] = 'ficeberg'
+#inputDict['Oday']['ficeberg2d']['outputVarName'] = 'ficeberg'
+#inputDict['Oday']['ficeberg2d']['outputUnits'] = 'kg m-2 s-1'
+#inputDict['Oday']['ficeberg2d']['positive'] = ''
 inputDict['Oday']['runoff_all'] = {}
 inputDict['Oday']['runoff_all']['fileList'] = [
         'testFiles/runoff_all.1962.15Dec2016.nc'

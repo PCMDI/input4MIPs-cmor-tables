@@ -6,7 +6,6 @@
 
     "calendar":                     "gregorian",
     "dataset_category":             "atmosphericState",
-    "dataset_version_number":       "1.3.0",
     "frequency":                    "3hr",
     "grid":                         "0.5x0.5 degree latitude x longitude",
     "grid_label":                   "gn",
@@ -23,6 +22,7 @@
     "references":                   "Tsujino et al., 2018: JRA-55 based surface dataset for driving ocean-sea-ice models (JRA55-do), Ocean Modelling, in review",
     "source_id":                    "MRI-JRA55-do-1-3",
     "source":                       "MRI JRA55-do 1.3: Atmospheric state generated for OMIP based on the JRA-55 reanalysis",
+    "source_version":               "1.3.0",
     "title":                        "MRI JRA55-do 1.3 dataset prepared for input4MIPs",
 
     "outpath":                      ".",
