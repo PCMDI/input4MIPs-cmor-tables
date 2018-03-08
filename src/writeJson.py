@@ -52,6 +52,7 @@ PJD 21 Feb 2018     - Updated to point source_id source to remote
 PJD 22 Feb 2018     - Updated to include MRI-JRA55-do-1-3 demo zip archive
 PJD 24 Feb 2018     - Updated demo to include formula_terms
 PJD  7 Mar 2018     - Update JRA55-do 1.3 source info
+PJD  8 Mar 2018     - Renamed dataset_version_number to source_version
                     - TODO: Deal with lab cert issue https://raw.githubusercontent.com -> http://rawgit.com (see requests library)
 
 @author: durack1
@@ -421,7 +422,6 @@ required_global_attributes = [
  'contact',
  'creation_date',
  'dataset_category',
- 'dataset_version_number',
  'frequency',
  'further_info_url',
  'grid_label',
@@ -434,6 +434,7 @@ required_global_attributes = [
  'region',
  'source',
  'source_id',
+ 'source_version',
  'table_id',
  'target_mip',
  'title',
