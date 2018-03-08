@@ -15,7 +15,7 @@
     },
     "variable_entry":{
         "huss":{
-            "cell_measures":"",
+            "cell_measures":"area: areacella",
             "cell_methods":"area: mean time: point",
             "comment":"Near-surface (usually, 2 meter) specific humidity",
             "dimensions":"longitude latitude time1 height2m",
@@ -51,7 +51,7 @@
             "valid_min":""
         },
         "tas":{
-            "cell_measures":"",
+            "cell_measures":"area: areacella",
             "cell_methods":"area: mean time: point",
             "comment":"near-surface (usually, 2 meter) air temperature",
             "dimensions":"longitude latitude time1 height2m",
@@ -69,7 +69,7 @@
             "valid_min":""
         },
         "uas":{
-            "cell_measures":"",
+            "cell_measures":"area: areacella",
             "cell_methods":"area: mean time: point",
             "comment":"Eastward component of the near-surface wind",
             "dimensions":"longitude latitude time1 height10m",
@@ -87,7 +87,7 @@
             "valid_min":""
         },
         "vas":{
-            "cell_measures":"",
+            "cell_measures":"area: areacella",
             "cell_methods":"area: mean time: point",
             "comment":"Northward component of the near surface wind",
             "dimensions":"longitude latitude time1 height10m",

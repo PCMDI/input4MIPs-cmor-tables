@@ -309,15 +309,19 @@ A3hrPt['variable_entry'] = {}
 A3hrPt['Header'] = copy.deepcopy(A3hr['Header'])
 A3hrPt['Header']['table_id'] = 'Table input4MIPs_A3hrPt'
 A3hrPt['variable_entry']['huss'] = A3hr['variable_entry'].pop('huss')
+A3hrPt['variable_entry']['huss']['cell_measures'] = 'area: areacella'
 A3hrPt['variable_entry']['huss']['comment'] = 'Near-surface (usually, 2 meter) specific humidity'
 A3hrPt['variable_entry']['psl'] = copy.deepcopy(E3hr['variable_entry']['psl'])
 A3hrPt['variable_entry']['psl']['frequency'] = '3hrPt'
 A3hrPt['variable_entry']['psl']['dimensions'] = 'longitude latitude time1'
 A3hrPt['variable_entry']['psl']['cell_methods'] = 'area: mean time: point'
 A3hrPt['variable_entry']['tas'] = A3hr['variable_entry'].pop('tas')
+A3hrPt['variable_entry']['tas']['cell_measures'] = 'area: areacella'
 A3hrPt['variable_entry']['uas'] = A3hr['variable_entry'].pop('uas')
+A3hrPt['variable_entry']['uas']['cell_measures'] = 'area: areacella'
 A3hrPt['variable_entry']['uas']['comment'] = 'Eastward component of the near-surface wind'
 A3hrPt['variable_entry']['vas'] = A3hr['variable_entry'].pop('vas')
+A3hrPt['variable_entry']['vas']['cell_measures'] = 'area: areacella'
 
 #%% Activity id
 activity_id = ['input4MIPs']
