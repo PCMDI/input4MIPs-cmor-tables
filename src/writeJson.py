@@ -450,7 +450,7 @@ source_id = source_id.get('source_id')
 
 # Fix issues
 key = 'MRI-JRA55-do-1-3'
-source_id[key]['source'] = 'MRI JRA55-do 1.3: Atmospheric state generated for OMIP based on the MRI JRA-55 reanalysis'
+source_id[key]['source'] = 'MRI JRA55-do 1.3: Atmospheric state generated for OMIP based on the JRA-55 reanalysis'
 #source_id = {}
 #source_id['PCMDI-AMIP-1-1-3'] = {}
 #source_id['PCMDI-AMIP-1-1-3']['source'] = 'PCMDI-AMIP 1.1.3: Merged SST based on UK MetOffice HadISST and NCEP OI2'
