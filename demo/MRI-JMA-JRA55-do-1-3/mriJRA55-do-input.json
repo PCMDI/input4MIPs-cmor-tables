@@ -16,14 +16,13 @@
     "region":                       "global_ocean",
     "target_mip":                   "OMIP",
 
-    "comment":                      "Based on JRA55 reanalysis (1958-01 to 2018-01)",
+    "comment":                      "Based on JRA-55 reanalysis (1958-01 to 2018-01)",
     "contact ":                     "Hiroyuki Tsujino (htsujino@mri-jma.go.jp)",
     "further_info_url":             "http://jra.kishou.go.jp/JRA-55/index_en.html",
     "institution_id":               "MRI",
-    "institution":                  "Meteorological Research Institute, Tsukuba, Ibaraki 305-0052, Japan",
     "references":                   "Tsujino et al., 2018: JRA-55 based surface dataset for driving ocean-sea-ice models (JRA55-do), Ocean Modelling, in review",
-    "source":                       "MRI JRA55-do 1.3: Atmospheric state generated for OMIP based on the MRI JRA55 reanalysis",
     "source_id":                    "MRI-JRA55-do-1-3",
+    "source":                       "MRI JRA55-do 1.3: Atmospheric state generated for OMIP based on the MRI JRA-55 reanalysis",
     "title":                        "MRI JRA55-do 1.3 dataset prepared for input4MIPs",
 
     "outpath":                      ".",

@@ -10,6 +10,7 @@ from calendar import isleap
 # PJD  5 Feb 2018   - Started
 # PJD 21 Feb 2018   - Updated for CMOR3.3.1
 # PJD 24 Feb 2018   - Updated paths for demo dir
+# PJD  7 Mar 2018   - Updated pr to prra
 #                   TODO: Fix missing_value assignment problem
 
 #%% Create input decks for all variables - 'fileList' will need to be amended to include all files 1958-2018
@@ -21,7 +22,7 @@ inputDict['A3hr']['rain']['fileList'] = [
         'testFiles/rain.2018.14Jan2018.nc'
         ]
 inputDict['A3hr']['rain']['inputVarName'] = 'prrn'
-inputDict['A3hr']['rain']['outputVarName'] = 'pr'
+inputDict['A3hr']['rain']['outputVarName'] = 'prra' ; # Was pr
 inputDict['A3hr']['rain']['outputUnits'] = 'kg m-2 s-1'
 inputDict['A3hr']['rain']['positive'] = 'down'
 inputDict['A3hr']['rlds'] = {}
