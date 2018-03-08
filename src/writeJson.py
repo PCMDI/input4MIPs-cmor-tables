@@ -49,14 +49,16 @@ PJD 25 Jan 2018     - Added source_id MRI-JRA55-do-1-3 https://github.com/PCMDI/
 PJD 21 Feb 2018     - Updated source_id to include as dedicated CV https://github.com/PCMDI/input4MIPs-cmor-tables/issues/36
 PJD 21 Feb 2018     - Updated friver comment from upstream
 PJD 21 Feb 2018     - Updated to point source_id source to remote
-                    - TODO: Update to include MRI-JRA55-do-1-3 demo zip archive
+PJD 22 Feb 2018     - Updated to include MRI-JRA55-do-1-3 demo zip archive
+PJD 24 Feb 2018     - Updated demo to include formula_terms
+PJD  7 Mar 2018     - Update JRA55-do 1.3 source info
                     - TODO: Deal with lab cert issue https://raw.githubusercontent.com -> http://rawgit.com (see requests library)
 
 @author: durack1
 """
 
 #%% Import statements
-import copy,gc,json,os,sys,time
+import copy,gc,json,os,shutil,subprocess,sys,time #pdb,
 sys.path.append('/export/durack1/git/durolib/lib/')
 from durolib import readJsonCreateDict
 
@@ -159,6 +161,7 @@ Ofx['variable_entry']['sftof']['comment'] = 'This is the area fraction at the oc
 # 'phos','phycalcos','phydiatos','phydiazos','phymiscos','phypicoos','po4os',
 # 'talkos','zmesoos','zmicroos','zmiscos','zoocos',
 # 'msftmyz','msftyyz'
+# 'pbfe','pbsi','pnitrate',
 OmonCleanup = ['agessc','arag','bacc','bfe','bfeos',
                'bigthetao','bigthetaoga','bsi','bsios','calc','cfc11',
                'cfc12','chl','chlcalc','chlcalcos','chldiat','chldiatos',
@@ -192,11 +195,11 @@ OmonCleanup = ['agessc','arag','bacc','bfe','bfeos',
                'msftmzmpa','msftmzsmpa','msftyrho','msftyrhompa',
                'msftyzmpa','msftyzsmpa','nh4','no3','no3os',
                'o2','o2min','o2os','o2sat','o2satos','obvfsq','ocfriver',
-               'pbfe','pbo','pbsi','ph','phabio','phabioos','phnat','phnatos',
+               'pbo','ph','phabio','phabioos','phnat','phnatos',
                'phyc','phycalc','phycos','phydiat',
                'phydiaz','phyfe','phyfeos','phymisc',
                'phyn','phynos','phyp','phypico',
-               'phypos','physi','physios','pnitrate','po4','pon',
+               'phypos','physi','physios','po4','pon',
                'ponos','pop','popos','pp','prra','prsn','pso','rlntds','rsdo',
                'rsntds','sf6','sfdsi','sfriver','si','sios','sltovgyre',
                'sltovovrt','so','sob','sos','soga','sosga','sossq','spco2',
@@ -213,6 +216,9 @@ Oday['variable_entry'] = {}
 Oday['variable_entry']['friver'] = copy.deepcopy(Omon['variable_entry']['friver'])
 Oday['variable_entry']['friver']['frequency'] = 'day'
 Oday['variable_entry']['friver']['comment'] = 'computed as the river flux of water into the ocean divided by the area of the ocean portion of the grid cell'
+Oday['variable_entry']['ficeberg2d'] = copy.deepcopy(Omon['variable_entry']['ficeberg2d'])
+Oday['variable_entry']['ficeberg2d']['frequency'] = 'day'
+Oday['variable_entry']['ficeberg2d']['comment'] = 'computed as the iceberg melt water flux into the ocean divided by the area of the ocean portion of the grid cell'
 Oday['Header'] = copy.deepcopy(Omon['Header'])
 Oday['Header']['table_id'] = 'Table input4MIPs_Oday'
 Oday['Header']['realm'] = 'ocean'
@@ -288,25 +294,34 @@ Omon['variable_entry']['tosbcs']['dimensions'] = 'longitude latitude time1'
 SImon['variable_entry']['siconcbcs']['dimensions'] = 'longitude latitude time1'
 
 # A3hr
-A3hrCleanup = ['clt','hfls','hfss','mrro','mrsos','prc','ps','rldscs','rlus',
+A3hrCleanup = ['clt','hfls','hfss','mrro','mrsos','pr','prc','ps','rldscs','rlus',
                'rsdscs','rsdsdiff','rsus','rsuscs','tos','tslsi']
 for clean in A3hrCleanup:
     tmp = A3hr['variable_entry'].pop(clean)
+A3hr['variable_entry']['prra'] = copy.deepcopy(E3hr['variable_entry']['prra'])
+A3hr['variable_entry']['prra']['frequency'] = '3hr'
+A3hr['variable_entry']['prra']['comment'] = 'In accordance with common usage in geophysical disciplines, \'flux\' implies per unit area, called \'flux density\' in physics'
+A3hr['variable_entry']['prra']['dimensions'] = 'longitude latitude time'
+A3hr['variable_entry']['prra']['cell_methods'] = 'area: time: mean'
 # Create A3hrPt
 A3hrPt = {}
 A3hrPt['variable_entry'] = {}
 A3hrPt['Header'] = copy.deepcopy(A3hr['Header'])
 A3hrPt['Header']['table_id'] = 'Table input4MIPs_A3hrPt'
 A3hrPt['variable_entry']['huss'] = A3hr['variable_entry'].pop('huss')
+A3hrPt['variable_entry']['huss']['cell_measures'] = 'area: areacella'
 A3hrPt['variable_entry']['huss']['comment'] = 'Near-surface (usually, 2 meter) specific humidity'
 A3hrPt['variable_entry']['psl'] = copy.deepcopy(E3hr['variable_entry']['psl'])
 A3hrPt['variable_entry']['psl']['frequency'] = '3hrPt'
 A3hrPt['variable_entry']['psl']['dimensions'] = 'longitude latitude time1'
 A3hrPt['variable_entry']['psl']['cell_methods'] = 'area: mean time: point'
 A3hrPt['variable_entry']['tas'] = A3hr['variable_entry'].pop('tas')
+A3hrPt['variable_entry']['tas']['cell_measures'] = 'area: areacella'
 A3hrPt['variable_entry']['uas'] = A3hr['variable_entry'].pop('uas')
+A3hrPt['variable_entry']['uas']['cell_measures'] = 'area: areacella'
 A3hrPt['variable_entry']['uas']['comment'] = 'Eastward component of the near-surface wind'
 A3hrPt['variable_entry']['vas'] = A3hr['variable_entry'].pop('vas')
+A3hrPt['variable_entry']['vas']['cell_measures'] = 'area: areacella'
 
 #%% Activity id
 activity_id = ['input4MIPs']
@@ -427,12 +442,15 @@ required_global_attributes = [
  ];
 
 #%% Source id
-#tmp = [['source_id','https://raw.githubusercontent.com/PCMDI/input4mips-cmor-tables/master/input4MIPs_source_id.json']
-#      ] ;
-#source_id = readJsonCreateDict(tmp)
-#source_id = institution_id.get('source_id')
+tmp = [['source_id','https://raw.githubusercontent.com/PCMDI/input4mips-cmor-tables/master/input4MIPs_source_id.json']
+      ] ;
+source_id = readJsonCreateDict(tmp)
+source_id = source_id.get('source_id')
+source_id = source_id.get('source_id')
 
 # Fix issues
+key = 'MRI-JRA55-do-1-3'
+source_id[key]['source'] = 'MRI JRA55-do 1.3: Atmospheric state generated for OMIP based on the MRI JRA-55 reanalysis'
 #source_id = {}
 #source_id['PCMDI-AMIP-1-1-3'] = {}
 #source_id['PCMDI-AMIP-1-1-3']['source'] = 'PCMDI-AMIP 1.1.3: Merged SST based on UK MetOffice HadISST and NCEP OI2'
@@ -611,3 +629,47 @@ jsonDict['input4MIPs_version'] = input4MIPs
 fH = open(outFile,'w')
 json.dump(jsonDict,fH,ensure_ascii=True,sort_keys=True,indent=4,separators=(',',':'),encoding="utf-8")
 fH.close()
+
+#%% Generate MRI-JMA-JRA55-do-1-3 demo directory
+demoPath = os.path.join('/','/'.join(os.path.realpath(__file__).split('/')[0:-2]),'demo')
+demoPath = os.path.join(demoPath,'MRI-JMA-JRA55-do-1-3')
+outPath = os.path.join(demoPath,'Tables')
+# First purge existing
+if os.path.exists(outPath):
+    shutil.rmtree(outPath) ; # Purge all existing
+    os.makedirs(outPath)
+else:
+    os.makedirs(outPath)
+os.chdir(demoPath)
+
+# Now fill Tables subdir with required files
+cvTables = ['A3hr','A3hrPt','CV','Oday','OmonC','coordinate','formula_terms']
+for count,tableId in enumerate(cvTables):
+    fileName = ''.join(['input4MIPs_',tableId,'.json'])
+    sourcePath = os.path.join('..','..','Tables',fileName)
+    shutil.copy(sourcePath,'Tables')
+
+#%% Generate zip archive
+env7za = os.environ.copy()
+env7za['PATH'] = env7za['PATH'] + ':/export/durack1/bin/downloads/p7zip16.02/180204_build/p7zip_16.02/bin'
+# Cleanup rogue files
+#os.chdir(demoPath)
+if os.path.exists('.DS_Store'):
+    os.remove('.DS_Store')
+if os.path.exists('demo.zip'):
+    os.remove('demo.zip')
+if os.path.exists('MRI-JMA-JRA55-do-1-3/demo.zip'):
+    os.remove('MRI-JMA-JRA55-do-1-3/demo.zip')
+if os.path.exists('../MRI-JMA-JRA55-do-1-3/demo.zip'):
+    os.remove('../MRI-JMA-JRA55-do-1-3/demo.zip')
+# Jump up one directory
+os.chdir(demoPath.replace('/MRI-JMA-JRA55-do-1-3',''))
+print os.getcwd()
+# Zip demo dir
+p = subprocess.Popen(['7za','a','demo.zip','MRI-JMA-JRA55-do-1-3','tzip','-xr!demo/MRI-JMA-JRA55-do-1-3',
+                      '-xr!MRI-JMA-JRA55-do-1-3/testFiles','-xr!MRI-JMA-JRA55-do-1-3/input4MIPs'],
+                      stdout=subprocess.PIPE,stderr=subprocess.PIPE,cwd=os.getcwd(),env=env7za)
+stdout = p.stdout.read() ; # Use persistent variables for tests below
+stderr = p.stderr.read()
+# Move to demo dir
+shutil.move('demo.zip', 'MRI-JMA-JRA55-do-1-3/demo.zip')
