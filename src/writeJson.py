@@ -46,6 +46,8 @@ PJD 23 Jan 2018     - Add A3hr/A3hrPt/Oday tables for JRA55-do OMIP datasets htt
 PJD 24 Jan 2018     - Add OmonC table for JRA55-do OMIP salinity restoring dataset
 PJD 25 Jan 2018     - Register institution_id MRI https://github.com/PCMDI/input4MIPs-cmor-tables/issues/33
 PJD 25 Jan 2018     - Added source_id MRI-JRA55-do-1-3 https://github.com/PCMDI/input4MIPs-cmor-tables/issues/30
+PJD  4 Apr 2018     - Updated MRI-JMA-JRA55-do demo with new variables https://github.com/PCMDI/input4MIPs-cmor-tables/issues/39
+PJD  4 Apr 2018     - Update print statements for python3
                     - TODO: Deal with lab cert issue https://raw.githubusercontent.com -> http://rawgit.com (see requests library)
 
 @author: durack1
@@ -87,7 +89,9 @@ masterTargets = [
  'A3hr',
  'A3hrPt',
  'Oday',
- 'OmonC'
+ 'OmonC',
+ 'AyrC',
+ 'OyrC'
  ] ;
 
 #%% Tables
@@ -105,7 +109,10 @@ tableSource = [
  ['region','https://raw.githubusercontent.com/PCMDI/obs4MIPs-cmor-tables/master/obs4MIPs_region.json'],
  ['target_mip','https://raw.githubusercontent.com/WCRP-CMIP/CMIP6_CVs/master/CMIP6_activity_id.json'],
  ['A3hr','https://raw.githubusercontent.com/PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_3hr.json'],
- ['E3hr','https://raw.githubusercontent.com/PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_E3hr.json']
+ ['E3hr','https://raw.githubusercontent.com/PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_E3hr.json'],
+ ['CF3hr','https://raw.githubusercontent.com/PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_CF3hr.json'],
+ ['SIday','https://raw.githubusercontent.com/PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_SIday.json'],
+ ['IyrGre','https://raw.githubusercontent.com/PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_IyrGre.json']
  ] ;
 
 headerFree = ['coordinate','frequency','formula_terms','grid_label','nominal_resolution',
@@ -115,7 +122,7 @@ headerFree = ['coordinate','frequency','formula_terms','grid_label','nominal_res
 # Loop through tableSource and create output tables
 tmp = readJsonCreateDict(tableSource)
 for count,table in enumerate(tmp.keys()):
-    print 'table:', table
+    print('table:',table)
     if table in ['coordinate','formula_terms']:
         vars()[table] = tmp[table]
     elif table == 'target_mip':
@@ -129,7 +136,7 @@ del(tmp,count,table) ; gc.collect()
 # Cleanup by extracting only variable lists
 for count2,table in enumerate(tableSource):
     tableName = table[0]
-    print 'tableName:',tableName
+    print('tableName:',tableName)
     #print eval(tableName)
     if tableName in headerFree:
         continue
@@ -147,12 +154,21 @@ for clean in OfxCleanup:
 Ofx['Header']['product'] = 'input4MIPs'
 Ofx['variable_entry']['sftof']['comment'] = 'This is the area fraction at the ocean surface'
 
+# Create AyrC (before Omon is cleaned up)
+AyrC = {}
+AyrC['variable_entry'] = {}
+AyrC['Header'] = copy.deepcopy(A3hr['Header'])
+AyrC['Header']['table_id'] = 'Table input4MIPs_AyrC'
+AyrC['variable_entry']['uo'] = Omon['variable_entry'].pop('uo')
+AyrC['variable_entry']['vo'] = Omon['variable_entry'].pop('vo')
+
 # Omon
 # Cleanup 'aragos','baccos','calcos','co3abioos','co3natos','co3os',
 # 'co3sataragos','co3satcalcos','detocos','dissicos','dissocos','dms','nh4os',
 # 'phos','phycalcos','phydiatos','phydiazos','phymiscos','phypicoos','po4os',
 # 'talkos','zmesoos','zmicroos','zmiscos','zoocos',
 # 'msftmyz','msftyyz'
+# 'pbfe','pbsi','pnitrate','uo','vo',
 OmonCleanup = ['agessc','arag','bacc','bfe','bfeos',
                'bigthetao','bigthetaoga','bsi','bsios','calc','cfc11',
                'cfc12','chl','chlcalc','chlcalcos','chldiat','chldiatos',
@@ -186,17 +202,17 @@ OmonCleanup = ['agessc','arag','bacc','bfe','bfeos',
                'msftmzmpa','msftmzsmpa','msftyrho','msftyrhompa',
                'msftyzmpa','msftyzsmpa','nh4','no3','no3os',
                'o2','o2min','o2os','o2sat','o2satos','obvfsq','ocfriver',
-               'pbfe','pbo','pbsi','ph','phabio','phabioos','phnat','phnatos',
+               'pbo','ph','phabio','phabioos','phnat','phnatos',
                'phyc','phycalc','phycos','phydiat',
                'phydiaz','phyfe','phyfeos','phymisc',
                'phyn','phynos','phyp','phypico',
-               'phypos','physi','physios','pnitrate','po4','pon',
+               'phypos','physi','physios','po4','pon',
                'ponos','pop','popos','pp','prra','prsn','pso','rlntds','rsdo',
                'rsntds','sf6','sfdsi','sfriver','si','sios','sltovgyre',
                'sltovovrt','so','sob','sos','soga','sosga','sossq','spco2',
                'spco2abio',u'spco2nat','talk','talknat','talknatos',
                'tauucorr','tauuo','tauvcorr','tauvo','thetao','thetaoga',
-               'thkcello','tob','tosga','tossq','umo','uo','vmo','vo','volo',
+               'thkcello','tob','tosga','tossq','umo','vmo','volo',
                'vsf','vsfcorr','vsfevap','vsfpr','vsfriver','vsfsit','wfcorr',
                'wfo','wfonocorr','wmo','wo','zfullo','zhalfo','zmeso',
                'zmicro','zmisc','zo2min','zooc',
@@ -206,6 +222,12 @@ Oday = {}
 Oday['variable_entry'] = {}
 Oday['variable_entry']['friver'] = copy.deepcopy(Omon['variable_entry']['friver'])
 Oday['variable_entry']['friver']['frequency'] = 'day'
+
+Oday['variable_entry']['tos'] = copy.deepcopy(Omon['variable_entry']['tos'])
+Oday['variable_entry']['tos']['frequency'] = 'day'
+Oday['variable_entry']['siconc'] = copy.deepcopy(SIday['variable_entry']['siconc'])
+Oday['variable_entry']['siconc']['frequency'] = 'day'
+
 Oday['Header'] = copy.deepcopy(Omon['Header'])
 Oday['Header']['table_id'] = 'Table input4MIPs_Oday'
 Oday['Header']['realm'] = 'ocean'
@@ -219,6 +241,16 @@ OmonC['variable_entry']['sos']['dimensions'] = 'longitude latitude time2'
 OmonC['Header'] = copy.deepcopy(Omon['Header'])
 OmonC['Header']['table_id'] = 'Table input4MIPs_OmonC'
 OmonC['Header']['realm'] = 'ocean'
+
+# OyrC
+OyrC = {}
+OyrC['variable_entry'] = {}
+OyrC['variable_entry']['licalvf'] = copy.deepcopy(IyrGre['variable_entry']['licalvf'])
+OyrC['variable_entry']['licalvf']['frequency'] = 'yrC'
+OyrC['variable_entry']['licalvf']['dimensions'] = 'longitude latitude time2'
+OyrC['Header'] = copy.deepcopy(Omon['Header'])
+OyrC['Header']['table_id'] = 'Table input4MIPs_OyrC'
+OyrC['Header']['realm'] = 'ocean'
 
 # Omon
 for clean in OmonCleanup:
@@ -300,6 +332,9 @@ A3hrPt['variable_entry']['tas'] = A3hr['variable_entry'].pop('tas')
 A3hrPt['variable_entry']['uas'] = A3hr['variable_entry'].pop('uas')
 A3hrPt['variable_entry']['uas']['comment'] = 'Eastward component of the near-surface wind'
 A3hrPt['variable_entry']['vas'] = A3hr['variable_entry'].pop('vas')
+
+A3hrPt['variable_entry']['ts'] = CF3hr['variable_entry'].pop('ts')
+A3hrPt['variable_entry']['siconc'] = SIday['variable_entry'].pop('siconca')
 
 
 #%% Activity id
@@ -462,19 +497,20 @@ for jsonName in masterTargets:
     if jsonName == 'license1':
         outFile = ''.join(['../input4MIPs_license.json'])
     elif jsonName in ['Ofx','Omon','SImon','CV','coordinate','formula_terms',
-                      'grids','A3hr','A3hrPt','Oday','OmonC']:
+                      'grids','A3hr','A3hrPt','Oday','OmonC','AyrC','OyrC']:
         outFile = ''.join(['../Tables/input4MIPs_',jsonName,'.json'])
     else:
         outFile = ''.join(['../input4MIPs_',jsonName,'.json'])
     # Check file exists
     if os.path.exists(outFile):
-        print 'File existing, purging:',outFile
+        print('File existing, purging:',outFile)
         os.remove(outFile)
     if not os.path.exists('../Tables'):
         os.mkdir('../Tables')
     # Create host dictionary
     if jsonName not in ['coordinate','formula_terms','grids','CV','institution_id',
-                        'Ofx','Omon','SImon','A3hr','A3hrPt','Oday','OmonC']:
+                        'Ofx','Omon','SImon','A3hr','A3hrPt','Oday','OmonC','AyrC',
+                        'OyrC']:
         jsonDict = {}
         jsonDict[jsonName] = eval(jsonName)
     else:
@@ -580,7 +616,7 @@ input4MIPs['data']['CMIP']['VUA']['emissions']['deprecatedVersion'] = '1.0'
 outFile = ''.join(['../Versions/',versionId,'.json'])
 # Check file exists
 if os.path.exists(outFile):
-    print 'File existing, purging:',outFile
+    print('File existing, purging:',outFile)
     os.remove(outFile)
 if not os.path.exists('../Versions'):
     os.mkdir('../Versions')

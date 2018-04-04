@@ -2,21 +2,22 @@
     "Header":{
         "Conventions":"CF-1.7 CMIP-6.2",
         "approx_interval":"30.00000",
-        "cmor_version":"3.2",
-        "data_specs_version":"01.00.20",
+        "cmor_version":"3.3",
+        "data_specs_version":"01.00.23",
         "generic_levels":"olevel",
+        "int_missing_value":"-999",
         "mip_era":"CMIP6",
         "missing_value":"1e20",
         "product":"input4MIPs",
         "realm":"ocean",
-        "table_date":"25 January 2018",
+        "table_date":"04 April 2018",
         "table_id":"Table input4MIPs_OmonC"
     },
     "variable_entry":{
         "sos":{
             "cell_measures":"area: areacello",
             "cell_methods":"area: mean where sea time: mean",
-            "comment":"",
+            "comment":"Sea surface salinity is the salt content of sea water close to the sea surface, often on the Practical Salinity Scale of 1978. However, the unqualified term 'salinity' is generic and does not necessarily imply any particular method of calculation. The units of salinity are dimensionless and the units attribute should normally be given as 1e-3 or 0.001 i.e. parts per thousand. Sea surface salinity is often abbreviated as 'SSS'. For the salinity of sea water at a particular depth or layer, a data variable of 'sea_water_salinity' or one of the more precisely defined salinities should be used with a vertical coordinate axis.",
             "dimensions":"longitude latitude time2",
             "frequency":"monC",
             "long_name":"Sea Surface Salinity",

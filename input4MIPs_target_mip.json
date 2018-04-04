@@ -2,6 +2,7 @@
     "target_mip":{
         "AerChemMIP":"Aerosols and Chemistry Model Intercomparison Project",
         "C4MIP":"Coupled Climate Carbon Cycle Model Intercomparison Project",
+        "CDRMIP":"Carbon Dioxide Removal Model Intercomparison Project",
         "CFMIP":"Cloud Feedback Model Intercomparison Project",
         "CMIP":"CMIP DECK: 1pctCO2, abrupt4xCO2, amip, esm-piControl, esm-historical, historical, and piControl experiments",
         "CORDEX":"Coordinated Regional Climate Downscaling Experiment",
@@ -16,6 +17,7 @@
         "LS3MIP":"Land Surface, Snow and Soil Moisture",
         "LUMIP":"Land-Use Model Intercomparison Project",
         "OMIP":"Ocean Model Intercomparison Project",
+        "PAMIP":"Polar Amplification Model Intercomparison Project",
         "PMIP":"Palaeoclimate Modelling Intercomparison Project",
         "RFMIP":"Radiative Forcing Model Intercomparison Project",
         "SIMIP":"Sea Ice Model Intercomparison Project",
