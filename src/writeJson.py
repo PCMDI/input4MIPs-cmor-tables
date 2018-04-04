@@ -680,7 +680,8 @@ else:
 os.chdir(demoPath)
 
 # Now fill Tables subdir with required files
-cvTables = ['A3hr','A3hrPt','CV','Oday','OmonC','coordinate','formula_terms']
+cvTables = ['A3hr','A3hrPt','CV','Oday','OmonC','AyrC','OyrC','coordinate',
+            'formula_terms']
 for count,tableId in enumerate(cvTables):
     fileName = ''.join(['input4MIPs_',tableId,'.json'])
     sourcePath = os.path.join('..','..','Tables',fileName)
