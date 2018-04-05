@@ -12,111 +12,190 @@ from calendar import isleap
 # PJD 24 Feb 2018   - Updated paths for demo dir
 # PJD  7 Mar 2018   - Updated pr to prra
 # PJD  8 Mar 2018   - Correct prra 'positive'; Added ficeberg2d placeholder
+# PJD  5 Apr 2018   - Update for latest variable list
 #                   TODO: Fix missing_value assignment problem
 
 #%% Create input decks for all variables - 'fileList' will need to be amended to include all files 1958-2018
 inputDict = {}
 inputDict['A3hr'] = {}
-inputDict['A3hr']['rain'] = {}
-inputDict['A3hr']['rain']['fileList'] = [
+key = 'rain'
+inputDict['A3hr'][key] = {}
+inputDict['A3hr'][key]['fileList'] = [
         'testFiles/rain.2017.14Jan2018.nc', # All these 'fileList' entries will require updating to include all files to be processed
         'testFiles/rain.2018.14Jan2018.nc'
         ]
-inputDict['A3hr']['rain']['inputVarName'] = 'prrn'
-inputDict['A3hr']['rain']['outputVarName'] = 'prra' ; # Was pr
-inputDict['A3hr']['rain']['outputUnits'] = 'kg m-2 s-1'
-inputDict['A3hr']['rain']['positive'] = ''
-inputDict['A3hr']['rlds'] = {}
-inputDict['A3hr']['rlds']['fileList'] = [
-        'testFiles/rlds.1996.18Oct2017.nc'
-        ]
-inputDict['A3hr']['rlds']['inputVarName'] = 'rlds'
-inputDict['A3hr']['rlds']['outputVarName'] = 'rlds'
-inputDict['A3hr']['rlds']['outputUnits'] = 'W m-2'
-inputDict['A3hr']['rlds']['positive'] = 'down'
-inputDict['A3hr']['rsds'] = {}
-inputDict['A3hr']['rsds']['fileList'] = [
-        'testFiles/rsds.1965.18Oct2017.nc'
-        ]
-inputDict['A3hr']['rsds']['inputVarName'] = 'rsds'
-inputDict['A3hr']['rsds']['outputVarName'] = 'rsds'
-inputDict['A3hr']['rsds']['outputUnits'] = 'W m-2'
-inputDict['A3hr']['rsds']['positive'] = 'down'
-inputDict['A3hr']['snow'] = {}
-inputDict['A3hr']['snow']['fileList'] = [
+inputDict['A3hr'][key]['inputVarName'] = 'prrn'
+inputDict['A3hr'][key]['outputVarName'] = 'prra' ; # Was pr
+inputDict['A3hr'][key]['outputUnits'] = 'kg m-2 s-1'
+inputDict['A3hr'][key]['positive'] = ''
+key = 'snow'
+inputDict['A3hr'][key] = {}
+inputDict['A3hr'][key]['fileList'] = [
         'testFiles/snow.1978.18Oct2017.nc'
         ]
-inputDict['A3hr']['snow']['inputVarName'] = 'prsn'
-inputDict['A3hr']['snow']['outputVarName'] = 'prsn'
-inputDict['A3hr']['snow']['outputUnits'] = 'kg m-2 s-1'
-inputDict['A3hr']['snow']['positive'] = ''
+inputDict['A3hr'][key]['inputVarName'] = 'prsn'
+inputDict['A3hr'][key]['outputVarName'] = 'prsn'
+inputDict['A3hr'][key]['outputUnits'] = 'kg m-2 s-1'
+inputDict['A3hr'][key]['positive'] = ''
+key = 'rlds'
+inputDict['A3hr'][key] = {}
+inputDict['A3hr'][key]['fileList'] = [
+        'testFiles/rlds.1996.18Oct2017.nc'
+        ]
+inputDict['A3hr'][key]['inputVarName'] = 'rlds'
+inputDict['A3hr'][key]['outputVarName'] = 'rlds'
+inputDict['A3hr'][key]['outputUnits'] = 'W m-2'
+inputDict['A3hr'][key]['positive'] = 'down'
+key = 'rsds'
+inputDict['A3hr'][key] = {}
+inputDict['A3hr'][key]['fileList'] = [
+        'testFiles/rsds.1965.18Oct2017.nc'
+        ]
+inputDict['A3hr'][key]['inputVarName'] = 'rsds'
+inputDict['A3hr'][key]['outputVarName'] = 'rsds'
+inputDict['A3hr'][key]['outputUnits'] = 'W m-2'
+inputDict['A3hr'][key]['positive'] = 'down'
+key = 'q_10'
 inputDict['A3hrPt'] = {}
-inputDict['A3hrPt']['q_10'] = {}
-inputDict['A3hrPt']['q_10']['fileList'] = [
+inputDict['A3hrPt'][key] = {}
+inputDict['A3hrPt'][key]['fileList'] = [
         'testFiles/q_10.1958.18Oct2017.nc'
         ]
-inputDict['A3hrPt']['q_10']['inputVarName'] = 'huss_10m'
-inputDict['A3hrPt']['q_10']['outputVarName'] = 'huss'
-inputDict['A3hrPt']['q_10']['outputUnits'] = '1.0'
-inputDict['A3hrPt']['q_10']['positive'] = ''
-inputDict['A3hrPt']['slp'] = {}
-inputDict['A3hrPt']['slp']['fileList'] = [
+inputDict['A3hrPt'][key]['inputVarName'] = 'huss_10m'
+inputDict['A3hrPt'][key]['outputVarName'] = 'huss'
+inputDict['A3hrPt'][key]['outputUnits'] = '1.0'
+inputDict['A3hrPt'][key]['positive'] = ''
+key = 'slp'
+inputDict['A3hrPt'][key] = {}
+inputDict['A3hrPt'][key]['fileList'] = [
         'testFiles/slp.2008.18Aug2017.nc'
         ]
-inputDict['A3hrPt']['slp']['inputVarName'] = 'psl'
-inputDict['A3hrPt']['slp']['outputVarName'] = 'psl'
-inputDict['A3hrPt']['slp']['outputUnits'] = 'Pa'
-inputDict['A3hrPt']['slp']['positive'] = ''
-inputDict['A3hrPt']['t_10'] = {}
-inputDict['A3hrPt']['t_10']['fileList'] = [
+inputDict['A3hrPt'][key]['inputVarName'] = 'psl'
+inputDict['A3hrPt'][key]['outputVarName'] = 'psl'
+inputDict['A3hrPt'][key]['outputUnits'] = 'Pa'
+inputDict['A3hrPt'][key]['positive'] = ''
+key = 't_10'
+inputDict['A3hrPt'][key] = {}
+inputDict['A3hrPt'][key]['fileList'] = [
         'testFiles/t_10.1987.18Oct2017.nc'
         ]
-inputDict['A3hrPt']['t_10']['inputVarName'] = 'tas_10m'
-inputDict['A3hrPt']['t_10']['outputVarName'] = 'tas'
-inputDict['A3hrPt']['t_10']['outputUnits'] = 'K'
-inputDict['A3hrPt']['t_10']['positive'] = ''
-inputDict['A3hrPt']['u_10'] = {}
-inputDict['A3hrPt']['u_10']['fileList'] = [
+inputDict['A3hrPt'][key]['inputVarName'] = 'tas_10m'
+inputDict['A3hrPt'][key]['outputVarName'] = 'tas'
+inputDict['A3hrPt'][key]['outputUnits'] = 'K'
+inputDict['A3hrPt'][key]['positive'] = ''
+key = 'ts'
+#inputDict['A3hrPt'][key] = {}
+#inputDict['A3hrPt'][key]['fileList'] = [
+#        ''
+#        ]
+#inputDict['A3hrPt'][key]['inputVarName'] = 'ts'
+#inputDict['A3hrPt'][key]['outputVarName'] = 'ts'
+#inputDict['A3hrPt'][key]['outputUnits'] = 'K'
+#inputDict['A3hrPt'][key]['positive'] = ''
+key = 'u_10'
+inputDict['A3hrPt'][key] = {}
+inputDict['A3hrPt'][key]['fileList'] = [
         'testFiles/u_10.1979.18Oct2017.nc'
         ]
-inputDict['A3hrPt']['u_10']['inputVarName'] = 'uas_10m'
-inputDict['A3hrPt']['u_10']['outputVarName'] = 'uas'
-inputDict['A3hrPt']['u_10']['outputUnits'] = 'm s-1'
-inputDict['A3hrPt']['u_10']['positive'] = ''
-inputDict['A3hrPt']['v_10'] = {}
-inputDict['A3hrPt']['v_10']['fileList'] = [
+inputDict['A3hrPt'][key]['inputVarName'] = 'uas_10m'
+inputDict['A3hrPt'][key]['outputVarName'] = 'uas'
+inputDict['A3hrPt'][key]['outputUnits'] = 'm s-1'
+inputDict['A3hrPt'][key]['positive'] = ''
+key = 'v_10'
+inputDict['A3hrPt'][key] = {}
+inputDict['A3hrPt'][key]['fileList'] = [
         'testFiles/v_10.1966.18Oct2017.nc'
         ]
-inputDict['A3hrPt']['v_10']['inputVarName'] = 'vas_10m'
-inputDict['A3hrPt']['v_10']['outputVarName'] = 'vas'
-inputDict['A3hrPt']['v_10']['outputUnits'] = 'm s-1'
-inputDict['A3hrPt']['v_10']['positive'] = ''
-inputDict['Oday'] = {}
-#inputDict['Oday']['ficeberg2d'] = {}
-#inputDict['Oday']['ficeberg2d']['fileList'] = [
-#        'testFiles/ficeberg.1962.15Dec2016.nc'
+inputDict['A3hrPt'][key]['inputVarName'] = 'vas_10m'
+inputDict['A3hrPt'][key]['outputVarName'] = 'vas'
+inputDict['A3hrPt'][key]['outputUnits'] = 'm s-1'
+inputDict['A3hrPt'][key]['positive'] = ''
+key = 'licalvf'
+#inputDict['LIyrC'] = {}
+#inputDict['LIyrC'][key] = {}
+#inputDict['LIyrC'][key]['fileList'] = [
+#        ''
 #        ]
-#inputDict['Oday']['ficeberg2d']['inputVarName'] = 'ficeberg'
-#inputDict['Oday']['ficeberg2d']['outputVarName'] = 'ficeberg'
-#inputDict['Oday']['ficeberg2d']['outputUnits'] = 'kg m-2 s-1'
-#inputDict['Oday']['ficeberg2d']['positive'] = ''
-inputDict['Oday']['runoff_all'] = {}
-inputDict['Oday']['runoff_all']['fileList'] = [
+#inputDict['LIyrC'][key]['inputVarName'] = 'licalvf'
+#inputDict['LIyrC'][key]['outputVarName'] = 'licalvf'
+#inputDict['LIyrC'][key]['outputUnits'] = 'kg m-2 s-1'
+#inputDict['LIyrC'][key]['positive'] = ''
+key = 'ficeberg2d'
+#inputDict['Oday'] = {}
+#inputDict['Oday'][key] = {}
+#inputDict['Oday'][key]['fileList'] = [
+#        ''
+#        ]
+#inputDict['Oday'][key]['inputVarName'] = 'ficeberg'
+#inputDict['Oday'][key]['outputVarName'] = 'ficeberg'
+#inputDict['Oday'][key]['outputUnits'] = 'kg m-2 s-1'
+#inputDict['Oday'][key]['positive'] = ''
+key = 'runoff_all'
+inputDict['Oday'][key] = {}
+inputDict['Oday'][key]['fileList'] = [
         'testFiles/runoff_all.1962.15Dec2016.nc'
         ]
-inputDict['Oday']['runoff_all']['inputVarName'] = 'friver'
-inputDict['Oday']['runoff_all']['outputVarName'] = 'friver'
-inputDict['Oday']['runoff_all']['outputUnits'] = 'kg m-2 s-1'
-inputDict['Oday']['runoff_all']['positive'] = ''
+inputDict['Oday'][key]['inputVarName'] = 'friver'
+inputDict['Oday'][key]['outputVarName'] = 'friver'
+inputDict['Oday'][key]['outputUnits'] = 'kg m-2 s-1'
+inputDict['Oday'][key]['positive'] = ''
+key = 'tos'
+#inputDict['Oday'][key] = {}
+#inputDict['Oday'][key]['fileList'] = [
+#        ''
+#        ]
+#inputDict['Oday'][key]['inputVarName'] = 'tos'
+#inputDict['Oday'][key]['outputVarName'] = 'tos'
+#inputDict['Oday'][key]['outputUnits'] = 'K'
+#inputDict['Oday'][key]['positive'] = ''
+key = 's_u10a'
 inputDict['OmonC'] = {}
-inputDict['OmonC']['s_u10a'] = {}
-inputDict['OmonC']['s_u10a']['fileList'] = [
+inputDict['OmonC'][key] = {}
+inputDict['OmonC'][key]['fileList'] = [
         'testFiles/woa13_decav_s_0-10m.mon_01v2_filled.nc'
         ]
-inputDict['OmonC']['s_u10a']['inputVarName'] = 's_u10a'
-inputDict['OmonC']['s_u10a']['outputVarName'] = 'sos'
-inputDict['OmonC']['s_u10a']['outputUnits'] = '0.001'
-inputDict['OmonC']['s_u10a']['positive'] = ''
+inputDict['OmonC'][key]['inputVarName'] = 's_u10a'
+inputDict['OmonC'][key]['outputVarName'] = 'sos'
+inputDict['OmonC'][key]['outputUnits'] = '0.001'
+inputDict['OmonC'][key]['positive'] = ''
+key = 'uo'
+#inputDict['OyrC'] = {}
+#inputDict['OyrC'][key] = {}
+#inputDict['OyrC'][key]['fileList'] = [
+#        ''
+#        ]
+#inputDict['OyrC'][key]['inputVarName'] = 'uo'
+#inputDict['OyrC'][key]['outputVarName'] = 'uo'
+#inputDict['OyrC'][key]['outputUnits'] = 'm s-1'
+#inputDict['OyrC'][key]['positive'] = ''
+key = 'vo'
+#inputDict['OyrC'] = {}
+#inputDict['OyrC'][key] = {}
+#inputDict['OyrC'][key]['fileList'] = [
+#        ''
+#        ]
+#inputDict['OyrC'][key]['inputVarName'] = 'vo'
+#inputDict['OyrC'][key]['outputVarName'] = 'vo'
+#inputDict['OyrC'][key]['outputUnits'] = 'm s-1'
+#inputDict['OyrC'][key]['positive'] = ''
+key = 'siconca'
+#inputDict['SI3hrPt'][key] = {}
+#inputDict['SI3hrPt'][key]['fileList'] = [
+#        ''
+#        ]
+#inputDict['SI3hrPt'][key]['inputVarName'] = 'siconca'
+#inputDict['SI3hrPt'][key]['outputVarName'] = 'siconca'
+#inputDict['SI3hrPt'][key]['outputUnits'] = '%'
+#inputDict['SI3hrPt'][key]['positive'] = ''
+key = 'siconc'
+#inputDict['SIday'][key] = {}
+#inputDict['SIday'][key]['fileList'] = [
+#        ''
+#        ]
+#inputDict['SIday'][key]['inputVarName'] = 'siconc'
+#inputDict['SIday'][key]['outputVarName'] = 'siconc'
+#inputDict['SIday'][key]['outputUnits'] = '%'
+#inputDict['SIday'][key]['positive'] = ''
 
 #%% Loop through entries and process file lists
 for key in inputDict.keys():
