@@ -53,6 +53,8 @@ PJD 22 Feb 2018     - Updated to include MRI-JRA55-do-1-3 demo zip archive
 PJD 24 Feb 2018     - Updated demo to include formula_terms
 PJD  7 Mar 2018     - Update JRA55-do 1.3 source info
 PJD  8 Mar 2018     - Renamed dataset_version_number to source_version
+PJD  4 Apr 2018     - Updated MRI-JMA-JRA55-do demo with new variables https://github.com/PCMDI/input4MIPs-cmor-tables/issues/39
+PJD  4 Apr 2018     - Update print statements for python3
                     - TODO: Deal with lab cert issue https://raw.githubusercontent.com -> http://rawgit.com (see requests library)
 
 @author: durack1
@@ -95,7 +97,12 @@ masterTargets = [
  'A3hr',
  'A3hrPt',
  'Oday',
- 'OmonC'
+ 'OmonC',
+ 'OyrC',
+ 'SI3hrPt',
+ 'LIyrC',
+ 'SIday',
+ 'LIfx'
  ] ;
 
 #%% Tables
@@ -114,7 +121,11 @@ tableSource = [
  ['source_id','https://raw.githubusercontent.com/PCMDI/input4MIPs-cmor-tables/master/input4MIPs_source_id.json'],
  ['target_mip','https://raw.githubusercontent.com/WCRP-CMIP/CMIP6_CVs/master/CMIP6_activity_id.json'],
  ['A3hr','https://raw.githubusercontent.com/PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_3hr.json'],
- ['E3hr','https://raw.githubusercontent.com/PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_E3hr.json']
+ ['E3hr','https://raw.githubusercontent.com/PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_E3hr.json'],
+ ['CF3hr','https://raw.githubusercontent.com/PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_CF3hr.json'],
+ ['SIday','https://raw.githubusercontent.com/PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_SIday.json'],
+ ['IyrGre','https://raw.githubusercontent.com/PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_IyrGre.json'],
+ ['LIfx','https://raw.githubusercontent.com/PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_IfxGre.json']
  ] ;
 
 headerFree = ['coordinate','frequency','formula_terms','grid_label','nominal_resolution',
@@ -124,7 +135,7 @@ headerFree = ['coordinate','frequency','formula_terms','grid_label','nominal_res
 # Loop through tableSource and create output tables
 tmp = readJsonCreateDict(tableSource)
 for count,table in enumerate(tmp.keys()):
-    print 'table:', table
+    print('table:',table)
     if table in ['coordinate','formula_terms']:
         vars()[table] = tmp[table]
     elif table == 'target_mip':
@@ -138,7 +149,7 @@ del(tmp,count,table) ; gc.collect()
 # Cleanup by extracting only variable lists
 for count2,table in enumerate(tableSource):
     tableName = table[0]
-    print 'tableName:',tableName
+    print('tableName:',tableName)
     #print eval(tableName)
     if tableName in headerFree:
         continue
@@ -156,13 +167,50 @@ for clean in OfxCleanup:
 Ofx['Header']['product'] = 'input4MIPs'
 Ofx['variable_entry']['sftof']['comment'] = 'This is the area fraction at the ocean surface'
 
+# LIfx
+LIfxCleanup = ['hfgeoubed','lithk','topg']
+for clean in LIfxCleanup:
+    tmp = LIfx['variable_entry'].pop(clean)
+LIfx['Header']['product'] = 'input4MIPs'
+LIfx['variable_entry']['areacellg']['comment'] = 'Area of the target grid (not the interpolated area of the source grid)'
+
+# Create OyrC (before Omon is cleaned up)
+OyrC = {}
+OyrC['variable_entry'] = {}
+OyrC['Header'] = copy.deepcopy(Omon['Header'])
+OyrC['Header']['table_id'] = 'Table input4MIPs_OyrC'
+OyrC['Header']['realm'] = 'ocean'
+OyrC['variable_entry']['uo'] = Omon['variable_entry'].pop('uo')
+OyrC['variable_entry']['uo']['cell_methods'] = 'area: mean where sea time: mean'
+OyrC['variable_entry']['uo']['comment'] = 'Prognostic x-ward velocity component resolved by the model'
+OyrC['variable_entry']['uo']['dimensions'] = 'longitude latitude olevel time2'
+OyrC['variable_entry']['uo']['frequency'] = 'yrC'
+OyrC['variable_entry']['vo'] = Omon['variable_entry'].pop('vo')
+OyrC['variable_entry']['vo']['cell_methods'] = 'area: mean where sea time: mean'
+OyrC['variable_entry']['vo']['comment'] = 'Prognostic y-ward velocity component resolved by the model'
+OyrC['variable_entry']['vo']['dimensions'] = 'longitude latitude olevel time2'
+OyrC['variable_entry']['vo']['frequency'] = 'yrC'
+
+# Create LIyrC (before Omon is cleaned up)
+LIyrC = {}
+LIyrC['variable_entry'] = {}
+LIyrC['Header'] = copy.deepcopy(Omon['Header'])
+LIyrC['Header']['table_id'] = 'Table input4MIPs_LIyrC'
+LIyrC['Header']['realm'] = 'landIce'
+LIyrC['variable_entry']['licalvf'] = copy.deepcopy(IyrGre['variable_entry']['licalvf'])
+LIyrC['variable_entry']['licalvf']['comment'] = 'Area of the target grid (not the interpolated area of the source grid)'
+LIyrC['variable_entry']['licalvf']['dimensions'] = 'longitude latitude time2'
+LIyrC['variable_entry']['licalvf']['frequency'] = 'yrC'
+LIyrC['variable_entry']['licalvf']['modeling_realm'] = 'landIce'
+
 # Omon
 # Cleanup 'aragos','baccos','calcos','co3abioos','co3natos','co3os',
 # 'co3sataragos','co3satcalcos','detocos','dissicos','dissocos','dms','nh4os',
 # 'phos','phycalcos','phydiatos','phydiazos','phymiscos','phypicoos','po4os',
 # 'talkos','zmesoos','zmicroos','zmiscos','zoocos',
 # 'msftmyz','msftyyz'
-# 'pbfe','pbsi','pnitrate',
+# 'pbfe','pbsi','pnitrate'
+# 'uo','vo',
 OmonCleanup = ['agessc','arag','bacc','bfe','bfeos',
                'bigthetao','bigthetaoga','bsi','bsios','calc','cfc11',
                'cfc12','chl','chlcalc','chlcalcos','chldiat','chldiatos',
@@ -206,7 +254,7 @@ OmonCleanup = ['agessc','arag','bacc','bfe','bfeos',
                'sltovovrt','so','sob','sos','soga','sosga','sossq','spco2',
                'spco2abio',u'spco2nat','talk','talknat','talknatos',
                'tauucorr','tauuo','tauvcorr','tauvo','thetao','thetaoga',
-               'thkcello','tob','tosga','tossq','umo','uo','vmo','vo','volo',
+               'thkcello','tob','tosga','tossq','umo','vmo','volo',
                'vsf','vsfcorr','vsfevap','vsfpr','vsfriver','vsfsit','wfcorr',
                'wfo','wfonocorr','wmo','wo','zfullo','zhalfo','zmeso',
                'zmicro','zmisc','zo2min','zooc',
@@ -220,6 +268,9 @@ Oday['variable_entry']['friver']['comment'] = 'computed as the river flux of wat
 Oday['variable_entry']['ficeberg2d'] = copy.deepcopy(Omon['variable_entry']['ficeberg2d'])
 Oday['variable_entry']['ficeberg2d']['frequency'] = 'day'
 Oday['variable_entry']['ficeberg2d']['comment'] = 'computed as the iceberg melt water flux into the ocean divided by the area of the ocean portion of the grid cell'
+Oday['variable_entry']['tos'] = copy.deepcopy(Omon['variable_entry']['tos'])
+Oday['variable_entry']['tos']['comment'] = 'Temperature of upper boundary of the liquid ocean, including temperatures below sea-ice and floating ice shelves'
+Oday['variable_entry']['tos']['frequency'] = 'day'
 Oday['Header'] = copy.deepcopy(Omon['Header'])
 Oday['Header']['table_id'] = 'Table input4MIPs_Oday'
 Oday['Header']['realm'] = 'ocean'
@@ -294,6 +345,24 @@ SImon['variable_entry']['siconc']['dimensions'] = 'longitude latitude time'
 Omon['variable_entry']['tosbcs']['dimensions'] = 'longitude latitude time1'
 SImon['variable_entry']['siconcbcs']['dimensions'] = 'longitude latitude time1'
 
+# Create SI3hrPt (before SIday cleanup)
+SI3hrPt = {}
+SI3hrPt['variable_entry'] = {}
+SI3hrPt['Header'] = copy.deepcopy(A3hr['Header'])
+SI3hrPt['Header']['table_id'] = 'Table input4MIPs_SI3hrPt'
+SI3hrPt['Header']['realm'] = 'seaIce'
+SI3hrPt['variable_entry']['siconca'] = SIday['variable_entry'].pop('siconca')
+SI3hrPt['variable_entry']['siconca']['cell_methods'] = 'area: mean time: point'
+SI3hrPt['variable_entry']['siconca']['frequency'] = '3hrPt'
+SI3hrPt['variable_entry']['siconca']['dimensions'] = 'longitude latitude time1 typesi'
+
+# Create SIday
+SIdayCleanup = ['sisnthick','sispeed','sitemptop','sithick','sitimefrac',
+                'siu','siv']
+for clean in SIdayCleanup:
+    tmp = SIday['variable_entry'].pop(clean)
+SIday['Header']['table_id'] = 'Table input4MIPs_SIday'
+
 # A3hr
 A3hrCleanup = ['clt','hfls','hfss','mrro','mrsos','pr','prc','ps','rldscs','rlus',
                'rsdscs','rsdsdiff','rsus','rsuscs','tos','tslsi']
@@ -304,6 +373,7 @@ A3hr['variable_entry']['prra']['frequency'] = '3hr'
 A3hr['variable_entry']['prra']['comment'] = 'In accordance with common usage in geophysical disciplines, \'flux\' implies per unit area, called \'flux density\' in physics'
 A3hr['variable_entry']['prra']['dimensions'] = 'longitude latitude time'
 A3hr['variable_entry']['prra']['cell_methods'] = 'area: time: mean'
+
 # Create A3hrPt
 A3hrPt = {}
 A3hrPt['variable_entry'] = {}
@@ -323,6 +393,7 @@ A3hrPt['variable_entry']['uas']['cell_measures'] = 'area: areacella'
 A3hrPt['variable_entry']['uas']['comment'] = 'Eastward component of the near-surface wind'
 A3hrPt['variable_entry']['vas'] = A3hr['variable_entry'].pop('vas')
 A3hrPt['variable_entry']['vas']['cell_measures'] = 'area: areacella'
+A3hrPt['variable_entry']['ts'] = CF3hr['variable_entry'].pop('ts')
 
 #%% Activity id
 activity_id = ['input4MIPs']
@@ -500,19 +571,21 @@ for jsonName in masterTargets:
     if jsonName == 'license1':
         outFile = ''.join(['../input4MIPs_license.json'])
     elif jsonName in ['Ofx','Omon','SImon','CV','coordinate','formula_terms',
-                      'grids','A3hr','A3hrPt','Oday','OmonC']:
+                      'grids','A3hr','A3hrPt','Oday','OmonC','OyrC','SI3hrPt',
+                      'SIday','LIyrC','LIfx']:
         outFile = ''.join(['../Tables/input4MIPs_',jsonName,'.json'])
     else:
         outFile = ''.join(['../input4MIPs_',jsonName,'.json'])
     # Check file exists
     if os.path.exists(outFile):
-        print 'File existing, purging:',outFile
+        print('File existing, purging:',outFile)
         os.remove(outFile)
     if not os.path.exists('../Tables'):
         os.mkdir('../Tables')
     # Create host dictionary
     if jsonName not in ['coordinate','formula_terms','grids','CV','institution_id',
-                        'Ofx','Omon','SImon','A3hr','A3hrPt','Oday','OmonC']:
+                        'Ofx','Omon','SImon','A3hr','A3hrPt','Oday','OmonC',
+                        'OyrC','SI3hrPt','LIyrC','SIday','LIfx']:
         jsonDict = {}
         jsonDict[jsonName] = eval(jsonName)
     else:
@@ -618,7 +691,7 @@ input4MIPs['data']['CMIP']['VUA']['emissions']['deprecatedVersion'] = '1.0'
 outFile = ''.join(['../Versions/',versionId,'.json'])
 # Check file exists
 if os.path.exists(outFile):
-    print 'File existing, purging:',outFile
+    print('File existing, purging:',outFile)
     os.remove(outFile)
 if not os.path.exists('../Versions'):
     os.mkdir('../Versions')
@@ -644,7 +717,8 @@ else:
 os.chdir(demoPath)
 
 # Now fill Tables subdir with required files
-cvTables = ['A3hr','A3hrPt','CV','Oday','OmonC','coordinate','formula_terms']
+cvTables = ['A3hr','A3hrPt','CV','Oday','OmonC','OyrC','SI3hrPt','LIyrC','SIday',
+            'coordinate','formula_terms']
 for count,tableId in enumerate(cvTables):
     fileName = ''.join(['input4MIPs_',tableId,'.json'])
     sourcePath = os.path.join('..','..','Tables',fileName)

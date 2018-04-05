@@ -2,15 +2,15 @@
     "Header":{
         "Conventions":"CF-1.7 CMIP-6.2",
         "approx_interval":"30.00000",
-        "cmor_version":"3.2",
-        "data_specs_version":"01.00.22",
+        "cmor_version":"3.3",
+        "data_specs_version":"01.00.23",
         "generic_levels":"olevel",
         "int_missing_value":"-999",
         "mip_era":"CMIP6",
         "missing_value":"1e20",
         "product":"input4MIPs",
         "realm":"ocean",
-        "table_date":"08 March 2018",
+        "table_date":"05 April 2018",
         "table_id":"Table input4MIPs_Oday"
     },
     "variable_entry":{
@@ -47,6 +47,24 @@
             "standard_name":"water_flux_into_sea_water_from_rivers",
             "type":"real",
             "units":"kg m-2 s-1",
+            "valid_max":"",
+            "valid_min":""
+        },
+        "tos":{
+            "cell_measures":"area: areacello",
+            "cell_methods":"area: mean where sea time: mean",
+            "comment":"Temperature of upper boundary of the liquid ocean, including temperatures below sea-ice and floating ice shelves",
+            "dimensions":"longitude latitude time",
+            "frequency":"day",
+            "long_name":"Sea Surface Temperature",
+            "modeling_realm":"ocean",
+            "ok_max_mean_abs":"",
+            "ok_min_mean_abs":"",
+            "out_name":"tos",
+            "positive":"",
+            "standard_name":"sea_surface_temperature",
+            "type":"real",
+            "units":"degC",
             "valid_max":"",
             "valid_min":""
         }
