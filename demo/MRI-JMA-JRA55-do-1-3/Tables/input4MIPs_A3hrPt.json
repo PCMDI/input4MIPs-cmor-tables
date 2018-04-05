@@ -50,24 +50,6 @@
             "valid_max":"",
             "valid_min":""
         },
-        "siconc":{
-            "cell_measures":"area: areacella",
-            "cell_methods":"area: time: mean",
-            "comment":"Area fraction of grid cell covered by sea ice",
-            "dimensions":"longitude latitude time typesi",
-            "frequency":"day",
-            "long_name":"Sea Ice Area Fraction (Atmospheric Grid)",
-            "modeling_realm":"seaIce",
-            "ok_max_mean_abs":"",
-            "ok_min_mean_abs":"",
-            "out_name":"siconca",
-            "positive":"",
-            "standard_name":"sea_ice_area_fraction",
-            "type":"real",
-            "units":"%",
-            "valid_max":"",
-            "valid_min":""
-        },
         "tas":{
             "cell_measures":"area: areacella",
             "cell_methods":"area: mean time: point",
