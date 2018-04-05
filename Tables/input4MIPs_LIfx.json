@@ -17,7 +17,7 @@
         "areacellg":{
             "cell_measures":"",
             "cell_methods":"area: sum",
-            "comment":"Area of the target grid (not the interpolated area of the source grid).",
+            "comment":"Area of the target grid (not the interpolated area of the source grid)",
             "dimensions":"longitude latitude",
             "frequency":"fx",
             "long_name":"Grid-Cell Area for Ice Sheet Variables",
