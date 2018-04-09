@@ -55,6 +55,8 @@ PJD  7 Mar 2018     - Update JRA55-do 1.3 source info
 PJD  8 Mar 2018     - Renamed dataset_version_number to source_version
 PJD  4 Apr 2018     - Updated MRI-JMA-JRA55-do demo with new variables https://github.com/PCMDI/input4MIPs-cmor-tables/issues/39
 PJD  4 Apr 2018     - Update print statements for python3
+PJD  9 Apr 2018     - Added 'msftmz' and 'msftyz' to exclusion list for Omon
+
                     - TODO: Deal with lab cert issue https://raw.githubusercontent.com -> http://rawgit.com (see requests library)
 
 @author: durack1
@@ -258,7 +260,8 @@ OmonCleanup = ['agessc','arag','bacc','bfe','bfeos',
                'vsf','vsfcorr','vsfevap','vsfpr','vsfriver','vsfsit','wfcorr',
                'wfo','wfonocorr','wmo','wo','zfullo','zhalfo','zmeso',
                'zmicro','zmisc','zo2min','zooc',
-               'zos','zossq','zostoga','zsatarag','zsatcalc']
+               'zos','zossq','zostoga','zsatarag','zsatcalc',
+               'msftmz','msftyz']
 # Oday
 Oday = {}
 Oday['variable_entry'] = {}
