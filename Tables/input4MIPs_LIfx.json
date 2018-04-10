@@ -10,7 +10,7 @@
         "missing_value":"1e20",
         "product":"input4MIPs",
         "realm":"landIce",
-        "table_date":"05 April 2018",
+        "table_date":"10 April 2018",
         "table_id":"Table input4MIPs_LIfx"
     },
     "variable_entry":{
@@ -26,6 +26,7 @@
             "ok_min_mean_abs":"",
             "out_name":"areacellg",
             "positive":"",
+            "realm":"landIce",
             "standard_name":"cell_area",
             "type":"real",
             "units":"m2",

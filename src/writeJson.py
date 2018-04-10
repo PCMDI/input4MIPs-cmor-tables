@@ -175,6 +175,7 @@ for clean in LIfxCleanup:
     tmp = LIfx['variable_entry'].pop(clean)
 LIfx['Header']['product'] = 'input4MIPs'
 LIfx['variable_entry']['areacellg']['comment'] = 'Area of the target grid (not the interpolated area of the source grid)'
+LIfx['variable_entry']['areacellg']['realm'] = 'landIce'
 
 # Create OyrC (before Omon is cleaned up)
 OyrC = {}
