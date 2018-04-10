@@ -57,6 +57,7 @@ PJD  4 Apr 2018     - Updated MRI-JMA-JRA55-do demo with new variables https://g
 PJD  4 Apr 2018     - Update print statements for python3
 PJD  9 Apr 2018     - Added 'msftmz' and 'msftyz' to exclusion list for Omon
 PJD 10 Apr 2018     - Update modeling_realm for LIfx areacellg https://github.com/PCMDI/input4MIPs-cmor-tables/issues/39
+PJD 10 Apr 2018     - Register source_id PCMDI-AMIP-1-1-4 https://github.com/PCMDI/input4MIPs-cmor-tables/issues/47
                     - TODO: Deal with lab cert issue https://raw.githubusercontent.com -> http://rawgit.com (see requests library)
 
 @author: durack1
@@ -525,13 +526,36 @@ source_id = source_id.get('source_id')
 source_id = source_id.get('source_id')
 
 # Fix issues
-key = 'MRI-JRA55-do-1-3'
-source_id[key]['source'] = 'MRI JRA55-do 1.3: Atmospheric state generated for OMIP based on the JRA-55 reanalysis'
-#source_id = {}
-#source_id['PCMDI-AMIP-1-1-3'] = {}
-#source_id['PCMDI-AMIP-1-1-3']['source'] = 'PCMDI-AMIP 1.1.3: Merged SST based on UK MetOffice HadISST and NCEP OI2'
-#source_id['MRI-JRA55-do-1-3'] = {}
-#source_id['MRI-JRA55-do-1-3']['source'] = 'MRI JRA55-do 1.3: Atmospheric state generated for OMIP based on the MRI JRA55 reanalysis'
+key = 'PCMDI-AMIP-1-1-4'
+source_id[key] = {}
+source_id[key]['comment'] = 'Based on Hurrell SST/sea ice consistency criteria applied to merged HadISST (1870-01 1981-10) & NCEP-0I2 (1981-11 to 2017-12)'
+source_id[key]['contact'] = 'PCMDI (pcmdi-cmip@llnl.gov)'
+source_id[key]['dataset_category'] = 'SSTsAndSeaIce'
+source_id[key]['grid'] = '1x1 degree longitude x latitude'
+source_id[key]['grid_label'] = 'gn'
+source_id[key]['further_info_url'] = 'https://pcmdi.llnl.gov/mips/amip'
+source_id[key]['institution_id'] = 'PCMDI'
+source_id[key]['institution'] = 'Program for Climate Model Diagnosis and Intercomparison, Lawrence Livermore National Laboratory, Livermore, CA 94550, USA'
+source_id[key]['nominal_resolution'] = '1x1 degree'
+source_id[key]['product'] = 'observations'
+source_id[key]['realm'] = 'ocean'
+source_id[key]['references'] = 'Taylor, K.E., D. Williamson and F. Zwiers, 2000: The sea surface temperature and sea ice concentration boundary conditions for AMIP II simulations. PCMDI Report 60, Program for Climate Model Diagnosis and Intercomparison, Lawrence Livermore National Laboratory, 25 pp. Available online: https://pcmdi.llnl.gov/report/pdf/60.pdf'
+source_id[key]['region'] = ['global_ocean']
+source_id[key]['release_year'] = '2018'
+source_id[key]['source_description'] = 'PCMDI (pcmdi-cmip@llnl.gov)'
+source_id[key]['source'] = 'PCMDI-AMIP 1.1.4: Merged SST based on UK MetOffice HadISST and NCEP OI2'
+source_id[key]['source_id'] = key
+source_id[key]['source_type'] = 'satellite_blended'
+source_id[key]['source_variables'] = ['areacello','sftof','siconc','siconcbcs',
+                                      'tos','tosbcs']
+source_id[key]['source_version_number'] = '1.1.4'
+source_id[key]['target_mip'] = 'CMIP'
+source_id[key]['title'] = 'PCMDI-AMIP 1.1.4 dataset prepared for input4MIPs'
+#----
+#key = 'MRI-JRA55-do-1-3'
+#source_id[key]['source'] = 'MRI JRA55-do 1.3: Atmospheric state generated for OMIP based on the JRA-55 reanalysis'
+#key = 'PCMDI-AMIP-1-1-3'
+#source_id[key]['source'] = 'PCMDI-AMIP 1.1.3: Merged SST based on UK MetOffice HadISST and NCEP OI2'
 
 #%% Create CV master
 CV = {}
