@@ -261,7 +261,7 @@
                 ],
                 "release_year":"2018",
                 "source":"PCMDI-AMIP 1.1.4: Merged SST based on UK MetOffice HadISST and NCEP OI2",
-                "source_description":"PCMDI (pcmdi-cmip@llnl.gov)",
+                "source_description":"Sea surface temperature and sea-ice datasets produced by PCMDI (LLNL) for the AMIP (DECK) experiment of CMIP6",
                 "source_id":"PCMDI-AMIP-1-1-4",
                 "source_type":"satellite_blended",
                 "source_variables":[
@@ -272,7 +272,7 @@
                     "tos",
                     "tosbcs"
                 ],
-                "source_version_number":"1.1.4",
+                "source_version":"1.1.4",
                 "target_mip":"CMIP",
                 "title":"PCMDI-AMIP 1.1.4 dataset prepared for input4MIPs"
             }
