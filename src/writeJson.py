@@ -59,6 +59,7 @@ PJD  9 Apr 2018     - Added 'msftmz' and 'msftyz' to exclusion list for Omon
 PJD 10 Apr 2018     - Update modeling_realm for LIfx areacellg https://github.com/PCMDI/input4MIPs-cmor-tables/issues/39
 PJD 10 Apr 2018     - Register source_id PCMDI-AMIP-1-1-4 https://github.com/PCMDI/input4MIPs-cmor-tables/issues/47
 PJD 17 Apr 2018     - Revise source_id PCMDI-AMIP-1-1-4 https://github.com/PCMDI/input4MIPs-cmor-tables/issues/47
+PJD 25 Apr 2018     - Revise source_id entries to remove realm https://github.com/PCMDI/input4MIPs-cmor-tables/issues/51
                     - TODO: Deal with lab cert issue https://raw.githubusercontent.com -> http://rawgit.com (see requests library)
 
 @author: durack1
@@ -539,8 +540,13 @@ source_id[key]['institution_id'] = 'PCMDI'
 source_id[key]['institution'] = 'Program for Climate Model Diagnosis and Intercomparison, Lawrence Livermore National Laboratory, Livermore, CA 94550, USA'
 source_id[key]['nominal_resolution'] = '1x1 degree'
 source_id[key]['product'] = 'observations'
-source_id[key]['realm'] = 'ocean'
-source_id[key]['references'] = 'Taylor, K.E., D. Williamson and F. Zwiers, 2000: The sea surface temperature and sea ice concentration boundary conditions for AMIP II simulations. PCMDI Report 60, Program for Climate Model Diagnosis and Intercomparison, Lawrence Livermore National Laboratory, 25 pp. Available online: https://pcmdi.llnl.gov/report/pdf/60.pdf'
+source_id[key]['references'] = ''.join(['Taylor, K.E., D. Williamson and F. Zwiers, ',
+                                        '2000: The sea surface temperature and sea ice ',
+                                        'concentration boundary conditions for AMIP II ',
+                                        'simulations. PCMDI Report 60, Program for ',
+                                        'Climate Model Diagnosis and Intercomparison, ',
+                                        'Lawrence Livermore National Laboratory, 25 pp. ',
+                                        'Available online: https://pcmdi.llnl.gov/report/pdf/60.pdf'])
 source_id[key]['region'] = ['global_ocean']
 source_id[key]['release_year'] = '2018'
 source_id[key]['source_description'] = 'Sea surface temperature and sea-ice datasets produced by PCMDI (LLNL) for the AMIP (DECK) experiment of CMIP6'

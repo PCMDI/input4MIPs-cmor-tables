@@ -17,7 +17,6 @@
             "institution_id":"PCMDI",
             "nominal_resolution":"1x1 degree",
             "product":"observations",
-            "realm":"ocean",
             "references":"Taylor, K.E., D. Williamson and F. Zwiers, 2000: The sea surface temperature and sea ice concentration boundary conditions for AMIP II simulations. PCMDI Report 60, Program for Climate Model Diagnosis and Intercomparison, Lawrence Livermore National Laboratory, 25 pp. Available online: https://pcmdi.llnl.gov/report/pdf/60.pdf",
             "region":[
                 "global_ocean"
