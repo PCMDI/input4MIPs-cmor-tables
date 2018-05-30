@@ -60,7 +60,7 @@ PJD 10 Apr 2018     - Update modeling_realm for LIfx areacellg https://github.co
 PJD 10 Apr 2018     - Register source_id PCMDI-AMIP-1-1-4 https://github.com/PCMDI/input4MIPs-cmor-tables/issues/47
 PJD 17 Apr 2018     - Revise source_id PCMDI-AMIP-1-1-4 https://github.com/PCMDI/input4MIPs-cmor-tables/issues/47
 PJD 25 Apr 2018     - Revise source_id entries to remove realm https://github.com/PCMDI/input4MIPs-cmor-tables/issues/51
-PJD 29 May 2018     - Register institution_id IAMC https://github.com/PCMDI/input4MIPs-cmor-tables/pull/53/files
+PJD 30 May 2018     - Register institution_id IAMC https://github.com/PCMDI/input4MIPs-cmor-tables/pull/53/files
                     - TODO: Deal with lab cert issue https://raw.githubusercontent.com -> http://rawgit.com (see requests library)
 
 @author: durack1
@@ -440,9 +440,9 @@ institution_id['CCCma'] = 'Canadian Centre for Climate Modelling and Analysis, V
 institution_id['CNRM-Cerfacs'] = ('CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France),'
               ' CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31100, France)')
 institution_id['IACETH'] = 'Institute for Atmosphere and Climate, ETH Zurich, Zurich 8092, Switzerland'
-#institution_id['IAMC'] = ''.join(['Integrated Assessment Modeling Consortium (see www.globalchange.umd.edu/iamc/membership ',
-#                         'for complete membership). Mailing address: International Institute for Applied Systems Analysis ',
-#                         '(IIASA), Schlossplatz 1, A-2361 Laxenburg, Austria'])
+institution_id['IAMC'] = ''.join(['Integrated Assessment Modeling Consortium (see www.globalchange.umd.edu/iamc/membership ',
+                         'for complete membership). Mailing address: International Institute for Applied Systems Analysis ',
+                         '(IIASA), Schlossplatz 1, A-2361 Laxenburg, Austria'])
 institution_id['ImperialCollege'] = 'Imperial College London, South Kensington Campus, London SW7 2AZ, UK'
 institution_id['MOHC'] = 'Met Office Hadley Centre, Fitzroy Road, Exeter, Devon, EX1 3PB, UK'
 institution_id['MPI-M'] = 'Max Planck Institute for Meteorology, Hamburg 20146, Germany'
