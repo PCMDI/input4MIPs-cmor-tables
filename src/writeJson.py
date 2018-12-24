@@ -63,6 +63,7 @@ PJD 25 Apr 2018     - Revise source_id entries to remove realm https://github.co
 PJD 30 May 2018     - Register institution_id IAMC https://github.com/PCMDI/input4MIPs-cmor-tables/pull/53/files
 PJD 23 Dec 2018     - Updated to deal with upstreams https://github.com/PCMDI/input4MIPs-cmor-tables/issues/56
 PJD 23 Dec 2018     - Register source_id PCMDI-AMIP-1-1-5 https://github.com/PCMDI/input4MIPs-cmor-tables/issues/57
+PJD 23 Dec 2018     - Revise source_id PCMDI-AMIP-1-1-4
                     - TODO: Deal with lab cert issue https://raw.githubusercontent.com -> http://rawgit.com (see requests library)
 
 @author: durack1
@@ -541,7 +542,7 @@ source_id = source_id.get('source_id')
 # Fix issues
 key = 'PCMDI-AMIP-1-1-5'
 source_id[key] = {}
-source_id[key]['comment'] = 'Based on Hurrell SST/sea ice consistency criteria applied to merged HadISST (1870-01 1981-10) & NCEP-0I2 (1981-11 to 2018-06)'
+source_id[key]['comment'] = 'Based on Hurrell SST/sea ice consistency criteria applied to merged HadISST (1870-01 to 1981-10) & NCEP-0I2 (1981-11 to 2018-06)'
 source_id[key]['contact'] = 'PCMDI (pcmdi-cmip@llnl.gov)'
 source_id[key]['dataset_category'] = 'SSTsAndSeaIce'
 source_id[key]['grid'] = '1x1 degree longitude x latitude'
@@ -570,9 +571,9 @@ source_id[key]['source_version'] = '1.1.5'
 source_id[key]['target_mip'] = 'CMIP'
 source_id[key]['title'] = 'PCMDI-AMIP 1.1.5 dataset prepared for input4MIPs'
 #----
-#key = 'PCMDI-AMIP-1-1-4'
+key = 'PCMDI-AMIP-1-1-4'
 #source_id[key] = {}
-#source_id[key]['comment'] = 'Based on Hurrell SST/sea ice consistency criteria applied to merged HadISST (1870-01 1981-10) & NCEP-0I2 (1981-11 to 2017-12)'
+source_id[key]['comment'] = 'Based on Hurrell SST/sea ice consistency criteria applied to merged HadISST (1870-01 to 1981-10) & NCEP-0I2 (1981-11 to 2017-12)'
 #source_id[key]['contact'] = 'PCMDI (pcmdi-cmip@llnl.gov)'
 #source_id[key]['dataset_category'] = 'SSTsAndSeaIce'
 #source_id[key]['grid'] = '1x1 degree longitude x latitude'
