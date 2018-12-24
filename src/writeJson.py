@@ -271,7 +271,8 @@ OmonCleanup = ['agessc','arag','bacc','bfe','bfeos',
                'aragos','baccos','calcos','co3abioos','co3natos','co3os',
                'co3sataragos','co3satcalcos','detocos','dissicos','dissocos',
                'nh4os','phos','phycalcos','phydiatos','phydiazos','phymiscos',
-               'phypicoos','po4os','ppos','talkos']
+               'phypicoos','po4os','ppos','talkos','zmesoos','zmicroos',
+               'zmiscos','zoocos']
 # Oday
 Oday = {}
 Oday['variable_entry'] = {}
