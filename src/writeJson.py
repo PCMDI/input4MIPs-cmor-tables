@@ -64,6 +64,7 @@ PJD 30 May 2018     - Register institution_id IAMC https://github.com/PCMDI/inpu
 PJD 23 Dec 2018     - Updated to deal with upstreams https://github.com/PCMDI/input4MIPs-cmor-tables/issues/56
 PJD 23 Dec 2018     - Register source_id PCMDI-AMIP-1-1-5 https://github.com/PCMDI/input4MIPs-cmor-tables/issues/57
 PJD 23 Dec 2018     - Revise source_id PCMDI-AMIP-1-1-4
+PJD 23 Dec 2018     - Register institution_id MPI-B https://github.com/PCMDI/input4MIPs-cmor-tables/issues/59
                     - TODO: Deal with lab cert issue https://raw.githubusercontent.com -> http://rawgit.com (see requests library)
 
 @author: durack1
@@ -453,6 +454,7 @@ institution_id['IAMC'] = ''.join(['Integrated Assessment Modeling Consortium (se
                          '(IIASA), Schlossplatz 1, A-2361 Laxenburg, Austria'])
 institution_id['ImperialCollege'] = 'Imperial College London, South Kensington Campus, London SW7 2AZ, UK'
 institution_id['MOHC'] = 'Met Office Hadley Centre, Fitzroy Road, Exeter, Devon, EX1 3PB, UK'
+institution_id['MPI-B'] = 'Max Planck Institute for Biogeochemistry, Jena 07745, Germany'
 institution_id['MPI-M'] = 'Max Planck Institute for Meteorology, Hamburg 20146, Germany'
 institution_id['MRI'] = 'Meteorological Research Institute, Tsukuba, Ibaraki 305-0052, Japan'
 institution_id['NCAR'] = 'National Center for Atmospheric Research, Boulder, CO 80307, USA'
