@@ -61,6 +61,7 @@ PJD 10 Apr 2018     - Register source_id PCMDI-AMIP-1-1-4 https://github.com/PCM
 PJD 17 Apr 2018     - Revise source_id PCMDI-AMIP-1-1-4 https://github.com/PCMDI/input4MIPs-cmor-tables/issues/47
 PJD 25 Apr 2018     - Revise source_id entries to remove realm https://github.com/PCMDI/input4MIPs-cmor-tables/issues/51
 PJD 30 May 2018     - Register institution_id IAMC https://github.com/PCMDI/input4MIPs-cmor-tables/pull/53/files
+PJD 23 Dec 2018     - Updated to deal with upstreams https://github.com/PCMDI/input4MIPs-cmor-tables/issues/56
                     - TODO: Deal with lab cert issue https://raw.githubusercontent.com -> http://rawgit.com (see requests library)
 
 @author: durack1
@@ -266,7 +267,12 @@ OmonCleanup = ['agessc','arag','bacc','bfe','bfeos',
                'wfo','wfonocorr','wmo','wo','zfullo','zhalfo','zmeso',
                'zmicro','zmisc','zo2min','zooc',
                'zos','zossq','zostoga','zsatarag','zsatcalc',
-               'msftmz','msftyz']
+               'msftmz','msftyz',
+               'aragos','baccos','calcos','co3abioos','co3natos','co3os',
+               'co3sataragos','co3satcalcos','detocos','dissicos','dissocos',
+               'nh4os','phos','phycalcos','phydiatos','phydiazos','phymiscos',
+               'phypicoos','po4os','ppos','talkos','zmesoos','zmicroos',
+               'zmiscos','zoocos']
 # Oday
 Oday = {}
 Oday['variable_entry'] = {}
