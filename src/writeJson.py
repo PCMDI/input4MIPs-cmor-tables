@@ -62,6 +62,8 @@ PJD 17 Apr 2018     - Revise source_id PCMDI-AMIP-1-1-4 https://github.com/PCMDI
 PJD 25 Apr 2018     - Revise source_id entries to remove realm https://github.com/PCMDI/input4MIPs-cmor-tables/issues/51
 PJD 30 May 2018     - Register institution_id IAMC https://github.com/PCMDI/input4MIPs-cmor-tables/pull/53/files
 PJD 23 Dec 2018     - Updated to deal with upstreams https://github.com/PCMDI/input4MIPs-cmor-tables/issues/56
+PJD 23 Dec 2018     - Register source_id PCMDI-AMIP-1-1-5 https://github.com/PCMDI/input4MIPs-cmor-tables/issues/57
+PJD 23 Dec 2018     - Revise source_id PCMDI-AMIP-1-1-4
                     - TODO: Deal with lab cert issue https://raw.githubusercontent.com -> http://rawgit.com (see requests library)
 
 @author: durack1
@@ -538,9 +540,9 @@ source_id = source_id.get('source_id')
 source_id = source_id.get('source_id')
 
 # Fix issues
-key = 'PCMDI-AMIP-1-1-4'
+key = 'PCMDI-AMIP-1-1-5'
 source_id[key] = {}
-source_id[key]['comment'] = 'Based on Hurrell SST/sea ice consistency criteria applied to merged HadISST (1870-01 1981-10) & NCEP-0I2 (1981-11 to 2017-12)'
+source_id[key]['comment'] = 'Based on Hurrell SST/sea ice consistency criteria applied to merged HadISST (1870-01 to 1981-10) & NCEP-0I2 (1981-11 to 2018-06)'
 source_id[key]['contact'] = 'PCMDI (pcmdi-cmip@llnl.gov)'
 source_id[key]['dataset_category'] = 'SSTsAndSeaIce'
 source_id[key]['grid'] = '1x1 degree longitude x latitude'
@@ -560,14 +562,45 @@ source_id[key]['references'] = ''.join(['Taylor, K.E., D. Williamson and F. Zwie
 source_id[key]['region'] = ['global_ocean']
 source_id[key]['release_year'] = '2018'
 source_id[key]['source_description'] = 'Sea surface temperature and sea-ice datasets produced by PCMDI (LLNL) for the AMIP (DECK) experiment of CMIP6'
-source_id[key]['source'] = 'PCMDI-AMIP 1.1.4: Merged SST based on UK MetOffice HadISST and NCEP OI2'
+source_id[key]['source'] = 'PCMDI-AMIP 1.1.5: Merged SST based on UK MetOffice HadISST and NCEP OI2'
 source_id[key]['source_id'] = key
 source_id[key]['source_type'] = 'satellite_blended'
 source_id[key]['source_variables'] = ['areacello','sftof','siconc','siconcbcs',
                                       'tos','tosbcs']
-source_id[key]['source_version'] = '1.1.4'
+source_id[key]['source_version'] = '1.1.5'
 source_id[key]['target_mip'] = 'CMIP'
-source_id[key]['title'] = 'PCMDI-AMIP 1.1.4 dataset prepared for input4MIPs'
+source_id[key]['title'] = 'PCMDI-AMIP 1.1.5 dataset prepared for input4MIPs'
+#----
+key = 'PCMDI-AMIP-1-1-4'
+#source_id[key] = {}
+source_id[key]['comment'] = 'Based on Hurrell SST/sea ice consistency criteria applied to merged HadISST (1870-01 to 1981-10) & NCEP-0I2 (1981-11 to 2017-12)'
+#source_id[key]['contact'] = 'PCMDI (pcmdi-cmip@llnl.gov)'
+#source_id[key]['dataset_category'] = 'SSTsAndSeaIce'
+#source_id[key]['grid'] = '1x1 degree longitude x latitude'
+#source_id[key]['grid_label'] = 'gn'
+#source_id[key]['further_info_url'] = 'https://pcmdi.llnl.gov/mips/amip'
+#source_id[key]['institution_id'] = 'PCMDI'
+#source_id[key]['institution'] = 'Program for Climate Model Diagnosis and Intercomparison, Lawrence Livermore National Laboratory, Livermore, CA 94550, USA'
+#source_id[key]['nominal_resolution'] = '1x1 degree'
+#source_id[key]['product'] = 'observations'
+#source_id[key]['references'] = ''.join(['Taylor, K.E., D. Williamson and F. Zwiers, ',
+#                                        '2000: The sea surface temperature and sea ice ',
+#                                        'concentration boundary conditions for AMIP II ',
+#                                        'simulations. PCMDI Report 60, Program for ',
+#                                        'Climate Model Diagnosis and Intercomparison, ',
+#                                        'Lawrence Livermore National Laboratory, 25 pp. ',
+#                                        'Available online: https://pcmdi.llnl.gov/report/pdf/60.pdf'])
+#source_id[key]['region'] = ['global_ocean']
+#source_id[key]['release_year'] = '2018'
+#source_id[key]['source_description'] = 'Sea surface temperature and sea-ice datasets produced by PCMDI (LLNL) for the AMIP (DECK) experiment of CMIP6'
+#source_id[key]['source'] = 'PCMDI-AMIP 1.1.4: Merged SST based on UK MetOffice HadISST and NCEP OI2'
+#source_id[key]['source_id'] = key
+#source_id[key]['source_type'] = 'satellite_blended'
+#source_id[key]['source_variables'] = ['areacello','sftof','siconc','siconcbcs',
+#                                      'tos','tosbcs']
+#source_id[key]['source_version'] = '1.1.4'
+#source_id[key]['target_mip'] = 'CMIP'
+#source_id[key]['title'] = 'PCMDI-AMIP 1.1.4 dataset prepared for input4MIPs'
 #----
 #key = 'MRI-JRA55-do-1-3'
 #source_id[key]['source'] = 'MRI JRA55-do 1.3: Atmospheric state generated for OMIP based on the JRA-55 reanalysis'
