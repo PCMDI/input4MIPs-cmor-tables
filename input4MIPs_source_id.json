@@ -1,5 +1,37 @@
 {
     "source_id":{
+        "IIS-UTokyo-GSWP3-LS3MIP-1-1":{
+            "comment":"Atmospheric boundary condition for retrospective off-line experiment of Global Soil Wetness Project Phase 3 (GSWP3, 1901-01 to 2014-12)",
+            "contact":"Hyungjun Kim (hjkim@iis.u-tokyo.ac.jp)",
+            "dataset_category":"atmosphericState",
+            "further_info_url":"https://hyungjun.github.io/GSWP3.DataDescription/; http://search.diasjp.net/en/dataset/GSWP3_EXP1_Forcing",
+            "grid":"0.5x0.5 degree latitude x longitude",
+            "grid_label":"gn",
+            "institution_id":"IIS-UTokyo",
+            "nominal_resolution":"50 km",
+            "product":"bias corrected & downscaled reanalysis",
+            "references":"Kim 2017: Global Soil Wetness Project Phase 3 Atmospheric Boundary Conditions (Experiment 1) [Data set]. Data Integration and Analysis System (DIAS). https://doi.org/10.20783/DIAS.501, ",
+            "region":[
+                "global_land"
+            ],
+            "release_year":"2019",
+            "source":"GSWP3-EXP1 for LS3MIP-landhist (v1.1): Atmospheric boundary conditions for landhist experiment of LS3MIP",
+            "source_description":"Land state datasets produced by the University of Tokyo for the LS3MIP landhist experiment of CMIP6",
+            "source_id":"IIS-UTokyo-GSWP3-LS3MIP-1-1",
+            "source_variables":[
+                "huss",
+                "prra",
+                "prsn",
+                "psl",
+                "rlds",
+                "rsds",
+                "sfcWind",
+                "tas"
+            ],
+            "source_version":"1.1",
+            "target_mip":"LS3MIP",
+            "title":"IIS-UTokyo GSWP3 LS3MIP 1.1 dataset prepared for input4MIPs"
+        },
         "MRI-JRA55-do-1-3":{
             "source":"MRI JRA55-do 1.3: Atmospheric state generated for OMIP based on the JRA-55 reanalysis"
         },

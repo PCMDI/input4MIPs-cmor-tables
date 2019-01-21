@@ -65,6 +65,7 @@ PJD 23 Dec 2018     - Updated to deal with upstreams https://github.com/PCMDI/in
 PJD 23 Dec 2018     - Register source_id PCMDI-AMIP-1-1-5 https://github.com/PCMDI/input4MIPs-cmor-tables/issues/57
 PJD 23 Dec 2018     - Revise source_id PCMDI-AMIP-1-1-4
 PJD 23 Dec 2018     - Register institution_id MPI-B https://github.com/PCMDI/input4MIPs-cmor-tables/issues/59
+PJD 20 Jan 2019     - Register institution_id and source_id values for LS3MIP data and demo https://github.com/PCMDI/input4MIPs-cmor-tables/issues/62
                     - TODO: Deal with lab cert issue https://raw.githubusercontent.com -> http://rawgit.com (see requests library)
 
 @author: durack1
@@ -452,6 +453,7 @@ institution_id['IACETH'] = 'Institute for Atmosphere and Climate, ETH Zurich, Zu
 institution_id['IAMC'] = ''.join(['Integrated Assessment Modeling Consortium (see www.globalchange.umd.edu/iamc/membership ',
                          'for complete membership). Mailing address: International Institute for Applied Systems Analysis ',
                          '(IIASA), Schlossplatz 1, A-2361 Laxenburg, Austria'])
+institution_id['IIS-UTokyo'] = 'Institute of Industrial Science, The University of Tokyo, Hongo, Bunkyo-ku 113-8656, Japan'
 institution_id['ImperialCollege'] = 'Imperial College London, South Kensington Campus, London SW7 2AZ, UK'
 institution_id['MOHC'] = 'Met Office Hadley Centre, Fitzroy Road, Exeter, Devon, EX1 3PB, UK'
 institution_id['MPI-B'] = 'Max Planck Institute for Biogeochemistry, Jena 07745, Germany'
@@ -542,6 +544,32 @@ source_id = source_id.get('source_id')
 source_id = source_id.get('source_id')
 
 # Fix issues
+key = 'IIS-UTokyo-GSWP3-LS3MIP-1-1'
+source_id[key] = {}
+source_id[key]['comment'] = 'Atmospheric boundary condition for retrospective off-line experiment of Global Soil Wetness Project Phase 3 (GSWP3, 1901-01 to 2014-12)'
+source_id[key]['contact'] = 'Hyungjun Kim (hjkim@iis.u-tokyo.ac.jp)'
+source_id[key]['dataset_category'] = 'atmosphericState'
+source_id[key]['grid'] = '0.5x0.5 degree latitude x longitude'
+source_id[key]['grid_label'] = 'gn'
+source_id[key]['further_info_url'] = 'https://hyungjun.github.io/GSWP3.DataDescription/; http://search.diasjp.net/en/dataset/GSWP3_EXP1_Forcing'
+source_id[key]['institution_id'] = 'IIS-UTokyo'
+source_id[key]['nominal_resolution'] = '50 km'
+source_id[key]['product'] = 'bias corrected & downscaled reanalysis'
+source_id[key]['references'] = ''.join(['Kim 2017: Global Soil Wetness Project Phase 3 Atmospheric ',
+                                        'Boundary Conditions (Experiment 1) [Data set]. Data ',
+                                        'Integration and Analysis System (DIAS). ',
+                                        'https://doi.org/10.20783/DIAS.501, '])
+source_id[key]['region'] = ['global_land']
+source_id[key]['release_year'] = '2019'
+source_id[key]['source_description'] = 'Land state datasets produced by the University of Tokyo for the LS3MIP landhist experiment of CMIP6'
+source_id[key]['source'] = 'GSWP3-EXP1 for LS3MIP-landhist (v1.1): Atmospheric boundary conditions for landhist experiment of LS3MIP'
+source_id[key]['source_id'] = key
+source_id[key]['source_variables'] = ['huss', 'prra', 'prsn', 'psl', 'rlds', 'rsds', 'sfcWind', 'tas']
+source_id[key]['source_version'] = '1.1'
+source_id[key]['target_mip'] = 'LS3MIP'
+source_id[key]['title'] = 'IIS-UTokyo GSWP3 LS3MIP 1.1 dataset prepared for input4MIPs'
+#----
+'''
 key = 'PCMDI-AMIP-1-1-5'
 source_id[key] = {}
 source_id[key]['comment'] = 'Based on Hurrell SST/sea ice consistency criteria applied to merged HadISST (1870-01 to 1981-10) & NCEP-0I2 (1981-11 to 2018-06)'
@@ -608,6 +636,7 @@ source_id[key]['comment'] = 'Based on Hurrell SST/sea ice consistency criteria a
 #source_id[key]['source'] = 'MRI JRA55-do 1.3: Atmospheric state generated for OMIP based on the JRA-55 reanalysis'
 #key = 'PCMDI-AMIP-1-1-3'
 #source_id[key]['source'] = 'PCMDI-AMIP 1.1.3: Merged SST based on UK MetOffice HadISST and NCEP OI2'
+'''
 
 #%% Create CV master
 CV = {}
