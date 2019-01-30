@@ -65,6 +65,7 @@ PJD 23 Dec 2018     - Updated to deal with upstreams https://github.com/PCMDI/in
 PJD 23 Dec 2018     - Register source_id PCMDI-AMIP-1-1-5 https://github.com/PCMDI/input4MIPs-cmor-tables/issues/57
 PJD 23 Dec 2018     - Revise source_id PCMDI-AMIP-1-1-4
 PJD 23 Dec 2018     - Register institution_id MPI-B https://github.com/PCMDI/input4MIPs-cmor-tables/issues/59
+PJD 30 Jan 2019     - Revise source_id MRI-JRA55-do-1-4, and generate LIday table https://github.com/PCMDI/input4MIPs-cmor-tables/issues/65
                     - TODO: Deal with lab cert issue https://raw.githubusercontent.com -> http://rawgit.com (see requests library)
 
 @author: durack1
@@ -110,6 +111,7 @@ masterTargets = [
  'OmonC',
  'OyrC',
  'SI3hrPt',
+ 'LIday',
  'LIyrC',
  'SIday',
  'LIfx'
@@ -209,10 +211,22 @@ LIyrC['Header'] = copy.deepcopy(Omon['Header'])
 LIyrC['Header']['table_id'] = 'Table input4MIPs_LIyrC'
 LIyrC['Header']['realm'] = 'landIce'
 LIyrC['variable_entry']['licalvf'] = copy.deepcopy(IyrGre['variable_entry']['licalvf'])
-LIyrC['variable_entry']['licalvf']['comment'] = 'Area of the target grid (not the interpolated area of the source grid)'
+LIyrC['variable_entry']['licalvf']['comment'] = 'Computed as the flux of solid ice into the ocean divided by the area of the land portion of the grid cell'
 LIyrC['variable_entry']['licalvf']['dimensions'] = 'longitude latitude time2'
 LIyrC['variable_entry']['licalvf']['frequency'] = 'yrC'
 LIyrC['variable_entry']['licalvf']['modeling_realm'] = 'landIce'
+
+# Create LIyrC (before Omon is cleaned up)
+LIday = {}
+LIday['variable_entry'] = {}
+LIday['Header'] = copy.deepcopy(Omon['Header'])
+LIday['Header']['table_id'] = 'Table input4MIPs_LIday'
+LIday['Header']['realm'] = 'landIce'
+LIday['variable_entry']['licalvf'] = copy.deepcopy(IyrGre['variable_entry']['licalvf'])
+LIday['variable_entry']['licalvf']['comment'] = 'Computed as the flux of solid ice into the ocean divided by the area of the land portion of the grid cell'
+LIday['variable_entry']['licalvf']['dimensions'] = 'longitude latitude time'
+LIday['variable_entry']['licalvf']['frequency'] = 'day'
+LIday['variable_entry']['licalvf']['modeling_realm'] = 'landIce'
 
 # Omon
 # Cleanup 'aragos','baccos','calcos','co3abioos','co3natos','co3os',
@@ -542,40 +556,70 @@ source_id = source_id.get('source_id')
 source_id = source_id.get('source_id')
 
 # Fix issues
-key = 'PCMDI-AMIP-1-1-5'
+key = 'MRI-JRA55-do-1-4'
 source_id[key] = {}
-source_id[key]['comment'] = 'Based on Hurrell SST/sea ice consistency criteria applied to merged HadISST (1870-01 to 1981-10) & NCEP-0I2 (1981-11 to 2018-06)'
-source_id[key]['contact'] = 'PCMDI (pcmdi-cmip@llnl.gov)'
-source_id[key]['dataset_category'] = 'SSTsAndSeaIce'
-source_id[key]['grid'] = '1x1 degree longitude x latitude'
+source_id[key]['comment'] = 'Based on JRA-55 reanalysis (1958-01 to 2019-01)'
+source_id[key]['contact'] = 'Hiroyuki Tsujino (htsujino@mri-jma.go.jp)'
+source_id[key]['dataset_category'] = 'atmosphericState'
+source_id[key]['grid'] = '0.5x0.5 degree latitude x longitude'
 source_id[key]['grid_label'] = 'gn'
-source_id[key]['further_info_url'] = 'https://pcmdi.llnl.gov/mips/amip'
-source_id[key]['institution_id'] = 'PCMDI'
-source_id[key]['institution'] = 'Program for Climate Model Diagnosis and Intercomparison, Lawrence Livermore National Laboratory, Livermore, CA 94550, USA'
-source_id[key]['nominal_resolution'] = '1x1 degree'
-source_id[key]['product'] = 'observations'
-source_id[key]['references'] = ''.join(['Taylor, K.E., D. Williamson and F. Zwiers, ',
-                                        '2000: The sea surface temperature and sea ice ',
-                                        'concentration boundary conditions for AMIP II ',
-                                        'simulations. PCMDI Report 60, Program for ',
-                                        'Climate Model Diagnosis and Intercomparison, ',
-                                        'Lawrence Livermore National Laboratory, 25 pp. ',
-                                        'Available online: https://pcmdi.llnl.gov/report/pdf/60.pdf'])
+source_id[key]['nominal_resolution'] = '50 km'
+source_id[key]['further_info_url'] = 'http://climate.mri-jma.go.jp/~htsujino/jra55do.html'
+source_id[key]['institution_id'] = 'MRI'
+source_id[key]['institution'] = 'Meteorological Research Institute, Tsukuba, Ibaraki 305-0052, Japan'
+source_id[key]['product'] = 'reanalysis'
+source_id[key]['references'] = ''.join(['Tsujino et al., 2018: JRA-55 based surface dataset ',
+                                        'for driving ocean-sea-ice models (JRA55-do), Ocean ',
+                                        'Modelling, 130(1), pp 79-139. ',
+                                        'https://doi.org/10.1016/j.ocemod.2018.07.002'])
 source_id[key]['region'] = ['global_ocean']
-source_id[key]['release_year'] = '2018'
-source_id[key]['source_description'] = 'Sea surface temperature and sea-ice datasets produced by PCMDI (LLNL) for the AMIP (DECK) experiment of CMIP6'
-source_id[key]['source'] = 'PCMDI-AMIP 1.1.5: Merged SST based on UK MetOffice HadISST and NCEP OI2'
+source_id[key]['release_year'] = '2019'
+source_id[key]['source_description'] = 'Atmospheric state and terrestrial runoff datasets produced by MRI for the OMIP experiment of CMIP6'
+source_id[key]['source'] = 'MRI JRA55-do 1.4: Atmospheric state generated for OMIP based on the JRA-55 reanalysis'
 source_id[key]['source_id'] = key
 source_id[key]['source_type'] = 'satellite_blended'
-source_id[key]['source_variables'] = ['areacello','sftof','siconc','siconcbcs',
-                                      'tos','tosbcs']
-source_id[key]['source_version'] = '1.1.5'
-source_id[key]['target_mip'] = 'CMIP'
-source_id[key]['title'] = 'PCMDI-AMIP 1.1.5 dataset prepared for input4MIPs'
-#----
-key = 'PCMDI-AMIP-1-1-4'
+source_id[key]['source_variables'] = ['areacellg','areacello','friver','huss',
+                                      'licalvf','prra','prsn','psl','rlds','sftof',
+                                      'siconc','siconca','sos','tas','tos','ts',
+                                      'uas','uo','vas','vo']
+source_id[key]['source_version'] = '1.4.0'
+source_id[key]['target_mip'] = 'OMIP'
+source_id[key]['title'] = 'MRI JRA55-do 1.4 dataset prepared for input4MIPs'
+
+key = 'MRI-JRA55-do-1-3-2'
+source_id[key] = {}
+source_id[key]['comment'] = 'Based on JRA-55 reanalysis (1958-01 to 2019-01)'
+source_id[key]['contact'] = 'Hiroyuki Tsujino (htsujino@mri-jma.go.jp)'
+source_id[key]['dataset_category'] = 'atmosphericState'
+source_id[key]['grid'] = '0.5x0.5 degree latitude x longitude'
+source_id[key]['grid_label'] = 'gn'
+source_id[key]['nominal_resolution'] = '50 km'
+source_id[key]['further_info_url'] = 'http://climate.mri-jma.go.jp/~htsujino/jra55do.html'
+source_id[key]['institution_id'] = 'MRI'
+source_id[key]['institution'] = 'Meteorological Research Institute, Tsukuba, Ibaraki 305-0052, Japan'
+source_id[key]['product'] = 'reanalysis'
+source_id[key]['references'] = ''.join(['Tsujino et al., 2018: JRA-55 based surface dataset ',
+                                        'for driving ocean-sea-ice models (JRA55-do), Ocean ',
+                                        'Modelling, 130(1), pp 79-139. ',
+                                        'https://doi.org/10.1016/j.ocemod.2018.07.002'])
+source_id[key]['region'] = ['global_ocean']
+source_id[key]['release_year'] = '2019'
+source_id[key]['source_description'] = 'Atmospheric state and terrestrial runoff datasets produced by MRI for the OMIP experiment of CMIP6'
+source_id[key]['source'] = 'MRI JRA55-do 1.3.2: Atmospheric state generated for OMIP based on the JRA-55 reanalysis'
+source_id[key]['source_id'] = key
+source_id[key]['source_type'] = 'satellite_blended'
+source_id[key]['source_variables'] = ['areacellg','areacello','friver','huss',
+                                      'licalvf','prra','prsn','psl','rlds','sftof',
+                                      'siconc','siconca','sos','tas','tos','ts',
+                                      'uas','uo','vas','vo']
+source_id[key]['source_version'] = '1.3.2'
+source_id[key]['target_mip'] = 'OMIP'
+source_id[key]['title'] = 'MRI JRA55-do 1.3.2 dataset prepared for input4MIPs'
+
+#--
+#key = 'PCMDI-AMIP-1-1-5'
 #source_id[key] = {}
-source_id[key]['comment'] = 'Based on Hurrell SST/sea ice consistency criteria applied to merged HadISST (1870-01 to 1981-10) & NCEP-0I2 (1981-11 to 2017-12)'
+#source_id[key]['comment'] = 'Based on Hurrell SST/sea ice consistency criteria applied to merged HadISST (1870-01 to 1981-10) & NCEP-0I2 (1981-11 to 2018-06)'
 #source_id[key]['contact'] = 'PCMDI (pcmdi-cmip@llnl.gov)'
 #source_id[key]['dataset_category'] = 'SSTsAndSeaIce'
 #source_id[key]['grid'] = '1x1 degree longitude x latitude'
@@ -595,19 +639,14 @@ source_id[key]['comment'] = 'Based on Hurrell SST/sea ice consistency criteria a
 #source_id[key]['region'] = ['global_ocean']
 #source_id[key]['release_year'] = '2018'
 #source_id[key]['source_description'] = 'Sea surface temperature and sea-ice datasets produced by PCMDI (LLNL) for the AMIP (DECK) experiment of CMIP6'
-#source_id[key]['source'] = 'PCMDI-AMIP 1.1.4: Merged SST based on UK MetOffice HadISST and NCEP OI2'
+#source_id[key]['source'] = 'PCMDI-AMIP 1.1.5: Merged SST based on UK MetOffice HadISST and NCEP OI2'
 #source_id[key]['source_id'] = key
 #source_id[key]['source_type'] = 'satellite_blended'
 #source_id[key]['source_variables'] = ['areacello','sftof','siconc','siconcbcs',
 #                                      'tos','tosbcs']
-#source_id[key]['source_version'] = '1.1.4'
+#source_id[key]['source_version'] = '1.1.5'
 #source_id[key]['target_mip'] = 'CMIP'
-#source_id[key]['title'] = 'PCMDI-AMIP 1.1.4 dataset prepared for input4MIPs'
-#----
-#key = 'MRI-JRA55-do-1-3'
-#source_id[key]['source'] = 'MRI JRA55-do 1.3: Atmospheric state generated for OMIP based on the JRA-55 reanalysis'
-#key = 'PCMDI-AMIP-1-1-3'
-#source_id[key]['source'] = 'PCMDI-AMIP 1.1.3: Merged SST based on UK MetOffice HadISST and NCEP OI2'
+#source_id[key]['title'] = 'PCMDI-AMIP 1.1.5 dataset prepared for input4MIPs'
 
 #%% Create CV master
 CV = {}
@@ -652,7 +691,7 @@ for jsonName in masterTargets:
         outFile = ''.join(['../input4MIPs_license.json'])
     elif jsonName in ['Ofx','Omon','SImon','CV','coordinate','formula_terms',
                       'grids','A3hr','A3hrPt','Oday','OmonC','OyrC','SI3hrPt',
-                      'SIday','LIyrC','LIfx']:
+                      'SIday','LIday','LIyrC','LIfx']:
         outFile = ''.join(['../Tables/input4MIPs_',jsonName,'.json'])
     else:
         outFile = ''.join(['../input4MIPs_',jsonName,'.json'])
@@ -665,7 +704,7 @@ for jsonName in masterTargets:
     # Create host dictionary
     if jsonName not in ['coordinate','formula_terms','grids','CV','institution_id',
                         'Ofx','Omon','SImon','A3hr','A3hrPt','Oday','OmonC',
-                        'OyrC','SI3hrPt','LIyrC','SIday','LIfx']:
+                        'OyrC','SI3hrPt','LIday','LIyrC','SIday','LIfx']:
         jsonDict = {}
         jsonDict[jsonName] = eval(jsonName)
     else:
@@ -797,8 +836,8 @@ else:
 os.chdir(demoPath)
 
 # Now fill Tables subdir with required files
-cvTables = ['A3hr','A3hrPt','CV','Oday','OmonC','OyrC','SI3hrPt','LIyrC','SIday',
-            'coordinate','formula_terms']
+cvTables = ['A3hr','A3hrPt','CV','Oday','OmonC','OyrC','SI3hrPt','LIday',
+            'LIyrC','SIday','coordinate','formula_terms']
 for count,tableId in enumerate(cvTables):
     fileName = ''.join(['input4MIPs_',tableId,'.json'])
     sourcePath = os.path.join('..','..','Tables',fileName)
