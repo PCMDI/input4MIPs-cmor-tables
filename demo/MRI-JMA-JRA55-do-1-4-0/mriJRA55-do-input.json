@@ -1,0 +1,34 @@
+{
+    "_control_vocabulary_file":     "input4MIPs_CV.json",
+    "_AXIS_ENTRY_FILE":             "input4MIPs_coordinate.json",
+    "_FORMULA_VAR_FILE":            "input4MIPs_formula_terms.json",
+    "activity_id":                  "input4MIPs",
+
+    "calendar":                     "gregorian",
+    "dataset_category":             "atmosphericState",
+    "frequency":                    "3hr",
+    "grid":                         "0.5x0.5 degree latitude x longitude",
+    "grid_label":                   "gn",
+    "nominal_resolution":           "50 km",
+    "product":                      "reanalysis",
+    "realm":                        "ocean",
+    "region":                       "global_ocean",
+    "target_mip":                   "OMIP",
+
+    "comment":                      "Based on JRA-55 reanalysis (1958-01 to 2019-01)",
+    "contact ":                     "Hiroyuki Tsujino (htsujino@mri-jma.go.jp)",
+    "further_info_url":             "http://climate.mri-jma.go.jp/~htsujino/jra55do.html",
+    "institution_id":               "MRI",
+    "references":                   "Tsujino et al., 2018: JRA-55 based surface dataset for driving ocean-sea-ice models (JRA55-do), Ocean Modelling, 130(1), pp 79-139. https://doi.org/10.1016/j.ocemod.2018.07.002",
+    "source_id":                    "MRI-JRA55-do-1-4",
+    "source":                       "MRI JRA55-do 1.4: Atmospheric state generated for OMIP based on the JRA-55 reanalysis",
+    "source_version":               "1.4.0",
+    "title":                        "MRI JRA55-do 1.4 dataset prepared for input4MIPs",
+
+    "outpath":                      ".",
+    "_history_template":            "%s; CMOR rewrote data to be consistent with <activity_id>, CMIP6, and <Conventions> standards",
+    "output_path_template":         "<activity_id><mip_era><target_mip><institution_id><source_id><realm><frequency><variable_id><grid_label><version>",
+    "output_file_template":         "<variable_id><activity_id><dataset_category><target_mip><source_id><grid_label>",
+    "tracking_prefix":              "hdl:21.14100",
+    "license":                      "OMIP boundary condition data produced by MRI is licensed under a Creative Commons Attribution-[NonCommercial-]ShareAlike 4.0 International License (https://creativecommons.org/licenses). Consult https://pcmdi.llnl.gov/CMIP6/TermsOfUse for terms of use governing input4MIPs output, including citation requirements and proper acknowledgment. Further information about this data, including some limitations, can be found via the further_info_url (recorded as a global attribute in this file). The data producers and data providers make no warranty, either express or implied, including, but not limited to, warranties of merchantability and fitness for a particular purpose. All liabilities arising from the supply of the information (including any liability arising in negligence) are excluded to the fullest extent permitted by law."
+}
