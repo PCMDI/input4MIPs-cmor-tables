@@ -67,6 +67,7 @@ PJD 23 Dec 2018     - Revise source_id PCMDI-AMIP-1-1-4
 PJD 23 Dec 2018     - Register institution_id MPI-B https://github.com/PCMDI/input4MIPs-cmor-tables/issues/59
 PJD 30 Jan 2019     - Revise source_id MRI-JRA55-do-1-4, and generate LIday table https://github.com/PCMDI/input4MIPs-cmor-tables/issues/65
 PJD 25 Feb 2019     - Register institution_id UCI https://github.com/PCMDI/input4MIPs-cmor-tables/issues/67
+PJD 28 Feb 2019     - Amend MRI-JRA55-do source_id values; Update OyrC table entries https://github.com/PCMDI/input4MIPs-cmor-tables/issues/72
                     - TODO: Deal with lab cert issue https://raw.githubusercontent.com -> http://rawgit.com (see requests library)
 
 @author: durack1
@@ -194,16 +195,16 @@ OyrC['variable_entry'] = {}
 OyrC['Header'] = copy.deepcopy(Omon['Header'])
 OyrC['Header']['table_id'] = 'Table input4MIPs_OyrC'
 OyrC['Header']['realm'] = 'ocean'
-OyrC['variable_entry']['uo'] = Omon['variable_entry'].pop('uo')
-OyrC['variable_entry']['uo']['cell_methods'] = 'area: mean where sea time: mean'
-OyrC['variable_entry']['uo']['comment'] = 'Prognostic x-ward velocity component resolved by the model'
-OyrC['variable_entry']['uo']['dimensions'] = 'longitude latitude olevel time2'
-OyrC['variable_entry']['uo']['frequency'] = 'yrC'
-OyrC['variable_entry']['vo'] = Omon['variable_entry'].pop('vo')
-OyrC['variable_entry']['vo']['cell_methods'] = 'area: mean where sea time: mean'
-OyrC['variable_entry']['vo']['comment'] = 'Prognostic y-ward velocity component resolved by the model'
-OyrC['variable_entry']['vo']['dimensions'] = 'longitude latitude olevel time2'
-OyrC['variable_entry']['vo']['frequency'] = 'yrC'
+OyrC['variable_entry']['uos'] = Omon['variable_entry'].pop('uo')
+OyrC['variable_entry']['uos']['cell_methods'] = 'area: mean where sea time: mean'
+OyrC['variable_entry']['uos']['comment'] = 'Prognostic x-ward velocity component resolved by the model'
+OyrC['variable_entry']['uos']['dimensions'] = 'longitude latitude time2'
+OyrC['variable_entry']['uos']['frequency'] = 'yrC'
+OyrC['variable_entry']['vos'] = Omon['variable_entry'].pop('vo')
+OyrC['variable_entry']['vos']['cell_methods'] = 'area: mean where sea time: mean'
+OyrC['variable_entry']['vos']['comment'] = 'Prognostic y-ward velocity component resolved by the model'
+OyrC['variable_entry']['vos']['dimensions'] = 'longitude latitude time2'
+OyrC['variable_entry']['vos']['frequency'] = 'yrC'
 
 # Create LIyrC (before Omon is cleaned up)
 LIyrC = {}
@@ -558,69 +559,64 @@ source_id = source_id.get('source_id')
 source_id = source_id.get('source_id')
 
 # Fix issues
+key = 'MRI-JRA55-do-1-4'
+source_id.pop(key)
+
+key = 'MRI-JRA55-do-1-4-0'
+source_id[key] = {}
+source_id[key]['comment'] = 'Based on JRA-55 reanalysis (1958-01 to 2019-01)'
+source_id[key]['contact'] = 'Hiroyuki Tsujino (htsujino@mri-jma.go.jp)'
+source_id[key]['dataset_category'] = 'atmosphericState'
+source_id[key]['further_info_url'] = 'http://climate.mri-jma.go.jp/~htsujino/jra55do.html'
+source_id[key]['institution_id'] = 'MRI'
+source_id[key]['institution'] = 'Meteorological Research Institute, Tsukuba, Ibaraki 305-0052, Japan'
+source_id[key]['product'] = 'reanalysis'
+source_id[key]['references'] = ''.join(['Tsujino et al., 2018: JRA-55 based surface dataset ',
+                                        'for driving ocean-sea-ice models (JRA55-do), Ocean ',
+                                        'Modelling, 130(1), pp 79-139. ',
+                                        'https://doi.org/10.1016/j.ocemod.2018.07.002'])
+source_id[key]['region'] = ['global_ocean']
+source_id[key]['release_year'] = '2019'
+source_id[key]['source_description'] = 'Atmospheric state and terrestrial runoff datasets produced by MRI for the OMIP experiment of CMIP6'
+source_id[key]['source'] = 'MRI JRA55-do 1.4.0: Atmospheric state generated for OMIP based on the JRA-55 reanalysis'
+source_id[key]['source_id'] = key
+source_id[key]['source_type'] = 'satellite_blended'
+source_id[key]['source_variables'] = ['areacellg','areacello','friver','huss',
+                                      'licalvf','prra','prsn','psl','rlds','sftof',
+                                      'siconc','siconca','sos','tas','tos','ts',
+                                      'uas','uos','vas','vos']
+source_id[key]['source_version'] = '1.4.0'
+source_id[key]['target_mip'] = 'OMIP'
+source_id[key]['title'] = 'MRI JRA55-do 1.4.0 dataset prepared for input4MIPs'
+
+key = 'MRI-JRA55-do-1-3-2'
+source_id[key] = {}
+source_id[key]['comment'] = 'Based on JRA-55 reanalysis (1958-01 to 2019-01)'
+source_id[key]['contact'] = 'Hiroyuki Tsujino (htsujino@mri-jma.go.jp)'
+source_id[key]['dataset_category'] = 'atmosphericState'
+source_id[key]['further_info_url'] = 'http://climate.mri-jma.go.jp/~htsujino/jra55do.html'
+source_id[key]['institution_id'] = 'MRI'
+source_id[key]['institution'] = 'Meteorological Research Institute, Tsukuba, Ibaraki 305-0052, Japan'
+source_id[key]['product'] = 'reanalysis'
+source_id[key]['references'] = ''.join(['Tsujino et al., 2018: JRA-55 based surface dataset ',
+                                        'for driving ocean-sea-ice models (JRA55-do), Ocean ',
+                                        'Modelling, 130(1), pp 79-139. ',
+                                        'https://doi.org/10.1016/j.ocemod.2018.07.002'])
+source_id[key]['region'] = ['global_ocean']
+source_id[key]['release_year'] = '2019'
+source_id[key]['source_description'] = 'Atmospheric state and terrestrial runoff datasets produced by MRI for the OMIP experiment of CMIP6'
+source_id[key]['source'] = 'MRI JRA55-do 1.3.2: Atmospheric state generated for OMIP based on the JRA-55 reanalysis'
+source_id[key]['source_id'] = key
+source_id[key]['source_type'] = 'satellite_blended'
+source_id[key]['source_variables'] = ['areacellg','areacello','friver','huss',
+                                      'licalvf','prra','prsn','psl','rlds','sftof',
+                                      'siconc','siconca','sos','tas','tos','ts',
+                                      'uas','uos','vas','vos']
+source_id[key]['source_version'] = '1.3.2'
+source_id[key]['target_mip'] = 'OMIP'
+source_id[key]['title'] = 'MRI JRA55-do 1.3.2 dataset prepared for input4MIPs'
 
 #--
-#key = 'MRI-JRA55-do-1-4'
-#source_id[key] = {}
-#source_id[key]['comment'] = 'Based on JRA-55 reanalysis (1958-01 to 2019-01)'
-#source_id[key]['contact'] = 'Hiroyuki Tsujino (htsujino@mri-jma.go.jp)'
-#source_id[key]['dataset_category'] = 'atmosphericState'
-#source_id[key]['grid'] = '0.5x0.5 degree latitude x longitude'
-#source_id[key]['grid_label'] = 'gn'
-#source_id[key]['nominal_resolution'] = '50 km'
-#source_id[key]['further_info_url'] = 'http://climate.mri-jma.go.jp/~htsujino/jra55do.html'
-#source_id[key]['institution_id'] = 'MRI'
-#source_id[key]['institution'] = 'Meteorological Research Institute, Tsukuba, Ibaraki 305-0052, Japan'
-#source_id[key]['product'] = 'reanalysis'
-#source_id[key]['references'] = ''.join(['Tsujino et al., 2018: JRA-55 based surface dataset ',
-#                                        'for driving ocean-sea-ice models (JRA55-do), Ocean ',
-#                                        'Modelling, 130(1), pp 79-139. ',
-#                                        'https://doi.org/10.1016/j.ocemod.2018.07.002'])
-#source_id[key]['region'] = ['global_ocean']
-#source_id[key]['release_year'] = '2019'
-#source_id[key]['source_description'] = 'Atmospheric state and terrestrial runoff datasets produced by MRI for the OMIP experiment of CMIP6'
-#source_id[key]['source'] = 'MRI JRA55-do 1.4: Atmospheric state generated for OMIP based on the JRA-55 reanalysis'
-#source_id[key]['source_id'] = key
-#source_id[key]['source_type'] = 'satellite_blended'
-#source_id[key]['source_variables'] = ['areacellg','areacello','friver','huss',
-#                                      'licalvf','prra','prsn','psl','rlds','sftof',
-#                                      'siconc','siconca','sos','tas','tos','ts',
-#                                      'uas','uo','vas','vo']
-#source_id[key]['source_version'] = '1.4.0'
-#source_id[key]['target_mip'] = 'OMIP'
-#source_id[key]['title'] = 'MRI JRA55-do 1.4 dataset prepared for input4MIPs'
-#
-#key = 'MRI-JRA55-do-1-3-2'
-#source_id[key] = {}
-#source_id[key]['comment'] = 'Based on JRA-55 reanalysis (1958-01 to 2019-01)'
-#source_id[key]['contact'] = 'Hiroyuki Tsujino (htsujino@mri-jma.go.jp)'
-#source_id[key]['dataset_category'] = 'atmosphericState'
-#source_id[key]['grid'] = '0.5x0.5 degree latitude x longitude'
-#source_id[key]['grid_label'] = 'gn'
-#source_id[key]['nominal_resolution'] = '50 km'
-#source_id[key]['further_info_url'] = 'http://climate.mri-jma.go.jp/~htsujino/jra55do.html'
-#source_id[key]['institution_id'] = 'MRI'
-#source_id[key]['institution'] = 'Meteorological Research Institute, Tsukuba, Ibaraki 305-0052, Japan'
-#source_id[key]['product'] = 'reanalysis'
-#source_id[key]['references'] = ''.join(['Tsujino et al., 2018: JRA-55 based surface dataset ',
-#                                        'for driving ocean-sea-ice models (JRA55-do), Ocean ',
-#                                        'Modelling, 130(1), pp 79-139. ',
-#                                        'https://doi.org/10.1016/j.ocemod.2018.07.002'])
-#source_id[key]['region'] = ['global_ocean']
-#source_id[key]['release_year'] = '2019'
-#source_id[key]['source_description'] = 'Atmospheric state and terrestrial runoff datasets produced by MRI for the OMIP experiment of CMIP6'
-#source_id[key]['source'] = 'MRI JRA55-do 1.3.2: Atmospheric state generated for OMIP based on the JRA-55 reanalysis'
-#source_id[key]['source_id'] = key
-#source_id[key]['source_type'] = 'satellite_blended'
-#source_id[key]['source_variables'] = ['areacellg','areacello','friver','huss',
-#                                      'licalvf','prra','prsn','psl','rlds','sftof',
-#                                      'siconc','siconca','sos','tas','tos','ts',
-#                                      'uas','uo','vas','vo']
-#source_id[key]['source_version'] = '1.3.2'
-#source_id[key]['target_mip'] = 'OMIP'
-#source_id[key]['title'] = 'MRI JRA55-do 1.3.2 dataset prepared for input4MIPs'
-#
-#
 #key = 'PCMDI-AMIP-1-1-5'
 #source_id[key] = {}
 #source_id[key]['comment'] = 'Based on Hurrell SST/sea ice consistency criteria applied to merged HadISST (1870-01 to 1981-10) & NCEP-0I2 (1981-11 to 2018-06)'
