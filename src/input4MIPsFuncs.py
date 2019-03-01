@@ -27,6 +27,8 @@ PJD 30 Jan 2019     - Corrected jsonWritePath path to relative usinge input4MIPs
 PJD 30 Jan 2019     - Updated createPubFiles to deal with same jsonId output from input arguments (as jsonWriteFile above)
 PJD  1 Feb 2019     - Added washperms fix for retracted dirs (washPerms: pathX =  input4MIPs/CMIP6/ScenarioMIP/IAMC-retracted)
 PJD  1 Feb 2019     - Added removeDuplicates to createPubFiles to deal with multi-file variables
+PJD  1 Mar 2019     - Committed file to input4MIPs-cmor-tables repo
+PJD  1 Mar 2019     - Revised directory perms to 775 (was 755)
                     - TODO: Note other Synda sensitive entries are "priority" and "type"
 
 @author: durack1
@@ -168,7 +170,7 @@ def washPerms(destPath,activityId,mipEra,targetMip,institutionId,sourceId,realm,
         dirs[:] = [d for d in dirs if '-retracted' not in d]
         for d in dirs:
             print 'washPerms: dir =',d
-            os.chmod(os.path.join(root, d), 0755) ; # Note a leading 0 is required to trick python into thinking this is octal
+            os.chmod(os.path.join(root, d), 0775) ; # Note a leading 0 is required to trick python into thinking this is octal
             # https://stackoverflow.com/questions/15607903/python-module-os-chmodfile-664-does-not-change-the-permission-to-rw-rw-r-bu
         for f in files:
             print 'washPerms: file =',f
