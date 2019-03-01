@@ -10,15 +10,15 @@
         "missing_value":"1e20",
         "product":"input4MIPs",
         "realm":"ocean",
-        "table_date":"30 January 2019",
+        "table_date":"28 February 2019",
         "table_id":"Table input4MIPs_OyrC"
     },
     "variable_entry":{
-        "uo":{
+        "uos":{
             "cell_measures":"--OPT",
             "cell_methods":"area: mean where sea time: mean",
             "comment":"Prognostic x-ward velocity component resolved by the model",
-            "dimensions":"longitude latitude olevel time2",
+            "dimensions":"longitude latitude time2",
             "frequency":"yrC",
             "long_name":"Sea Water X Velocity",
             "modeling_realm":"ocean",
@@ -32,11 +32,11 @@
             "valid_max":"",
             "valid_min":""
         },
-        "vo":{
+        "vos":{
             "cell_measures":"--OPT",
             "cell_methods":"area: mean where sea time: mean",
             "comment":"Prognostic y-ward velocity component resolved by the model",
-            "dimensions":"longitude latitude olevel time2",
+            "dimensions":"longitude latitude time2",
             "frequency":"yrC",
             "long_name":"Sea Water Y Velocity",
             "modeling_realm":"ocean",
