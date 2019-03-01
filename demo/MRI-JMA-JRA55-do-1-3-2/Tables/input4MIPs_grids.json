@@ -5,7 +5,7 @@
         "data_specs_version":"01.00.29",
         "missing_value":"1e20",
         "product":"input4MIPs",
-        "table_date":"30 January 2019",
+        "table_date":"28 February 2019",
         "table_id":"Table input4MIPs_grids"
     },
     "axis_entry":{
@@ -119,6 +119,7 @@
             "long_name":"latitude",
             "out_name":"latitude",
             "standard_name":"latitude",
+            "type":"double",
             "units":"degrees_north",
             "valid_max":"90.0",
             "valid_min":"-90.0"
@@ -128,6 +129,7 @@
             "long_name":"longitude",
             "out_name":"longitude",
             "standard_name":"longitude",
+            "type":"double",
             "units":"degrees_east",
             "valid_max":"360.0",
             "valid_min":"0.0"
@@ -137,6 +139,7 @@
             "long_name":"",
             "out_name":"vertices_latitude",
             "standard_name":"",
+            "type":"double",
             "units":"degrees_north",
             "valid_max":"90.0",
             "valid_min":"-90.0"
@@ -146,6 +149,7 @@
             "long_name":"",
             "out_name":"vertices_longitude",
             "standard_name":"",
+            "type":"double",
             "units":"degrees_east",
             "valid_max":"360.0",
             "valid_min":"0.0"
