@@ -68,6 +68,7 @@ PJD 23 Dec 2018     - Register institution_id MPI-B https://github.com/PCMDI/inp
 PJD 30 Jan 2019     - Revise source_id MRI-JRA55-do-1-4, and generate LIday table https://github.com/PCMDI/input4MIPs-cmor-tables/issues/65
 PJD 25 Feb 2019     - Register institution_id UCI https://github.com/PCMDI/input4MIPs-cmor-tables/issues/67
 PJD 28 Feb 2019     - Amend MRI-JRA55-do source_id values; Update OyrC table entries https://github.com/PCMDI/input4MIPs-cmor-tables/issues/72
+PJD 28 Feb 2019     - Update to include Afx table (areacella, sftlf) for MRI-JRA55-do https://github.com/PCMDI/input4MIPs-cmor-tables/issues/74
                     - TODO: Deal with lab cert issue https://raw.githubusercontent.com -> http://rawgit.com (see requests library)
 
 @author: durack1
@@ -104,19 +105,20 @@ masterTargets = [
  'source_id',
  'target_mip',
  'CV',
- 'Ofx',
- 'Omon',
- 'SImon',
  'A3hr',
  'A3hrPt',
+ 'Afx',
  'Oday',
+ 'Ofx',
+ 'Omon',
  'OmonC',
  'OyrC',
- 'SI3hrPt',
  'LIday',
+ 'LIfx',
  'LIyrC',
+ 'SI3hrPt',
  'SIday',
- 'LIfx'
+ 'SImon'
  ] ;
 
 #%% Tables
@@ -139,7 +141,8 @@ tableSource = [
  ['CF3hr','https://raw.githubusercontent.com/PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_CF3hr.json'],
  ['SIday','https://raw.githubusercontent.com/PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_SIday.json'],
  ['IyrGre','https://raw.githubusercontent.com/PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_IyrGre.json'],
- ['LIfx','https://raw.githubusercontent.com/PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_IfxGre.json']
+ ['LIfx','https://raw.githubusercontent.com/PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_IfxGre.json'],
+ ['Afx','https://raw.githubusercontent.com/PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_fx.json']
  ] ;
 
 headerFree = ['coordinate','frequency','formula_terms','grid_label','nominal_resolution',
@@ -188,6 +191,16 @@ for clean in LIfxCleanup:
 LIfx['Header']['product'] = 'input4MIPs'
 LIfx['variable_entry']['areacellg']['comment'] = 'Area of the target grid (not the interpolated area of the source grid)'
 LIfx['variable_entry']['areacellg']['modeling_realm'] = 'landIce'
+
+# Afx
+AfxCleanup = ['areacellr','mrsofc','orog','rootd','sftgif','zfull']
+for clean in AfxCleanup:
+    tmp = Afx['variable_entry'].pop(clean)
+Afx['Header']['product'] = 'input4MIPs'
+Afx['Header']['table_id'] = 'Table input4MIPs_Afx'
+Afx['Header']['realm'] = 'atmos land'
+Afx['variable_entry']['areacella']['comment'] = 'For atmospheres with more than 1 mesh (e.g., staggered grids), report areas that apply to surface vertical fluxes of energy'
+Afx['variable_entry']['sftlf']['comment'] = 'Please express \'X_area_fraction\' as the percentage of horizontal area occupied by X'
 
 # Create OyrC (before Omon is cleaned up)
 OyrC = {}
@@ -559,64 +572,65 @@ source_id = source_id.get('source_id')
 source_id = source_id.get('source_id')
 
 # Fix issues
-key = 'MRI-JRA55-do-1-4'
-source_id.pop(key)
-
-key = 'MRI-JRA55-do-1-4-0'
-source_id[key] = {}
-source_id[key]['comment'] = 'Based on JRA-55 reanalysis (1958-01 to 2019-01)'
-source_id[key]['contact'] = 'Hiroyuki Tsujino (htsujino@mri-jma.go.jp)'
-source_id[key]['dataset_category'] = 'atmosphericState'
-source_id[key]['further_info_url'] = 'http://climate.mri-jma.go.jp/~htsujino/jra55do.html'
-source_id[key]['institution_id'] = 'MRI'
-source_id[key]['institution'] = 'Meteorological Research Institute, Tsukuba, Ibaraki 305-0052, Japan'
-source_id[key]['product'] = 'reanalysis'
-source_id[key]['references'] = ''.join(['Tsujino et al., 2018: JRA-55 based surface dataset ',
-                                        'for driving ocean-sea-ice models (JRA55-do), Ocean ',
-                                        'Modelling, 130(1), pp 79-139. ',
-                                        'https://doi.org/10.1016/j.ocemod.2018.07.002'])
-source_id[key]['region'] = ['global_ocean']
-source_id[key]['release_year'] = '2019'
-source_id[key]['source_description'] = 'Atmospheric state and terrestrial runoff datasets produced by MRI for the OMIP experiment of CMIP6'
-source_id[key]['source'] = 'MRI JRA55-do 1.4.0: Atmospheric state generated for OMIP based on the JRA-55 reanalysis'
-source_id[key]['source_id'] = key
-source_id[key]['source_type'] = 'satellite_blended'
-source_id[key]['source_variables'] = ['areacellg','areacello','friver','huss',
-                                      'licalvf','prra','prsn','psl','rlds','sftof',
-                                      'siconc','siconca','sos','tas','tos','ts',
-                                      'uas','uos','vas','vos']
-source_id[key]['source_version'] = '1.4.0'
-source_id[key]['target_mip'] = 'OMIP'
-source_id[key]['title'] = 'MRI JRA55-do 1.4.0 dataset prepared for input4MIPs'
-
-key = 'MRI-JRA55-do-1-3-2'
-source_id[key] = {}
-source_id[key]['comment'] = 'Based on JRA-55 reanalysis (1958-01 to 2019-01)'
-source_id[key]['contact'] = 'Hiroyuki Tsujino (htsujino@mri-jma.go.jp)'
-source_id[key]['dataset_category'] = 'atmosphericState'
-source_id[key]['further_info_url'] = 'http://climate.mri-jma.go.jp/~htsujino/jra55do.html'
-source_id[key]['institution_id'] = 'MRI'
-source_id[key]['institution'] = 'Meteorological Research Institute, Tsukuba, Ibaraki 305-0052, Japan'
-source_id[key]['product'] = 'reanalysis'
-source_id[key]['references'] = ''.join(['Tsujino et al., 2018: JRA-55 based surface dataset ',
-                                        'for driving ocean-sea-ice models (JRA55-do), Ocean ',
-                                        'Modelling, 130(1), pp 79-139. ',
-                                        'https://doi.org/10.1016/j.ocemod.2018.07.002'])
-source_id[key]['region'] = ['global_ocean']
-source_id[key]['release_year'] = '2019'
-source_id[key]['source_description'] = 'Atmospheric state and terrestrial runoff datasets produced by MRI for the OMIP experiment of CMIP6'
-source_id[key]['source'] = 'MRI JRA55-do 1.3.2: Atmospheric state generated for OMIP based on the JRA-55 reanalysis'
-source_id[key]['source_id'] = key
-source_id[key]['source_type'] = 'satellite_blended'
-source_id[key]['source_variables'] = ['areacellg','areacello','friver','huss',
-                                      'licalvf','prra','prsn','psl','rlds','sftof',
-                                      'siconc','siconca','sos','tas','tos','ts',
-                                      'uas','uos','vas','vos']
-source_id[key]['source_version'] = '1.3.2'
-source_id[key]['target_mip'] = 'OMIP'
-source_id[key]['title'] = 'MRI JRA55-do 1.3.2 dataset prepared for input4MIPs'
 
 #--
+#key = 'MRI-JRA55-do-1-4'
+#source_id.pop(key)
+#
+#key = 'MRI-JRA55-do-1-4-0'
+#source_id[key] = {}
+#source_id[key]['comment'] = 'Based on JRA-55 reanalysis (1958-01 to 2019-01)'
+#source_id[key]['contact'] = 'Hiroyuki Tsujino (htsujino@mri-jma.go.jp)'
+#source_id[key]['dataset_category'] = 'atmosphericState'
+#source_id[key]['further_info_url'] = 'http://climate.mri-jma.go.jp/~htsujino/jra55do.html'
+#source_id[key]['institution_id'] = 'MRI'
+#source_id[key]['institution'] = 'Meteorological Research Institute, Tsukuba, Ibaraki 305-0052, Japan'
+#source_id[key]['product'] = 'reanalysis'
+#source_id[key]['references'] = ''.join(['Tsujino et al., 2018: JRA-55 based surface dataset ',
+#                                        'for driving ocean-sea-ice models (JRA55-do), Ocean ',
+#                                        'Modelling, 130(1), pp 79-139. ',
+#                                        'https://doi.org/10.1016/j.ocemod.2018.07.002'])
+#source_id[key]['region'] = ['global_ocean']
+#source_id[key]['release_year'] = '2019'
+#source_id[key]['source_description'] = 'Atmospheric state and terrestrial runoff datasets produced by MRI for the OMIP experiment of CMIP6'
+#source_id[key]['source'] = 'MRI JRA55-do 1.4.0: Atmospheric state generated for OMIP based on the JRA-55 reanalysis'
+#source_id[key]['source_id'] = key
+#source_id[key]['source_type'] = 'satellite_blended'
+#source_id[key]['source_variables'] = ['areacellg','areacello','friver','huss',
+#                                      'licalvf','prra','prsn','psl','rlds','sftof',
+#                                      'siconc','siconca','sos','tas','tos','ts',
+#                                      'uas','uos','vas','vos']
+#source_id[key]['source_version'] = '1.4.0'
+#source_id[key]['target_mip'] = 'OMIP'
+#source_id[key]['title'] = 'MRI JRA55-do 1.4.0 dataset prepared for input4MIPs'
+#
+#key = 'MRI-JRA55-do-1-3-2'
+#source_id[key] = {}
+#source_id[key]['comment'] = 'Based on JRA-55 reanalysis (1958-01 to 2019-01)'
+#source_id[key]['contact'] = 'Hiroyuki Tsujino (htsujino@mri-jma.go.jp)'
+#source_id[key]['dataset_category'] = 'atmosphericState'
+#source_id[key]['further_info_url'] = 'http://climate.mri-jma.go.jp/~htsujino/jra55do.html'
+#source_id[key]['institution_id'] = 'MRI'
+#source_id[key]['institution'] = 'Meteorological Research Institute, Tsukuba, Ibaraki 305-0052, Japan'
+#source_id[key]['product'] = 'reanalysis'
+#source_id[key]['references'] = ''.join(['Tsujino et al., 2018: JRA-55 based surface dataset ',
+#                                        'for driving ocean-sea-ice models (JRA55-do), Ocean ',
+#                                        'Modelling, 130(1), pp 79-139. ',
+#                                        'https://doi.org/10.1016/j.ocemod.2018.07.002'])
+#source_id[key]['region'] = ['global_ocean']
+#source_id[key]['release_year'] = '2019'
+#source_id[key]['source_description'] = 'Atmospheric state and terrestrial runoff datasets produced by MRI for the OMIP experiment of CMIP6'
+#source_id[key]['source'] = 'MRI JRA55-do 1.3.2: Atmospheric state generated for OMIP based on the JRA-55 reanalysis'
+#source_id[key]['source_id'] = key
+#source_id[key]['source_type'] = 'satellite_blended'
+#source_id[key]['source_variables'] = ['areacellg','areacello','friver','huss',
+#                                      'licalvf','prra','prsn','psl','rlds','sftof',
+#                                      'siconc','siconca','sos','tas','tos','ts',
+#                                      'uas','uos','vas','vos']
+#source_id[key]['source_version'] = '1.3.2'
+#source_id[key]['target_mip'] = 'OMIP'
+#source_id[key]['title'] = 'MRI JRA55-do 1.3.2 dataset prepared for input4MIPs'
+#
 #key = 'PCMDI-AMIP-1-1-5'
 #source_id[key] = {}
 #source_id[key]['comment'] = 'Based on Hurrell SST/sea ice consistency criteria applied to merged HadISST (1870-01 to 1981-10) & NCEP-0I2 (1981-11 to 2018-06)'
@@ -691,7 +705,7 @@ for jsonName in masterTargets:
         outFile = ''.join(['../input4MIPs_license.json'])
     elif jsonName in ['Ofx','Omon','SImon','CV','coordinate','formula_terms',
                       'grids','A3hr','A3hrPt','Oday','OmonC','OyrC','SI3hrPt',
-                      'SIday','LIday','LIyrC','LIfx']:
+                      'SIday','LIday','LIyrC','LIfx','Afx']:
         outFile = ''.join(['../Tables/input4MIPs_',jsonName,'.json'])
     else:
         outFile = ''.join(['../input4MIPs_',jsonName,'.json'])
@@ -703,7 +717,7 @@ for jsonName in masterTargets:
         os.mkdir('../Tables')
     # Create host dictionary
     if jsonName not in ['coordinate','formula_terms','grids','CV','institution_id',
-                        'Ofx','Omon','SImon','A3hr','A3hrPt','Oday','OmonC',
+                        'Afx','Ofx','Omon','SImon','A3hr','A3hrPt','Oday','OmonC',
                         'OyrC','SI3hrPt','LIday','LIyrC','SIday','LIfx']:
         jsonDict = {}
         jsonDict[jsonName] = eval(jsonName)
