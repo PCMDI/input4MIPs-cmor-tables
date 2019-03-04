@@ -726,144 +726,145 @@ inputDict['LIday'] = {}
 key = 'licalvf'
 inputDict['LIday'][key] = {}
 inputDict['LIday'][key]['fileList'] = [
-        'input_atmos/runoff_solidice.1958.07Jan2019.nc',
-        'input_atmos/runoff_solidice.1959.07Jan2019.nc',
-        'input_atmos/runoff_solidice.1960.07Jan2019.nc',
-        'input_atmos/runoff_solidice.1961.07Jan2019.nc',
-        'input_atmos/runoff_solidice.1962.07Jan2019.nc',
-        'input_atmos/runoff_solidice.1963.07Jan2019.nc',
-        'input_atmos/runoff_solidice.1964.07Jan2019.nc',
-        'input_atmos/runoff_solidice.1965.07Jan2019.nc',
-        'input_atmos/runoff_solidice.1966.07Jan2019.nc',
-        'input_atmos/runoff_solidice.1967.07Jan2019.nc',
-        'input_atmos/runoff_solidice.1968.07Jan2019.nc',
-        'input_atmos/runoff_solidice.1969.07Jan2019.nc',
-        'input_atmos/runoff_solidice.1970.07Jan2019.nc',
-        'input_atmos/runoff_solidice.1971.07Jan2019.nc',
-        'input_atmos/runoff_solidice.1972.07Jan2019.nc',
-        'input_atmos/runoff_solidice.1973.07Jan2019.nc',
-        'input_atmos/runoff_solidice.1974.07Jan2019.nc',
-        'input_atmos/runoff_solidice.1975.07Jan2019.nc',
-        'input_atmos/runoff_solidice.1976.07Jan2019.nc',
-        'input_atmos/runoff_solidice.1977.07Jan2019.nc',
-        'input_atmos/runoff_solidice.1978.07Jan2019.nc',
-        'input_atmos/runoff_solidice.1979.07Jan2019.nc',
-        'input_atmos/runoff_solidice.1980.07Jan2019.nc',
-        'input_atmos/runoff_solidice.1981.07Jan2019.nc',
-        'input_atmos/runoff_solidice.1982.07Jan2019.nc',
-        'input_atmos/runoff_solidice.1983.07Jan2019.nc',
-        'input_atmos/runoff_solidice.1984.07Jan2019.nc',
-        'input_atmos/runoff_solidice.1985.07Jan2019.nc',
-        'input_atmos/runoff_solidice.1986.07Jan2019.nc',
-        'input_atmos/runoff_solidice.1987.07Jan2019.nc',
-        'input_atmos/runoff_solidice.1988.07Jan2019.nc',
-        'input_atmos/runoff_solidice.1989.07Jan2019.nc',
-        'input_atmos/runoff_solidice.1990.07Jan2019.nc',
-        'input_atmos/runoff_solidice.1991.07Jan2019.nc',
-        'input_atmos/runoff_solidice.1992.07Jan2019.nc',
-        'input_atmos/runoff_solidice.1993.07Jan2019.nc',
-        'input_atmos/runoff_solidice.1994.07Jan2019.nc',
-        'input_atmos/runoff_solidice.1995.07Jan2019.nc',
-        'input_atmos/runoff_solidice.1996.07Jan2019.nc',
-        'input_atmos/runoff_solidice.1997.07Jan2019.nc',
-        'input_atmos/runoff_solidice.1998.07Jan2019.nc',
-        'input_atmos/runoff_solidice.1999.07Jan2019.nc',
-        'input_atmos/runoff_solidice.2000.07Jan2019.nc',
-        'input_atmos/runoff_solidice.2001.07Jan2019.nc',
-        'input_atmos/runoff_solidice.2002.07Jan2019.nc',
-        'input_atmos/runoff_solidice.2003.07Jan2019.nc',
-        'input_atmos/runoff_solidice.2004.07Jan2019.nc',
-        'input_atmos/runoff_solidice.2005.07Jan2019.nc',
-        'input_atmos/runoff_solidice.2006.07Jan2019.nc',
-        'input_atmos/runoff_solidice.2007.07Jan2019.nc',
-        'input_atmos/runoff_solidice.2008.07Jan2019.nc',
-        'input_atmos/runoff_solidice.2009.07Jan2019.nc',
-        'input_atmos/runoff_solidice.2010.07Jan2019.nc',
-        'input_atmos/runoff_solidice.2011.07Jan2019.nc',
-        'input_atmos/runoff_solidice.2012.07Jan2019.nc',
-        'input_atmos/runoff_solidice.2013.07Jan2019.nc',
-        'input_atmos/runoff_solidice.2014.07Jan2019.nc',
-        'input_atmos/runoff_solidice.2015.07Jan2019.nc',
-        'input_atmos/runoff_solidice.2016.07Jan2019.nc',
-        'input_atmos/runoff_solidice.2017.07Jan2019.nc',
-        'input_atmos/runoff_solidice.2018.07Jan2019.nc',
-        'input_atmos/runoff_solidice.2019.07Jan2019.nc'
+        'input_atmos/solid_runoff.1958.16Feb2019.nc',
+        'input_atmos/solid_runoff.1959.16Feb2019.nc',
+        'input_atmos/solid_runoff.1960.16Feb2019.nc',
+        'input_atmos/solid_runoff.1961.16Feb2019.nc',
+        'input_atmos/solid_runoff.1962.16Feb2019.nc',
+        'input_atmos/solid_runoff.1963.16Feb2019.nc',
+        'input_atmos/solid_runoff.1964.16Feb2019.nc',
+        'input_atmos/solid_runoff.1965.16Feb2019.nc',
+        'input_atmos/solid_runoff.1966.16Feb2019.nc',
+        'input_atmos/solid_runoff.1967.16Feb2019.nc',
+        'input_atmos/solid_runoff.1968.16Feb2019.nc',
+        'input_atmos/solid_runoff.1969.16Feb2019.nc',
+        'input_atmos/solid_runoff.1970.16Feb2019.nc',
+        'input_atmos/solid_runoff.1971.16Feb2019.nc',
+        'input_atmos/solid_runoff.1972.16Feb2019.nc',
+        'input_atmos/solid_runoff.1973.16Feb2019.nc',
+        'input_atmos/solid_runoff.1974.16Feb2019.nc',
+        'input_atmos/solid_runoff.1975.16Feb2019.nc',
+        'input_atmos/solid_runoff.1976.16Feb2019.nc',
+        'input_atmos/solid_runoff.1977.16Feb2019.nc',
+        'input_atmos/solid_runoff.1978.16Feb2019.nc',
+        'input_atmos/solid_runoff.1979.16Feb2019.nc',
+        'input_atmos/solid_runoff.1980.16Feb2019.nc',
+        'input_atmos/solid_runoff.1981.16Feb2019.nc',
+        'input_atmos/solid_runoff.1982.16Feb2019.nc',
+        'input_atmos/solid_runoff.1983.16Feb2019.nc',
+        'input_atmos/solid_runoff.1984.16Feb2019.nc',
+        'input_atmos/solid_runoff.1985.16Feb2019.nc',
+        'input_atmos/solid_runoff.1986.16Feb2019.nc',
+        'input_atmos/solid_runoff.1987.16Feb2019.nc',
+        'input_atmos/solid_runoff.1988.16Feb2019.nc',
+        'input_atmos/solid_runoff.1989.16Feb2019.nc',
+        'input_atmos/solid_runoff.1990.16Feb2019.nc',
+        'input_atmos/solid_runoff.1991.16Feb2019.nc',
+        'input_atmos/solid_runoff.1992.16Feb2019.nc',
+        'input_atmos/solid_runoff.1993.16Feb2019.nc',
+        'input_atmos/solid_runoff.1994.16Feb2019.nc',
+        'input_atmos/solid_runoff.1995.16Feb2019.nc',
+        'input_atmos/solid_runoff.1996.16Feb2019.nc',
+        'input_atmos/solid_runoff.1997.16Feb2019.nc',
+        'input_atmos/solid_runoff.1998.16Feb2019.nc',
+        'input_atmos/solid_runoff.1999.16Feb2019.nc',
+        'input_atmos/solid_runoff.2000.16Feb2019.nc',
+        'input_atmos/solid_runoff.2001.16Feb2019.nc',
+        'input_atmos/solid_runoff.2002.16Feb2019.nc',
+        'input_atmos/solid_runoff.2003.16Feb2019.nc',
+        'input_atmos/solid_runoff.2004.16Feb2019.nc',
+        'input_atmos/solid_runoff.2005.16Feb2019.nc',
+        'input_atmos/solid_runoff.2006.16Feb2019.nc',
+        'input_atmos/solid_runoff.2007.16Feb2019.nc',
+        'input_atmos/solid_runoff.2008.16Feb2019.nc',
+        'input_atmos/solid_runoff.2009.16Feb2019.nc',
+        'input_atmos/solid_runoff.2010.16Feb2019.nc',
+        'input_atmos/solid_runoff.2011.16Feb2019.nc',
+        'input_atmos/solid_runoff.2012.16Feb2019.nc',
+        'input_atmos/solid_runoff.2013.16Feb2019.nc',
+        'input_atmos/solid_runoff.2014.16Feb2019.nc',
+        'input_atmos/solid_runoff.2015.16Feb2019.nc',
+        'input_atmos/solid_runoff.2016.16Feb2019.nc',
+        'input_atmos/solid_runoff.2017.16Feb2019.nc',
+        'input_atmos/solid_runoff.2018.16Feb2019.nc',
+        'input_atmos/solid_runoff.2019.16Feb2019.nc'
         ]
 inputDict['LIday'][key]['inputVarName'] = 'licalvf'
 inputDict['LIday'][key]['outputVarName'] = 'licalvf'
 inputDict['LIday'][key]['outputUnits'] = 'kg m-2 s-1'
 inputDict['LIday'][key]['positive'] = ''
-inputDict['Oday'] = {}
-key = 'runoff_all'
-inputDict['Oday'][key] = {}
-inputDict['Oday'][key]['fileList'] = [
-        'input_atmos/runoff_all.1958.07Jan2019.nc',
-        'input_atmos/runoff_all.1959.07Jan2019.nc',
-        'input_atmos/runoff_all.1960.07Jan2019.nc',
-        'input_atmos/runoff_all.1961.07Jan2019.nc',
-        'input_atmos/runoff_all.1962.07Jan2019.nc',
-        'input_atmos/runoff_all.1963.07Jan2019.nc',
-        'input_atmos/runoff_all.1964.07Jan2019.nc',
-        'input_atmos/runoff_all.1965.07Jan2019.nc',
-        'input_atmos/runoff_all.1966.07Jan2019.nc',
-        'input_atmos/runoff_all.1967.07Jan2019.nc',
-        'input_atmos/runoff_all.1968.07Jan2019.nc',
-        'input_atmos/runoff_all.1969.07Jan2019.nc',
-        'input_atmos/runoff_all.1970.07Jan2019.nc',
-        'input_atmos/runoff_all.1971.07Jan2019.nc',
-        'input_atmos/runoff_all.1972.07Jan2019.nc',
-        'input_atmos/runoff_all.1973.07Jan2019.nc',
-        'input_atmos/runoff_all.1974.07Jan2019.nc',
-        'input_atmos/runoff_all.1975.07Jan2019.nc',
-        'input_atmos/runoff_all.1976.07Jan2019.nc',
-        'input_atmos/runoff_all.1977.07Jan2019.nc',
-        'input_atmos/runoff_all.1978.07Jan2019.nc',
-        'input_atmos/runoff_all.1979.07Jan2019.nc',
-        'input_atmos/runoff_all.1980.07Jan2019.nc',
-        'input_atmos/runoff_all.1981.07Jan2019.nc',
-        'input_atmos/runoff_all.1982.07Jan2019.nc',
-        'input_atmos/runoff_all.1983.07Jan2019.nc',
-        'input_atmos/runoff_all.1984.07Jan2019.nc',
-        'input_atmos/runoff_all.1985.07Jan2019.nc',
-        'input_atmos/runoff_all.1986.07Jan2019.nc',
-        'input_atmos/runoff_all.1987.07Jan2019.nc',
-        'input_atmos/runoff_all.1988.07Jan2019.nc',
-        'input_atmos/runoff_all.1989.07Jan2019.nc',
-        'input_atmos/runoff_all.1990.07Jan2019.nc',
-        'input_atmos/runoff_all.1991.07Jan2019.nc',
-        'input_atmos/runoff_all.1992.07Jan2019.nc',
-        'input_atmos/runoff_all.1993.07Jan2019.nc',
-        'input_atmos/runoff_all.1994.07Jan2019.nc',
-        'input_atmos/runoff_all.1995.07Jan2019.nc',
-        'input_atmos/runoff_all.1996.07Jan2019.nc',
-        'input_atmos/runoff_all.1997.07Jan2019.nc',
-        'input_atmos/runoff_all.1998.07Jan2019.nc',
-        'input_atmos/runoff_all.1999.07Jan2019.nc',
-        'input_atmos/runoff_all.2000.07Jan2019.nc',
-        'input_atmos/runoff_all.2001.07Jan2019.nc',
-        'input_atmos/runoff_all.2002.07Jan2019.nc',
-        'input_atmos/runoff_all.2003.07Jan2019.nc',
-        'input_atmos/runoff_all.2004.07Jan2019.nc',
-        'input_atmos/runoff_all.2005.07Jan2019.nc',
-        'input_atmos/runoff_all.2006.07Jan2019.nc',
-        'input_atmos/runoff_all.2007.07Jan2019.nc',
-        'input_atmos/runoff_all.2008.07Jan2019.nc',
-        'input_atmos/runoff_all.2009.07Jan2019.nc',
-        'input_atmos/runoff_all.2010.07Jan2019.nc',
-        'input_atmos/runoff_all.2011.07Jan2019.nc',
-        'input_atmos/runoff_all.2012.07Jan2019.nc',
-        'input_atmos/runoff_all.2013.07Jan2019.nc',
-        'input_atmos/runoff_all.2014.07Jan2019.nc',
-        'input_atmos/runoff_all.2015.07Jan2019.nc',
-        'input_atmos/runoff_all.2016.07Jan2019.nc',
-        'input_atmos/runoff_all.2017.07Jan2019.nc',
-        'input_atmos/runoff_all.2018.07Jan2019.nc',
-        'input_atmos/runoff_all.2019.07Jan2019.nc'
+inputDict['Lday'] = {}
+key = 'friver'
+inputDict['Lday'][key] = {}
+inputDict['Lday'][key]['fileList'] = [
+        'input_atmos/liquid_runoff.1958.16Feb2019.nc',
+        'input_atmos/liquid_runoff.1959.16Feb2019.nc',
+        'input_atmos/liquid_runoff.1960.16Feb2019.nc',
+        'input_atmos/liquid_runoff.1961.16Feb2019.nc',
+        'input_atmos/liquid_runoff.1962.16Feb2019.nc',
+        'input_atmos/liquid_runoff.1963.16Feb2019.nc',
+        'input_atmos/liquid_runoff.1964.16Feb2019.nc',
+        'input_atmos/liquid_runoff.1965.16Feb2019.nc',
+        'input_atmos/liquid_runoff.1966.16Feb2019.nc',
+        'input_atmos/liquid_runoff.1967.16Feb2019.nc',
+        'input_atmos/liquid_runoff.1968.16Feb2019.nc',
+        'input_atmos/liquid_runoff.1969.16Feb2019.nc',
+        'input_atmos/liquid_runoff.1970.16Feb2019.nc',
+        'input_atmos/liquid_runoff.1971.16Feb2019.nc',
+        'input_atmos/liquid_runoff.1972.16Feb2019.nc',
+        'input_atmos/liquid_runoff.1973.16Feb2019.nc',
+        'input_atmos/liquid_runoff.1974.16Feb2019.nc',
+        'input_atmos/liquid_runoff.1975.16Feb2019.nc',
+        'input_atmos/liquid_runoff.1976.16Feb2019.nc',
+        'input_atmos/liquid_runoff.1977.16Feb2019.nc',
+        'input_atmos/liquid_runoff.1978.16Feb2019.nc',
+        'input_atmos/liquid_runoff.1979.16Feb2019.nc',
+        'input_atmos/liquid_runoff.1980.16Feb2019.nc',
+        'input_atmos/liquid_runoff.1981.16Feb2019.nc',
+        'input_atmos/liquid_runoff.1982.16Feb2019.nc',
+        'input_atmos/liquid_runoff.1983.16Feb2019.nc',
+        'input_atmos/liquid_runoff.1984.16Feb2019.nc',
+        'input_atmos/liquid_runoff.1985.16Feb2019.nc',
+        'input_atmos/liquid_runoff.1986.16Feb2019.nc',
+        'input_atmos/liquid_runoff.1987.16Feb2019.nc',
+        'input_atmos/liquid_runoff.1988.16Feb2019.nc',
+        'input_atmos/liquid_runoff.1989.16Feb2019.nc',
+        'input_atmos/liquid_runoff.1990.16Feb2019.nc',
+        'input_atmos/liquid_runoff.1991.16Feb2019.nc',
+        'input_atmos/liquid_runoff.1992.16Feb2019.nc',
+        'input_atmos/liquid_runoff.1993.16Feb2019.nc',
+        'input_atmos/liquid_runoff.1994.16Feb2019.nc',
+        'input_atmos/liquid_runoff.1995.16Feb2019.nc',
+        'input_atmos/liquid_runoff.1996.16Feb2019.nc',
+        'input_atmos/liquid_runoff.1997.16Feb2019.nc',
+        'input_atmos/liquid_runoff.1998.16Feb2019.nc',
+        'input_atmos/liquid_runoff.1999.16Feb2019.nc',
+        'input_atmos/liquid_runoff.2000.16Feb2019.nc',
+        'input_atmos/liquid_runoff.2001.16Feb2019.nc',
+        'input_atmos/liquid_runoff.2002.16Feb2019.nc',
+        'input_atmos/liquid_runoff.2003.16Feb2019.nc',
+        'input_atmos/liquid_runoff.2004.16Feb2019.nc',
+        'input_atmos/liquid_runoff.2005.16Feb2019.nc',
+        'input_atmos/liquid_runoff.2006.16Feb2019.nc',
+        'input_atmos/liquid_runoff.2007.16Feb2019.nc',
+        'input_atmos/liquid_runoff.2008.16Feb2019.nc',
+        'input_atmos/liquid_runoff.2009.16Feb2019.nc',
+        'input_atmos/liquid_runoff.2010.16Feb2019.nc',
+        'input_atmos/liquid_runoff.2011.16Feb2019.nc',
+        'input_atmos/liquid_runoff.2012.16Feb2019.nc',
+        'input_atmos/liquid_runoff.2013.16Feb2019.nc',
+        'input_atmos/liquid_runoff.2014.16Feb2019.nc',
+        'input_atmos/liquid_runoff.2015.16Feb2019.nc',
+        'input_atmos/liquid_runoff.2016.16Feb2019.nc',
+        'input_atmos/liquid_runoff.2017.16Feb2019.nc',
+        'input_atmos/liquid_runoff.2018.16Feb2019.nc',
+        'input_atmos/liquid_runoff.2019.16Feb2019.nc'
         ]
-inputDict['Oday'][key]['inputVarName'] = 'friver'
-inputDict['Oday'][key]['outputVarName'] = 'friver'
-inputDict['Oday'][key]['outputUnits'] = 'kg m-2 s-1'
-inputDict['Oday'][key]['positive'] = ''
+inputDict['Lday'][key]['inputVarName'] = 'friver'
+inputDict['Lday'][key]['outputVarName'] = 'friver'
+inputDict['Lday'][key]['outputUnits'] = 'kg m-2 s-1'
+inputDict['Lday'][key]['positive'] = ''
+inputDict['Oday'] = {}
 key = 'tos'
 inputDict['Oday'][key] = {}
 inputDict['Oday'][key]['fileList'] = [
@@ -951,7 +952,7 @@ inputDict['OyrC'][key]['fileList'] = [
         'input_suppl/uosurf_3d_nov1999-oct2009.nc'
         ]
 inputDict['OyrC'][key]['inputVarName'] = 'uo'
-inputDict['OyrC'][key]['outputVarName'] = 'uo'
+inputDict['OyrC'][key]['outputVarName'] = 'uos'
 inputDict['OyrC'][key]['outputUnits'] = 'm s-1'
 inputDict['OyrC'][key]['positive'] = ''
 key = 'vo'
@@ -960,7 +961,7 @@ inputDict['OyrC'][key]['fileList'] = [
         'input_suppl/vosurf_3d_nov1999-oct2009.nc'
         ]
 inputDict['OyrC'][key]['inputVarName'] = 'vo'
-inputDict['OyrC'][key]['outputVarName'] = 'vo'
+inputDict['OyrC'][key]['outputVarName'] = 'vos'
 inputDict['OyrC'][key]['outputUnits'] = 'm s-1'
 inputDict['OyrC'][key]['positive'] = ''
 inputDict['SI3hrPt'] = {}
@@ -1106,35 +1107,35 @@ inputDict['SIday'][key]['outputVarName'] = 'siconc'
 inputDict['SIday'][key]['outputUnits'] = '%'
 inputDict['SIday'][key]['positive'] = ''
 # fixed in time
-inputDict['Ofx'] = {}
+inputDict['Afx'] = {}
 key = 'areacello'
-inputDict['Ofx'][key] = {}
-inputDict['Ofx'][key]['fileList'] = [
+inputDict['Afx'][key] = {}
+inputDict['Afx'][key]['fileList'] = [
         'input_suppl/jra55_cell_area.10Apr2018.nc'
         ]
-inputDict['Ofx'][key]['inputVarName'] = 'areacello'
+inputDict['Afx'][key]['inputVarName'] = 'areacello'
+inputDict['Afx'][key]['outputVarName'] = 'areacella'
+inputDict['Afx'][key]['outputUnits'] = 'm2'
+inputDict['Afx'][key]['positive'] = ''
+key = 'sftof'
+inputDict['Afx'][key] = {}
+inputDict['Afx'][key]['fileList'] = [
+        'input_suppl/jra55_mask_sea.10Apr2018.nc'
+        ]
+inputDict['Afx'][key]['inputVarName'] = 'sftof'
+inputDict['Afx'][key]['outputVarName'] = 'sftof'
+inputDict['Afx'][key]['outputUnits'] = '1'
+inputDict['Afx'][key]['positive'] = ''
+inputDict['Ofx'] = {}
+key = 'areacellg'
+inputDict['Ofx'][key] = {}
+inputDict['Ofx'][key]['fileList'] = [
+        'input_suppl/runoff_cell_area.10Apr2018.nc'
+        ]
+inputDict['Ofx'][key]['inputVarName'] = 'areacellg'
 inputDict['Ofx'][key]['outputVarName'] = 'areacello'
 inputDict['Ofx'][key]['outputUnits'] = 'm2'
 inputDict['Ofx'][key]['positive'] = ''
-key = 'sftof'
-inputDict['Ofx'][key] = {}
-inputDict['Ofx'][key]['fileList'] = [
-        'input_suppl/jra55_mask_sea.10Apr2018.nc'
-        ]
-inputDict['Ofx'][key]['inputVarName'] = 'sftof'
-inputDict['Ofx'][key]['outputVarName'] = 'sftof'
-inputDict['Ofx'][key]['outputUnits'] = '1'
-inputDict['Ofx'][key]['positive'] = ''
-inputDict['LIfx'] = {}
-key = 'areacellg'
-inputDict['LIfx'][key] = {}
-inputDict['LIfx'][key]['fileList'] = [
-        'input_suppl/runoff_cell_area.10Apr2018.nc'
-        ]
-inputDict['LIfx'][key]['inputVarName'] = 'areacellg'
-inputDict['LIfx'][key]['outputVarName'] = 'areacellg'
-inputDict['LIfx'][key]['outputUnits'] = 'm2'
-inputDict['LIfx'][key]['positive'] = ''
 
 #%% Loop through entries and process file lists
 for key in inputDict.keys():
@@ -1147,6 +1148,30 @@ for key in inputDict.keys():
         outVar = inputDict[key][var]['outputVarName']
         # Update frequency based on variableand write output to CMOR input file
         newJson['frequency'] = cmorJson['variable_entry'][outVar]['frequency']
+
+        if var in ['friver','licalvf','areacellg','s_u10a']:
+           newJson['grid'] = '0.25x0.25 degree latitude x longitude'
+           newJson['nominal_resolution'] = '25 km'
+           newJson['grid_label'] = 'gr'
+        elif var in ['tos','siconco']:
+           newJson['grid'] = '1x1 degree latitude x longitude'
+           newJson['nominal_resolution'] = '100 km'
+           newJson['grid_label'] = 'gn'
+        else:
+           newJson['grid'] = 'data regridded to the normal atmosphere TL319 gaussian grid (320x640 latxlon) from a reduced TL319 gaussian grid'
+           newJson['nominal_resolution'] = '50 km'
+           newJson['grid_label'] = 'gr'
+
+        # areacello -> areacella, areacellg -> areacello
+        if var in ['friver','licalvf','s_u10a']:
+           newJson['cell_measures'] = 'area: areacello'
+        elif var in ['tos','siconco']:
+           newJson['cell_measures'] = ''
+        elif var in ['areacello','areacellg']:
+           newJson['cell_measures'] = ''
+        else:
+           newJson['cell_measures'] = 'area: areacella'
+
         json.dump(newJson,open('tmp.json','w'),ensure_ascii=True,encoding='utf-8',sort_keys=True)
         inputVarName = inputDict[key][var]['inputVarName']
         outputVarName = inputDict[key][var]['outputVarName']
@@ -1297,12 +1322,25 @@ for key in inputDict.keys():
                           ]
             elif var in ['uo','vo']:
             # 4D variable - 4 axes
+#                axes    = [  timeAx,
+#                             {'table_entry': 'depth_coord',
+#                              'units': 'm',
+#                              'coord_vals': lev[:],
+#                              'cell_bounds': lev.getBounds()
+#                             },
+#                             {'table_entry': 'latitude',
+#                              'units': 'degrees_north',
+#                              'coord_vals': lat[:],
+#                              'cell_bounds': lat.getBounds()
+#                             },
+#                             {'table_entry': 'longitude',
+#                              'units': 'degrees_east',
+#                              'coord_vals': lon[:],
+#                              'cell_bounds': lon.getBounds()
+#                             },
+#                          ]
+            # 3D variable - 3 axes
                 axes    = [  timeAx,
-                             {'table_entry': 'depth_coord',
-                              'units': 'm',
-                              'coord_vals': lev[:],
-                              'cell_bounds': lev.getBounds()
-                             },
                              {'table_entry': 'latitude',
                               'units': 'degrees_north',
                               'coord_vals': lat[:],
@@ -1376,6 +1414,8 @@ for key in inputDict.keys():
             elif key == 'LIyrC':  
                 cmor.write(varid,values) ; # Write variable with time axis
             elif key == 'Ofx':  
+                cmor.write(varid,values) ; # Write variable without time axis
+            elif key == 'Afx':  
                 cmor.write(varid,values) ; # Write variable without time axis
             elif key == 'LIfx':  
                 cmor.write(varid,values) ; # Write variable without time axis

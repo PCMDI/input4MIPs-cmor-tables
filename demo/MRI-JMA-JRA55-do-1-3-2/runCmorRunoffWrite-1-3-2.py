@@ -20,10 +20,10 @@ from calendar import isleap
 
 #%% Create input decks for all variables - 'fileList' will need to be amended to include all files 1958-2018
 inputDict = {}
-inputDict['Oday'] = {}
+inputDict['Lday'] = {}
 key = 'friver'
-inputDict['Oday'][key] = {}
-inputDict['Oday'][key]['fileList'] = [
+inputDict['Lday'][key] = {}
+inputDict['Lday'][key]['fileList'] = [
         'input_atmos/liquid_runoff.1958.16Feb2019.nc',
         'input_atmos/liquid_runoff.1959.16Feb2019.nc',
         'input_atmos/liquid_runoff.1960.16Feb2019.nc',
@@ -87,10 +87,10 @@ inputDict['Oday'][key]['fileList'] = [
         'input_atmos/liquid_runoff.2018.16Feb2019.nc',
         'input_atmos/liquid_runoff.2019.16Feb2019.nc'
         ]
-inputDict['Oday'][key]['inputVarName'] = 'friver'
-inputDict['Oday'][key]['outputVarName'] = 'friver'
-inputDict['Oday'][key]['outputUnits'] = 'kg m-2 s-1'
-inputDict['Oday'][key]['positive'] = ''
+inputDict['Lday'][key]['inputVarName'] = 'friver'
+inputDict['Lday'][key]['outputVarName'] = 'friver'
+inputDict['Lday'][key]['outputUnits'] = 'kg m-2 s-1'
+inputDict['Lday'][key]['positive'] = ''
 inputDict['LIyrC'] = {}
 key = 'licalvf'
 inputDict['LIyrC'][key] = {}
@@ -101,16 +101,16 @@ inputDict['LIyrC'][key]['inputVarName'] = 'licalvf'
 inputDict['LIyrC'][key]['outputVarName'] = 'licalvf'
 inputDict['LIyrC'][key]['outputUnits'] = 'kg m-2 s-1'
 inputDict['LIyrC'][key]['positive'] = ''
-inputDict['LIfx'] = {}
+inputDict['Ofx'] = {}
 key = 'areacellg'
-inputDict['LIfx'][key] = {}
-inputDict['LIfx'][key]['fileList'] = [
+inputDict['Ofx'][key] = {}
+inputDict['Ofx'][key]['fileList'] = [
         'input_suppl/runoff_cell_area.10Apr2018.nc'
         ]
-inputDict['LIfx'][key]['inputVarName'] = 'areacellg'
-inputDict['LIfx'][key]['outputVarName'] = 'areacellg'
-inputDict['LIfx'][key]['outputUnits'] = 'm2'
-inputDict['LIfx'][key]['positive'] = ''
+inputDict['Ofx'][key]['inputVarName'] = 'areacellg'
+inputDict['Ofx'][key]['outputVarName'] = 'areacello'
+inputDict['Ofx'][key]['outputUnits'] = 'm2'
+inputDict['Ofx'][key]['positive'] = ''
 #
 #%% Loop through entries and process file lists
 for key in inputDict.keys():
@@ -121,8 +121,13 @@ for key in inputDict.keys():
     newJson = json.load(open(inputJson))
     for var in inputDict[key].keys():
         outVar = inputDict[key][var]['outputVarName']
-        # Update frequency based on variableand write output to CMOR input file
+        # Update frequency based on variable and write output to CMOR input file
         newJson['frequency'] = cmorJson['variable_entry'][outVar]['frequency']
+        if var in ['friver','licalvf','areacellg']:
+           newJson['grid_label'] = 'gr'
+        if var in ['friver','licalvf','areacellg']:
+           newJson['grid'] = '0.25x0.25 degree latitude x longitude'
+           newJson['nominal_resolution'] = '25 km'
         json.dump(newJson,open('tmp.json','w'),ensure_ascii=True,encoding='utf-8',sort_keys=True)
         inputVarName = inputDict[key][var]['inputVarName']
         outputVarName = inputDict[key][var]['outputVarName']
@@ -142,6 +147,7 @@ for key in inputDict.keys():
             print 'Source data read end..'
             # Reset missing value
             #d.setMissing(1e20) ; # This should also set fill_value, and suppress CMOR variable history being written
+            # rewrite nominal resolution
             # Get axes
             lat = d.getLatitude()
             lon = d.getLongitude()
@@ -341,7 +347,11 @@ for key in inputDict.keys():
             # Append valid_min and valid_max to variable before writing - see https://cmor.llnl.gov/mydoc_cmor3_api/#cmor_set_variable_attribute
             #cmor.set_variable_attribute(varid,'valid_min','f',2.0)
             #cmor.set_variable_attribute(varid,'valid_max','f',3.0)
-
+#            if var in ['friver','licalvf','areacellg']:
+#                cmor.set_cur_dataset_attribute('grid','0.25x0.25 degree latitude x longitude')
+#                cmor.set_cur_dataset_attribute('nominal_resolution','25 km')
+#            if var in ['friver','licalvf']:
+#                cmor.set_variable_attribute(varid,'cell_measures','c','area: areacellg')
             # Prepare variable for writing, then write and close file - see https://cmor.llnl.gov/mydoc_cmor3_api/#cmor_set_variable_attribute
             cmor.set_deflate(varid,1,1,1) ; # shuffle=1,deflate=1,deflate_level=1 - Deflate options compress file data
             print 'Start CMOR write..'
