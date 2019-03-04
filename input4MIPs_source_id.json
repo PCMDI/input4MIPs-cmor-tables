@@ -21,7 +21,7 @@
             "source_id":"MRI-JRA55-do-1-3-2",
             "source_type":"satellite_blended",
             "source_variables":[
-                "areacellg",
+                "areacella",
                 "areacello",
                 "friver",
                 "huss",
@@ -64,7 +64,7 @@
             "source_id":"MRI-JRA55-do-1-4-0",
             "source_type":"satellite_blended",
             "source_variables":[
-                "areacellg",
+                "areacella",
                 "areacello",
                 "friver",
                 "huss",
