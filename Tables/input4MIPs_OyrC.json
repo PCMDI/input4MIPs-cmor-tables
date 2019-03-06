@@ -10,7 +10,7 @@
         "missing_value":"1e20",
         "product":"input4MIPs",
         "realm":"ocean",
-        "table_date":"28 February 2019",
+        "table_date":"06 March 2019",
         "table_id":"Table input4MIPs_OyrC"
     },
     "variable_entry":{
@@ -24,7 +24,7 @@
             "modeling_realm":"ocean",
             "ok_max_mean_abs":"",
             "ok_min_mean_abs":"",
-            "out_name":"uo",
+            "out_name":"uos",
             "positive":"",
             "standard_name":"sea_water_x_velocity",
             "type":"real",
@@ -42,7 +42,7 @@
             "modeling_realm":"ocean",
             "ok_max_mean_abs":"",
             "ok_min_mean_abs":"",
-            "out_name":"vo",
+            "out_name":"vos",
             "positive":"",
             "standard_name":"sea_water_y_velocity",
             "type":"real",
