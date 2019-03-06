@@ -51,7 +51,7 @@
             "valid_min":""
         },
         "sftof":{
-            "cell_measures":"area: areacello",
+            "cell_measures":"area: areacella",
             "cell_methods":"area: mean",
             "comment":"This is the area fraction at the ocean surface",
             "dimensions":"longitude latitude typesea",
