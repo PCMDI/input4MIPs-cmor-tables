@@ -4,7 +4,7 @@
         "approx_interval":"30.00000",
         "cmor_version":"3.4",
         "data_specs_version":"01.00.29",
-        "generic_levels":"olevel",
+        "generic_levels":"",
         "int_missing_value":"-999",
         "mip_era":"CMIP6",
         "missing_value":"1e20",
@@ -15,7 +15,7 @@
     },
     "variable_entry":{
         "friver":{
-            "cell_measures":"area: areacello",
+            "cell_measures":"area: areacella",
             "cell_methods":"area: mean where sea time: mean",
             "comment":"computed as the river flux of water into the ocean divided by the area of the ocean portion of the grid cell",
             "dimensions":"longitude latitude time",

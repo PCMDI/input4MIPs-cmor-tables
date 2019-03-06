@@ -701,6 +701,7 @@ CV['CV']['required_global_attributes'] = required_global_attributes
 CV['CV']['source_id'] = source_id
 
 #%% Write variables to files
+print 'Start Tables write:',os.getcwd()
 for jsonName in masterTargets:
     #print jsonName
     # Clean experiment formats
@@ -722,19 +723,19 @@ for jsonName in masterTargets:
         vars()[jsonName] = dictToClean
     # Write file
     if jsonName == 'license1':
-        outFile = ''.join(['../input4MIPs_license.json'])
+        outFile = ''.join(['input4MIPs_license.json'])
     elif jsonName in ['Ofx','Omon','SImon','CV','coordinate','formula_terms',
                       'grids','A3hr','A3hrPt','Oday','OmonC','OyrC','SI3hrPt',
                       'SIday','LIday','LIyrC','LIfx','Lday','Afx']:
-        outFile = ''.join(['../Tables/input4MIPs_',jsonName,'.json'])
+        outFile = ''.join(['Tables/input4MIPs_',jsonName,'.json'])
     else:
-        outFile = ''.join(['../input4MIPs_',jsonName,'.json'])
+        outFile = ''.join(['input4MIPs_',jsonName,'.json'])
     # Check file exists
     if os.path.exists(outFile):
         print('File existing, purging:',outFile)
         os.remove(outFile)
-    if not os.path.exists('../Tables'):
-        os.mkdir('../Tables')
+    if not os.path.exists('Tables'):
+        os.mkdir('Tables')
     # Create host dictionary
     if jsonName not in ['coordinate','formula_terms','grids','CV','institution_id',
                         'Afx','Ofx','Omon','SImon','A3hr','A3hrPt','Oday','OmonC',
