@@ -206,7 +206,7 @@ Afx['Header']['table_id'] = 'Table input4MIPs_Afx'
 Afx['Header']['realm'] = 'atmos land'
 Afx['variable_entry']['areacella']['comment'] = 'For atmospheres with more than 1 mesh (e.g., staggered grids), report areas that apply to surface vertical fluxes of energy'
 Afx['variable_entry']['sftlf']['comment'] = 'Please express \'X_area_fraction\' as the percentage of horizontal area occupied by X'
-Afx['variable_entry']['sftof'] = Ofx['variable_entry']['sftof']
+Afx['variable_entry']['sftof'] = copy.deepcopy(Ofx['variable_entry']['sftof'])
 Afx['variable_entry']['sftof']['modeling_realm'] = 'atmos'
 Afx['variable_entry']['sftof']['cell_measures'] = 'area: areacella'
 
