@@ -69,6 +69,8 @@ PJD 30 Jan 2019     - Revise source_id MRI-JRA55-do-1-4, and generate LIday tabl
 PJD 25 Feb 2019     - Register institution_id UCI https://github.com/PCMDI/input4MIPs-cmor-tables/issues/67
 PJD 28 Feb 2019     - Amend MRI-JRA55-do source_id values; Update OyrC table entries https://github.com/PCMDI/input4MIPs-cmor-tables/issues/72
 PJD 28 Feb 2019     - Update to include Afx table (areacella, sftlf) for MRI-JRA55-do https://github.com/PCMDI/input4MIPs-cmor-tables/issues/74
+PJD  6 Mar 2019     - Tweaks required to correctly align variables with realms/Tables https://github.com/PCMDI/input4MIPs-cmor-tables/issues/81
+PJD  6 Mar 2019     - Updated homePath
                     - TODO: Deal with lab cert issue https://raw.githubusercontent.com -> http://rawgit.com (see requests library)
 
 @author: durack1
@@ -80,9 +82,11 @@ sys.path.append('/export/durack1/git/durolib/lib/')
 from durolib import readJsonCreateDict
 
 #%% Determine path
-homePath = os.path.join('/','/'.join(os.path.realpath(__file__).split('/')[0:-1]))
+#homePath = os.path.join('/','/'.join(os.path.realpath(__file__).split('/')[0:-1]))
+homePath = os.path.join('/','/'.join(os.path.realpath(sys.argv[0]).split('/')[0:-2]))
 #homePath = '/export/durack1/git/input4MIPs-cmor-tables/' ; # Linux
 #homePath = '/sync/git/input4MIPs-cmor-tables/src' ; # OS-X
+print 'homePath:',homePath
 os.chdir(homePath)
 
 #%% List target tables
@@ -116,6 +120,7 @@ masterTargets = [
  'LIday',
  'LIfx',
  'LIyrC',
+ 'Lday',
  'SI3hrPt',
  'SIday',
  'SImon'
@@ -201,6 +206,9 @@ Afx['Header']['table_id'] = 'Table input4MIPs_Afx'
 Afx['Header']['realm'] = 'atmos land'
 Afx['variable_entry']['areacella']['comment'] = 'For atmospheres with more than 1 mesh (e.g., staggered grids), report areas that apply to surface vertical fluxes of energy'
 Afx['variable_entry']['sftlf']['comment'] = 'Please express \'X_area_fraction\' as the percentage of horizontal area occupied by X'
+Afx['variable_entry']['sftof'] = copy.deepcopy(Ofx['variable_entry']['sftof'])
+Afx['variable_entry']['sftof']['modeling_realm'] = 'atmos'
+Afx['variable_entry']['sftof']['cell_measures'] = 'area: areacella'
 
 # Create OyrC (before Omon is cleaned up)
 OyrC = {}
@@ -213,11 +221,13 @@ OyrC['variable_entry']['uos']['cell_methods'] = 'area: mean where sea time: mean
 OyrC['variable_entry']['uos']['comment'] = 'Prognostic x-ward velocity component resolved by the model'
 OyrC['variable_entry']['uos']['dimensions'] = 'longitude latitude time2'
 OyrC['variable_entry']['uos']['frequency'] = 'yrC'
+OyrC['variable_entry']['uos']['out_name'] = 'uos'
 OyrC['variable_entry']['vos'] = Omon['variable_entry'].pop('vo')
 OyrC['variable_entry']['vos']['cell_methods'] = 'area: mean where sea time: mean'
 OyrC['variable_entry']['vos']['comment'] = 'Prognostic y-ward velocity component resolved by the model'
 OyrC['variable_entry']['vos']['dimensions'] = 'longitude latitude time2'
 OyrC['variable_entry']['vos']['frequency'] = 'yrC'
+OyrC['variable_entry']['vos']['out_name'] = 'vos'
 
 # Create LIyrC (before Omon is cleaned up)
 LIyrC = {}
@@ -320,6 +330,16 @@ Oday['variable_entry']['tos']['frequency'] = 'day'
 Oday['Header'] = copy.deepcopy(Omon['Header'])
 Oday['Header']['table_id'] = 'Table input4MIPs_Oday'
 Oday['Header']['realm'] = 'ocean'
+
+Lday = {}
+Lday['variable_entry'] = {}
+Lday['variable_entry']['friver'] = copy.deepcopy(Oday['variable_entry']['friver'])
+Lday['variable_entry']['friver']['modeling_realm'] = 'land'
+Lday['variable_entry']['friver']['cell_measures'] = 'area: areacella'
+Lday['Header'] = copy.deepcopy(Omon['Header'])
+Lday['Header']['table_id'] = 'Table input4MIPs_Lday'
+Lday['Header']['realm'] = 'land'
+Lday['Header']['generic_levels'] = ''
 
 # OmonC
 OmonC = {}
@@ -681,6 +701,7 @@ CV['CV']['required_global_attributes'] = required_global_attributes
 CV['CV']['source_id'] = source_id
 
 #%% Write variables to files
+print 'Start Tables write:',os.getcwd()
 for jsonName in masterTargets:
     #print jsonName
     # Clean experiment formats
@@ -702,23 +723,23 @@ for jsonName in masterTargets:
         vars()[jsonName] = dictToClean
     # Write file
     if jsonName == 'license1':
-        outFile = ''.join(['../input4MIPs_license.json'])
+        outFile = ''.join(['input4MIPs_license.json'])
     elif jsonName in ['Ofx','Omon','SImon','CV','coordinate','formula_terms',
                       'grids','A3hr','A3hrPt','Oday','OmonC','OyrC','SI3hrPt',
-                      'SIday','LIday','LIyrC','LIfx','Afx']:
-        outFile = ''.join(['../Tables/input4MIPs_',jsonName,'.json'])
+                      'SIday','LIday','LIyrC','LIfx','Lday','Afx']:
+        outFile = ''.join(['Tables/input4MIPs_',jsonName,'.json'])
     else:
-        outFile = ''.join(['../input4MIPs_',jsonName,'.json'])
+        outFile = ''.join(['input4MIPs_',jsonName,'.json'])
     # Check file exists
     if os.path.exists(outFile):
         print('File existing, purging:',outFile)
         os.remove(outFile)
-    if not os.path.exists('../Tables'):
-        os.mkdir('../Tables')
+    if not os.path.exists('Tables'):
+        os.mkdir('Tables')
     # Create host dictionary
     if jsonName not in ['coordinate','formula_terms','grids','CV','institution_id',
                         'Afx','Ofx','Omon','SImon','A3hr','A3hrPt','Oday','OmonC',
-                        'OyrC','SI3hrPt','LIday','LIyrC','SIday','LIfx']:
+                        'OyrC','SI3hrPt','LIday','LIyrC','SIday','LIfx','Lday']:
         jsonDict = {}
         jsonDict[jsonName] = eval(jsonName)
     else:
@@ -881,3 +902,49 @@ stdout = p.stdout.read() ; # Use persistent variables for tests below
 stderr = p.stderr.read()
 # Move to demo dir
 shutil.move('demo.zip', 'MRI-JMA-JRA55-do-1-3/demo.zip')
+
+#%% Generate MRI-JMA-JRA55-do-1-3-2 demo directory
+#demoPath = os.path.join('/','/'.join(os.path.realpath(__file__).split('/')[0:-2]),'demo')
+demoPath = os.path.join(homePath,'demo')
+os.chdir(demoPath)
+#print 'MRI-JMA-JRA55-do-1-3-2 demo:',os.getcwd()
+demoPath = os.path.join(demoPath,'MRI-JMA-JRA55-do-1-3-2')
+outPath = os.path.join(demoPath,'Tables')
+# First purge existing
+if os.path.exists(outPath):
+    shutil.rmtree(outPath) ; # Purge all existing
+    os.makedirs(outPath)
+else:
+    os.makedirs(outPath)
+os.chdir(outPath)
+
+# Now fill Tables subdir with required files
+cvTables = ['Afx','Lday','OyrC','coordinate','formula_terms']
+#print 'MRI-JMA-JRA55-do-1-3-2 demo:',os.getcwd()
+for count,tableId in enumerate(cvTables):
+    fileName = ''.join(['input4MIPs_',tableId,'.json'])
+    sourcePath = os.path.join('..','..','..','..','Tables',fileName)
+    shutil.copy(sourcePath,'.')
+
+#%% Generate MRI-JMA-JRA55-do-1-4-0 demo directory
+demoPath = os.path.join(homePath,'demo')
+os.chdir(demoPath)
+#print 'MRI-JMA-JRA55-do-1-4-0 demo:',os.getcwd()
+demoPath = os.path.join(demoPath,'MRI-JMA-JRA55-do-1-4-0')
+outPath = os.path.join(demoPath,'Tables')
+# First purge existing
+if os.path.exists(outPath):
+    shutil.rmtree(outPath) ; # Purge all existing
+    os.makedirs(outPath)
+else:
+    os.makedirs(outPath)
+os.chdir(outPath)
+
+# Now fill Tables subdir with required files
+cvTables = ['Afx','A3hr','A3hrPt','CV','Lday','LIday','LIyrC','Oday','OmonC',
+            'OyrC','SI3hrPt','SIday','coordinate','formula_terms']
+#print 'MRI-JMA-JRA55-do-1-4-0 demo:',os.getcwd()
+for count,tableId in enumerate(cvTables):
+    fileName = ''.join(['input4MIPs_',tableId,'.json'])
+    sourcePath = os.path.join('..','..','..','Tables',fileName)
+    shutil.copy(sourcePath,'.')
