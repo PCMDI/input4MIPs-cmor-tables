@@ -65,12 +65,16 @@ PJD 23 Dec 2018     - Updated to deal with upstreams https://github.com/PCMDI/in
 PJD 23 Dec 2018     - Register source_id PCMDI-AMIP-1-1-5 https://github.com/PCMDI/input4MIPs-cmor-tables/issues/57
 PJD 23 Dec 2018     - Revise source_id PCMDI-AMIP-1-1-4
 PJD 23 Dec 2018     - Register institution_id MPI-B https://github.com/PCMDI/input4MIPs-cmor-tables/issues/59
+PJD 20 Jan 2019     - Register institution_id and source_id values for LS3MIP data and demo https://github.com/PCMDI/input4MIPs-cmor-tables/issues/62
 PJD 30 Jan 2019     - Revise source_id MRI-JRA55-do-1-4, and generate LIday table https://github.com/PCMDI/input4MIPs-cmor-tables/issues/65
 PJD 25 Feb 2019     - Register institution_id UCI https://github.com/PCMDI/input4MIPs-cmor-tables/issues/67
 PJD 28 Feb 2019     - Amend MRI-JRA55-do source_id values; Update OyrC table entries https://github.com/PCMDI/input4MIPs-cmor-tables/issues/72
 PJD 28 Feb 2019     - Update to include Afx table (areacella, sftlf) for MRI-JRA55-do https://github.com/PCMDI/input4MIPs-cmor-tables/issues/74
 PJD  6 Mar 2019     - Tweaks required to correctly align variables with realms/Tables https://github.com/PCMDI/input4MIPs-cmor-tables/issues/81
 PJD  6 Mar 2019     - Updated homePath
+PJD  7 Mar 2019     - Merge branch with master - register institution_id and source_id values for LS3MIP data and demo https://github.com/PCMDI/input4MIPs-cmor-tables/issues/62
+PJD  7 Mar 2019     - Fighting with linux relative paths - will need to check MacOS
+
                     - TODO: Deal with lab cert issue https://raw.githubusercontent.com -> http://rawgit.com (see requests library)
 
 @author: durack1
@@ -501,6 +505,7 @@ institution_id['IACETH'] = 'Institute for Atmosphere and Climate, ETH Zurich, Zu
 institution_id['IAMC'] = ''.join(['Integrated Assessment Modeling Consortium (see www.globalchange.umd.edu/iamc/membership ',
                          'for complete membership). Mailing address: International Institute for Applied Systems Analysis ',
                          '(IIASA), Schlossplatz 1, A-2361 Laxenburg, Austria'])
+institution_id['IIS-UTokyo'] = 'Institute of Industrial Science, The University of Tokyo, Hongo, Bunkyo-ku 113-8656, Japan'
 institution_id['ImperialCollege'] = 'Imperial College London, South Kensington Campus, London SW7 2AZ, UK'
 institution_id['MOHC'] = 'Met Office Hadley Centre, Fitzroy Road, Exeter, Devon, EX1 3PB, UK'
 institution_id['MPI-B'] = 'Max Planck Institute for Biogeochemistry, Jena 07745, Germany'
@@ -592,10 +597,32 @@ source_id = source_id.get('source_id')
 source_id = source_id.get('source_id')
 
 # Fix issues
-
-#key = 'MRI-JRA55-do-1-4'
-#source_id.pop(key)
-
+key = 'IIS-UTokyo-GSWP3-LS3MIP-1-1'
+source_id[key] = {}
+source_id[key]['comment'] = 'Atmospheric boundary condition for retrospective off-line experiment of Global Soil Wetness Project Phase 3 (GSWP3, 1901-01 to 2014-12)'
+source_id[key]['contact'] = 'Hyungjun Kim (hjkim@iis.u-tokyo.ac.jp)'
+source_id[key]['dataset_category'] = 'atmosphericState'
+source_id[key]['grid'] = '0.5x0.5 degree latitude x longitude'
+source_id[key]['grid_label'] = 'gn'
+source_id[key]['further_info_url'] = 'https://hyungjun.github.io/GSWP3.DataDescription/; http://search.diasjp.net/en/dataset/GSWP3_EXP1_Forcing'
+source_id[key]['institution_id'] = 'IIS-UTokyo'
+source_id[key]['nominal_resolution'] = '50 km'
+source_id[key]['product'] = 'bias corrected & downscaled reanalysis'
+source_id[key]['references'] = ''.join(['Kim 2017: Global Soil Wetness Project Phase 3 Atmospheric ',
+                                        'Boundary Conditions (Experiment 1) [Data set]. Data ',
+                                        'Integration and Analysis System (DIAS). ',
+                                        'https://doi.org/10.20783/DIAS.501, '])
+source_id[key]['region'] = ['global_land']
+source_id[key]['release_year'] = '2019'
+source_id[key]['source_description'] = 'Land state datasets produced by the University of Tokyo for the LS3MIP landhist experiment of CMIP6'
+source_id[key]['source'] = 'GSWP3-EXP1 for LS3MIP-landhist (v1.1): Atmospheric boundary conditions for landhist experiment of LS3MIP'
+source_id[key]['source_id'] = key
+source_id[key]['source_variables'] = ['huss', 'prra', 'prsn', 'psl', 'rlds', 'rsds', 'sfcWind', 'tas']
+source_id[key]['source_version'] = '1.1'
+source_id[key]['target_mip'] = 'LS3MIP'
+source_id[key]['title'] = 'IIS-UTokyo GSWP3 LS3MIP 1.1 dataset prepared for input4MIPs'
+#----
+'''
 key = 'MRI-JRA55-do-1-4-0'
 #source_id[key] = {}
 source_id[key]['comment'] = 'Based on JRA-55 reanalysis (1958-01 to 2019-01)'
@@ -649,37 +676,37 @@ source_id[key]['source_variables'] = ['areacello','friver','huss',
 source_id[key]['source_version'] = '1.3.2'
 source_id[key]['target_mip'] = 'OMIP'
 source_id[key]['title'] = 'MRI JRA55-do 1.3.2 dataset prepared for input4MIPs'
-#--
-#key = 'PCMDI-AMIP-1-1-5'
-#source_id[key] = {}
-#source_id[key]['comment'] = 'Based on Hurrell SST/sea ice consistency criteria applied to merged HadISST (1870-01 to 1981-10) & NCEP-0I2 (1981-11 to 2018-06)'
-#source_id[key]['contact'] = 'PCMDI (pcmdi-cmip@llnl.gov)'
-#source_id[key]['dataset_category'] = 'SSTsAndSeaIce'
-#source_id[key]['grid'] = '1x1 degree longitude x latitude'
-#source_id[key]['grid_label'] = 'gn'
-#source_id[key]['further_info_url'] = 'https://pcmdi.llnl.gov/mips/amip'
-#source_id[key]['institution_id'] = 'PCMDI'
-#source_id[key]['institution'] = 'Program for Climate Model Diagnosis and Intercomparison, Lawrence Livermore National Laboratory, Livermore, CA 94550, USA'
-#source_id[key]['nominal_resolution'] = '1x1 degree'
-#source_id[key]['product'] = 'observations'
-#source_id[key]['references'] = ''.join(['Taylor, K.E., D. Williamson and F. Zwiers, ',
-#                                        '2000: The sea surface temperature and sea ice ',
-#                                        'concentration boundary conditions for AMIP II ',
-#                                        'simulations. PCMDI Report 60, Program for ',
-#                                        'Climate Model Diagnosis and Intercomparison, ',
-#                                        'Lawrence Livermore National Laboratory, 25 pp. ',
-#                                        'Available online: https://pcmdi.llnl.gov/report/pdf/60.pdf'])
-#source_id[key]['region'] = ['global_ocean']
-#source_id[key]['release_year'] = '2018'
-#source_id[key]['source_description'] = 'Sea surface temperature and sea-ice datasets produced by PCMDI (LLNL) for the AMIP (DECK) experiment of CMIP6'
-#source_id[key]['source'] = 'PCMDI-AMIP 1.1.5: Merged SST based on UK MetOffice HadISST and NCEP OI2'
-#source_id[key]['source_id'] = key
-#source_id[key]['source_type'] = 'satellite_blended'
-#source_id[key]['source_variables'] = ['areacello','sftof','siconc','siconcbcs',
-#                                      'tos','tosbcs']
-#source_id[key]['source_version'] = '1.1.5'
-#source_id[key]['target_mip'] = 'CMIP'
-#source_id[key]['title'] = 'PCMDI-AMIP 1.1.5 dataset prepared for input4MIPs'
+
+key = 'PCMDI-AMIP-1-1-5'
+source_id[key] = {}
+source_id[key]['comment'] = 'Based on Hurrell SST/sea ice consistency criteria applied to merged HadISST (1870-01 to 1981-10) & NCEP-0I2 (1981-11 to 2018-06)'
+source_id[key]['contact'] = 'PCMDI (pcmdi-cmip@llnl.gov)'
+source_id[key]['dataset_category'] = 'SSTsAndSeaIce'
+source_id[key]['grid'] = '1x1 degree longitude x latitude'
+source_id[key]['grid_label'] = 'gn'
+source_id[key]['further_info_url'] = 'https://pcmdi.llnl.gov/mips/amip'
+source_id[key]['institution_id'] = 'PCMDI'
+source_id[key]['institution'] = 'Program for Climate Model Diagnosis and Intercomparison, Lawrence Livermore National Laboratory, Livermore, CA 94550, USA'
+source_id[key]['nominal_resolution'] = '1x1 degree'
+source_id[key]['product'] = 'observations'
+source_id[key]['references'] = ''.join(['Taylor, K.E., D. Williamson and F. Zwiers, ',
+                                        '2000: The sea surface temperature and sea ice ',
+                                        'concentration boundary conditions for AMIP II ',
+                                        'simulations. PCMDI Report 60, Program for ',
+                                        'Climate Model Diagnosis and Intercomparison, ',
+                                        'Lawrence Livermore National Laboratory, 25 pp. ',
+                                        'Available online: https://pcmdi.llnl.gov/report/pdf/60.pdf'])
+source_id[key]['region'] = ['global_ocean']
+source_id[key]['release_year'] = '2018'
+source_id[key]['source_description'] = 'Sea surface temperature and sea-ice datasets produced by PCMDI (LLNL) for the AMIP (DECK) experiment of CMIP6'
+source_id[key]['source'] = 'PCMDI-AMIP 1.1.5: Merged SST based on UK MetOffice HadISST and NCEP OI2'
+source_id[key]['source_id'] = key
+source_id[key]['source_type'] = 'satellite_blended'
+source_id[key]['source_variables'] = ['areacello','sftof','siconc','siconcbcs',
+                                      'tos','tosbcs']
+source_id[key]['source_version'] = '1.1.5'
+source_id[key]['target_mip'] = 'CMIP'
+'''
 
 #%% Create CV master
 CV = {}
@@ -752,6 +779,7 @@ del(jsonName,outFile) ; gc.collect()
 # Validate - only necessary if files are not written by json module
 
 #%% Incorporate JSON versioning info - see https://docs.google.com/document/d/1pU9IiJvPJwRvIgVaSDdJ4O0Jeorv_2ekEtted34K9cA/edit#heading=h.w4kchhc266o3
+print 'Start Versions write:',os.getcwd()
 versionId = '6.2.3'
 input4MIPs = {}
 input4MIPs['data'] = {}
@@ -841,13 +869,14 @@ input4MIPs['data']['CMIP']['VUA']['emissions'] = {}
 input4MIPs['data']['CMIP']['VUA']['emissions']['currentVersion'] = '1.2'
 input4MIPs['data']['CMIP']['VUA']['emissions']['deprecatedVersion'] = '1.0'
 # Write version file
-outFile = ''.join(['../Versions/',versionId,'.json'])
+print 'Start Versions write:',os.getcwd()
+outFile = ''.join(['Versions/',versionId,'.json'])
 # Check file exists
 if os.path.exists(outFile):
     print('File existing, purging:',outFile)
     os.remove(outFile)
-if not os.path.exists('../Versions'):
-    os.mkdir('../Versions')
+if not os.path.exists('Versions'):
+    os.mkdir('Versions')
 # Create host dictionary
 jsonDict = {}
 jsonDict['input4MIPs_version'] = {}
@@ -858,24 +887,30 @@ json.dump(jsonDict,fH,ensure_ascii=True,sort_keys=True,indent=4,separators=(',',
 fH.close()
 
 #%% Generate MRI-JMA-JRA55-do-1-3 demo directory
-demoPath = os.path.join('/','/'.join(os.path.realpath(__file__).split('/')[0:-2]),'demo')
+print 'Start MRI-JMA-JRA55-do-1-3 write:',os.getcwd()
+demoPath = os.path.join('/','/'.join(os.path.realpath(__file__).split('/')[0:-1]),'demo')
+print 'demoPath:',demoPath
 demoPath = os.path.join(demoPath,'MRI-JMA-JRA55-do-1-3')
+print 'demoPath:',demoPath
 outPath = os.path.join(demoPath,'Tables')
+print 'outPath:',outPath
 # First purge existing
 if os.path.exists(outPath):
     shutil.rmtree(outPath) ; # Purge all existing
     os.makedirs(outPath)
 else:
     os.makedirs(outPath)
-os.chdir(demoPath)
+os.chdir(outPath)
+print 'Write MRI-JMA-JRA55-do-1-3 write:',os.getcwd()
 
 # Now fill Tables subdir with required files
 cvTables = ['A3hr','A3hrPt','CV','Oday','OmonC','OyrC','SI3hrPt','LIday',
             'LIyrC','SIday','coordinate','formula_terms']
 for count,tableId in enumerate(cvTables):
     fileName = ''.join(['input4MIPs_',tableId,'.json'])
-    sourcePath = os.path.join('..','..','Tables',fileName)
-    shutil.copy(sourcePath,'Tables')
+    print 'Write loop MRI-JMA-JRA55-do-1-3:',os.getcwd()
+    sourcePath = os.path.join('..','..','..','Tables',fileName)
+    shutil.copy(sourcePath,'.')
 
 #%% Generate zip archive
 env7za = os.environ.copy()
@@ -903,6 +938,7 @@ stderr = p.stderr.read()
 shutil.move('demo.zip', 'MRI-JMA-JRA55-do-1-3/demo.zip')
 
 #%% Generate MRI-JMA-JRA55-do-1-3-2 demo directory
+print 'Start MRI-JMA-JRA55-do-1-3-2 write:',os.getcwd()
 #demoPath = os.path.join('/','/'.join(os.path.realpath(__file__).split('/')[0:-2]),'demo')
 demoPath = os.path.join(homePath,'demo')
 os.chdir(demoPath)
@@ -922,10 +958,12 @@ cvTables = ['Afx','Lday','OyrC','coordinate','formula_terms']
 #print 'MRI-JMA-JRA55-do-1-3-2 demo:',os.getcwd()
 for count,tableId in enumerate(cvTables):
     fileName = ''.join(['input4MIPs_',tableId,'.json'])
-    sourcePath = os.path.join('..','..','..','..','Tables',fileName)
+    print 'Write loop MRI-JMA-JRA55-do-1-3-2:',os.getcwd()
+    sourcePath = os.path.join('..','..','..','Tables',fileName)
     shutil.copy(sourcePath,'.')
 
 #%% Generate MRI-JMA-JRA55-do-1-4-0 demo directory
+print 'Start MRI-JMA-JRA55-do-1-4-0 write:',os.getcwd()
 demoPath = os.path.join(homePath,'demo')
 os.chdir(demoPath)
 #print 'MRI-JMA-JRA55-do-1-4-0 demo:',os.getcwd()
@@ -945,5 +983,6 @@ cvTables = ['Afx','A3hr','A3hrPt','CV','Lday','LIday','LIyrC','Oday','OmonC',
 #print 'MRI-JMA-JRA55-do-1-4-0 demo:',os.getcwd()
 for count,tableId in enumerate(cvTables):
     fileName = ''.join(['input4MIPs_',tableId,'.json'])
+    print 'Write loop MRI-JMA-JRA55-do-1-4-0:',os.getcwd()
     sourcePath = os.path.join('..','..','..','Tables',fileName)
     shutil.copy(sourcePath,'.')

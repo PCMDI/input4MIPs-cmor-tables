@@ -2,3 +2,5 @@
 *.pyc
 demo/MRI-JMA-JRA55-do-1-3/testFiles
 demo/MRI-JMA-JRA55-do-1-3/input4MIPs
+demo/IIS-UT-GSWP3-LS3MIP-1-1/input4MIPs
+demo/IIS-UT-GSWP3-LS3MIP-1-1/_obsolete
