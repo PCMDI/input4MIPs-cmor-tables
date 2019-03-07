@@ -1,7 +1,7 @@
 {
     "Header":{
         "Conventions":"CF-1.7 CMIP-6.2",
-        "approx_interval":"1.00000",
+        "approx_interval":"30.00000",
         "cmor_version":"3.4",
         "data_specs_version":"01.00.29",
         "generic_levels":"",
@@ -9,26 +9,26 @@
         "mip_era":"CMIP6",
         "missing_value":"1e20",
         "product":"input4MIPs",
-        "realm":"seaIce",
+        "realm":"land",
         "table_date":"07 March 2019",
-        "table_id":"Table input4MIPs_SIday"
+        "table_id":"Table input4MIPs_Lday"
     },
     "variable_entry":{
-        "siconc":{
-            "cell_measures":"area: areacello",
+        "friver":{
+            "cell_measures":"area: areacella",
             "cell_methods":"area: mean where sea time: mean",
-            "comment":"Area fraction of grid cell covered by sea ice",
-            "dimensions":"longitude latitude time typesi",
+            "comment":"computed as the river flux of water into the ocean divided by the area of the ocean portion of the grid cell",
+            "dimensions":"longitude latitude time",
             "frequency":"day",
-            "long_name":"Sea-ice Area Percentage (Ocean Grid)",
-            "modeling_realm":"seaIce",
+            "long_name":"Water Flux into Sea Water from Rivers",
+            "modeling_realm":"land",
             "ok_max_mean_abs":"",
             "ok_min_mean_abs":"",
-            "out_name":"siconc",
+            "out_name":"friver",
             "positive":"",
-            "standard_name":"sea_ice_area_fraction",
+            "standard_name":"water_flux_into_sea_water_from_rivers",
             "type":"real",
-            "units":"%",
+            "units":"kg m-2 s-1",
             "valid_max":"",
             "valid_min":""
         }

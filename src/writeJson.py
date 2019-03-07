@@ -66,6 +66,15 @@ PJD 23 Dec 2018     - Register source_id PCMDI-AMIP-1-1-5 https://github.com/PCM
 PJD 23 Dec 2018     - Revise source_id PCMDI-AMIP-1-1-4
 PJD 23 Dec 2018     - Register institution_id MPI-B https://github.com/PCMDI/input4MIPs-cmor-tables/issues/59
 PJD 20 Jan 2019     - Register institution_id and source_id values for LS3MIP data and demo https://github.com/PCMDI/input4MIPs-cmor-tables/issues/62
+PJD 30 Jan 2019     - Revise source_id MRI-JRA55-do-1-4, and generate LIday table https://github.com/PCMDI/input4MIPs-cmor-tables/issues/65
+PJD 25 Feb 2019     - Register institution_id UCI https://github.com/PCMDI/input4MIPs-cmor-tables/issues/67
+PJD 28 Feb 2019     - Amend MRI-JRA55-do source_id values; Update OyrC table entries https://github.com/PCMDI/input4MIPs-cmor-tables/issues/72
+PJD 28 Feb 2019     - Update to include Afx table (areacella, sftlf) for MRI-JRA55-do https://github.com/PCMDI/input4MIPs-cmor-tables/issues/74
+PJD  6 Mar 2019     - Tweaks required to correctly align variables with realms/Tables https://github.com/PCMDI/input4MIPs-cmor-tables/issues/81
+PJD  6 Mar 2019     - Updated homePath
+PJD  7 Mar 2019     - Merge branch with master - register institution_id and source_id values for LS3MIP data and demo https://github.com/PCMDI/input4MIPs-cmor-tables/issues/62
+PJD  7 Mar 2019     - Fighting with linux relative paths - will need to check MacOS
+
                     - TODO: Deal with lab cert issue https://raw.githubusercontent.com -> http://rawgit.com (see requests library)
 
 @author: durack1
@@ -77,9 +86,11 @@ sys.path.append('/export/durack1/git/durolib/lib/')
 from durolib import readJsonCreateDict
 
 #%% Determine path
-homePath = os.path.join('/','/'.join(os.path.realpath(__file__).split('/')[0:-1]))
+#homePath = os.path.join('/','/'.join(os.path.realpath(__file__).split('/')[0:-1]))
+homePath = os.path.join('/','/'.join(os.path.realpath(sys.argv[0]).split('/')[0:-2]))
 #homePath = '/export/durack1/git/input4MIPs-cmor-tables/' ; # Linux
 #homePath = '/sync/git/input4MIPs-cmor-tables/src' ; # OS-X
+print 'homePath:',homePath
 os.chdir(homePath)
 
 #%% List target tables
@@ -102,18 +113,21 @@ masterTargets = [
  'source_id',
  'target_mip',
  'CV',
- 'Ofx',
- 'Omon',
- 'SImon',
  'A3hr',
  'A3hrPt',
+ 'Afx',
  'Oday',
+ 'Ofx',
+ 'Omon',
  'OmonC',
  'OyrC',
- 'SI3hrPt',
+ 'LIday',
+ 'LIfx',
  'LIyrC',
+ 'Lday',
+ 'SI3hrPt',
  'SIday',
- 'LIfx'
+ 'SImon'
  ] ;
 
 #%% Tables
@@ -136,7 +150,8 @@ tableSource = [
  ['CF3hr','https://raw.githubusercontent.com/PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_CF3hr.json'],
  ['SIday','https://raw.githubusercontent.com/PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_SIday.json'],
  ['IyrGre','https://raw.githubusercontent.com/PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_IyrGre.json'],
- ['LIfx','https://raw.githubusercontent.com/PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_IfxGre.json']
+ ['LIfx','https://raw.githubusercontent.com/PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_IfxGre.json'],
+ ['Afx','https://raw.githubusercontent.com/PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_fx.json']
  ] ;
 
 headerFree = ['coordinate','frequency','formula_terms','grid_label','nominal_resolution',
@@ -186,22 +201,37 @@ LIfx['Header']['product'] = 'input4MIPs'
 LIfx['variable_entry']['areacellg']['comment'] = 'Area of the target grid (not the interpolated area of the source grid)'
 LIfx['variable_entry']['areacellg']['modeling_realm'] = 'landIce'
 
+# Afx
+AfxCleanup = ['areacellr','mrsofc','orog','rootd','sftgif','zfull']
+for clean in AfxCleanup:
+    tmp = Afx['variable_entry'].pop(clean)
+Afx['Header']['product'] = 'input4MIPs'
+Afx['Header']['table_id'] = 'Table input4MIPs_Afx'
+Afx['Header']['realm'] = 'atmos land'
+Afx['variable_entry']['areacella']['comment'] = 'For atmospheres with more than 1 mesh (e.g., staggered grids), report areas that apply to surface vertical fluxes of energy'
+Afx['variable_entry']['sftlf']['comment'] = 'Please express \'X_area_fraction\' as the percentage of horizontal area occupied by X'
+Afx['variable_entry']['sftof'] = copy.deepcopy(Ofx['variable_entry']['sftof'])
+Afx['variable_entry']['sftof']['modeling_realm'] = 'atmos'
+Afx['variable_entry']['sftof']['cell_measures'] = 'area: areacella'
+
 # Create OyrC (before Omon is cleaned up)
 OyrC = {}
 OyrC['variable_entry'] = {}
 OyrC['Header'] = copy.deepcopy(Omon['Header'])
 OyrC['Header']['table_id'] = 'Table input4MIPs_OyrC'
 OyrC['Header']['realm'] = 'ocean'
-OyrC['variable_entry']['uo'] = Omon['variable_entry'].pop('uo')
-OyrC['variable_entry']['uo']['cell_methods'] = 'area: mean where sea time: mean'
-OyrC['variable_entry']['uo']['comment'] = 'Prognostic x-ward velocity component resolved by the model'
-OyrC['variable_entry']['uo']['dimensions'] = 'longitude latitude olevel time2'
-OyrC['variable_entry']['uo']['frequency'] = 'yrC'
-OyrC['variable_entry']['vo'] = Omon['variable_entry'].pop('vo')
-OyrC['variable_entry']['vo']['cell_methods'] = 'area: mean where sea time: mean'
-OyrC['variable_entry']['vo']['comment'] = 'Prognostic y-ward velocity component resolved by the model'
-OyrC['variable_entry']['vo']['dimensions'] = 'longitude latitude olevel time2'
-OyrC['variable_entry']['vo']['frequency'] = 'yrC'
+OyrC['variable_entry']['uos'] = Omon['variable_entry'].pop('uo')
+OyrC['variable_entry']['uos']['cell_methods'] = 'area: mean where sea time: mean'
+OyrC['variable_entry']['uos']['comment'] = 'Prognostic x-ward velocity component resolved by the model'
+OyrC['variable_entry']['uos']['dimensions'] = 'longitude latitude time2'
+OyrC['variable_entry']['uos']['frequency'] = 'yrC'
+OyrC['variable_entry']['uos']['out_name'] = 'uos'
+OyrC['variable_entry']['vos'] = Omon['variable_entry'].pop('vo')
+OyrC['variable_entry']['vos']['cell_methods'] = 'area: mean where sea time: mean'
+OyrC['variable_entry']['vos']['comment'] = 'Prognostic y-ward velocity component resolved by the model'
+OyrC['variable_entry']['vos']['dimensions'] = 'longitude latitude time2'
+OyrC['variable_entry']['vos']['frequency'] = 'yrC'
+OyrC['variable_entry']['vos']['out_name'] = 'vos'
 
 # Create LIyrC (before Omon is cleaned up)
 LIyrC = {}
@@ -210,10 +240,22 @@ LIyrC['Header'] = copy.deepcopy(Omon['Header'])
 LIyrC['Header']['table_id'] = 'Table input4MIPs_LIyrC'
 LIyrC['Header']['realm'] = 'landIce'
 LIyrC['variable_entry']['licalvf'] = copy.deepcopy(IyrGre['variable_entry']['licalvf'])
-LIyrC['variable_entry']['licalvf']['comment'] = 'Area of the target grid (not the interpolated area of the source grid)'
+LIyrC['variable_entry']['licalvf']['comment'] = 'Computed as the flux of solid ice into the ocean divided by the area of the land portion of the grid cell'
 LIyrC['variable_entry']['licalvf']['dimensions'] = 'longitude latitude time2'
 LIyrC['variable_entry']['licalvf']['frequency'] = 'yrC'
 LIyrC['variable_entry']['licalvf']['modeling_realm'] = 'landIce'
+
+# Create LIyrC (before Omon is cleaned up)
+LIday = {}
+LIday['variable_entry'] = {}
+LIday['Header'] = copy.deepcopy(Omon['Header'])
+LIday['Header']['table_id'] = 'Table input4MIPs_LIday'
+LIday['Header']['realm'] = 'landIce'
+LIday['variable_entry']['licalvf'] = copy.deepcopy(IyrGre['variable_entry']['licalvf'])
+LIday['variable_entry']['licalvf']['comment'] = 'Computed as the flux of solid ice into the ocean divided by the area of the land portion of the grid cell'
+LIday['variable_entry']['licalvf']['dimensions'] = 'longitude latitude time'
+LIday['variable_entry']['licalvf']['frequency'] = 'day'
+LIday['variable_entry']['licalvf']['modeling_realm'] = 'landIce'
 
 # Omon
 # Cleanup 'aragos','baccos','calcos','co3abioos','co3natos','co3os',
@@ -292,6 +334,16 @@ Oday['variable_entry']['tos']['frequency'] = 'day'
 Oday['Header'] = copy.deepcopy(Omon['Header'])
 Oday['Header']['table_id'] = 'Table input4MIPs_Oday'
 Oday['Header']['realm'] = 'ocean'
+
+Lday = {}
+Lday['variable_entry'] = {}
+Lday['variable_entry']['friver'] = copy.deepcopy(Oday['variable_entry']['friver'])
+Lday['variable_entry']['friver']['modeling_realm'] = 'land'
+Lday['variable_entry']['friver']['cell_measures'] = 'area: areacella'
+Lday['Header'] = copy.deepcopy(Omon['Header'])
+Lday['Header']['table_id'] = 'Table input4MIPs_Lday'
+Lday['Header']['realm'] = 'land'
+Lday['Header']['generic_levels'] = ''
 
 # OmonC
 OmonC = {}
@@ -464,6 +516,7 @@ institution_id['NCAS'] = 'National Centre for Atmospheric Science, University of
 institution_id['PCMDI'] = 'Program for Climate Model Diagnosis and Intercomparison, Lawrence Livermore National Laboratory, Livermore, CA 94550, USA'
 institution_id['PNNL-JGCRI'] = 'Pacific Northwest National Laboratory - Joint Global Change Research Institute, College Park, MD 20740, USA'
 institution_id['SOLARIS-HEPPA'] = 'SOLARIS-HEPPA, GEOMAR Helmholtz Centre for Ocean Research, Kiel 24105, Germany'
+institution_id['UCI'] = 'University of California - Irvine, Irvine, CA 92697, USA'
 institution_id['UColorado'] = 'University of Colorado, Boulder, CO 80309, USA'
 institution_id['UReading'] = 'University of Reading, Reading RG6 6UA, UK'
 institution_id['UoM'] = 'Australian-German Climate & Energy College, The University of Melbourne (UoM), Parkville, Victoria 3010, Australia'
@@ -570,6 +623,60 @@ source_id[key]['target_mip'] = 'LS3MIP'
 source_id[key]['title'] = 'IIS-UTokyo GSWP3 LS3MIP 1.1 dataset prepared for input4MIPs'
 #----
 '''
+key = 'MRI-JRA55-do-1-4-0'
+#source_id[key] = {}
+source_id[key]['comment'] = 'Based on JRA-55 reanalysis (1958-01 to 2019-01)'
+source_id[key]['contact'] = 'Hiroyuki Tsujino (htsujino@mri-jma.go.jp)'
+source_id[key]['dataset_category'] = 'atmosphericState'
+source_id[key]['further_info_url'] = 'http://climate.mri-jma.go.jp/~htsujino/jra55do.html'
+source_id[key]['institution_id'] = 'MRI'
+source_id[key]['institution'] = 'Meteorological Research Institute, Tsukuba, Ibaraki 305-0052, Japan'
+source_id[key]['product'] = 'reanalysis'
+source_id[key]['references'] = ''.join(['Tsujino et al., 2018: JRA-55 based surface dataset ',
+                                        'for driving ocean-sea-ice models (JRA55-do), Ocean ',
+                                        'Modelling, 130(1), pp 79-139. ',
+                                        'https://doi.org/10.1016/j.ocemod.2018.07.002'])
+source_id[key]['region'] = ['global_ocean']
+source_id[key]['release_year'] = '2019'
+source_id[key]['source_description'] = 'Atmospheric state and terrestrial runoff datasets produced by MRI for the OMIP experiment of CMIP6'
+source_id[key]['source'] = 'MRI JRA55-do 1.4.0: Atmospheric state generated for OMIP based on the JRA-55 reanalysis'
+source_id[key]['source_id'] = key
+source_id[key]['source_type'] = 'satellite_blended'
+source_id[key]['source_variables'] = ['areacello','friver','huss',
+                                      'licalvf','prra','prsn','psl','rlds','sftof',
+                                      'siconc','siconca','sos','tas','tos','ts',
+                                      'uas','uos','vas','vos']
+source_id[key]['source_version'] = '1.4.0'
+source_id[key]['target_mip'] = 'OMIP'
+source_id[key]['title'] = 'MRI JRA55-do 1.4.0 dataset prepared for input4MIPs'
+
+key = 'MRI-JRA55-do-1-3-2'
+#source_id[key] = {}
+source_id[key]['comment'] = 'Based on JRA-55 reanalysis (1958-01 to 2019-01)'
+source_id[key]['contact'] = 'Hiroyuki Tsujino (htsujino@mri-jma.go.jp)'
+source_id[key]['dataset_category'] = 'atmosphericState'
+source_id[key]['further_info_url'] = 'http://climate.mri-jma.go.jp/~htsujino/jra55do.html'
+source_id[key]['institution_id'] = 'MRI'
+source_id[key]['institution'] = 'Meteorological Research Institute, Tsukuba, Ibaraki 305-0052, Japan'
+source_id[key]['product'] = 'reanalysis'
+source_id[key]['references'] = ''.join(['Tsujino et al., 2018: JRA-55 based surface dataset ',
+                                        'for driving ocean-sea-ice models (JRA55-do), Ocean ',
+                                        'Modelling, 130(1), pp 79-139. ',
+                                        'https://doi.org/10.1016/j.ocemod.2018.07.002'])
+source_id[key]['region'] = ['global_ocean']
+source_id[key]['release_year'] = '2019'
+source_id[key]['source_description'] = 'Atmospheric state and terrestrial runoff datasets produced by MRI for the OMIP experiment of CMIP6'
+source_id[key]['source'] = 'MRI JRA55-do 1.3.2: Atmospheric state generated for OMIP based on the JRA-55 reanalysis'
+source_id[key]['source_id'] = key
+source_id[key]['source_type'] = 'satellite_blended'
+source_id[key]['source_variables'] = ['areacello','friver','huss',
+                                      'licalvf','prra','prsn','psl','rlds','sftof',
+                                      'siconc','siconca','sos','tas','tos','ts',
+                                      'uas','uos','vas','vos']
+source_id[key]['source_version'] = '1.3.2'
+source_id[key]['target_mip'] = 'OMIP'
+source_id[key]['title'] = 'MRI JRA55-do 1.3.2 dataset prepared for input4MIPs'
+
 key = 'PCMDI-AMIP-1-1-5'
 source_id[key] = {}
 source_id[key]['comment'] = 'Based on Hurrell SST/sea ice consistency criteria applied to merged HadISST (1870-01 to 1981-10) & NCEP-0I2 (1981-11 to 2018-06)'
@@ -599,43 +706,6 @@ source_id[key]['source_variables'] = ['areacello','sftof','siconc','siconcbcs',
                                       'tos','tosbcs']
 source_id[key]['source_version'] = '1.1.5'
 source_id[key]['target_mip'] = 'CMIP'
-source_id[key]['title'] = 'PCMDI-AMIP 1.1.5 dataset prepared for input4MIPs'
-#----
-key = 'PCMDI-AMIP-1-1-4'
-#source_id[key] = {}
-source_id[key]['comment'] = 'Based on Hurrell SST/sea ice consistency criteria applied to merged HadISST (1870-01 to 1981-10) & NCEP-0I2 (1981-11 to 2017-12)'
-#source_id[key]['contact'] = 'PCMDI (pcmdi-cmip@llnl.gov)'
-#source_id[key]['dataset_category'] = 'SSTsAndSeaIce'
-#source_id[key]['grid'] = '1x1 degree longitude x latitude'
-#source_id[key]['grid_label'] = 'gn'
-#source_id[key]['further_info_url'] = 'https://pcmdi.llnl.gov/mips/amip'
-#source_id[key]['institution_id'] = 'PCMDI'
-#source_id[key]['institution'] = 'Program for Climate Model Diagnosis and Intercomparison, Lawrence Livermore National Laboratory, Livermore, CA 94550, USA'
-#source_id[key]['nominal_resolution'] = '1x1 degree'
-#source_id[key]['product'] = 'observations'
-#source_id[key]['references'] = ''.join(['Taylor, K.E., D. Williamson and F. Zwiers, ',
-#                                        '2000: The sea surface temperature and sea ice ',
-#                                        'concentration boundary conditions for AMIP II ',
-#                                        'simulations. PCMDI Report 60, Program for ',
-#                                        'Climate Model Diagnosis and Intercomparison, ',
-#                                        'Lawrence Livermore National Laboratory, 25 pp. ',
-#                                        'Available online: https://pcmdi.llnl.gov/report/pdf/60.pdf'])
-#source_id[key]['region'] = ['global_ocean']
-#source_id[key]['release_year'] = '2018'
-#source_id[key]['source_description'] = 'Sea surface temperature and sea-ice datasets produced by PCMDI (LLNL) for the AMIP (DECK) experiment of CMIP6'
-#source_id[key]['source'] = 'PCMDI-AMIP 1.1.4: Merged SST based on UK MetOffice HadISST and NCEP OI2'
-#source_id[key]['source_id'] = key
-#source_id[key]['source_type'] = 'satellite_blended'
-#source_id[key]['source_variables'] = ['areacello','sftof','siconc','siconcbcs',
-#                                      'tos','tosbcs']
-#source_id[key]['source_version'] = '1.1.4'
-#source_id[key]['target_mip'] = 'CMIP'
-#source_id[key]['title'] = 'PCMDI-AMIP 1.1.4 dataset prepared for input4MIPs'
-#----
-#key = 'MRI-JRA55-do-1-3'
-#source_id[key]['source'] = 'MRI JRA55-do 1.3: Atmospheric state generated for OMIP based on the JRA-55 reanalysis'
-#key = 'PCMDI-AMIP-1-1-3'
-#source_id[key]['source'] = 'PCMDI-AMIP 1.1.3: Merged SST based on UK MetOffice HadISST and NCEP OI2'
 '''
 
 #%% Create CV master
@@ -657,6 +727,7 @@ CV['CV']['required_global_attributes'] = required_global_attributes
 CV['CV']['source_id'] = source_id
 
 #%% Write variables to files
+print 'Start Tables write:',os.getcwd()
 for jsonName in masterTargets:
     #print jsonName
     # Clean experiment formats
@@ -678,23 +749,23 @@ for jsonName in masterTargets:
         vars()[jsonName] = dictToClean
     # Write file
     if jsonName == 'license1':
-        outFile = ''.join(['../input4MIPs_license.json'])
+        outFile = ''.join(['input4MIPs_license.json'])
     elif jsonName in ['Ofx','Omon','SImon','CV','coordinate','formula_terms',
                       'grids','A3hr','A3hrPt','Oday','OmonC','OyrC','SI3hrPt',
-                      'SIday','LIyrC','LIfx']:
-        outFile = ''.join(['../Tables/input4MIPs_',jsonName,'.json'])
+                      'SIday','LIday','LIyrC','LIfx','Lday','Afx']:
+        outFile = ''.join(['Tables/input4MIPs_',jsonName,'.json'])
     else:
-        outFile = ''.join(['../input4MIPs_',jsonName,'.json'])
+        outFile = ''.join(['input4MIPs_',jsonName,'.json'])
     # Check file exists
     if os.path.exists(outFile):
         print('File existing, purging:',outFile)
         os.remove(outFile)
-    if not os.path.exists('../Tables'):
-        os.mkdir('../Tables')
+    if not os.path.exists('Tables'):
+        os.mkdir('Tables')
     # Create host dictionary
     if jsonName not in ['coordinate','formula_terms','grids','CV','institution_id',
-                        'Ofx','Omon','SImon','A3hr','A3hrPt','Oday','OmonC',
-                        'OyrC','SI3hrPt','LIyrC','SIday','LIfx']:
+                        'Afx','Ofx','Omon','SImon','A3hr','A3hrPt','Oday','OmonC',
+                        'OyrC','SI3hrPt','LIday','LIyrC','SIday','LIfx','Lday']:
         jsonDict = {}
         jsonDict[jsonName] = eval(jsonName)
     else:
@@ -708,6 +779,7 @@ del(jsonName,outFile) ; gc.collect()
 # Validate - only necessary if files are not written by json module
 
 #%% Incorporate JSON versioning info - see https://docs.google.com/document/d/1pU9IiJvPJwRvIgVaSDdJ4O0Jeorv_2ekEtted34K9cA/edit#heading=h.w4kchhc266o3
+print 'Start Versions write:',os.getcwd()
 versionId = '6.2.3'
 input4MIPs = {}
 input4MIPs['data'] = {}
@@ -797,13 +869,14 @@ input4MIPs['data']['CMIP']['VUA']['emissions'] = {}
 input4MIPs['data']['CMIP']['VUA']['emissions']['currentVersion'] = '1.2'
 input4MIPs['data']['CMIP']['VUA']['emissions']['deprecatedVersion'] = '1.0'
 # Write version file
-outFile = ''.join(['../Versions/',versionId,'.json'])
+print 'Start Versions write:',os.getcwd()
+outFile = ''.join(['Versions/',versionId,'.json'])
 # Check file exists
 if os.path.exists(outFile):
     print('File existing, purging:',outFile)
     os.remove(outFile)
-if not os.path.exists('../Versions'):
-    os.mkdir('../Versions')
+if not os.path.exists('Versions'):
+    os.mkdir('Versions')
 # Create host dictionary
 jsonDict = {}
 jsonDict['input4MIPs_version'] = {}
@@ -814,24 +887,30 @@ json.dump(jsonDict,fH,ensure_ascii=True,sort_keys=True,indent=4,separators=(',',
 fH.close()
 
 #%% Generate MRI-JMA-JRA55-do-1-3 demo directory
-demoPath = os.path.join('/','/'.join(os.path.realpath(__file__).split('/')[0:-2]),'demo')
+print 'Start MRI-JMA-JRA55-do-1-3 write:',os.getcwd()
+demoPath = os.path.join('/','/'.join(os.path.realpath(__file__).split('/')[0:-1]),'demo')
+print 'demoPath:',demoPath
 demoPath = os.path.join(demoPath,'MRI-JMA-JRA55-do-1-3')
+print 'demoPath:',demoPath
 outPath = os.path.join(demoPath,'Tables')
+print 'outPath:',outPath
 # First purge existing
 if os.path.exists(outPath):
     shutil.rmtree(outPath) ; # Purge all existing
     os.makedirs(outPath)
 else:
     os.makedirs(outPath)
-os.chdir(demoPath)
+os.chdir(outPath)
+print 'Write MRI-JMA-JRA55-do-1-3 write:',os.getcwd()
 
 # Now fill Tables subdir with required files
-cvTables = ['A3hr','A3hrPt','CV','Oday','OmonC','OyrC','SI3hrPt','LIyrC','SIday',
-            'coordinate','formula_terms']
+cvTables = ['A3hr','A3hrPt','CV','Oday','OmonC','OyrC','SI3hrPt','LIday',
+            'LIyrC','SIday','coordinate','formula_terms']
 for count,tableId in enumerate(cvTables):
     fileName = ''.join(['input4MIPs_',tableId,'.json'])
-    sourcePath = os.path.join('..','..','Tables',fileName)
-    shutil.copy(sourcePath,'Tables')
+    print 'Write loop MRI-JMA-JRA55-do-1-3:',os.getcwd()
+    sourcePath = os.path.join('..','..','..','Tables',fileName)
+    shutil.copy(sourcePath,'.')
 
 #%% Generate zip archive
 env7za = os.environ.copy()
@@ -857,3 +936,53 @@ stdout = p.stdout.read() ; # Use persistent variables for tests below
 stderr = p.stderr.read()
 # Move to demo dir
 shutil.move('demo.zip', 'MRI-JMA-JRA55-do-1-3/demo.zip')
+
+#%% Generate MRI-JMA-JRA55-do-1-3-2 demo directory
+print 'Start MRI-JMA-JRA55-do-1-3-2 write:',os.getcwd()
+#demoPath = os.path.join('/','/'.join(os.path.realpath(__file__).split('/')[0:-2]),'demo')
+demoPath = os.path.join(homePath,'demo')
+os.chdir(demoPath)
+#print 'MRI-JMA-JRA55-do-1-3-2 demo:',os.getcwd()
+demoPath = os.path.join(demoPath,'MRI-JMA-JRA55-do-1-3-2')
+outPath = os.path.join(demoPath,'Tables')
+# First purge existing
+if os.path.exists(outPath):
+    shutil.rmtree(outPath) ; # Purge all existing
+    os.makedirs(outPath)
+else:
+    os.makedirs(outPath)
+os.chdir(outPath)
+
+# Now fill Tables subdir with required files
+cvTables = ['Afx','Lday','OyrC','coordinate','formula_terms']
+#print 'MRI-JMA-JRA55-do-1-3-2 demo:',os.getcwd()
+for count,tableId in enumerate(cvTables):
+    fileName = ''.join(['input4MIPs_',tableId,'.json'])
+    print 'Write loop MRI-JMA-JRA55-do-1-3-2:',os.getcwd()
+    sourcePath = os.path.join('..','..','..','Tables',fileName)
+    shutil.copy(sourcePath,'.')
+
+#%% Generate MRI-JMA-JRA55-do-1-4-0 demo directory
+print 'Start MRI-JMA-JRA55-do-1-4-0 write:',os.getcwd()
+demoPath = os.path.join(homePath,'demo')
+os.chdir(demoPath)
+#print 'MRI-JMA-JRA55-do-1-4-0 demo:',os.getcwd()
+demoPath = os.path.join(demoPath,'MRI-JMA-JRA55-do-1-4-0')
+outPath = os.path.join(demoPath,'Tables')
+# First purge existing
+if os.path.exists(outPath):
+    shutil.rmtree(outPath) ; # Purge all existing
+    os.makedirs(outPath)
+else:
+    os.makedirs(outPath)
+os.chdir(outPath)
+
+# Now fill Tables subdir with required files
+cvTables = ['Afx','A3hr','A3hrPt','CV','Lday','LIday','LIyrC','Oday','OmonC',
+            'OyrC','SI3hrPt','SIday','coordinate','formula_terms']
+#print 'MRI-JMA-JRA55-do-1-4-0 demo:',os.getcwd()
+for count,tableId in enumerate(cvTables):
+    fileName = ''.join(['input4MIPs_',tableId,'.json'])
+    print 'Write loop MRI-JMA-JRA55-do-1-4-0:',os.getcwd()
+    sourcePath = os.path.join('..','..','..','Tables',fileName)
+    shutil.copy(sourcePath,'.')
