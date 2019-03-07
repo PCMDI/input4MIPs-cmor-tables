@@ -29,17 +29,87 @@ PJD  1 Feb 2019     - Added washperms fix for retracted dirs (washPerms: pathX =
 PJD  1 Feb 2019     - Added removeDuplicates to createPubFiles to deal with multi-file variables
 PJD  1 Mar 2019     - Committed file to input4MIPs-cmor-tables repo
 PJD  1 Mar 2019     - Revised directory perms to 775 (was 755)
+PJD  7 Mar 2019     - Reorg library alpha
+PJD  7 Mar 2019     - Add checkTrackingId
                     - TODO: Note other Synda sensitive entries are "priority" and "type"
 
 @author: durack1
 """
-import datetime,json,os,pytz,sys
+import datetime,json,os,pytz,re,sys
 
 #%% Create master vars for validation
 MIPList = ['AerChemMIP','C4MIP','CDRMIP','CFMIP','CMIP','CORDEX',
            'DAMIP','DCPP','DynVarMIP','FAFMIP','GMMIP','GeoMIP',
            'HighResMIP','ISMIP6','LS3MIP','LUMIP','OMIP','PAMIP',
            'PMIP','RFMIP','SIMIP','ScenarioMIP','VIACSAB','VolMIP']
+
+#%% Test tracking_id for valid form
+def checkTrackingId(trackingId):
+    # Test tracking id for matching form
+    #:tracking_id = "hdl:21.14100/0499b180-3af7-43e8-9bfe-228722d64100" ; Consists of a prefix hdl:21.14100/ with a unique UUID4 appended for each unique file
+    # Spec indicates no upper-case https://stackoverflow.com/questions/8258480/type-of-character-generated-by-uuid
+    reTrackIdTest = re.compile(r'[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}')
+    tId = trackingId.split('/')
+    #print tId
+    if tId[0] != 'hdl:21.14100':
+        print 'checkTrackingId: invalid prefix != hdl:21.14100 = ',tId[0]
+        result = False
+    elif not re.match(reTrackIdTest,tId[1]):
+        print 'checkTrackingId: invalid UUID4 = ',tId[1]
+        result = False
+    else:
+        print 'checkTrackingId: valid prefix/UUID4'
+        result = True
+
+    return result
+
+#%% Generate publication files
+def createPubFiles(destPath,jsonId,jsonFilePaths,variableFilePaths):
+    os.chdir(destPath)
+    print 'createPubFiles: os.cwd() =',os.getcwd()
+    print 'createPubFiles: jsonId =',jsonId
+    # Check jsonId format
+    testStr = jsonId.split('-')
+    if len(testStr) != 2:
+        print 'teststr:',testStr
+        print 'jsonWriteFile: format invalid, exiting..'
+    if testStr[0] not in MIPList:
+        #print 'teststr 1:',testStr[1]
+        print 'createPubFiles: jsonId format issue - activity_id invalid, exiting ..'
+        sys.exit()
+    if testStr[1] == '':
+        #print 'teststr 2:',testStr[2]
+        print 'createPubFiles: jsonId format issue - User identifier invalid, exiting ..'
+        sys.exit()
+    key = '-'.join(['input4MIPs',jsonId])
+    # Create output files for publication
+    timeNow = datetime.datetime.now();
+    local = pytz.timezone('America/Los_Angeles')
+    localTimeNow = timeNow.replace(tzinfo = local)
+    dateStamp = localTimeNow.strftime('%y%m%d_%H%M%S')
+    # Change to target directory
+    pubFileDir = '/p/user_pub/publish-queue/input4MIPs-list-todo/'
+    os.chdir(pubFileDir)
+    jsonFilePath = '_'.join([dateStamp,key,'jsonList.txt'])
+    # Now trim lists for unique
+    jsonFilePaths = removeDuplicates(jsonFilePaths)
+    with open(jsonFilePath, 'w') as f:
+        for item in jsonFilePaths:
+            f.write('%s\n' % item)
+    # Wash perms of file
+    os.chmod(jsonFilePath,0664) ; # Note a leading 0 is required to trick python into thinking this is octal
+    # https://stackoverflow.com/questions/15607903/python-module-os-chmodfile-664-does-not-change-the-permission-to-rw-rw-r-bu
+    os.chown(jsonFilePath,40336,2669)
+    fileListPaths = '_'.join([dateStamp,key,'fileList.txt'])
+    # Now trim lists for unique
+    variableFilePaths = removeDuplicates(variableFilePaths)
+    with open(fileListPaths, 'w') as f:
+        for item in variableFilePaths:
+            f.write('%s\n' % item)
+    # Wash perms of file
+    os.chmod(fileListPaths,0664)
+    os.chown(fileListPaths,40336,2669)
+    print 'createPubFiles: Publication files successfully written to:',pubFileDir
 
 #%% Generate json file for publication step
 def jsonWriteFile(conventions,activityId,contact,creationDate,datasetCategory,datasetVersionNumber,
@@ -157,6 +227,19 @@ def jsonWriteFile(conventions,activityId,contact,creationDate,datasetCategory,da
     json.dump(esgfPubDict,fH,ensure_ascii=True,sort_keys=True,indent=4,separators=(',',':'),encoding="utf-8")
     fH.close()
 
+#%% Remove duplicate elements from list
+def removeDuplicates(listofElements):
+    # Create an empty list to store unique elements
+    uniqueList = []
+    # Iterate over the original list and for each element
+    # add it to uniqueList, if its not already there.
+    for elem in listofElements:
+        if elem not in uniqueList:
+            uniqueList.append(elem)
+
+    # Return the list of unique elements
+    return uniqueList
+
 #%% Wash permissions
 def washPerms(destPath,activityId,mipEra,targetMip,institutionId,sourceId,realm,frequency,gridLabel,dataVersion):
     os.chdir(destPath)
@@ -175,64 +258,3 @@ def washPerms(destPath,activityId,mipEra,targetMip,institutionId,sourceId,realm,
         for f in files:
             print 'washPerms: file =',f
             os.chmod(os.path.join(root, f), 0664)
-
-#%% Generate publication files
-def createPubFiles(destPath,jsonId,jsonFilePaths,variableFilePaths):
-    os.chdir(destPath)
-    print 'createPubFiles: os.cwd() =',os.getcwd()
-    print 'createPubFiles: jsonId =',jsonId
-    # Check jsonId format
-    testStr = jsonId.split('-')
-    if len(testStr) != 2:
-        print 'teststr:',testStr
-        print 'jsonWriteFile: format invalid, exiting..'
-    if testStr[0] not in MIPList:
-        #print 'teststr 1:',testStr[1]
-        print 'createPubFiles: jsonId format issue - activity_id invalid, exiting ..'
-        sys.exit()
-    if testStr[1] == '':
-        #print 'teststr 2:',testStr[2]
-        print 'createPubFiles: jsonId format issue - User identifier invalid, exiting ..'
-        sys.exit()
-    key = '-'.join(['input4MIPs',jsonId])
-    # Create output files for publication
-    timeNow = datetime.datetime.now();
-    local = pytz.timezone('America/Los_Angeles')
-    localTimeNow = timeNow.replace(tzinfo = local)
-    dateStamp = localTimeNow.strftime('%y%m%d_%H%M%S')
-    # Change to target directory
-    pubFileDir = '/p/user_pub/publish-queue/input4MIPs-list-todo/'
-    os.chdir(pubFileDir)
-    jsonFilePath = '_'.join([dateStamp,key,'jsonList.txt'])
-    # Now trim lists for unique
-    jsonFilePaths = removeDuplicates(jsonFilePaths)
-    with open(jsonFilePath, 'w') as f:
-        for item in jsonFilePaths:
-            f.write('%s\n' % item)
-    # Wash perms of file
-    os.chmod(jsonFilePath,0664) ; # Note a leading 0 is required to trick python into thinking this is octal
-    # https://stackoverflow.com/questions/15607903/python-module-os-chmodfile-664-does-not-change-the-permission-to-rw-rw-r-bu
-    os.chown(jsonFilePath,40336,2669)
-    fileListPaths = '_'.join([dateStamp,key,'fileList.txt'])
-    # Now trim lists for unique
-    variableFilePaths = removeDuplicates(variableFilePaths)
-    with open(fileListPaths, 'w') as f:
-        for item in variableFilePaths:
-            f.write('%s\n' % item)
-    # Wash perms of file
-    os.chmod(fileListPaths,0664)
-    os.chown(fileListPaths,40336,2669)
-    print 'createPubFiles: Publication files successfully written to:',pubFileDir
-
-#%% Remove duplicate elements from list
-def removeDuplicates(listofElements):
-    # Create an empty list to store unique elements
-    uniqueList = []
-    # Iterate over the original list and for each element
-    # add it to uniqueList, if its not already there.
-    for elem in listofElements:
-        if elem not in uniqueList:
-            uniqueList.append(elem)
-
-    # Return the list of unique elements
-    return uniqueList
