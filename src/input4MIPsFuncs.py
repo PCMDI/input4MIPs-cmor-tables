@@ -31,11 +31,12 @@ PJD  1 Mar 2019     - Committed file to input4MIPs-cmor-tables repo
 PJD  1 Mar 2019     - Revised directory perms to 775 (was 755)
 PJD  7 Mar 2019     - Reorg library alpha
 PJD  7 Mar 2019     - Add checkTrackingId
+PJD 29 Apr 2019     - Adding errno to deal with perm issue in washPerms
                     - TODO: Note other Synda sensitive entries are "priority" and "type"
 
 @author: durack1
 """
-import datetime,json,os,pytz,re,sys
+import datetime,errno,json,os,pytz,re,sys
 
 #%% Create master vars for validation
 MIPList = ['AerChemMIP','C4MIP','CDRMIP','CFMIP','CMIP','CORDEX',
@@ -253,8 +254,15 @@ def washPerms(destPath,activityId,mipEra,targetMip,institutionId,sourceId,realm,
         dirs[:] = [d for d in dirs if '-retracted' not in d]
         for d in dirs:
             print 'washPerms: dir =',d
-            os.chmod(os.path.join(root, d), 0775) ; # Note a leading 0 is required to trick python into thinking this is octal
-            # https://stackoverflow.com/questions/15607903/python-module-os-chmodfile-664-does-not-change-the-permission-to-rw-rw-r-bu
+            try:
+                os.chmod(os.path.join(root, d), 0775) ; # Note a leading 0 is required to trick python into thinking this is octal
+                # https://stackoverflow.com/questions/15607903/python-module-os-chmodfile-664-does-not-change-the-permission-to-rw-rw-r-bu
+            except OSError as e:
+                print e
+                if (e[0] == errno.EPERM):
+                    print >> sys.stderr, "Permissions to complete task not assigned, skipping"
+                    continue
+                
         for f in files:
             print 'washPerms: file =',f
             os.chmod(os.path.join(root, f), 0664)
