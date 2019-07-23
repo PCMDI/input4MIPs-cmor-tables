@@ -32,6 +32,7 @@ PJD  1 Mar 2019     - Revised directory perms to 775 (was 755)
 PJD  7 Mar 2019     - Reorg library alpha
 PJD  7 Mar 2019     - Add checkTrackingId
 PJD 29 Apr 2019     - Adding errno to deal with perm issue in washPerms
+PJD 23 Jul 2019     - Updated for python3 ; Updated leading '0' for chmod calls (remove py2 fudge)
                     - TODO: Note other Synda sensitive entries are "priority" and "type"
 
 @author: durack1
@@ -53,13 +54,13 @@ def checkTrackingId(trackingId):
     tId = trackingId.split('/')
     #print tId
     if tId[0] != 'hdl:21.14100':
-        print 'checkTrackingId: invalid prefix != hdl:21.14100 = ',tId[0]
+        print('checkTrackingId: invalid prefix != hdl:21.14100 = ',tId[0])
         result = False
     elif not re.match(reTrackIdTest,tId[1]):
-        print 'checkTrackingId: invalid UUID4 = ',tId[1]
+        print('checkTrackingId: invalid UUID4 = ',tId[1])
         result = False
     else:
-        print 'checkTrackingId: valid prefix/UUID4'
+        print('checkTrackingId: valid prefix/UUID4')
         result = True
 
     return result
@@ -67,20 +68,20 @@ def checkTrackingId(trackingId):
 #%% Generate publication files
 def createPubFiles(destPath,jsonId,jsonFilePaths,variableFilePaths):
     os.chdir(destPath)
-    print 'createPubFiles: os.cwd() =',os.getcwd()
-    print 'createPubFiles: jsonId =',jsonId
+    print('createPubFiles: os.cwd() =',os.getcwd())
+    print('createPubFiles: jsonId =',jsonId)
     # Check jsonId format
     testStr = jsonId.split('-')
     if len(testStr) != 2:
-        print 'teststr:',testStr
-        print 'jsonWriteFile: format invalid, exiting..'
+        print('teststr:',testStr)
+        print('jsonWriteFile: format invalid, exiting..')
     if testStr[0] not in MIPList:
         #print 'teststr 1:',testStr[1]
-        print 'createPubFiles: jsonId format issue - activity_id invalid, exiting ..'
+        print('createPubFiles: jsonId format issue - activity_id invalid, exiting ..')
         sys.exit()
     if testStr[1] == '':
         #print 'teststr 2:',testStr[2]
-        print 'createPubFiles: jsonId format issue - User identifier invalid, exiting ..'
+        print('createPubFiles: jsonId format issue - User identifier invalid, exiting ..')
         sys.exit()
     key = '-'.join(['input4MIPs',jsonId])
     # Create output files for publication
@@ -98,7 +99,7 @@ def createPubFiles(destPath,jsonId,jsonFilePaths,variableFilePaths):
         for item in jsonFilePaths:
             f.write('%s\n' % item)
     # Wash perms of file
-    os.chmod(jsonFilePath,0664) ; # Note a leading 0 is required to trick python into thinking this is octal
+    os.chmod(jsonFilePath,664) ; # Note a leading 0 is required to trick python into thinking this is octal
     # https://stackoverflow.com/questions/15607903/python-module-os-chmodfile-664-does-not-change-the-permission-to-rw-rw-r-bu
     os.chown(jsonFilePath,40336,2669)
     fileListPaths = '_'.join([dateStamp,key,'fileList.txt'])
@@ -108,9 +109,9 @@ def createPubFiles(destPath,jsonId,jsonFilePaths,variableFilePaths):
         for item in variableFilePaths:
             f.write('%s\n' % item)
     # Wash perms of file
-    os.chmod(fileListPaths,0664)
+    os.chmod(fileListPaths,664)
     os.chown(fileListPaths,40336,2669)
-    print 'createPubFiles: Publication files successfully written to:',pubFileDir
+    print('createPubFiles: Publication files successfully written to:',pubFileDir)
 
 #%% Generate json file for publication step
 def jsonWriteFile(conventions,activityId,contact,creationDate,datasetCategory,datasetVersionNumber,
@@ -123,30 +124,30 @@ def jsonWriteFile(conventions,activityId,contact,creationDate,datasetCategory,da
     esgfPubDict = {}
     # Check jsonId format
     testStr = jsonId.split('-')
-    print 'testStr:',testStr
-    print 'len(testStr):',len(testStr)
+    print('testStr:',testStr)
+    print('len(testStr):',len(testStr))
     if len(testStr) != 2:
-        print 'teststr 0:',testStr[0]
-        print 'jsonWriteFile: format invalid, exiting..'
+        print('teststr 0:',testStr[0])
+        print('jsonWriteFile: format invalid, exiting..')
 #    if testStr[0] != 'input4MIPs':
 #        #print 'teststr 0:',testStr[0]
 #        print 'jsonWriteFile: format invalid, exiting..'
 #        sys.exit()
     if testStr[0] not in MIPList:
         #print 'teststr 1:',testStr[1]
-        print 'jsonWriteFile: format issue: activity_id invalid, exiting ..'
+        print('jsonWriteFile: format issue: activity_id invalid, exiting ..')
         sys.exit()
     if testStr[1] == '':
         #print 'teststr 2:',testStr[2]
-        print 'jsonWriteFile: format issue: User identifier invalid, exiting ..'
+        print('jsonWriteFile: format issue: User identifier invalid, exiting ..')
         sys.exit()
 
     # Test targetMip
-    print 'jsonWriteFile: targetMip =',targetMip
+    print('jsonWriteFile: targetMip =',targetMip)
 
     #key = '-'.join(['input4MIPs',jsonId,targetMip])
     key = '-'.join(['input4MIPs',jsonId])
-    print 'key:',key
+    print('key:',key)
     esgfPubDict[key] = {}
     esgfPubDict[key]['Conventions'] = ' '.join(conventions.split())
     esgfPubDict[key]['activity_id'] = 'input4MIPs' ; #' '.join(activityId.split())
@@ -168,7 +169,7 @@ def jsonWriteFile(conventions,activityId,contact,creationDate,datasetCategory,da
     esgfPubDict[key]['target_mip'] = targetMip ; # First entry only
     # test target_mip
     if targetMip not in MIPList:
-        print 'jsonWriteFile: MIP invalid, exiting..'
+        print('jsonWriteFile: MIP invalid, exiting..')
         sys.exit()
     esgfPubDict[key]['target_mip_list'] = targetMipJson ; #list([' '.join(targetMip.split())])
     esgfPubDict[key]['title'] = ' '.join(title.split()) # Comes from file
@@ -178,10 +179,10 @@ def jsonWriteFile(conventions,activityId,contact,creationDate,datasetCategory,da
     #esgfPubDict[key]['tracking_id_list'] = list([trackingId]) # Comes from file
     # Case of multiple files
     if type(fileList) == list:
-        print 'jsonWriteFile: fileList test pass'
+        print('jsonWriteFile: fileList test pass')
         esgfPubDict[key]['file_list'] = fileList ; # Ensure list type
     else:
-        print 'jsonWriteFile: fileList test fail'
+        print('jsonWriteFile: fileList test fail')
         esgfPubDict[key]['file_list'] = list([fileList])
     # Correct paths to DRS/relative
     esgfPubDict[key]['tracking_id_list'] = trackingIdList
@@ -209,20 +210,20 @@ def jsonWriteFile(conventions,activityId,contact,creationDate,datasetCategory,da
     esgfPubDict[key]['timestamp'] = timeFormat
     # Write to json file
     outFile = os.path.join(destPath,activityId,mipEra,targetMip,institutionId,''.join(['_'.join([institutionId,frequency,sourceId,variableId,gridLabel,dataVersion]),'.json']))
-    print 'jsonWriteFile: json filename - ',outFile
+    print('jsonWriteFile: json filename - ',outFile)
     #outFile = os.path.join(userPath,'tmp',''.join(['_'.join([institutionId,frequency,sourceId,variableId]),'.json']))
     # Validate path - test for valid targetMip
     input4MIPsInd = outFile.split('/').index('input4MIPs') ; # Correct no matter what destPath is set
     if outFile.split('/')[input4MIPsInd+2] not in MIPList:
-        print 'jsonWriteFile: targetMip ',outFile.split('/')[6],' invalid MIP, exiting..'
+        print('jsonWriteFile: targetMip ',outFile.split('/')[6],' invalid MIP, exiting..')
         sys.exit()
     # Validate if json file exists - DO NOT DELETE/OVERWRITE
     if os.path.exists(outFile):
         if overWriteFile:
-            print 'jsonWriteFile: File existing, purging - ',outFile
+            print('jsonWriteFile: File existing, purging - ',outFile)
             os.remove(outFile)
         elif overWriteFile: # Condition must be True
-            print 'jsonWriteFile: File exists, exiting..'
+            print('jsonWriteFile: File exists, exiting..')
             sys.exit()
     fH = open(outFile,'w')
     json.dump(esgfPubDict,fH,ensure_ascii=True,sort_keys=True,indent=4,separators=(',',':'),encoding="utf-8")
@@ -244,25 +245,26 @@ def removeDuplicates(listofElements):
 #%% Wash permissions
 def washPerms(destPath,activityId,mipEra,targetMip,institutionId,sourceId,realm,frequency,gridLabel,dataVersion):
     os.chdir(destPath)
-    print 'washPerms: os.cwd() = ',os.getcwd()
+    print('washPerms: os.cwd() = ',os.getcwd())
     #[durack1@oceanonly input4MIPs]$ chmod 755 -R FAFMIP/
     #pathX = os.path.join(destPath,activityId,mipEra,targetMip)
     pathX = os.path.join(activityId,mipEra,targetMip) ; # Remove sourceId as cases of multiple exist
-    print 'washPerms: pathX = ',pathX
+    print('washPerms: pathX = ',pathX)
     for root, dirs, files in os.walk(pathX, topdown=True):
         # Prune dirs in place - retracted dirs
         dirs[:] = [d for d in dirs if '-retracted' not in d]
         for d in dirs:
-            print 'washPerms: dir =',d
+            print('washPerms: dir =',d)
             try:
-                os.chmod(os.path.join(root, d), 0775) ; # Note a leading 0 is required to trick python into thinking this is octal
+                os.chmod(os.path.join(root, d), 775) ; # Note a leading 0 is required to trick python into thinking this is octal
                 # https://stackoverflow.com/questions/15607903/python-module-os-chmodfile-664-does-not-change-the-permission-to-rw-rw-r-bu
             except OSError as e:
-                print e
+                print('e:',e)
                 if (e[0] == errno.EPERM):
-                    print >> sys.stderr, "Permissions to complete task not assigned, skipping"
+                    print('Permissions to complete task not assigned, skipping')
+                    sys.stderr.write('Permissions to complete task not assigned, skipping')
                     continue
-                
+
         for f in files:
-            print 'washPerms: file =',f
-            os.chmod(os.path.join(root, f), 0664)
+            print('washPerms: file =',f)
+            os.chmod(os.path.join(root, f), 664)
