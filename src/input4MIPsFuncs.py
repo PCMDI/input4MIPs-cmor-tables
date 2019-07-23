@@ -33,6 +33,9 @@ PJD  7 Mar 2019     - Reorg library alpha
 PJD  7 Mar 2019     - Add checkTrackingId
 PJD 29 Apr 2019     - Adding errno to deal with perm issue in washPerms
 PJD 23 Jul 2019     - Updated for python3 ; Updated leading '0' for chmod calls (remove py2 fudge)
+PJD 23 Jul 2019     - json library missing 'encoding' keywork in py3, workaround implemented
+PJD 23 Jul 2019     - Update os.chmod calls to take octal arguments, prefix '0o' rather than py2 '0'
+PJD 23 Jul 2019     - Updated os.chmod file calls from 664 (-rw-rw-r--) to 644 (-rw-r--r--)
                     - TODO: Note other Synda sensitive entries are "priority" and "type"
 
 @author: durack1
@@ -44,6 +47,12 @@ MIPList = ['AerChemMIP','C4MIP','CDRMIP','CFMIP','CMIP','CORDEX',
            'DAMIP','DCPP','DynVarMIP','FAFMIP','GMMIP','GeoMIP',
            'HighResMIP','ISMIP6','LS3MIP','LUMIP','OMIP','PAMIP',
            'PMIP','RFMIP','SIMIP','ScenarioMIP','VIACSAB','VolMIP']
+
+#%% Create uuid and gid entries for durack1
+#(cdatpy3N190723) > id durack1
+#uid=40336(durack1) gid=1026(climate) groups=1026(climate),3669(cmipXmls),4669(cmipXmlsAdmin),2669(climatew),6669(xclimw)uid = 40336
+uid = 40336
+gid = 2669
 
 #%% Test tracking_id for valid form
 def checkTrackingId(trackingId):
@@ -99,9 +108,9 @@ def createPubFiles(destPath,jsonId,jsonFilePaths,variableFilePaths):
         for item in jsonFilePaths:
             f.write('%s\n' % item)
     # Wash perms of file
-    os.chmod(jsonFilePath,664) ; # Note a leading 0 is required to trick python into thinking this is octal
+    os.chmod(jsonFilePath,0o644) ; # Note a leading 0 is required to trick python into thinking this is octal
     # https://stackoverflow.com/questions/15607903/python-module-os-chmodfile-664-does-not-change-the-permission-to-rw-rw-r-bu
-    os.chown(jsonFilePath,40336,2669)
+    os.chown(jsonFilePath,uid,gid)
     fileListPaths = '_'.join([dateStamp,key,'fileList.txt'])
     # Now trim lists for unique
     variableFilePaths = removeDuplicates(variableFilePaths)
@@ -109,8 +118,8 @@ def createPubFiles(destPath,jsonId,jsonFilePaths,variableFilePaths):
         for item in variableFilePaths:
             f.write('%s\n' % item)
     # Wash perms of file
-    os.chmod(fileListPaths,664)
-    os.chown(fileListPaths,40336,2669)
+    os.chmod(fileListPaths, 0o644)
+    os.chown(fileListPaths,uid,gid)
     print('createPubFiles: Publication files successfully written to:',pubFileDir)
 
 #%% Generate json file for publication step
@@ -225,8 +234,8 @@ def jsonWriteFile(conventions,activityId,contact,creationDate,datasetCategory,da
         elif overWriteFile: # Condition must be True
             print('jsonWriteFile: File exists, exiting..')
             sys.exit()
-    fH = open(outFile,'w')
-    json.dump(esgfPubDict,fH,ensure_ascii=True,sort_keys=True,indent=4,separators=(',',':'),encoding="utf-8")
+    fH = open(outFile,'w',encoding='utf8') ; # Update from straight open call
+    json.dump(esgfPubDict,fH,ensure_ascii=True,sort_keys=True,indent=4,separators=(',',':'))
     fH.close()
 
 #%% Remove duplicate elements from list
@@ -256,7 +265,7 @@ def washPerms(destPath,activityId,mipEra,targetMip,institutionId,sourceId,realm,
         for d in dirs:
             print('washPerms: dir =',d)
             try:
-                os.chmod(os.path.join(root, d), 775) ; # Note a leading 0 is required to trick python into thinking this is octal
+                os.chmod(os.path.join(root, d), 0o775) ; # Note a leading 0o is required to trick python into thinking this is octal
                 # https://stackoverflow.com/questions/15607903/python-module-os-chmodfile-664-does-not-change-the-permission-to-rw-rw-r-bu
             except OSError as e:
                 print('e:',e)
@@ -267,4 +276,4 @@ def washPerms(destPath,activityId,mipEra,targetMip,institutionId,sourceId,realm,
 
         for f in files:
             print('washPerms: file =',f)
-            os.chmod(os.path.join(root, f), 664)
+            os.chmod(os.path.join(root, f), 0o644)
