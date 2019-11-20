@@ -395,7 +395,7 @@
                 "title":"PCMDI-AMIP 1.1.5 dataset prepared for input4MIPs"
             },
             "PCMDI-AMIP-1-2-0":{
-                "comment":"Based on Hurrell SST/sea ice consistency criteria applied to merged HadISST (1870-01 to 1981-10) & NCEP-0I2 (1981-11 to 2018-12)",
+                "comment":"Based on Hurrell SST/sea ice consistency criteria applied to merged HadISST (1870-01 to 1981-10) & NCEP-0I2 (1981-11 to 2019-06)",
                 "contact":"PCMDI (pcmdi-cmip@llnl.gov)",
                 "dataset_category":"SSTsAndSeaIce",
                 "further_info_url":"https://pcmdi.llnl.gov/mips/amip",
@@ -409,7 +409,7 @@
                 "region":[
                     "global_ocean"
                 ],
-                "release_year":"2019",
+                "release_year":"2020",
                 "source":"PCMDI-AMIP 1.2.0: Merged SST based on UK MetOffice HadISST and NCEP OI2",
                 "source_description":"Sea surface temperature and sea-ice datasets produced by PCMDI (LLNL) for the AMIP (DECK) experiment of CMIP6",
                 "source_id":"PCMDI-AMIP-1-2-0",
