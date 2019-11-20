@@ -74,6 +74,7 @@ PJD  6 Mar 2019     - Updated homePath
 PJD 11 Jul 2019     - Register source_id PCMDI-AMIP-1-2-0 https://github.com/PCMDI/input4MIPs-cmor-tables/issues/87
 PJD 11 Jul 2019     - Add MacOS path to durolib
 PJD 20 Nov 2019     - Update registration of PCMDI-AMIP-1-2-0 https://github.com/PCMDI/input4MIPs-cmor-tables/issues/87
+PJD 20 Nov 2019     - Update institution_id to maintain cross-CV formatting https://github.com/PCMDI/input4MIPs-cmor-tables/issues/93
                     - TODO: Deal with lab cert issue https://raw.githubusercontent.com -> http://rawgit.com (see requests library)
 
 @author: durack1
@@ -497,29 +498,30 @@ frequency['yrC'] = 'annual climatology computed from annual mean samples'
 
 # Fix issues
 institution_id = {}
-institution_id['CCCma'] = 'Canadian Centre for Climate Modelling and Analysis, Victoria, BC V8P 5C2, Canada'
-institution_id['CNRM-Cerfacs'] = ('CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France),'
+institution_id['institution_id'] = {}
+institution_id['institution_id']['CCCma'] = 'Canadian Centre for Climate Modelling and Analysis, Victoria, BC V8P 5C2, Canada'
+institution_id['institution_id']['CNRM-Cerfacs'] = ('CNRM (Centre National de Recherches Meteorologiques, Toulouse 31057, France),'
               ' CERFACS (Centre Europeen de Recherche et de Formation Avancee en Calcul Scientifique, Toulouse 31100, France)')
-institution_id['IACETH'] = 'Institute for Atmosphere and Climate, ETH Zurich, Zurich 8092, Switzerland'
-institution_id['IAMC'] = ''.join(['Integrated Assessment Modeling Consortium (see www.globalchange.umd.edu/iamc/membership ',
+institution_id['institution_id']['IACETH'] = 'Institute for Atmosphere and Climate, ETH Zurich, Zurich 8092, Switzerland'
+institution_id['institution_id']['IAMC'] = ''.join(['Integrated Assessment Modeling Consortium (see www.globalchange.umd.edu/iamc/membership ',
                          'for complete membership). Mailing address: International Institute for Applied Systems Analysis ',
                          '(IIASA), Schlossplatz 1, A-2361 Laxenburg, Austria'])
-institution_id['ImperialCollege'] = 'Imperial College London, South Kensington Campus, London SW7 2AZ, UK'
-institution_id['MOHC'] = 'Met Office Hadley Centre, Fitzroy Road, Exeter, Devon, EX1 3PB, UK'
-institution_id['MPI-B'] = 'Max Planck Institute for Biogeochemistry, Jena 07745, Germany'
-institution_id['MPI-M'] = 'Max Planck Institute for Meteorology, Hamburg 20146, Germany'
-institution_id['MRI'] = 'Meteorological Research Institute, Tsukuba, Ibaraki 305-0052, Japan'
-institution_id['NCAR'] = 'National Center for Atmospheric Research, Boulder, CO 80307, USA'
-institution_id['NCAS'] = 'National Centre for Atmospheric Science, University of Reading, Reading RG6 6BB, UK'
-institution_id['PCMDI'] = 'Program for Climate Model Diagnosis and Intercomparison, Lawrence Livermore National Laboratory, Livermore, CA 94550, USA'
-institution_id['PNNL-JGCRI'] = 'Pacific Northwest National Laboratory - Joint Global Change Research Institute, College Park, MD 20740, USA'
-institution_id['SOLARIS-HEPPA'] = 'SOLARIS-HEPPA, GEOMAR Helmholtz Centre for Ocean Research, Kiel 24105, Germany'
-institution_id['UCI'] = 'University of California - Irvine, Irvine, CA 92697, USA'
-institution_id['UColorado'] = 'University of Colorado, Boulder, CO 80309, USA'
-institution_id['UReading'] = 'University of Reading, Reading RG6 6UA, UK'
-institution_id['UoM'] = 'Australian-German Climate & Energy College, The University of Melbourne (UoM), Parkville, Victoria 3010, Australia'
-institution_id['UofMD'] = 'University of Maryland (UofMD), College Park, MD 20742, USA'
-institution_id['VUA'] = 'Vrije Universiteit Amsterdam, De Boelelaan 1105, 1081 HV Amsterdam, Netherlands'
+institution_id['institution_id']['ImperialCollege'] = 'Imperial College London, South Kensington Campus, London SW7 2AZ, UK'
+institution_id['institution_id']['MOHC'] = 'Met Office Hadley Centre, Fitzroy Road, Exeter, Devon, EX1 3PB, UK'
+institution_id['institution_id']['MPI-B'] = 'Max Planck Institute for Biogeochemistry, Jena 07745, Germany'
+institution_id['institution_id']['MPI-M'] = 'Max Planck Institute for Meteorology, Hamburg 20146, Germany'
+institution_id['institution_id']['MRI'] = 'Meteorological Research Institute, Tsukuba, Ibaraki 305-0052, Japan'
+institution_id['institution_id']['NCAR'] = 'National Center for Atmospheric Research, Boulder, CO 80307, USA'
+institution_id['institution_id']['NCAS'] = 'National Centre for Atmospheric Science, University of Reading, Reading RG6 6BB, UK'
+institution_id['institution_id']['PCMDI'] = 'Program for Climate Model Diagnosis and Intercomparison, Lawrence Livermore National Laboratory, Livermore, CA 94550, USA'
+institution_id['institution_id']['PNNL-JGCRI'] = 'Pacific Northwest National Laboratory - Joint Global Change Research Institute, College Park, MD 20740, USA'
+institution_id['institution_id']['SOLARIS-HEPPA'] = 'SOLARIS-HEPPA, GEOMAR Helmholtz Centre for Ocean Research, Kiel 24105, Germany'
+institution_id['institution_id']['UCI'] = 'University of California - Irvine, Irvine, CA 92697, USA'
+institution_id['institution_id']['UColorado'] = 'University of Colorado, Boulder, CO 80309, USA'
+institution_id['institution_id']['UReading'] = 'University of Reading, Reading RG6 6UA, UK'
+institution_id['institution_id']['UoM'] = 'Australian-German Climate & Energy College, The University of Melbourne (UoM), Parkville, Victoria 3010, Australia'
+institution_id['institution_id']['UofMD'] = 'University of Maryland (UofMD), College Park, MD 20742, USA'
+institution_id['institution_id']['VUA'] = 'Vrije Universiteit Amsterdam, De Boelelaan 1105, 1081 HV Amsterdam, Netherlands'
 #==============================================================================
 # Example new experiment_id entry
 #institution_id['institution_id']['NOAA-NCEI'] = 'NOAA\'s National Centers for Environmental Information, Asheville, NC 28801, USA'
