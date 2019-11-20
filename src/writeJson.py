@@ -75,6 +75,7 @@ PJD 11 Jul 2019     - Register source_id PCMDI-AMIP-1-2-0 https://github.com/PCM
 PJD 11 Jul 2019     - Add MacOS path to durolib
 PJD 20 Nov 2019     - Update registration of PCMDI-AMIP-1-2-0 https://github.com/PCMDI/input4MIPs-cmor-tables/issues/87
 PJD 20 Nov 2019     - Update institution_id to maintain cross-CV formatting https://github.com/PCMDI/input4MIPs-cmor-tables/issues/93
+PJD 20 Nov 2019     - Register source_id PCMDI-AMIP-1-1-6 https://github.com/PCMDI/input4MIPs-cmor-tables/issues/94
                     - TODO: Deal with lab cert issue https://raw.githubusercontent.com -> http://rawgit.com (see requests library)
 
 @author: durack1
@@ -627,6 +628,37 @@ source_id[key]['source_variables'] = ['areacello','sftof','siconc','siconcbcs',
 source_id[key]['source_version'] = '1.2.0'
 source_id[key]['target_mip'] = 'CMIP'
 source_id[key]['title'] = 'PCMDI-AMIP 1.2.0 dataset prepared for input4MIPs'
+
+key = 'PCMDI-AMIP-1-1-6'
+source_id[key] = {}
+source_id[key]['comment'] = 'Based on Hurrell SST/sea ice consistency criteria applied to merged HadISST (1870-01 to 1981-10) & NCEP-0I2 (1981-11 to 2018-12)'
+source_id[key]['contact'] = 'PCMDI (pcmdi-cmip@llnl.gov)'
+source_id[key]['dataset_category'] = 'SSTsAndSeaIce'
+source_id[key]['grid'] = '1x1 degree longitude x latitude'
+source_id[key]['grid_label'] = 'gn'
+source_id[key]['further_info_url'] = 'https://pcmdi.llnl.gov/mips/amip'
+source_id[key]['institution_id'] = 'PCMDI'
+source_id[key]['institution'] = 'Program for Climate Model Diagnosis and Intercomparison, Lawrence Livermore National Laboratory, Livermore, CA 94550, USA'
+source_id[key]['nominal_resolution'] = '1x1 degree'
+source_id[key]['product'] = 'observations'
+source_id[key]['references'] = ''.join(['Taylor, K.E., D. Williamson and F. Zwiers, ',
+                                        '2000: The sea surface temperature and sea ice ',
+                                        'concentration boundary conditions for AMIP II ',
+                                        'simulations. PCMDI Report 60, Program for ',
+                                        'Climate Model Diagnosis and Intercomparison, ',
+                                        'Lawrence Livermore National Laboratory, 25 pp. ',
+                                        'Available online: https://pcmdi.llnl.gov/report/pdf/60.pdf'])
+source_id[key]['region'] = ['global_ocean']
+source_id[key]['release_year'] = '2019'
+source_id[key]['source_description'] = 'Sea surface temperature and sea-ice datasets produced by PCMDI (LLNL) for the AMIP (DECK) experiment of CMIP6'
+source_id[key]['source'] = 'PCMDI-AMIP 1.1.6: Merged SST based on UK MetOffice HadISST and NCEP OI2'
+source_id[key]['source_id'] = key
+source_id[key]['source_type'] = 'satellite_blended'
+source_id[key]['source_variables'] = ['areacello','sftof','siconc','siconcbcs',
+                                      'tos','tosbcs']
+source_id[key]['source_version'] = '1.1.6'
+source_id[key]['target_mip'] = 'CMIP'
+source_id[key]['title'] = 'PCMDI-AMIP 1.1.6 dataset prepared for input4MIPs'
 
 #--
 #key = 'PCMDI-AMIP-1-1-5'
