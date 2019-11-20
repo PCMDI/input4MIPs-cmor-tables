@@ -73,6 +73,7 @@ PJD  6 Mar 2019     - Tweaks required to correctly align variables with realms/T
 PJD  6 Mar 2019     - Updated homePath
 PJD 11 Jul 2019     - Register source_id PCMDI-AMIP-1-2-0 https://github.com/PCMDI/input4MIPs-cmor-tables/issues/87
 PJD 11 Jul 2019     - Add MacOS path to durolib
+PJD 20 Nov 2019     - Update registration of PCMDI-AMIP-1-2-0 https://github.com/PCMDI/input4MIPs-cmor-tables/issues/87
                     - TODO: Deal with lab cert issue https://raw.githubusercontent.com -> http://rawgit.com (see requests library)
 
 @author: durack1
@@ -596,7 +597,7 @@ source_id = source_id.get('source_id')
 # Fix issues
 key = 'PCMDI-AMIP-1-2-0'
 source_id[key] = {}
-source_id[key]['comment'] = 'Based on Hurrell SST/sea ice consistency criteria applied to merged HadISST (1870-01 to 1981-10) & NCEP-0I2 (1981-11 to 2018-12)'
+source_id[key]['comment'] = 'Based on Hurrell SST/sea ice consistency criteria applied to merged HadISST (1870-01 to 1981-10) & NCEP-0I2 (1981-11 to 2019-06)'
 source_id[key]['contact'] = 'PCMDI (pcmdi-cmip@llnl.gov)'
 source_id[key]['dataset_category'] = 'SSTsAndSeaIce'
 source_id[key]['grid'] = '1x1 degree longitude x latitude'
@@ -614,7 +615,7 @@ source_id[key]['references'] = ''.join(['Taylor, K.E., D. Williamson and F. Zwie
                                         'Lawrence Livermore National Laboratory, 25 pp. ',
                                         'Available online: https://pcmdi.llnl.gov/report/pdf/60.pdf'])
 source_id[key]['region'] = ['global_ocean']
-source_id[key]['release_year'] = '2019'
+source_id[key]['release_year'] = '2020'
 source_id[key]['source_description'] = 'Sea surface temperature and sea-ice datasets produced by PCMDI (LLNL) for the AMIP (DECK) experiment of CMIP6'
 source_id[key]['source'] = 'PCMDI-AMIP 1.2.0: Merged SST based on UK MetOffice HadISST and NCEP OI2'
 source_id[key]['source_id'] = key
