@@ -36,6 +36,8 @@ PJD 23 Jul 2019     - Updated for python3 ; Updated leading '0' for chmod calls 
 PJD 23 Jul 2019     - json library missing 'encoding' keywork in py3, workaround implemented
 PJD 23 Jul 2019     - Update os.chmod calls to take octal arguments, prefix '0o' rather than py2 '0'
 PJD 23 Jul 2019     - Updated os.chmod file calls from 664 (-rw-rw-r--) to 644 (-rw-r--r--)
+PJD 21 Nov 2019     - Updated to deal with lack of climatew defined on detect (corrected back)
+                    - TODO: Need to add test for uid and gid existence before running any code (use grp)
                     - TODO: Note other Synda sensitive entries are "priority" and "type"
 
 @author: durack1
@@ -51,8 +53,9 @@ MIPList = ['AerChemMIP','C4MIP','CDRMIP','CFMIP','CMIP','CORDEX',
 #%% Create uuid and gid entries for durack1
 #(cdatpy3N190723) > id durack1
 #uid=40336(durack1) gid=1026(climate) groups=1026(climate),3669(cmipXmls),4669(cmipXmlsAdmin),2669(climatew),6669(xclimw)uid = 40336
-uid = 40336
-gid = 2669
+uid = 40336 ; #durack1
+gid = 2669 ; #climatew
+#gid = 1026 ; #climate
 
 #%% Test tracking_id for valid form
 def checkTrackingId(trackingId):
@@ -110,6 +113,7 @@ def createPubFiles(destPath,jsonId,jsonFilePaths,variableFilePaths):
     # Wash perms of file
     os.chmod(jsonFilePath,0o644) ; # Note a leading 0 is required to trick python into thinking this is octal
     # https://stackoverflow.com/questions/15607903/python-module-os-chmodfile-664-does-not-change-the-permission-to-rw-rw-r-bu
+    # https://stackoverflow.com/questions/1627198/python-mkdir-giving-me-wrong-permissions
     os.chown(jsonFilePath,uid,gid)
     fileListPaths = '_'.join([dateStamp,key,'fileList.txt'])
     # Now trim lists for unique
@@ -118,7 +122,7 @@ def createPubFiles(destPath,jsonId,jsonFilePaths,variableFilePaths):
         for item in variableFilePaths:
             f.write('%s\n' % item)
     # Wash perms of file
-    os.chmod(fileListPaths, 0o644)
+    os.chmod(fileListPaths,0o644)
     os.chown(fileListPaths,uid,gid)
     print('createPubFiles: Publication files successfully written to:',pubFileDir)
 
@@ -259,13 +263,13 @@ def washPerms(destPath,activityId,mipEra,targetMip,institutionId,sourceId,realm,
     #pathX = os.path.join(destPath,activityId,mipEra,targetMip)
     pathX = os.path.join(activityId,mipEra,targetMip) ; # Remove sourceId as cases of multiple exist
     print('washPerms: pathX = ',pathX)
-    for root, dirs, files in os.walk(pathX, topdown=True):
+    for root, dirs, files in os.walk(pathX,topdown=True):
         # Prune dirs in place - retracted dirs
         dirs[:] = [d for d in dirs if '-retracted' not in d]
         for d in dirs:
             print('washPerms: dir =',d)
             try:
-                os.chmod(os.path.join(root, d), 0o775) ; # Note a leading 0o is required to trick python into thinking this is octal
+                os.chmod(os.path.join(root,d),0o775) ; # Note a leading 0o is required to trick python into thinking this is octal
                 # https://stackoverflow.com/questions/15607903/python-module-os-chmodfile-664-does-not-change-the-permission-to-rw-rw-r-bu
             except OSError as e:
                 print('e:',e)
@@ -276,4 +280,4 @@ def washPerms(destPath,activityId,mipEra,targetMip,institutionId,sourceId,realm,
 
         for f in files:
             print('washPerms: file =',f)
-            os.chmod(os.path.join(root, f), 0o644)
+            os.chmod(os.path.join(root,f),0o644)
