@@ -77,6 +77,9 @@ PJD 20 Nov 2019     - Update registration of PCMDI-AMIP-1-2-0 https://github.com
 PJD 20 Nov 2019     - Update institution_id to maintain cross-CV formatting https://github.com/PCMDI/input4MIPs-cmor-tables/issues/93
 PJD 20 Nov 2019     - Register source_id PCMDI-AMIP-1-1-6 https://github.com/PCMDI/input4MIPs-cmor-tables/issues/94
 PJD 20 Nov 2019     - Revise institution_id UCI https://github.com/PCMDI/input4MIPs-cmor-tables/issues/95
+PJD 17 Jul 2020     - Update upstreams
+PJD 17 Jul 2020     - Register institution_id NASA-GSFC https://github.com/PCMDI/input4MIPs-cmor-tables/issues/101
+                    - TODO: Register multiple ISMIP6 source_id entries https://github.com/PCMDI/input4MIPs-cmor-tables/issues/103
                     - TODO: Deal with lab cert issue https://raw.githubusercontent.com -> http://rawgit.com (see requests library)
 
 @author: durack1
@@ -512,6 +515,7 @@ institution_id['MOHC'] = 'Met Office Hadley Centre, Fitzroy Road, Exeter, Devon,
 institution_id['MPI-B'] = 'Max Planck Institute for Biogeochemistry, Jena 07745, Germany'
 institution_id['MPI-M'] = 'Max Planck Institute for Meteorology, Hamburg 20146, Germany'
 institution_id['MRI'] = 'Meteorological Research Institute, Tsukuba, Ibaraki 305-0052, Japan'
+#institution_id['NASA-GSFC'] = 'NASA Goddard Space Flight Center, Greenbelt, MD 20771, USA']
 institution_id['NCAR'] = 'National Center for Atmospheric Research, Boulder, CO 80307, USA'
 institution_id['NCAS'] = 'National Centre for Atmospheric Science, University of Reading, Reading RG6 6BB, UK'
 institution_id['PCMDI'] = 'Program for Climate Model Diagnosis and Intercomparison, Lawrence Livermore National Laboratory, Livermore, CA 94550, USA'
