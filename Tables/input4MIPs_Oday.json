@@ -3,14 +3,14 @@
         "Conventions":"CF-1.7 CMIP-6.2",
         "approx_interval":"30.00000",
         "cmor_version":"3.5",
-        "data_specs_version":"01.00.31",
+        "data_specs_version":"01.00.32",
         "generic_levels":"olevel olevhalf",
         "int_missing_value":"-999",
         "mip_era":"CMIP6",
         "missing_value":"1e20",
         "product":"input4MIPs",
         "realm":"ocean",
-        "table_date":"20 November 2019",
+        "table_date":"17 July 2020",
         "table_id":"Table input4MIPs_Oday"
     },
     "variable_entry":{
