@@ -79,7 +79,7 @@ PJD 20 Nov 2019     - Register source_id PCMDI-AMIP-1-1-6 https://github.com/PCM
 PJD 20 Nov 2019     - Revise institution_id UCI https://github.com/PCMDI/input4MIPs-cmor-tables/issues/95
 PJD 17 Jul 2020     - Update upstreams
 PJD 17 Jul 2020     - Register institution_id NASA-GSFC https://github.com/PCMDI/input4MIPs-cmor-tables/issues/101
-                    - TODO: Register multiple ISMIP6 source_id entries https://github.com/PCMDI/input4MIPs-cmor-tables/issues/103
+PJD 18 Jul 2020     - Register multiple ISMIP6 source_id entries https://github.com/PCMDI/input4MIPs-cmor-tables/issues/103
                     - TODO: Deal with lab cert issue https://raw.githubusercontent.com -> http://rawgit.com (see requests library)
 
 @author: durack1
@@ -633,36 +633,71 @@ source_id[key]['source_version'] = '1.2.0'
 source_id[key]['target_mip'] = 'CMIP'
 source_id[key]['title'] = 'PCMDI-AMIP 1.2.0 dataset prepared for input4MIPs'
 
-key = 'PCMDI-AMIP-1-1-6'
-source_id[key] = {}
-source_id[key]['comment'] = 'Based on Hurrell SST/sea ice consistency criteria applied to merged HadISST (1870-01 to 1981-10) & NCEP-0I2 (1981-11 to 2018-12)'
-source_id[key]['contact'] = 'PCMDI (pcmdi-cmip@llnl.gov)'
-source_id[key]['dataset_category'] = 'SSTsAndSeaIce'
-source_id[key]['grid'] = '1x1 degree longitude x latitude'
-source_id[key]['grid_label'] = 'gn'
-source_id[key]['further_info_url'] = 'https://pcmdi.llnl.gov/mips/amip'
-source_id[key]['institution_id'] = 'PCMDI'
-source_id[key]['institution'] = 'Program for Climate Model Diagnosis and Intercomparison, Lawrence Livermore National Laboratory, Livermore, CA 94550, USA'
-source_id[key]['nominal_resolution'] = '1x1 degree'
-source_id[key]['product'] = 'observations'
-source_id[key]['references'] = ''.join(['Taylor, K.E., D. Williamson and F. Zwiers, ',
-                                        '2000: The sea surface temperature and sea ice ',
-                                        'concentration boundary conditions for AMIP II ',
-                                        'simulations. PCMDI Report 60, Program for ',
-                                        'Climate Model Diagnosis and Intercomparison, ',
-                                        'Lawrence Livermore National Laboratory, 25 pp. ',
-                                        'Available online: https://pcmdi.llnl.gov/report/pdf/60.pdf'])
-source_id[key]['region'] = ['global_ocean']
-source_id[key]['release_year'] = '2019'
-source_id[key]['source_description'] = 'Sea surface temperature and sea-ice datasets produced by PCMDI (LLNL) for the AMIP (DECK) experiment of CMIP6'
-source_id[key]['source'] = 'PCMDI-AMIP 1.1.6: Merged SST based on UK MetOffice HadISST and NCEP OI2'
-source_id[key]['source_id'] = key
-source_id[key]['source_type'] = 'satellite_blended'
-source_id[key]['source_variables'] = ['areacello','sftof','siconc','siconcbcs',
-                                      'tos','tosbcs']
-source_id[key]['source_version'] = '1.1.6'
-source_id[key]['target_mip'] = 'CMIP'
-source_id[key]['title'] = 'PCMDI-AMIP 1.1.6 dataset prepared for input4MIPs'
+# Loop over ISMIP6 source_id entries
+sIds = [
+ 'ACCESS1-3-rcp85-1-0',
+ 'CCSM4-rcp26-1-0',
+ 'CCSM4-rcp85-1-0',
+ 'CESM2-ssp585-1-0',
+ 'CNRM-CM6-1-ssp126-1-0',
+ 'CNRM-CM6-1-ssp585-1-0',
+ 'CNRM-ESM2-1-ssp585-1-0',
+ 'CSIRO-MK3-6-0-rcp85-1-0',
+ 'HadGEM2-ES-rcp85-1-0',
+ 'IPSL-CM5A-MR-rcp26-1-0',
+ 'IPSL-CM5A-MR-rcp85-1-0',
+ 'MIROC-ESM-CHEM-rcp26-1-0',
+ 'MIROC-ESM-CHEM-rcp85-1-0',
+ 'MIROC5-rcp26-1-0',
+ 'MIROC5-rcp85-1-0',
+ 'NorESM1-M-rcp26-1-0',
+ 'NorESM1-M-rcp85-1-0',
+ 'UKESM1-0-LL-ssp585-1-0'
+ ]
+
+for count,sId in enumerate(sIds):
+    key = sId
+    tmp = key.replace('-1-0','')
+    rcp = tmp.split('-')[-1]
+    mod = tmp.replace(''.join(['-',rcp]),'')
+    print(count,key,mod,rcp)
+    #sys.exit()
+    source_id[key] = {}
+    source_id[key]['comment'] = ' '.join(['This dataset was prepared using CMIP5',
+                                         'model', mod ,'as input. A combination',
+                                         'of historical and', rcp ,'datasets',
+                                         'were used to create this forcing dataset',
+                                         'for ISMIP6'])
+    source_id[key]['contact'] = 'IMSIP6 Steering Team (ismip6@gmail.com)'
+    source_id[key]['dataset_category'] = 'atmosphericState'
+    source_id[key]['grid'] = '1x1 degree longitude x latitude'
+    source_id[key]['grid_label'] = 'gn'
+    source_id[key]['further_info_url'] = 'http://www.climate-cryosphere.org/wiki/index.php?title=ISMIP6_wiki_page'
+    source_id[key]['institution_id'] = 'NASA-GSFC'
+    source_id[key]['institution'] = 'NASA Goddard Space Flight Center, Greenbelt, MD 20771, USA'
+    source_id[key]['nominal_resolution'] = '1x1 degree'
+    source_id[key]['product'] = 'derived'
+    source_id[key]['references'] = ' '.join(['Experimental protocol for sealevel',
+                                            'projections from ISMIP6 standalone',
+                                            'ice sheet models, Nowicki, S. et al,',
+                                            '2020, https://doi.org/10.5194/tc-2019-322'])
+    source_id[key]['region'] = ['global_ocean']
+    source_id[key]['release_year'] = '2020'
+    source_id[key]['source_description'] = ' '.join(['Ice sheet relevant datasets',
+                                                    'produced by ISMIP6 Team for',
+                                                    'the standalone ice sheet',
+                                                    'experiment of ISMIP6'])
+    source_id[key]['source'] = ' '.join([key, 'derived dataset computed from CMIP5',
+                                        '-'.join([mod, rcp]), 'and historical',
+                                        'simulations for ISMIP6'])
+    source_id[key]['source_id'] = key
+    source_id[key]['source_type'] = 'AOGCM'
+    source_id[key]['source_variables'] = ['areacello','sftof','siconc','siconcbcs',
+                                          'tos','tosbcs']
+    source_id[key]['source_version'] = '1.0'
+    source_id[key]['target_mip'] = 'ISMIP6'
+    source_id[key]['title'] = ' '.join(['ISMIP6 -', key, 'derived data prepared',
+                                       'for input4MIPs'])
 
 #--
 #key = 'PCMDI-AMIP-1-1-5'
