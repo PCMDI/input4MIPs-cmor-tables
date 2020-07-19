@@ -663,12 +663,11 @@ for count,sId in enumerate(sIds):
     print(count,key,mod,rcp)
     #sys.exit()
     source_id[key] = {}
-    source_id[key]['comment'] = ' '.join(['This dataset was prepared using CMIP5',
-                                         'model', mod ,'as input. A combination',
-                                         'of historical and', rcp ,'datasets',
-                                         'were used to create this forcing dataset',
-                                         'for ISMIP6'])
-    source_id[key]['contact'] = 'IMSIP6 Steering Team (ismip6@gmail.com)'
+    source_id[key]['comment'] = ' '.join(['Prepared using CMIP5 model', mod ,
+                                          'as input. A combination of historical',
+                                          'and', rcp ,'datasets were used to',
+                                          'create this ISMIP6 forcing dataset'])
+    source_id[key]['contact'] = 'ISMIP6 Steering Team (ismip6@gmail.com)'
     source_id[key]['dataset_category'] = 'atmosphericState'
     source_id[key]['grid'] = '1x1 degree longitude x latitude'
     source_id[key]['grid_label'] = 'gn'
@@ -684,19 +683,19 @@ for count,sId in enumerate(sIds):
     source_id[key]['region'] = ['global_ocean']
     source_id[key]['release_year'] = '2020'
     source_id[key]['source_description'] = ' '.join(['Ice sheet relevant datasets',
-                                                    'produced by ISMIP6 Team for',
-                                                    'the standalone ice sheet',
+                                                    'produced by the ISMIP6 Team',
+                                                    'for the standalone ice sheet',
                                                     'experiment of ISMIP6'])
     source_id[key]['source'] = ' '.join([key, 'derived dataset computed from CMIP5',
-                                        '-'.join([mod, rcp]), 'and historical',
-                                        'simulations for ISMIP6'])
+                                        mod, 'historical and', rcp, 'simulations',
+                                        'for ISMIP6'])
     source_id[key]['source_id'] = key
     source_id[key]['source_type'] = 'AOGCM'
     source_id[key]['source_variables'] = ['areacello','sftof','siconc','siconcbcs',
                                           'tos','tosbcs']
     source_id[key]['source_version'] = '1.0'
     source_id[key]['target_mip'] = 'ISMIP6'
-    source_id[key]['title'] = ' '.join(['ISMIP6 -', key, 'derived data prepared',
+    source_id[key]['title'] = ' '.join(['ISMIP6 (CMIP6) -', key, 'derived data prepared',
                                        'for input4MIPs'])
 
 #--
