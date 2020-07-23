@@ -81,6 +81,7 @@ PJD 17 Jul 2020     - Update upstreams
 PJD 17 Jul 2020     - Register institution_id NASA-GSFC https://github.com/PCMDI/input4MIPs-cmor-tables/issues/101
 PJD 18 Jul 2020     - Register multiple ISMIP6 source_id entries https://github.com/PCMDI/input4MIPs-cmor-tables/issues/103
 PJD 22 Jul 2020     - Updates to #103 following a review by @geresie https://github.com/PCMDI/input4MIPs-cmor-tables/issues/103
+PJD 23 Jul 2020     - Variable correction to #103 following a review by @geresie https://github.com/PCMDI/input4MIPs-cmor-tables/issues/103
                     - TODO: Deal with lab cert issue https://raw.githubusercontent.com -> http://rawgit.com (see requests library)
 
 @author: durack1
@@ -693,7 +694,7 @@ for count,sId in enumerate(sIds):
                                         'for ISMIP6'])
     source_id[key]['source_id'] = key
     source_id[key]['source_type'] = 'AOGCM'
-    source_id[key]['source_variables'] = ['acabf', 'evspsbl', 'mrroLi', 'pr',
+    source_id[key]['source_variables'] = ['acabf', 'evspsbl', 'mrros', 'pr',
                                           'sftflf', 'so', 'ts']
     source_id[key]['source_version'] = '1.0'
     source_id[key]['target_mip'] = 'ISMIP6'
