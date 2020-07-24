@@ -53,7 +53,7 @@
         "sftof":{
             "cell_measures":"area: areacella",
             "cell_methods":"area: mean",
-            "comment":"Percentage of horizontal area occupied by ocean.",
+            "comment":"Percentage of horizontal area occupied by ocean",
             "dimensions":"longitude latitude",
             "frequency":"fx",
             "long_name":"Sea Area Percentage",

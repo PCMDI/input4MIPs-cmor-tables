@@ -268,13 +268,14 @@ Afx['variable_entry']['sftlf']['comment'] = 'Please express \'X_area_fraction\' 
 Afx['variable_entry']['sftof'] = copy.deepcopy(Ofx['variable_entry']['sftof'])
 Afx['variable_entry']['sftof']['modeling_realm'] = 'atmos'
 Afx['variable_entry']['sftof']['cell_measures'] = 'area: areacella'
+Afx['variable_entry']['sftof']['comment'] = 'Percentage of horizontal area occupied by ocean'
 
 # Ofx
 OfxCleanup = ['basin', 'deptho', 'hfgeou', 'masscello', 'thkcello', 'volcello'] ; #ugrid
 for clean in OfxCleanup:
     tmp = Ofx['variable_entry'].pop(clean)
 Ofx['Header']['product'] = 'input4MIPs'
-Ofx['variable_entry']['sftof']['comment'] = 'This is the area fraction at the ocean surface'
+Ofx['variable_entry']['sftof']['comment'] = 'Percentage of horizontal area occupied by ocean'
 
 
 # Variable tables
@@ -354,8 +355,13 @@ LyrCleanup = ['baresoilFrac', 'burntFractionAll', 'c3PftFrac', 'c4PftFrac',
 
 for clean in LyrCleanup:
     tmp = Lyr['variable_entry'].pop(clean)
-for count, key in enumerate(Lyr['variable_entry']):
-    Lyr['variable_entry'][key]['frequency'] = 'yr'
+Lyr['variable_entry']['mrros']['comment'] = ' '.join(['The total surface run',
+                                                     'off leaving the land',
+                                                     'portion of the grid cell',
+                                                     '(excluding drainage',
+                                                     'through the base of the',
+                                                     'soil model)'])
+Lyr['variable_entry']['mrros']['frequency'] = 'yr'
 Lyr['Header']['table_id'] = 'Table input4MIPs_Lyr'
 Lyr['Header']['product'] = 'input4MIPs'
 #print(Lyr['variable_entry'].keys())
@@ -568,9 +574,24 @@ OmonC['Header']['realm'] = 'ocean'
 # Oyr from Omon
 Oyr = {}
 Oyr['variable_entry'] = {}
-Oyr['variable_entry']['sos'] = copy.deepcopy(Omon['variable_entry']['so'])
-Oyr['variable_entry']['sos']['frequency'] = 'yr'
-Oyr['variable_entry']['sos']['dimensions'] = 'longitude latitude time'
+Oyr['variable_entry']['so'] = copy.deepcopy(Omon['variable_entry']['so'])
+Oyr['variable_entry']['so']['comment'] = ' '.join(['Sea water salinity is the',
+                                                   'salt content of sea water,',
+                                                   'often on the Practical',
+                                                   'Salinity Scale of 1978.',
+                                                   'However, the unqualified',
+                                                   'term \'salinity\' is',
+                                                   'generic and does not',
+                                                   'necessarily imply any',
+                                                   'particular method of',
+                                                   'calculation. The units of',
+                                                   'salinity are dimensionless',
+                                                   'and the units attribute',
+                                                   'should normally be given',
+                                                   'as 1e-3 or 0.001 i.e.',
+                                                   'parts per thousand'])
+Oyr['variable_entry']['so']['frequency'] = 'yr'
+Oyr['variable_entry']['so']['dimensions'] = 'longitude latitude time'
 Oyr['Header'] = copy.deepcopy(Omon['Header'])
 Oyr['Header']['table_id'] = 'Table input4MIPs_Oyr'
 Oyr['Header']['realm'] = 'ocean'

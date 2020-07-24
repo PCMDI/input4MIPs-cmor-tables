@@ -17,7 +17,7 @@
         "mrros":{
             "cell_measures":"area: areacella",
             "cell_methods":"area: mean where land time: mean",
-            "comment":"The total surface run off leaving the land portion of the grid cell (excluding drainage through the base of the soil model).",
+            "comment":"The total surface run off leaving the land portion of the grid cell (excluding drainage through the base of the soil model)",
             "dimensions":"longitude latitude time",
             "frequency":"yr",
             "long_name":"Surface Runoff",
