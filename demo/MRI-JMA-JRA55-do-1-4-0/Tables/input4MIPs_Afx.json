@@ -10,7 +10,7 @@
         "missing_value":"1e20",
         "product":"input4MIPs",
         "realm":"atmos land",
-        "table_date":"23 July 2020",
+        "table_date":"24 July 2020",
         "table_id":"Table input4MIPs_Afx"
     },
     "variable_entry":{
@@ -53,7 +53,7 @@
         "sftof":{
             "cell_measures":"area: areacella",
             "cell_methods":"area: mean",
-            "comment":"This is the area fraction at the ocean surface",
+            "comment":"Percentage of horizontal area occupied by ocean",
             "dimensions":"longitude latitude",
             "frequency":"fx",
             "long_name":"Sea Area Percentage",

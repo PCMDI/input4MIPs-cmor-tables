@@ -82,6 +82,8 @@ PJD 17 Jul 2020     - Register institution_id NASA-GSFC https://github.com/PCMDI
 PJD 18 Jul 2020     - Register multiple ISMIP6 source_id entries https://github.com/PCMDI/input4MIPs-cmor-tables/issues/103
 PJD 22 Jul 2020     - Updates to #103 following a review by @geresie https://github.com/PCMDI/input4MIPs-cmor-tables/issues/103
 PJD 23 Jul 2020     - Variable correction to #103 following a review by @geresie https://github.com/PCMDI/input4MIPs-cmor-tables/issues/103
+PJD 24 Jul 2020     - Add new tables for ISMIP6 https://github.com/PCMDI/input4MIPs-cmor-tables/issues/107
+PJD 24 Jul 2020     - Updated call to readJsonCreateDict(tableSource, rawGit) - added argument
                     - TODO: Deal with lab cert issue https://raw.githubusercontent.com -> http://rawgit.com (see requests library)
 
 @author: durack1
@@ -113,8 +115,8 @@ masterTargets = [
  'institution_id',
  'license1',
  'mip_era',
- 'product',
  'nominal_resolution',
+ 'product',
  'realm',
  'region',
  'required_global_attributes',
@@ -124,50 +126,105 @@ masterTargets = [
  'A3hr',
  'A3hrPt',
  'Afx',
+ 'Ayr',
+ 'Lday',
+ 'Lyr',
+ 'LIday',
+ 'LIfx',
+ 'LIyr',
+ 'LIyrAnt',
+ 'LIyrC',
+ 'LIyrGre',
  'Oday',
  'Ofx',
  'Omon',
  'OmonC',
+ 'Oyr',
  'OyrC',
- 'LIday',
- 'LIfx',
- 'LIyrC',
- 'Lday',
  'SI3hrPt',
  'SIday',
  'SImon'
- ] ;
+ ]
+
+CVTargets = [
+ 'activity_id',
+ 'dataset_category',
+ 'frequency',
+ 'grid_label',
+ 'institution_id',
+ 'license1',
+ 'mip_era',
+ 'nominal_resolution',
+ 'product',
+ 'realm',
+ 'region',
+ 'required_global_attributes',
+ 'source_id',
+ 'target_mip',
+ ]
+
+tableTargets = [
+ 'A3hr',
+ 'A3hrPt',
+ 'Afx',
+ 'Ayr',
+ 'CV',
+ 'Lday',
+ 'Lyr',
+ 'LIday',
+ 'LIfx',
+ 'LIyr',
+ 'LIyrAnt',
+ 'LIyrC',
+ 'LIyrGre',
+ 'Oday',
+ 'Ofx',
+ 'Omon',
+ 'OmonC',
+ 'Oyr',
+ 'OyrC',
+ 'SI3hrPt',
+ 'SIday',
+ 'SImon',
+ 'coordinate',
+ 'formula_terms',
+ 'grids'
+ ]
 
 #%% Tables
 tableSource = [
- ['frequency','https://raw.githubusercontent.com/WCRP-CMIP/CMIP6_CVs/master/CMIP6_frequency.json'],
- ['grid_label','https://raw.githubusercontent.com/WCRP-CMIP/CMIP6_CVs/master/CMIP6_grid_label.json'],
- ['nominal_resolution','https://raw.githubusercontent.com/WCRP-CMIP/CMIP6_CVs/master/CMIP6_nominal_resolution.json'],
- ['realm','https://raw.githubusercontent.com/WCRP-CMIP/CMIP6_CVs/master/CMIP6_realm.json'],
- ['Omon','https://raw.githubusercontent.com/PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_Omon.json'],
- ['SImon','https://raw.githubusercontent.com/PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_SImon.json'],
- ['Ofx','https://raw.githubusercontent.com/PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_Ofx.json'],
- ['coordinate','https://raw.githubusercontent.com/PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_coordinate.json'],
- ['formula_terms','https://raw.githubusercontent.com/PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_formula_terms.json'],
- ['grids','https://raw.githubusercontent.com/PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_grids.json'],
- ['region','https://raw.githubusercontent.com/PCMDI/obs4MIPs-cmor-tables/master/obs4MIPs_region.json'],
- ['source_id','https://raw.githubusercontent.com/PCMDI/input4MIPs-cmor-tables/master/input4MIPs_source_id.json'],
- ['target_mip','https://raw.githubusercontent.com/WCRP-CMIP/CMIP6_CVs/master/CMIP6_activity_id.json'],
- ['A3hr','https://raw.githubusercontent.com/PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_3hr.json'],
- ['E3hr','https://raw.githubusercontent.com/PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_E3hr.json'],
- ['CF3hr','https://raw.githubusercontent.com/PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_CF3hr.json'],
- ['SIday','https://raw.githubusercontent.com/PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_SIday.json'],
- ['IyrGre','https://raw.githubusercontent.com/PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_IyrGre.json'],
- ['LIfx','https://raw.githubusercontent.com/PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_IfxGre.json'],
- ['Afx','https://raw.githubusercontent.com/PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_fx.json']
- ] ;
-
-headerFree = ['coordinate','frequency','formula_terms','grid_label','nominal_resolution',
-              'realm','region','source_id','target_mip']
+ ['coordinate','PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_coordinate.json'],
+ ['formula_terms','PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_formula_terms.json'],
+ ['frequency','WCRP-CMIP/CMIP6_CVs/master/CMIP6_frequency.json'],
+ ['grid_label','WCRP-CMIP/CMIP6_CVs/master/CMIP6_grid_label.json'],
+ ['grids','PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_grids.json'],
+ ['nominal_resolution','WCRP-CMIP/CMIP6_CVs/master/CMIP6_nominal_resolution.json'],
+ ['realm','WCRP-CMIP/CMIP6_CVs/master/CMIP6_realm.json'],
+ ['region','PCMDI/obs4MIPs-cmor-tables/master/obs4MIPs_region.json'],
+ ['source_id','PCMDI/input4MIPs-cmor-tables/master/input4MIPs_source_id.json'],
+ ['target_mip','WCRP-CMIP/CMIP6_CVs/master/CMIP6_activity_id.json'],
+ ['A3hr','PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_3hr.json'],
+ ['Afx','PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_fx.json'],
+ ['Ayr','PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_Amon.json'],
+ ['CF3hr','PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_CF3hr.json'],
+ ['E3hr','PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_E3hr.json'],
+ ['LIfx','PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_IfxGre.json'],
+ ['LIyr','PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_LImon.json'],
+ ['LIyrAnt','PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_IyrAnt.json'],
+ ['LIyrGre','PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_IyrGre.json'],
+ ['Lyr','PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_Lmon.json'],
+ ['Ofx','PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_Ofx.json'],
+ ['Omon','PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_Omon.json'],
+ ['SIday','PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_SIday.json'],
+ ['SImon','PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_SImon.json'],
+ ]
+headerFree = ['coordinate', 'frequency', 'formula_terms', 'grid_label',
+              'nominal_resolution', 'realm', 'region', 'source_id', 'target_mip']
+rawGit = 'https://raw.githubusercontent.com/'
 
 #%% Loop through tables and create in-memory objects
 # Loop through tableSource and create output tables
-tmp = readJsonCreateDict(tableSource)
+tmp = readJsonCreateDict(tableSource, rawGit)
 for count,table in enumerate(tmp.keys()):
     print('table:',table)
     if table in ['coordinate','formula_terms']:
@@ -193,34 +250,209 @@ for count2,table in enumerate(tableSource):
         eval(tableName)['Header']['table_id'] = ''.join(['Table input4MIPs_',tableName])
 
 #%% Cleanup imported tables
+# Fixed fields
+# Afx
+AfxCleanup = ['areacellr', 'mrsofc', 'orog', 'rootd', 'sftgif', 'zfull']
+for clean in AfxCleanup:
+    tmp = Afx['variable_entry'].pop(clean)
+Afx['Header']['product'] = 'input4MIPs'
+Afx['Header']['table_id'] = 'Table input4MIPs_Afx'
+Afx['Header']['realm'] = 'atmos land'
+Afx['variable_entry']['areacella']['comment'] = ' '.join(['For atmospheres with',
+                                                         'more than 1 mesh',
+                                                         '(e.g., staggered grids),',
+                                                         'report areas that apply',
+                                                         'to surface vertical',
+                                                         'fluxes of energy'])
+Afx['variable_entry']['sftlf']['comment'] = 'Please express \'X_area_fraction\' as the percentage of horizontal area occupied by X'
+Afx['variable_entry']['sftof'] = copy.deepcopy(Ofx['variable_entry']['sftof'])
+Afx['variable_entry']['sftof']['modeling_realm'] = 'atmos'
+Afx['variable_entry']['sftof']['cell_measures'] = 'area: areacella'
+Afx['variable_entry']['sftof']['comment'] = 'Percentage of horizontal area occupied by ocean'
+
 # Ofx
-OfxCleanup = ['basin','deptho','hfgeou','masscello','thkcello','volcello'] ; #ugrid
+OfxCleanup = ['basin', 'deptho', 'hfgeou', 'masscello', 'thkcello', 'volcello'] ; #ugrid
 for clean in OfxCleanup:
     tmp = Ofx['variable_entry'].pop(clean)
 Ofx['Header']['product'] = 'input4MIPs'
-Ofx['variable_entry']['sftof']['comment'] = 'This is the area fraction at the ocean surface'
+Ofx['variable_entry']['sftof']['comment'] = 'Percentage of horizontal area occupied by ocean'
 
+
+# Variable tables
+# Atmos
+
+# A3hr
+A3hrCleanup = ['clt', 'hfls', 'hfss', 'mrro', 'mrsos', 'pr', 'prc', 'ps',
+               'rldscs', 'rlus', 'rsdscs', 'rsdsdiff', 'rsus', 'rsuscs', 'tos',
+               'tslsi']
+for clean in A3hrCleanup:
+    tmp = A3hr['variable_entry'].pop(clean)
+A3hr['variable_entry']['prra'] = copy.deepcopy(E3hr['variable_entry']['prra'])
+A3hr['variable_entry']['prra']['frequency'] = '3hr'
+A3hr['variable_entry']['prra']['comment'] = 'In accordance with common usage in geophysical disciplines, \'flux\' implies per unit area, called \'flux density\' in physics'
+A3hr['variable_entry']['prra']['dimensions'] = 'longitude latitude time'
+A3hr['variable_entry']['prra']['cell_methods'] = 'area: time: mean'
+
+# Create A3hrPt
+A3hrPt = {}
+A3hrPt['variable_entry'] = {}
+A3hrPt['Header'] = copy.deepcopy(A3hr['Header'])
+A3hrPt['Header']['table_id'] = 'Table input4MIPs_A3hrPt'
+A3hrPt['variable_entry']['huss'] = A3hr['variable_entry'].pop('huss')
+A3hrPt['variable_entry']['huss']['cell_measures'] = 'area: areacella'
+A3hrPt['variable_entry']['huss']['comment'] = 'Near-surface (usually, 2 meter) specific humidity'
+A3hrPt['variable_entry']['psl'] = copy.deepcopy(E3hr['variable_entry']['psl'])
+A3hrPt['variable_entry']['psl']['frequency'] = '3hrPt'
+A3hrPt['variable_entry']['psl']['dimensions'] = 'longitude latitude time1'
+A3hrPt['variable_entry']['psl']['cell_methods'] = 'area: mean time: point'
+A3hrPt['variable_entry']['tas'] = A3hr['variable_entry'].pop('tas')
+A3hrPt['variable_entry']['tas']['cell_measures'] = 'area: areacella'
+A3hrPt['variable_entry']['uas'] = A3hr['variable_entry'].pop('uas')
+A3hrPt['variable_entry']['uas']['cell_measures'] = 'area: areacella'
+A3hrPt['variable_entry']['uas']['comment'] = 'Eastward component of the near-surface wind'
+A3hrPt['variable_entry']['vas'] = A3hr['variable_entry'].pop('vas')
+A3hrPt['variable_entry']['vas']['cell_measures'] = 'area: areacella'
+A3hrPt['variable_entry']['ts'] = CF3hr['variable_entry'].pop('ts')
+
+# Create Ayr
+AyrCleanup = ['ccb', 'cct', 'cfc113global', 'cfc11global', 'cfc12global',
+              'ch4', 'ch4Clim', 'ch4global', 'ch4globalClim', 'ci', 'cl',
+              'cli', 'clivi', 'clt', 'clw', 'clwvi', 'co2', 'co2Clim',
+              'co2mass', 'co2massClim', 'fco2antt', 'fco2fos', 'fco2nat',
+              'hcfc22global', 'hfls', 'hfss', 'hur', 'hurs', 'hus', 'huss',
+              'mc', 'n2o', 'n2oClim', 'n2oglobal', 'n2oglobalClim', 'o3',
+              'o3Clim', 'pfull', 'phalf', 'prc', 'prsn', 'prw', 'ps', 'psl',
+              'rlds', 'rldscs', 'rlus', 'rlut', 'rlutcs', 'rsds', 'rsdscs',
+              'rsdt', 'rsus', 'rsuscs', 'rsut', 'rsutcs', 'rtmt', 'sbl', 'sci',
+              'sfcWind', 'ta', 'tas', 'tasmax', 'tasmin', 'tauu', 'tauv', 'ua',
+              'uas', 'va', 'vas', 'wap', 'zg']
+for clean in AyrCleanup:
+    tmp = Ayr['variable_entry'].pop(clean)
+for count, key in enumerate(Ayr['variable_entry']):
+    Ayr['variable_entry'][key]['frequency'] = 'yr'
+Ayr['Header']['table_id'] = 'Table input4MIPs_Ayr'
+Ayr['Header']['product'] = 'input4MIPs'
+print(Ayr['variable_entry'].keys())
+print(Ayr['Header'].keys())
+
+
+# Land
+# Create Lyr
+LyrCleanup = ['baresoilFrac', 'burntFractionAll', 'c3PftFrac', 'c4PftFrac',
+              'cCwd', 'cLeaf', 'cLitter', 'cLitterAbove', 'cLitterBelow',
+              'cProduct', 'cRoot', 'cSoilFast', 'cSoilMedium', 'cSoilSlow',
+              'cVeg', 'cropFrac', 'evspsblsoi', 'evspsblveg', 'fFire',
+              'fGrazing', 'fHarvest', 'fLitterSoil', 'fVegLitter',
+              'fVegSoil', 'gpp', 'grassFrac', 'lai', 'landCoverFrac', 'mrfso',
+              'mrro', 'mrso', 'mrsos', 'nbp', 'npp', 'nppLeaf', 'nppRoot',
+              'nppWood', 'pastureFrac', 'prveg', 'rGrowth', 'rMaint', 'ra',
+              'residualFrac', 'rh', 'shrubFrac', 'tran', 'treeFrac',
+              'treeFracPrimDec', 'treeFracPrimEver', 'treeFracSecDec',
+              'treeFracSecEver', 'tsl']
+#keys = Lyr['variable_entry'].keys()
+#keys.sort()
+#print([x.encode('utf-8') for x in keys])
+
+for clean in LyrCleanup:
+    tmp = Lyr['variable_entry'].pop(clean)
+Lyr['variable_entry']['mrros']['comment'] = ' '.join(['The total surface run',
+                                                     'off leaving the land',
+                                                     'portion of the grid cell',
+                                                     '(excluding drainage',
+                                                     'through the base of the',
+                                                     'soil model)'])
+Lyr['variable_entry']['mrros']['frequency'] = 'yr'
+Lyr['Header']['table_id'] = 'Table input4MIPs_Lyr'
+Lyr['Header']['product'] = 'input4MIPs'
+#print(Lyr['variable_entry'].keys())
+#print(Lyr['Header'].keys())
+
+
+# LandIce
 # LIfx
-LIfxCleanup = ['hfgeoubed','lithk','topg']
+LIfxCleanup = ['hfgeoubed', 'lithk', 'topg']
 for clean in LIfxCleanup:
     tmp = LIfx['variable_entry'].pop(clean)
 LIfx['Header']['product'] = 'input4MIPs'
 LIfx['variable_entry']['areacellg']['comment'] = 'Area of the target grid (not the interpolated area of the source grid)'
 LIfx['variable_entry']['areacellg']['modeling_realm'] = 'landIce'
 
-# Afx
-AfxCleanup = ['areacellr','mrsofc','orog','rootd','sftgif','zfull']
-for clean in AfxCleanup:
-    tmp = Afx['variable_entry'].pop(clean)
-Afx['Header']['product'] = 'input4MIPs'
-Afx['Header']['table_id'] = 'Table input4MIPs_Afx'
-Afx['Header']['realm'] = 'atmos land'
-Afx['variable_entry']['areacella']['comment'] = 'For atmospheres with more than 1 mesh (e.g., staggered grids), report areas that apply to surface vertical fluxes of energy'
-Afx['variable_entry']['sftlf']['comment'] = 'Please express \'X_area_fraction\' as the percentage of horizontal area occupied by X'
-Afx['variable_entry']['sftof'] = copy.deepcopy(Ofx['variable_entry']['sftof'])
-Afx['variable_entry']['sftof']['modeling_realm'] = 'atmos'
-Afx['variable_entry']['sftof']['cell_measures'] = 'area: areacella'
+# Create LIyrC (before Omon is cleaned up)
+LIyrC = {}
+LIyrC['variable_entry'] = {}
+LIyrC['Header'] = copy.deepcopy(Omon['Header'])
+LIyrC['Header']['table_id'] = 'Table input4MIPs_LIyrC'
+LIyrC['Header']['realm'] = 'landIce'
+LIyrC['variable_entry']['licalvf'] = copy.deepcopy(LIyrGre['variable_entry']['licalvf'])
+LIyrC['variable_entry']['licalvf']['comment'] = 'Computed as the flux of solid ice into the ocean divided by the area of the land portion of the grid cell'
+LIyrC['variable_entry']['licalvf']['dimensions'] = 'longitude latitude time2'
+LIyrC['variable_entry']['licalvf']['frequency'] = 'yrC'
+LIyrC['variable_entry']['licalvf']['modeling_realm'] = 'landIce'
 
+# Create LIyrC (before Omon is cleaned up)
+LIday = {}
+LIday['variable_entry'] = {}
+LIday['Header'] = copy.deepcopy(Omon['Header'])
+LIday['Header']['table_id'] = 'Table input4MIPs_LIday'
+LIday['Header']['realm'] = 'landIce'
+LIday['variable_entry']['licalvf'] = copy.deepcopy(LIyrGre['variable_entry']['licalvf'])
+LIday['variable_entry']['licalvf']['comment'] = 'Computed as the flux of solid ice into the ocean divided by the area of the land portion of the grid cell'
+LIday['variable_entry']['licalvf']['dimensions'] = 'longitude latitude time'
+LIday['variable_entry']['licalvf']['frequency'] = 'day'
+LIday['variable_entry']['licalvf']['modeling_realm'] = 'landIce'
+
+# Create LIyr
+LIyrCleanup = ['acabfIs', 'agesno', 'hfdsn', 'hflsIs', 'hfssIs', 'icemIs',
+               'litemptopIs', 'lwsnl', 'mrroIs', 'orogIs', 'pflw', 'prraIs',
+               'prsnIs', 'rldsIs', 'rlusIs', 'rsdsIs', 'rsusIs', 'sbl',
+               'sblIs', 'sftgif', 'sftgrf', 'snc', 'sncIs', 'snd',
+               'snicefreezIs', 'snicemIs', 'snm', 'snmIs', 'snw', 'sootsn',
+               'tasIs', 'tpf', 'tsIs', 'tsn', 'tsnIs']
+#keys = LIyr['variable_entry'].keys()
+#keys.sort()
+#print([x.encode('utf-8') for x in keys])
+
+for clean in LIyrCleanup:
+    tmp = LIyr['variable_entry'].pop(clean)
+for count, key in enumerate(LIyr['variable_entry']):
+    LIyr['variable_entry'][key]['frequency'] = 'yr'
+LIyr['Header']['table_id'] = 'Table input4MIPs_LIyr'
+#print(LIyr['variable_entry'].keys())
+#print(LIyr['Header'].keys())
+
+# Create LIyrAnt/Gre
+LIyrISCleanup = ['hfgeoubed', 'iareafl', 'iareagr', 'libmassbffl',
+                 'libmassbfgr', 'licalvf', 'lifmassbf', 'lim', 'limnsw',
+                 'litempbotfl', 'litempbotgr', 'litemptop', 'lithk',
+                 'modelCellAreai', 'orog', 'sftflf', 'sftgif', 'sftgrf', 'snc',
+                 'strbasemag', 'tendacabf', 'tendlibmassbf', 'tendlicalvf',
+                 'topg', 'xvelbase', 'xvelmean', 'xvelsurf', 'yvelbase',
+                 'yvelmean', 'yvelsurf', 'zvelbase', 'zvelsurf']
+
+# keys = LIyrAnt['variable_entry'].keys()
+# keys.sort()
+# print([x.encode('utf-8') for x in keys])
+# keys = LIyrGre['variable_entry'].keys()
+# keys.sort()
+# print([x.encode('utf-8') for x in keys])
+
+for clean in LIyrISCleanup:
+    tmp = LIyrAnt['variable_entry'].pop(clean)
+    tmp = LIyrGre['variable_entry'].pop(clean)
+
+LIyrAnt['variable_entry']['acabf']['frequency'] = 'yr'
+LIyrGre['variable_entry']['acabf']['frequency'] = 'yr'
+LIyrAnt['Header']['table_id'] = 'Table input4MIPs_LIyrAnt'
+LIyrGre['Header']['table_id'] = 'Table input4MIPs_LIyrGre'
+LIyrAnt['Header']['product'] = 'input4MIPs'
+LIyrGre['Header']['product'] = 'input4MIPs'
+#print(LIyrAnt['variable_entry'].keys())
+#print(LIyrAnt['Header'].keys())
+#print(LIyrAnt['Header']['realm'])
+#print(LIyrAnt['Header']['table_id'])
+
+
+# Ocean
 # Create OyrC (before Omon is cleaned up)
 OyrC = {}
 OyrC['variable_entry'] = {}
@@ -239,30 +471,6 @@ OyrC['variable_entry']['vos']['comment'] = 'Prognostic y-ward velocity component
 OyrC['variable_entry']['vos']['dimensions'] = 'longitude latitude time2'
 OyrC['variable_entry']['vos']['frequency'] = 'yrC'
 OyrC['variable_entry']['vos']['out_name'] = 'vos'
-
-# Create LIyrC (before Omon is cleaned up)
-LIyrC = {}
-LIyrC['variable_entry'] = {}
-LIyrC['Header'] = copy.deepcopy(Omon['Header'])
-LIyrC['Header']['table_id'] = 'Table input4MIPs_LIyrC'
-LIyrC['Header']['realm'] = 'landIce'
-LIyrC['variable_entry']['licalvf'] = copy.deepcopy(IyrGre['variable_entry']['licalvf'])
-LIyrC['variable_entry']['licalvf']['comment'] = 'Computed as the flux of solid ice into the ocean divided by the area of the land portion of the grid cell'
-LIyrC['variable_entry']['licalvf']['dimensions'] = 'longitude latitude time2'
-LIyrC['variable_entry']['licalvf']['frequency'] = 'yrC'
-LIyrC['variable_entry']['licalvf']['modeling_realm'] = 'landIce'
-
-# Create LIyrC (before Omon is cleaned up)
-LIday = {}
-LIday['variable_entry'] = {}
-LIday['Header'] = copy.deepcopy(Omon['Header'])
-LIday['Header']['table_id'] = 'Table input4MIPs_LIday'
-LIday['Header']['realm'] = 'landIce'
-LIday['variable_entry']['licalvf'] = copy.deepcopy(IyrGre['variable_entry']['licalvf'])
-LIday['variable_entry']['licalvf']['comment'] = 'Computed as the flux of solid ice into the ocean divided by the area of the land portion of the grid cell'
-LIday['variable_entry']['licalvf']['dimensions'] = 'longitude latitude time'
-LIday['variable_entry']['licalvf']['frequency'] = 'day'
-LIday['variable_entry']['licalvf']['modeling_realm'] = 'landIce'
 
 # Omon
 # Cleanup 'aragos','baccos','calcos','co3abioos','co3natos','co3os',
@@ -342,6 +550,7 @@ Oday['Header'] = copy.deepcopy(Omon['Header'])
 Oday['Header']['table_id'] = 'Table input4MIPs_Oday'
 Oday['Header']['realm'] = 'ocean'
 
+# Create Lday from Oday
 Lday = {}
 Lday['variable_entry'] = {}
 Lday['variable_entry']['friver'] = copy.deepcopy(Oday['variable_entry']['friver'])
@@ -362,6 +571,35 @@ OmonC['Header'] = copy.deepcopy(Omon['Header'])
 OmonC['Header']['table_id'] = 'Table input4MIPs_OmonC'
 OmonC['Header']['realm'] = 'ocean'
 
+# Oyr from Omon
+Oyr = {}
+Oyr['variable_entry'] = {}
+Oyr['variable_entry']['so'] = copy.deepcopy(Omon['variable_entry']['so'])
+Oyr['variable_entry']['so']['comment'] = ' '.join(['Sea water salinity is the',
+                                                   'salt content of sea water,',
+                                                   'often on the Practical',
+                                                   'Salinity Scale of 1978.',
+                                                   'However, the unqualified',
+                                                   'term \'salinity\' is',
+                                                   'generic and does not',
+                                                   'necessarily imply any',
+                                                   'particular method of',
+                                                   'calculation. The units of',
+                                                   'salinity are dimensionless',
+                                                   'and the units attribute',
+                                                   'should normally be given',
+                                                   'as 1e-3 or 0.001 i.e.',
+                                                   'parts per thousand'])
+Oyr['variable_entry']['so']['frequency'] = 'yr'
+Oyr['variable_entry']['so']['dimensions'] = 'longitude latitude time'
+Oyr['Header'] = copy.deepcopy(Omon['Header'])
+Oyr['Header']['table_id'] = 'Table input4MIPs_Oyr'
+Oyr['Header']['realm'] = 'ocean'
+#print(Oyr['variable_entry'].keys())
+#print(Oyr['Header'].keys())
+#print(Oyr['Header']['realm'])
+#print(Oyr['Header']['table_id'])
+
 # Omon
 for clean in OmonCleanup:
     tmp = Omon['variable_entry'].pop(clean)
@@ -379,6 +617,8 @@ Omon['variable_entry']['tosbcs']['valid_min'] = '-25' ; # Updated K -> degC
 Omon['variable_entry']['tosbcs']['valid_max'] = '65' ; # Updated K -> degC
 Omon['Header']['realm'] = 'ocean'
 
+
+# SeaIce
 # SImon
 # Cleanup 'siflsaltbot',
 # New 'sfdsi'
@@ -440,37 +680,6 @@ for clean in SIdayCleanup:
     tmp = SIday['variable_entry'].pop(clean)
 SIday['Header']['table_id'] = 'Table input4MIPs_SIday'
 
-# A3hr
-A3hrCleanup = ['clt','hfls','hfss','mrro','mrsos','pr','prc','ps','rldscs','rlus',
-               'rsdscs','rsdsdiff','rsus','rsuscs','tos','tslsi']
-for clean in A3hrCleanup:
-    tmp = A3hr['variable_entry'].pop(clean)
-A3hr['variable_entry']['prra'] = copy.deepcopy(E3hr['variable_entry']['prra'])
-A3hr['variable_entry']['prra']['frequency'] = '3hr'
-A3hr['variable_entry']['prra']['comment'] = 'In accordance with common usage in geophysical disciplines, \'flux\' implies per unit area, called \'flux density\' in physics'
-A3hr['variable_entry']['prra']['dimensions'] = 'longitude latitude time'
-A3hr['variable_entry']['prra']['cell_methods'] = 'area: time: mean'
-
-# Create A3hrPt
-A3hrPt = {}
-A3hrPt['variable_entry'] = {}
-A3hrPt['Header'] = copy.deepcopy(A3hr['Header'])
-A3hrPt['Header']['table_id'] = 'Table input4MIPs_A3hrPt'
-A3hrPt['variable_entry']['huss'] = A3hr['variable_entry'].pop('huss')
-A3hrPt['variable_entry']['huss']['cell_measures'] = 'area: areacella'
-A3hrPt['variable_entry']['huss']['comment'] = 'Near-surface (usually, 2 meter) specific humidity'
-A3hrPt['variable_entry']['psl'] = copy.deepcopy(E3hr['variable_entry']['psl'])
-A3hrPt['variable_entry']['psl']['frequency'] = '3hrPt'
-A3hrPt['variable_entry']['psl']['dimensions'] = 'longitude latitude time1'
-A3hrPt['variable_entry']['psl']['cell_methods'] = 'area: mean time: point'
-A3hrPt['variable_entry']['tas'] = A3hr['variable_entry'].pop('tas')
-A3hrPt['variable_entry']['tas']['cell_measures'] = 'area: areacella'
-A3hrPt['variable_entry']['uas'] = A3hr['variable_entry'].pop('uas')
-A3hrPt['variable_entry']['uas']['cell_measures'] = 'area: areacella'
-A3hrPt['variable_entry']['uas']['comment'] = 'Eastward component of the near-surface wind'
-A3hrPt['variable_entry']['vas'] = A3hr['variable_entry'].pop('vas')
-A3hrPt['variable_entry']['vas']['cell_measures'] = 'area: areacella'
-A3hrPt['variable_entry']['ts'] = CF3hr['variable_entry'].pop('ts')
 
 #%% Activity id
 activity_id = ['input4MIPs']
@@ -597,13 +806,15 @@ required_global_attributes = [
  ];
 
 #%% Source id
-tmp = [['source_id','https://raw.githubusercontent.com/PCMDI/input4mips-cmor-tables/master/input4MIPs_source_id.json']
-      ] ;
-source_id = readJsonCreateDict(tmp)
+tmp = [['source_id','PCMDI/input4mips-cmor-tables/master/input4MIPs_source_id.json']
+      ]
+source_id = readJsonCreateDict(tmp, rawGit)
 source_id = source_id.get('source_id')
 source_id = source_id.get('source_id')
 
 # Fix issues
+
+'''
 key = 'PCMDI-AMIP-1-2-0'
 source_id[key] = {}
 source_id[key]['comment'] = 'Based on Hurrell SST/sea ice consistency criteria applied to merged HadISST (1870-01 to 1981-10) & NCEP-0I2 (1981-11 to 2019-06)'
@@ -700,38 +911,7 @@ for count,sId in enumerate(sIds):
     source_id[key]['target_mip'] = 'ISMIP6'
     source_id[key]['title'] = ' '.join(['ISMIP6 (CMIP6) -', key, 'derived data prepared',
                                        'for input4MIPs'])
-
-#--
-#key = 'PCMDI-AMIP-1-1-5'
-#source_id[key] = {}
-#source_id[key]['comment'] = 'Based on Hurrell SST/sea ice consistency criteria applied to merged HadISST (1870-01 to 1981-10) & NCEP-0I2 (1981-11 to 2018-06)'
-#source_id[key]['contact'] = 'PCMDI (pcmdi-cmip@llnl.gov)'
-#source_id[key]['dataset_category'] = 'SSTsAndSeaIce'
-#source_id[key]['grid'] = '1x1 degree longitude x latitude'
-#source_id[key]['grid_label'] = 'gn'
-#source_id[key]['further_info_url'] = 'https://pcmdi.llnl.gov/mips/amip'
-#source_id[key]['institution_id'] = 'PCMDI'
-#source_id[key]['institution'] = 'Program for Climate Model Diagnosis and Intercomparison, Lawrence Livermore National Laboratory, Livermore, CA 94550, USA'
-#source_id[key]['nominal_resolution'] = '1x1 degree'
-#source_id[key]['product'] = 'observations'
-#source_id[key]['references'] = ''.join(['Taylor, K.E., D. Williamson and F. Zwiers, ',
-#                                        '2000: The sea surface temperature and sea ice ',
-#                                        'concentration boundary conditions for AMIP II ',
-#                                        'simulations. PCMDI Report 60, Program for ',
-#                                        'Climate Model Diagnosis and Intercomparison, ',
-#                                        'Lawrence Livermore National Laboratory, 25 pp. ',
-#                                        'Available online: https://pcmdi.llnl.gov/report/pdf/60.pdf'])
-#source_id[key]['region'] = ['global_ocean']
-#source_id[key]['release_year'] = '2018'
-#source_id[key]['source_description'] = 'Sea surface temperature and sea-ice datasets produced by PCMDI (LLNL) for the AMIP (DECK) experiment of CMIP6'
-#source_id[key]['source'] = 'PCMDI-AMIP 1.1.5: Merged SST based on UK MetOffice HadISST and NCEP OI2'
-#source_id[key]['source_id'] = key
-#source_id[key]['source_type'] = 'satellite_blended'
-#source_id[key]['source_variables'] = ['areacello','sftof','siconc','siconcbcs',
-#                                      'tos','tosbcs']
-#source_id[key]['source_version'] = '1.1.5'
-#source_id[key]['target_mip'] = 'CMIP'
-#source_id[key]['title'] = 'PCMDI-AMIP 1.1.5 dataset prepared for input4MIPs'
+'''
 
 #%% Create CV master
 CV = {}
@@ -775,9 +955,7 @@ for jsonName in masterTargets:
     # Write file
     if jsonName == 'license1':
         outFile = ''.join(['input4MIPs_license.json'])
-    elif jsonName in ['Ofx','Omon','SImon','CV','coordinate','formula_terms',
-                      'grids','A3hr','A3hrPt','Oday','OmonC','OyrC','SI3hrPt',
-                      'SIday','LIday','LIyrC','LIfx','Lday','Afx']:
+    elif jsonName in tableTargets:
         outFile = ''.join(['Tables/input4MIPs_',jsonName,'.json'])
     else:
         outFile = ''.join(['input4MIPs_',jsonName,'.json'])
@@ -788,9 +966,11 @@ for jsonName in masterTargets:
     if not os.path.exists('Tables'):
         os.mkdir('Tables')
     # Create host dictionary
-    if jsonName not in ['coordinate','formula_terms','grids','CV',
-                        'Afx','Ofx','Omon','SImon','A3hr','A3hrPt','Oday','OmonC',
-                        'OyrC','SI3hrPt','LIday','LIyrC','SIday','LIfx','Lday']:
+    # if jsonName not in ['A3hr', 'A3hrPt', 'Afx', 'CV', 'LIday', 'LIfx',
+    #                     'LIyrC', 'Lday', 'Oday', 'Ofx', 'Omon', 'OmonC',
+    #                     'OyrC', 'SI3hrPt', 'SIday', 'SImon', 'coordinate',
+    #                     'formula_terms', 'grids']:
+    if jsonName  in CVTargets:
         jsonDict = {}
         jsonDict[jsonName] = eval(jsonName)
     else:
@@ -803,7 +983,100 @@ del(jsonName,outFile) ; gc.collect()
 
 # Validate - only necessary if files are not written by json module
 
+#%% Generate MRI-JMA-JRA55-do-1-3 demo directory
+demoPath = os.path.join('/','/'.join(os.path.realpath(__file__).split('/')[0:-2]),'demo')
+demoPath = os.path.join(demoPath,'MRI-JMA-JRA55-do-1-3')
+outPath = os.path.join(demoPath,'Tables')
+# First purge existing
+if os.path.exists(outPath):
+    shutil.rmtree(outPath) ; # Purge all existing
+    os.makedirs(outPath)
+else:
+    os.makedirs(outPath)
+os.chdir(demoPath)
+
+# Now fill Tables subdir with required files
+cvTables = ['A3hr', 'A3hrPt', 'CV', 'Oday', 'OmonC', 'OyrC', 'SI3hrPt',
+            'LIday', 'LIyrC', 'SIday', 'coordinate', 'formula_terms']
+for count,tableId in enumerate(cvTables):
+    fileName = ''.join(['input4MIPs_',tableId,'.json'])
+    sourcePath = os.path.join('..','..','Tables',fileName)
+    shutil.copy(sourcePath,'Tables')
+
+#%% Generate zip archive
+env7za = os.environ.copy()
+env7za['PATH'] = env7za['PATH'] + ':/export/durack1/bin/downloads/p7zip16.02/180204_build/p7zip_16.02/bin'
+# Cleanup rogue files
+#os.chdir(demoPath)
+if os.path.exists('.DS_Store'):
+    os.remove('.DS_Store')
+if os.path.exists('demo.zip'):
+    os.remove('demo.zip')
+if os.path.exists('MRI-JMA-JRA55-do-1-3/demo.zip'):
+    os.remove('MRI-JMA-JRA55-do-1-3/demo.zip')
+if os.path.exists('../MRI-JMA-JRA55-do-1-3/demo.zip'):
+    os.remove('../MRI-JMA-JRA55-do-1-3/demo.zip')
+# Jump up one directory
+os.chdir(demoPath.replace('/MRI-JMA-JRA55-do-1-3',''))
+print os.getcwd()
+# Zip demo dir
+p = subprocess.Popen(['7za','a','demo.zip','MRI-JMA-JRA55-do-1-3','tzip','-xr!demo/MRI-JMA-JRA55-do-1-3',
+                      '-xr!MRI-JMA-JRA55-do-1-3/testFiles','-xr!MRI-JMA-JRA55-do-1-3/input4MIPs'],
+                      stdout=subprocess.PIPE,stderr=subprocess.PIPE,cwd=os.getcwd(),env=env7za)
+stdout = p.stdout.read() ; # Use persistent variables for tests below
+stderr = p.stderr.read()
+# Move to demo dir
+shutil.move('demo.zip', 'MRI-JMA-JRA55-do-1-3/demo.zip')
+
+#%% Generate MRI-JMA-JRA55-do-1-3-2 demo directory
+#demoPath = os.path.join('/','/'.join(os.path.realpath(__file__).split('/')[0:-2]),'demo')
+demoPath = os.path.join(homePath,'demo')
+os.chdir(demoPath)
+#print 'MRI-JMA-JRA55-do-1-3-2 demo:',os.getcwd()
+demoPath = os.path.join(demoPath,'MRI-JMA-JRA55-do-1-3-2')
+outPath = os.path.join(demoPath,'Tables')
+# First purge existing
+if os.path.exists(outPath):
+    shutil.rmtree(outPath) ; # Purge all existing
+    os.makedirs(outPath)
+else:
+    os.makedirs(outPath)
+os.chdir(outPath)
+
+# Now fill Tables subdir with required files
+cvTables = ['Afx', 'Lday', 'OyrC', 'coordinate', 'formula_terms']
+#print 'MRI-JMA-JRA55-do-1-3-2 demo:',os.getcwd()
+for count,tableId in enumerate(cvTables):
+    fileName = ''.join(['input4MIPs_',tableId,'.json'])
+    sourcePath = os.path.join('..','..','..','..','Tables',fileName)
+    shutil.copy(sourcePath,'.')
+
+#%% Generate MRI-JMA-JRA55-do-1-4-0 demo directory
+demoPath = os.path.join(homePath,'demo')
+os.chdir(demoPath)
+#print 'MRI-JMA-JRA55-do-1-4-0 demo:',os.getcwd()
+demoPath = os.path.join(demoPath,'MRI-JMA-JRA55-do-1-4-0')
+outPath = os.path.join(demoPath,'Tables')
+# First purge existing
+if os.path.exists(outPath):
+    shutil.rmtree(outPath) ; # Purge all existing
+    os.makedirs(outPath)
+else:
+    os.makedirs(outPath)
+os.chdir(outPath)
+
+# Now fill Tables subdir with required files
+cvTables = ['Afx', 'A3hr', 'A3hrPt', 'CV', 'Lday', 'LIday', 'LIyrC', 'Oday',
+            'OmonC', 'OyrC', 'SI3hrPt', 'SIday', 'coordinate', 'formula_terms']
+#print 'MRI-JMA-JRA55-do-1-4-0 demo:',os.getcwd()
+for count,tableId in enumerate(cvTables):
+    fileName = ''.join(['input4MIPs_',tableId,'.json'])
+    sourcePath = os.path.join('..','..','..','Tables',fileName)
+    shutil.copy(sourcePath,'.')
+
+
 #%% Incorporate JSON versioning info - see https://docs.google.com/document/d/1pU9IiJvPJwRvIgVaSDdJ4O0Jeorv_2ekEtted34K9cA/edit#heading=h.w4kchhc266o3
+os.chdir('../..')
 versionId = '6.2.3'
 input4MIPs = {}
 input4MIPs['data'] = {}
@@ -908,94 +1181,3 @@ jsonDict['input4MIPs_version'] = input4MIPs
 fH = open(outFile,'w')
 json.dump(jsonDict,fH,ensure_ascii=True,sort_keys=True,indent=4,separators=(',',':'),encoding="utf-8")
 fH.close()
-
-#%% Generate MRI-JMA-JRA55-do-1-3 demo directory
-demoPath = os.path.join('/','/'.join(os.path.realpath(__file__).split('/')[0:-2]),'demo')
-demoPath = os.path.join(demoPath,'MRI-JMA-JRA55-do-1-3')
-outPath = os.path.join(demoPath,'Tables')
-# First purge existing
-if os.path.exists(outPath):
-    shutil.rmtree(outPath) ; # Purge all existing
-    os.makedirs(outPath)
-else:
-    os.makedirs(outPath)
-os.chdir(demoPath)
-
-# Now fill Tables subdir with required files
-cvTables = ['A3hr','A3hrPt','CV','Oday','OmonC','OyrC','SI3hrPt','LIday',
-            'LIyrC','SIday','coordinate','formula_terms']
-for count,tableId in enumerate(cvTables):
-    fileName = ''.join(['input4MIPs_',tableId,'.json'])
-    sourcePath = os.path.join('..','..','Tables',fileName)
-    shutil.copy(sourcePath,'Tables')
-
-#%% Generate zip archive
-env7za = os.environ.copy()
-env7za['PATH'] = env7za['PATH'] + ':/export/durack1/bin/downloads/p7zip16.02/180204_build/p7zip_16.02/bin'
-# Cleanup rogue files
-#os.chdir(demoPath)
-if os.path.exists('.DS_Store'):
-    os.remove('.DS_Store')
-if os.path.exists('demo.zip'):
-    os.remove('demo.zip')
-if os.path.exists('MRI-JMA-JRA55-do-1-3/demo.zip'):
-    os.remove('MRI-JMA-JRA55-do-1-3/demo.zip')
-if os.path.exists('../MRI-JMA-JRA55-do-1-3/demo.zip'):
-    os.remove('../MRI-JMA-JRA55-do-1-3/demo.zip')
-# Jump up one directory
-os.chdir(demoPath.replace('/MRI-JMA-JRA55-do-1-3',''))
-print os.getcwd()
-# Zip demo dir
-p = subprocess.Popen(['7za','a','demo.zip','MRI-JMA-JRA55-do-1-3','tzip','-xr!demo/MRI-JMA-JRA55-do-1-3',
-                      '-xr!MRI-JMA-JRA55-do-1-3/testFiles','-xr!MRI-JMA-JRA55-do-1-3/input4MIPs'],
-                      stdout=subprocess.PIPE,stderr=subprocess.PIPE,cwd=os.getcwd(),env=env7za)
-stdout = p.stdout.read() ; # Use persistent variables for tests below
-stderr = p.stderr.read()
-# Move to demo dir
-shutil.move('demo.zip', 'MRI-JMA-JRA55-do-1-3/demo.zip')
-
-#%% Generate MRI-JMA-JRA55-do-1-3-2 demo directory
-#demoPath = os.path.join('/','/'.join(os.path.realpath(__file__).split('/')[0:-2]),'demo')
-demoPath = os.path.join(homePath,'demo')
-os.chdir(demoPath)
-#print 'MRI-JMA-JRA55-do-1-3-2 demo:',os.getcwd()
-demoPath = os.path.join(demoPath,'MRI-JMA-JRA55-do-1-3-2')
-outPath = os.path.join(demoPath,'Tables')
-# First purge existing
-if os.path.exists(outPath):
-    shutil.rmtree(outPath) ; # Purge all existing
-    os.makedirs(outPath)
-else:
-    os.makedirs(outPath)
-os.chdir(outPath)
-
-# Now fill Tables subdir with required files
-cvTables = ['Afx','Lday','OyrC','coordinate','formula_terms']
-#print 'MRI-JMA-JRA55-do-1-3-2 demo:',os.getcwd()
-for count,tableId in enumerate(cvTables):
-    fileName = ''.join(['input4MIPs_',tableId,'.json'])
-    sourcePath = os.path.join('..','..','..','..','Tables',fileName)
-    shutil.copy(sourcePath,'.')
-
-#%% Generate MRI-JMA-JRA55-do-1-4-0 demo directory
-demoPath = os.path.join(homePath,'demo')
-os.chdir(demoPath)
-#print 'MRI-JMA-JRA55-do-1-4-0 demo:',os.getcwd()
-demoPath = os.path.join(demoPath,'MRI-JMA-JRA55-do-1-4-0')
-outPath = os.path.join(demoPath,'Tables')
-# First purge existing
-if os.path.exists(outPath):
-    shutil.rmtree(outPath) ; # Purge all existing
-    os.makedirs(outPath)
-else:
-    os.makedirs(outPath)
-os.chdir(outPath)
-
-# Now fill Tables subdir with required files
-cvTables = ['Afx','A3hr','A3hrPt','CV','Lday','LIday','LIyrC','Oday','OmonC',
-            'OyrC','SI3hrPt','SIday','coordinate','formula_terms']
-#print 'MRI-JMA-JRA55-do-1-4-0 demo:',os.getcwd()
-for count,tableId in enumerate(cvTables):
-    fileName = ''.join(['input4MIPs_',tableId,'.json'])
-    sourcePath = os.path.join('..','..','..','Tables',fileName)
-    shutil.copy(sourcePath,'.')

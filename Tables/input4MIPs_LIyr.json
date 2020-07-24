@@ -9,26 +9,26 @@
         "mip_era":"CMIP6",
         "missing_value":"1e20",
         "product":"input4MIPs",
-        "realm":"land",
+        "realm":"landIce land",
         "table_date":"24 July 2020",
-        "table_id":"Table input4MIPs_Lday"
+        "table_id":"Table input4MIPs_LIyr"
     },
     "variable_entry":{
-        "friver":{
+        "sftflf":{
             "cell_measures":"area: areacella",
-            "cell_methods":"area: mean where sea time: mean",
-            "comment":"computed as the river flux of water into the ocean divided by the area of the ocean portion of the grid cell",
+            "cell_methods":"area: time: mean",
+            "comment":"Percentage of grid cell covered by floating ice shelf, the component of the ice sheet that is flowing over sea water",
             "dimensions":"longitude latitude time",
-            "frequency":"day",
-            "long_name":"Water Flux into Sea Water from Rivers",
-            "modeling_realm":"land",
+            "frequency":"yr",
+            "long_name":"Floating Ice Shelf Area Percentage",
+            "modeling_realm":"landIce",
             "ok_max_mean_abs":"",
             "ok_min_mean_abs":"",
-            "out_name":"friver",
+            "out_name":"sftflf",
             "positive":"",
-            "standard_name":"water_flux_into_sea_water_from_rivers",
+            "standard_name":"floating_ice_shelf_area_fraction",
             "type":"real",
-            "units":"kg m-2 s-1",
+            "units":"%",
             "valid_max":"",
             "valid_min":""
         }
