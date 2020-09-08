@@ -91,7 +91,7 @@ PJD  8 Sep 2020     - Register source_id MRI-JRA55-do-1-5-0 https://github.com/P
 """
 
 #%% Import statements
-import copy, gc, json, os, shutil, subprocess, sys, time, pdb
+import copy, gc, json, os, shutil, subprocess, sys, time #, pdb
 sys.path.append('/export/durack1/git/durolib/durolib/')
 sys.path.append('/Volumes/durack1ml/sync/git/durolib/durolib/')
 from durolib import readJsonCreateDict
@@ -843,8 +843,6 @@ source_id[key]['source_variables'] = ['areacello', 'friver', 'huss', 'licalvf',
 source_id[key]['source_version'] = '1.5.0'
 source_id[key]['target_mip'] = 'OMIP'
 source_id[key]['title'] = 'MRI JRA55-do 1.5.0 dataset prepared for input4MIPs'
-
-pdb.set_trace()
 
 '''
 key = 'PCMDI-AMIP-1-2-0'

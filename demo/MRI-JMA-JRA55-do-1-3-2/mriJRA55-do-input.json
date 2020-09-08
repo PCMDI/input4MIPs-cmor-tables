@@ -1,5 +1,5 @@
 {
-    "_control_vocabulary_file":     "input4MIPs_CV.json",
+    "_controlled_vocabulary_file":  "input4MIPs_CV.json",
     "_AXIS_ENTRY_FILE":             "input4MIPs_coordinate.json",
     "_FORMULA_VAR_FILE":            "input4MIPs_formula_terms.json",
     "activity_id":                  "input4MIPs",
