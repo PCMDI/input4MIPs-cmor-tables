@@ -748,6 +748,53 @@
                 "target_mip":"OMIP",
                 "title":"MRI JRA55-do 1.4.0 dataset prepared for input4MIPs"
             },
+            "MRI-JRA55-do-1-5-0":{
+                "comment":"Based on JRA-55 reanalysis (1958-01 to 2020-07)",
+                "contact":"Hiroyuki Tsujino (htsujino@mri-jma.go.jp)",
+                "dataset_category":"atmosphericState",
+                "further_info_url":"http://climate.mri-jma.go.jp/~htsujino/jra55do.html",
+                "grid":"1x1 degree longitude x latitude",
+                "grid_label":"gn",
+                "institution":"Meteorological Research Institute, Tsukuba, Ibaraki 305-0052, Japan",
+                "institution_id":"MRI",
+                "nominal_resolution":"1x1 degree",
+                "product":"reanalysis",
+                "references":"Tsujino et al., 2018: JRA-55 based surface dataset for driving ocean-sea-ice models (JRA55-do), Ocean Modelling, 130(1), pp 79-139. https://doi.org/10.1016/j.ocemod.2018.07.002",
+                "region":[
+                    "global_ocean"
+                ],
+                "release_year":"2020",
+                "source":"MRI JRA55-do 1.5.0: Atmospheric state generated for OMIP based on the JRA-55 reanalysis",
+                "source_description":"Atmospheric state and terrestrial runoff datasets produced by MRI for the OMIP experiment of CMIP6",
+                "source_id":"MRI-JRA55-do-1-5-0",
+                "source_type":"satellite_blended",
+                "source_variables":[
+                    [
+                        "areacello",
+                        "friver",
+                        "huss",
+                        "licalvf",
+                        "prra",
+                        "prsn",
+                        "psl",
+                        "rlds",
+                        "sftof",
+                        "siconc",
+                        "siconca",
+                        "sos",
+                        "tas",
+                        "tos",
+                        "ts",
+                        "uas",
+                        "uos",
+                        "vas",
+                        "vos"
+                    ]
+                ],
+                "source_version":"1.5.0",
+                "target_mip":"OMIP",
+                "title":"MRI JRA55-do 1.5.0 dataset prepared for input4MIPs"
+            },
             "NorESM1-M-rcp26-1-0":{
                 "comment":"Prepared using CMIP5 model NorESM1-M as input. A combination of historical and rcp26 datasets were used to create this ISMIP6 forcing dataset",
                 "contact":"ISMIP6 Steering Team (ismip6@gmail.com)",

@@ -84,6 +84,7 @@ PJD 22 Jul 2020     - Updates to #103 following a review by @geresie https://git
 PJD 23 Jul 2020     - Variable correction to #103 following a review by @geresie https://github.com/PCMDI/input4MIPs-cmor-tables/issues/103
 PJD 24 Jul 2020     - Add new tables for ISMIP6 https://github.com/PCMDI/input4MIPs-cmor-tables/issues/107
 PJD 24 Jul 2020     - Updated call to readJsonCreateDict(tableSource, rawGit) - added argument
+PJD  8 Sep 2020     - Register source_id MRI-JRA55-do-1-5-0 https://github.com/PCMDI/input4MIPs-cmor-tables/issues/109
                     - TODO: Deal with lab cert issue https://raw.githubusercontent.com -> http://rawgit.com (see requests library)
 
 @author: durack1
@@ -813,6 +814,52 @@ source_id = source_id.get('source_id')
 source_id = source_id.get('source_id')
 
 # Fix issues
+key = 'MRI-JRA55-do-1-5-0'
+source_id[key] = {}
+source_id[key]['comment'] = 'Based on JRA-55 reanalysis (1958-01 to 2020-07)'
+source_id[key]['contact'] = 'Hiroyuki Tsujino (htsujino@mri-jma.go.jp)'
+source_id[key]['dataset_category'] = 'atmosphericState'
+source_id[key]['grid'] = '1x1 degree longitude x latitude'
+source_id[key]['grid_label'] = 'gn'
+source_id[key]['further_info_url'] = 'http://climate.mri-jma.go.jp/~htsujino/jra55do.html'
+source_id[key]['institution_id'] = 'MRI'
+source_id[key]['institution'] = 'Meteorological Research Institute, Tsukuba, Ibaraki 305-0052, Japan'
+source_id[key]['nominal_resolution'] = '1x1 degree'
+source_id[key]['product'] = 'reanalysis'
+source_id[key]['references'] = ' '.join(['Tsujino et al., 2018: JRA-55 based surface dataset for',
+                                        'driving ocean-sea-ice models (JRA55-do), Ocean Modelling,',
+                                        '130(1), pp 79-139.',
+                                        'https://doi.org/10.1016/j.ocemod.2018.07.002'])
+source_id[key]['region'] = ['global_ocean']
+source_id[key]['release_year'] = '2020'
+source_id[key]['source_description'] = 'Atmospheric state and terrestrial runoff datasets produced by MRI for the OMIP experiment of CMIP6'
+source_id[key]['source'] = 'MRI JRA55-do 1.5.0: Atmospheric state generated for OMIP based on the JRA-55 reanalysis'
+source_id[key]['source_id'] = key
+source_id[key]['source_type'] = 'satellite_blended'
+source_id[key]['source_variables'] = [
+   "areacello",
+   "friver",
+   "huss",
+   "licalvf",
+   "prra",
+   "prsn",
+   "psl",
+   "rlds",
+   "sftof",
+   "siconc",
+   "siconca",
+   "sos",
+   "tas",
+   "tos",
+   "ts",
+   "uas",
+   "uos",
+   "vas",
+   "vos"
+],
+source_id[key]['source_version'] = '1.5.0'
+source_id[key]['target_mip'] = 'OMIP'
+source_id[key]['title'] = 'MRI JRA55-do 1.5.0 dataset prepared for input4MIPs'
 
 '''
 key = 'PCMDI-AMIP-1-2-0'
