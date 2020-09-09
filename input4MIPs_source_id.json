@@ -512,11 +512,8 @@
             "contact":"Hiroyuki Tsujino (htsujino@mri-jma.go.jp)",
             "dataset_category":"atmosphericState",
             "further_info_url":"http://climate.mri-jma.go.jp/~htsujino/jra55do.html",
-            "grid":"1x1 degree longitude x latitude",
-            "grid_label":"gn",
             "institution":"Meteorological Research Institute, Tsukuba, Ibaraki 305-0052, Japan",
             "institution_id":"MRI",
-            "nominal_resolution":"1x1 degree",
             "product":"reanalysis",
             "references":"Tsujino et al., 2018: JRA-55 based surface dataset for driving ocean-sea-ice models (JRA55-do), Ocean Modelling, 130(1), pp 79-139. https://doi.org/10.1016/j.ocemod.2018.07.002",
             "region":[
