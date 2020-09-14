@@ -819,12 +819,9 @@ source_id[key] = {}
 source_id[key]['comment'] = 'Based on JRA-55 reanalysis (1958-01 to 2020-07)'
 source_id[key]['contact'] = 'Hiroyuki Tsujino (htsujino@mri-jma.go.jp)'
 source_id[key]['dataset_category'] = 'atmosphericState'
-source_id[key]['grid'] = '1x1 degree longitude x latitude'
-source_id[key]['grid_label'] = 'gn'
 source_id[key]['further_info_url'] = 'http://climate.mri-jma.go.jp/~htsujino/jra55do.html'
 source_id[key]['institution_id'] = 'MRI'
 source_id[key]['institution'] = 'Meteorological Research Institute, Tsukuba, Ibaraki 305-0052, Japan'
-source_id[key]['nominal_resolution'] = '1x1 degree'
 source_id[key]['product'] = 'reanalysis'
 source_id[key]['references'] = ' '.join(['Tsujino et al., 2018: JRA-55 based surface dataset for',
                                         'driving ocean-sea-ice models (JRA55-do), Ocean Modelling,',
@@ -1099,6 +1096,29 @@ os.chdir(outPath)
 cvTables = ['Afx', 'A3hr', 'A3hrPt', 'CV', 'Lday', 'LIday', 'LIyrC', 'Oday',
             'OmonC', 'OyrC', 'SI3hrPt', 'SIday', 'coordinate', 'formula_terms']
 #print 'MRI-JMA-JRA55-do-1-4-0 demo:',os.getcwd()
+for count,tableId in enumerate(cvTables):
+    fileName = ''.join(['input4MIPs_',tableId,'.json'])
+    sourcePath = os.path.join('..','..','..','Tables',fileName)
+    shutil.copy(sourcePath,'.')
+
+#%% Generate MRI-JMA-JRA55-do-1-5-0 demo directory
+demoPath = os.path.join(homePath,'demo')
+os.chdir(demoPath)
+#print 'MRI-JMA-JRA55-do-1-5-0 demo:',os.getcwd()
+demoPath = os.path.join(demoPath,'MRI-JMA-JRA55-do-1-5-0')
+outPath = os.path.join(demoPath,'Tables')
+# First purge existing
+if os.path.exists(outPath):
+    shutil.rmtree(outPath) ; # Purge all existing
+    os.makedirs(outPath)
+else:
+    os.makedirs(outPath)
+os.chdir(outPath)
+
+# Now fill Tables subdir with required files
+cvTables = ['Afx', 'A3hr', 'A3hrPt', 'CV', 'Lday', 'LIday', 'LIyrC', 'Oday',
+            'OmonC', 'OyrC', 'SI3hrPt', 'SIday', 'coordinate', 'formula_terms']
+#print 'MRI-JMA-JRA55-do-1-5-0 demo:',os.getcwd()
 for count,tableId in enumerate(cvTables):
     fileName = ''.join(['input4MIPs_',tableId,'.json'])
     sourcePath = os.path.join('..','..','..','Tables',fileName)
