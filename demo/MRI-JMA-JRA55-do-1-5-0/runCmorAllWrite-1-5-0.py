@@ -797,7 +797,7 @@ inputDict['LIday'][key]['fileList'] = [
         'input_atmos/solid_runoff.2016.16Feb2019.nc',
         'input_atmos/solid_runoff.2017.16Feb2019.nc',
         'input_atmos/solid_runoff.2018.16Feb2019.nc',
-        'input_atmos/solid_runoff.2019.16Jan2010.nc',
+        'input_atmos/solid_runoff.2019.16Jan2020.nc',
         'input_atmos/solid_runoff.2020.24jul2020.nc'
         ]
 inputDict['LIday'][key]['inputVarName'] = 'licalvf'
@@ -1437,15 +1437,15 @@ for key in inputDict.keys():
             print ('Start CMOR write..')
             if key == 'OmonC':
                 cmor.write(varid,values) ; # Write variable with time axis
-            elif key == 'OyrC':  
+            elif key == 'OyrC':
                 cmor.write(varid,values) ; # Write variable with time axis
-            elif key == 'LIyrC':  
+            elif key == 'LIyrC':
                 cmor.write(varid,values) ; # Write variable with time axis
-            elif key == 'Ofx':  
+            elif key == 'Ofx':
                 cmor.write(varid,values) ; # Write variable without time axis
-            elif key == 'Afx':  
+            elif key == 'Afx':
                 cmor.write(varid,values) ; # Write variable without time axis
-            elif key == 'LIfx':  
+            elif key == 'LIfx':
                 cmor.write(varid,values) ; # Write variable without time axis
             else:
                 cmor.write(varid,values,time_vals=time,time_bnds=time.getBounds()) ; # Write variable with time axis

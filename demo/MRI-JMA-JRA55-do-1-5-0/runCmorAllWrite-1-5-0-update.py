@@ -530,15 +530,15 @@ for key in inputDict.keys():
             print ('Start CMOR write..')
             if key == 'OmonC':
                 cmor.write(varid,values) ; # Write variable with time axis
-            elif key == 'OyrC':  
+            elif key == 'OyrC':
                 cmor.write(varid,values) ; # Write variable with time axis
-            elif key == 'LIyrC':  
+            elif key == 'LIyrC':
                 cmor.write(varid,values) ; # Write variable with time axis
-            elif key == 'Ofx':  
+            elif key == 'Ofx':
                 cmor.write(varid,values) ; # Write variable without time axis
-            elif key == 'Afx':  
+            elif key == 'Afx':
                 cmor.write(varid,values) ; # Write variable without time axis
-            elif key == 'LIfx':  
+            elif key == 'LIfx':
                 cmor.write(varid,values) ; # Write variable without time axis
             else:
                 cmor.write(varid,values,time_vals=time,time_bnds=time.getBounds()) ; # Write variable with time axis
