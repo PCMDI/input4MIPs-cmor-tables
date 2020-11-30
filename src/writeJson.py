@@ -85,6 +85,8 @@ PJD 23 Jul 2020     - Variable correction to #103 following a review by @geresie
 PJD 24 Jul 2020     - Add new tables for ISMIP6 https://github.com/PCMDI/input4MIPs-cmor-tables/issues/107
 PJD 24 Jul 2020     - Updated call to readJsonCreateDict(tableSource, rawGit) - added argument
 PJD  8 Sep 2020     - Register source_id MRI-JRA55-do-1-5-0 https://github.com/PCMDI/input4MIPs-cmor-tables/issues/109
+PJD 30 Nov 2020     - Update to deal with Py3
+PJD 30 Nov 2020     - Register source_id UKESM1-CM6-ssp585-1-0
                     - TODO: Deal with lab cert issue https://raw.githubusercontent.com -> http://rawgit.com (see requests library)
 
 @author: durack1
@@ -101,7 +103,7 @@ from durolib import readJsonCreateDict
 homePath = os.path.join('/','/'.join(os.path.realpath(sys.argv[0]).split('/')[0:-2]))
 #homePath = '/export/durack1/git/input4MIPs-cmor-tables/' ; # Linux
 #homePath = '/sync/git/input4MIPs-cmor-tables/src' ; # OS-X
-print 'homePath:',homePath
+print('homePath:',homePath)
 os.chdir(homePath)
 
 #%% List target tables
@@ -814,32 +816,6 @@ source_id = source_id.get('source_id')
 source_id = source_id.get('source_id')
 
 # Fix issues
-key = 'MRI-JRA55-do-1-5-0'
-source_id[key] = {}
-source_id[key]['comment'] = 'Based on JRA-55 reanalysis (1958-01 to 2020-07)'
-source_id[key]['contact'] = 'Hiroyuki Tsujino (htsujino@mri-jma.go.jp)'
-source_id[key]['dataset_category'] = 'atmosphericState'
-source_id[key]['further_info_url'] = 'http://climate.mri-jma.go.jp/~htsujino/jra55do.html'
-source_id[key]['institution_id'] = 'MRI'
-source_id[key]['institution'] = 'Meteorological Research Institute, Tsukuba, Ibaraki 305-0052, Japan'
-source_id[key]['product'] = 'reanalysis'
-source_id[key]['references'] = ' '.join(['Tsujino et al., 2018: JRA-55 based surface dataset for',
-                                        'driving ocean-sea-ice models (JRA55-do), Ocean Modelling,',
-                                        '130(1), pp 79-139.',
-                                        'https://doi.org/10.1016/j.ocemod.2018.07.002'])
-source_id[key]['region'] = ['global_ocean']
-source_id[key]['release_year'] = '2020'
-source_id[key]['source_description'] = 'Atmospheric state and terrestrial runoff datasets produced by MRI for the OMIP experiment of CMIP6'
-source_id[key]['source'] = 'MRI JRA55-do 1.5.0: Atmospheric state generated for OMIP based on the JRA-55 reanalysis'
-source_id[key]['source_id'] = key
-source_id[key]['source_type'] = 'satellite_blended'
-source_id[key]['source_variables'] = ['areacello', 'friver', 'huss', 'licalvf',
-                                      'prra', 'prsn', 'psl', 'rlds', 'sftof',
-                                      'siconc', 'siconca', 'sos', 'tas', 'tos',
-                                      'ts', 'uas', 'uos', 'vas', 'vos']
-source_id[key]['source_version'] = '1.5.0'
-source_id[key]['target_mip'] = 'OMIP'
-source_id[key]['title'] = 'MRI JRA55-do 1.5.0 dataset prepared for input4MIPs'
 
 '''
 key = 'PCMDI-AMIP-1-2-0'
@@ -872,6 +848,7 @@ source_id[key]['source_variables'] = ['areacello','sftof','siconc','siconcbcs',
 source_id[key]['source_version'] = '1.2.0'
 source_id[key]['target_mip'] = 'CMIP'
 source_id[key]['title'] = 'PCMDI-AMIP 1.2.0 dataset prepared for input4MIPs'
+'''
 
 # Loop over ISMIP6 source_id entries
 sIds = [
@@ -894,6 +871,7 @@ sIds = [
  'NorESM1-M-rcp85-1-0',
  'UKESM1-0-LL-ssp585-1-0'
  ]
+sIds = ['UKESM1-CM6-ssp585-1-0']
 
 for count,sId in enumerate(sIds):
     key = sId
@@ -904,8 +882,8 @@ for count,sId in enumerate(sIds):
     else:
         mipEra = 'CMIP5'
     mod = tmp.replace(''.join(['-',rcp]),'')
-    print(count,key,mod,rcp,mipEra)
-    #sys.exit()
+    print(count, key, mod, rcp, mipEra)
+    sys.exit()
     source_id[key] = {}
     source_id[key]['comment'] = ' '.join(['Prepared using', mipEra, 'model', mod ,
                                           'as input. A combination of historical',
@@ -938,7 +916,6 @@ for count,sId in enumerate(sIds):
     source_id[key]['target_mip'] = 'ISMIP6'
     source_id[key]['title'] = ' '.join(['ISMIP6 (CMIP6) -', key, 'derived data prepared',
                                        'for input4MIPs'])
-'''
 
 #%% Create CV master
 CV = {}
@@ -959,7 +936,7 @@ CV['CV']['required_global_attributes'] = required_global_attributes
 CV['CV']['source_id'] = source_id
 
 #%% Write variables to files
-print 'Start Tables write:',os.getcwd()
+print('Start Tables write:',os.getcwd())
 for jsonName in masterTargets:
     #print jsonName
     # Clean experiment formats
@@ -1045,7 +1022,7 @@ if os.path.exists('../MRI-JMA-JRA55-do-1-3/demo.zip'):
     os.remove('../MRI-JMA-JRA55-do-1-3/demo.zip')
 # Jump up one directory
 os.chdir(demoPath.replace('/MRI-JMA-JRA55-do-1-3',''))
-print os.getcwd()
+print(os.getcwd())
 # Zip demo dir
 p = subprocess.Popen(['7za','a','demo.zip','MRI-JMA-JRA55-do-1-3','tzip','-xr!demo/MRI-JMA-JRA55-do-1-3',
                       '-xr!MRI-JMA-JRA55-do-1-3/testFiles','-xr!MRI-JMA-JRA55-do-1-3/input4MIPs'],
