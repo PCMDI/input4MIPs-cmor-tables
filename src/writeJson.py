@@ -224,7 +224,8 @@ tableSource = [
  ]
 notTable = ['coordinate', 'frequency', 'formula_terms', 'grid_label',
               'nominal_resolution', 'realm', 'region', 'source_id', 'target_mip']
-headerFree = ['coordinate', 'formula_terms']
+headerFree = ['coordinate', 'frequency', 'formula_terms', 'grid_label',
+              'nominal_resolution', 'realm', 'region']
 rawGit = 'https://raw.githubusercontent.com/'
 
 #%% Loop through tables and create in-memory objects
