@@ -705,7 +705,7 @@
             "title":"PCMDI-AMIP 1.1.6 dataset prepared for input4MIPs"
         },
         "PCMDI-AMIP-1-2-0":{
-            "comment":"Based on Hurrell SST/sea ice consistency criteria applied to merged HadISST (1870-01 to 1981-10) & NCEP-0I2 (1981-11 to 2019-06)",
+            "comment":"Based on Hurrell SST/sea ice consistency criteria applied to merged HadISST (1870-01 to 1981-10) & NCEP-0I2 (1981-11 to 2021-06)",
             "contact":"PCMDI (pcmdi-cmip@llnl.gov)",
             "dataset_category":"SSTsAndSeaIce",
             "further_info_url":"https://pcmdi.llnl.gov/mips/amip",
@@ -713,13 +713,14 @@
             "grid_label":"gn",
             "institution":"Program for Climate Model Diagnosis and Intercomparison, Lawrence Livermore National Laboratory, Livermore, CA 94550, USA",
             "institution_id":"PCMDI",
+            "mip_era":"CMIP6Plus",
             "nominal_resolution":"1x1 degree",
             "product":"observations",
             "references":"Taylor, K.E., D. Williamson and F. Zwiers, 2000: The sea surface temperature and sea ice concentration boundary conditions for AMIP II simulations. PCMDI Report 60, Program for Climate Model Diagnosis and Intercomparison, Lawrence Livermore National Laboratory, 25 pp. Available online: https://pcmdi.llnl.gov/report/pdf/60.pdf",
             "region":[
                 "global_ocean"
             ],
-            "release_year":"2020",
+            "release_year":"2021",
             "source":"PCMDI-AMIP 1.2.0: Merged SST based on UK MetOffice HadISST and NCEP OI2",
             "source_description":"Sea surface temperature and sea-ice datasets produced by PCMDI (LLNL) for the AMIP (DECK) experiment of CMIP6",
             "source_id":"PCMDI-AMIP-1-2-0",

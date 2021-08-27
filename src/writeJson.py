@@ -85,6 +85,9 @@ PJD 23 Jul 2020     - Variable correction to #103 following a review by @geresie
 PJD 24 Jul 2020     - Add new tables for ISMIP6 https://github.com/PCMDI/input4MIPs-cmor-tables/issues/107
 PJD 24 Jul 2020     - Updated call to readJsonCreateDict(tableSource, rawGit) - added argument
 PJD  8 Sep 2020     - Register source_id MRI-JRA55-do-1-5-0 https://github.com/PCMDI/input4MIPs-cmor-tables/issues/109
+PJD 26 Aug 2021     - Update to reflect PCMDI-AMIP-1-2-0 mip_era = CMIP6Plus
+PJD 26 Aug 2021     - Update home path
+PJD 27 Aug 2021     - Updated for Py3
                     - TODO: Deal with lab cert issue https://raw.githubusercontent.com -> http://rawgit.com (see requests library)
 
 @author: durack1
@@ -92,7 +95,7 @@ PJD  8 Sep 2020     - Register source_id MRI-JRA55-do-1-5-0 https://github.com/P
 
 #%% Import statements
 import copy, gc, json, os, shutil, subprocess, sys, time #, pdb
-sys.path.append('/export/durack1/git/durolib/durolib/')
+sys.path.append('/home/durack1/git/durolib/durolib/')
 sys.path.append('/Volumes/durack1ml/sync/git/durolib/durolib/')
 from durolib import readJsonCreateDict
 
@@ -101,7 +104,7 @@ from durolib import readJsonCreateDict
 homePath = os.path.join('/','/'.join(os.path.realpath(sys.argv[0]).split('/')[0:-2]))
 #homePath = '/export/durack1/git/input4MIPs-cmor-tables/' ; # Linux
 #homePath = '/sync/git/input4MIPs-cmor-tables/src' ; # OS-X
-print 'homePath:',homePath
+print('homePath:', homePath)
 os.chdir(homePath)
 
 #%% List target tables
@@ -219,12 +222,14 @@ tableSource = [
  ['SIday','PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_SIday.json'],
  ['SImon','PCMDI/cmip6-cmor-tables/master/Tables/CMIP6_SImon.json'],
  ]
-headerFree = ['coordinate', 'frequency', 'formula_terms', 'grid_label',
+notTable = ['coordinate', 'frequency', 'formula_terms', 'grid_label',
               'nominal_resolution', 'realm', 'region', 'source_id', 'target_mip']
+headerFree = ['coordinate', 'formula_terms']
 rawGit = 'https://raw.githubusercontent.com/'
 
 #%% Loop through tables and create in-memory objects
 # Loop through tableSource and create output tables
+
 tmp = readJsonCreateDict(tableSource, rawGit)
 for count,table in enumerate(tmp.keys()):
     print('table:',table)
@@ -242,8 +247,7 @@ del(tmp,count,table) ; gc.collect()
 for count2,table in enumerate(tableSource):
     tableName = table[0]
     print('tableName:',tableName)
-    #print eval(tableName)
-    if tableName in headerFree:
+    if tableName in notTable:
         continue
     else:
         eval(tableName)['Header']['table_date'] = time.strftime('%d %B %Y')
@@ -814,6 +818,40 @@ source_id = source_id.get('source_id')
 source_id = source_id.get('source_id')
 
 # Fix issues
+
+key = 'PCMDI-AMIP-1-2-0'
+source_id[key] = {}
+source_id[key]['comment'] = 'Based on Hurrell SST/sea ice consistency criteria applied to merged HadISST (1870-01 to 1981-10) & NCEP-0I2 (1981-11 to 2021-06)'
+source_id[key]['contact'] = 'PCMDI (pcmdi-cmip@llnl.gov)'
+source_id[key]['dataset_category'] = 'SSTsAndSeaIce'
+source_id[key]['grid'] = '1x1 degree longitude x latitude'
+source_id[key]['grid_label'] = 'gn'
+source_id[key]['further_info_url'] = 'https://pcmdi.llnl.gov/mips/amip'
+source_id[key]['institution_id'] = 'PCMDI'
+source_id[key]['institution'] = 'Program for Climate Model Diagnosis and Intercomparison, Lawrence Livermore National Laboratory, Livermore, CA 94550, USA'
+source_id[key]['nominal_resolution'] = '1x1 degree'
+source_id[key]['mip_era'] = 'CMIP6Plus'
+source_id[key]['product'] = 'observations'
+source_id[key]['references'] = ''.join(['Taylor, K.E., D. Williamson and F. Zwiers, ',
+                                        '2000: The sea surface temperature and sea ice ',
+                                        'concentration boundary conditions for AMIP II ',
+                                        'simulations. PCMDI Report 60, Program for ',
+                                        'Climate Model Diagnosis and Intercomparison, ',
+                                        'Lawrence Livermore National Laboratory, 25 pp. ',
+                                        'Available online: https://pcmdi.llnl.gov/report/pdf/60.pdf'])
+source_id[key]['region'] = ['global_ocean']
+source_id[key]['release_year'] = '2021'
+source_id[key]['source_description'] = 'Sea surface temperature and sea-ice datasets produced by PCMDI (LLNL) for the AMIP (DECK) experiment of CMIP6'
+source_id[key]['source'] = 'PCMDI-AMIP 1.2.0: Merged SST based on UK MetOffice HadISST and NCEP OI2'
+source_id[key]['source_id'] = key
+source_id[key]['source_type'] = 'satellite_blended'
+source_id[key]['source_variables'] = ['areacello','sftof','siconc','siconcbcs',
+                                      'tos','tosbcs']
+source_id[key]['source_version'] = '1.2.0'
+source_id[key]['target_mip'] = 'CMIP'
+source_id[key]['title'] = 'PCMDI-AMIP 1.2.0 dataset prepared for input4MIPs'
+
+'''
 key = 'MRI-JRA55-do-1-5-0'
 source_id[key] = {}
 source_id[key]['comment'] = 'Based on JRA-55 reanalysis (1958-01 to 2020-07)'
@@ -840,39 +878,9 @@ source_id[key]['source_variables'] = ['areacello', 'friver', 'huss', 'licalvf',
 source_id[key]['source_version'] = '1.5.0'
 source_id[key]['target_mip'] = 'OMIP'
 source_id[key]['title'] = 'MRI JRA55-do 1.5.0 dataset prepared for input4MIPs'
+'''
 
 '''
-key = 'PCMDI-AMIP-1-2-0'
-source_id[key] = {}
-source_id[key]['comment'] = 'Based on Hurrell SST/sea ice consistency criteria applied to merged HadISST (1870-01 to 1981-10) & NCEP-0I2 (1981-11 to 2019-06)'
-source_id[key]['contact'] = 'PCMDI (pcmdi-cmip@llnl.gov)'
-source_id[key]['dataset_category'] = 'SSTsAndSeaIce'
-source_id[key]['grid'] = '1x1 degree longitude x latitude'
-source_id[key]['grid_label'] = 'gn'
-source_id[key]['further_info_url'] = 'https://pcmdi.llnl.gov/mips/amip'
-source_id[key]['institution_id'] = 'PCMDI'
-source_id[key]['institution'] = 'Program for Climate Model Diagnosis and Intercomparison, Lawrence Livermore National Laboratory, Livermore, CA 94550, USA'
-source_id[key]['nominal_resolution'] = '1x1 degree'
-source_id[key]['product'] = 'observations'
-source_id[key]['references'] = ''.join(['Taylor, K.E., D. Williamson and F. Zwiers, ',
-                                        '2000: The sea surface temperature and sea ice ',
-                                        'concentration boundary conditions for AMIP II ',
-                                        'simulations. PCMDI Report 60, Program for ',
-                                        'Climate Model Diagnosis and Intercomparison, ',
-                                        'Lawrence Livermore National Laboratory, 25 pp. ',
-                                        'Available online: https://pcmdi.llnl.gov/report/pdf/60.pdf'])
-source_id[key]['region'] = ['global_ocean']
-source_id[key]['release_year'] = '2020'
-source_id[key]['source_description'] = 'Sea surface temperature and sea-ice datasets produced by PCMDI (LLNL) for the AMIP (DECK) experiment of CMIP6'
-source_id[key]['source'] = 'PCMDI-AMIP 1.2.0: Merged SST based on UK MetOffice HadISST and NCEP OI2'
-source_id[key]['source_id'] = key
-source_id[key]['source_type'] = 'satellite_blended'
-source_id[key]['source_variables'] = ['areacello','sftof','siconc','siconcbcs',
-                                      'tos','tosbcs']
-source_id[key]['source_version'] = '1.2.0'
-source_id[key]['target_mip'] = 'CMIP'
-source_id[key]['title'] = 'PCMDI-AMIP 1.2.0 dataset prepared for input4MIPs'
-
 # Loop over ISMIP6 source_id entries
 sIds = [
  'ACCESS1-3-rcp85-1-0',
@@ -959,14 +967,14 @@ CV['CV']['required_global_attributes'] = required_global_attributes
 CV['CV']['source_id'] = source_id
 
 #%% Write variables to files
-print 'Start Tables write:',os.getcwd()
+print('Start Tables write:', os.getcwd())
 for jsonName in masterTargets:
     #print jsonName
     # Clean experiment formats
     if jsonName in ['coordinate','grids']: #,'Amon','Lmon','Omon','SImon']:
         dictToClean = eval(jsonName)
-        for key, value1 in dictToClean.iteritems():
-            for value2 in value1.iteritems():
+        for key, value1 in dictToClean.items():
+            for value2 in value1.items():
                 string = dictToClean[key][value2[0]]
                 if not isinstance(string, list) and not isinstance(string, dict):
                     string = string.strip() ; # Remove trailing whitespace
@@ -1003,7 +1011,7 @@ for jsonName in masterTargets:
     else:
         jsonDict = eval(jsonName)
     fH = open(outFile,'w')
-    json.dump(jsonDict,fH,ensure_ascii=True,sort_keys=True,indent=4,separators=(',',':'),encoding="utf-8")
+    json.dump(jsonDict,fH,ensure_ascii=True,sort_keys=True,indent=4,separators=(',',':')) #,encoding="utf-8")
     fH.close()
 
 del(jsonName,outFile) ; gc.collect()
@@ -1011,9 +1019,11 @@ del(jsonName,outFile) ; gc.collect()
 # Validate - only necessary if files are not written by json module
 
 #%% Generate MRI-JMA-JRA55-do-1-3 demo directory
-demoPath = os.path.join('/','/'.join(os.path.realpath(__file__).split('/')[0:-2]),'demo')
+demoPath = os.path.join('/','/'.join(os.path.realpath(__file__).split('/')[0:-1]),'demo')
+#print('demoPath:', demoPath)
 demoPath = os.path.join(demoPath,'MRI-JMA-JRA55-do-1-3')
 outPath = os.path.join(demoPath,'Tables')
+#print('outPath:', outPath)
 # First purge existing
 if os.path.exists(outPath):
     shutil.rmtree(outPath) ; # Purge all existing
@@ -1028,11 +1038,13 @@ cvTables = ['A3hr', 'A3hrPt', 'CV', 'Oday', 'OmonC', 'OyrC', 'SI3hrPt',
 for count,tableId in enumerate(cvTables):
     fileName = ''.join(['input4MIPs_',tableId,'.json'])
     sourcePath = os.path.join('..','..','Tables',fileName)
+    #print('pwd', os.getcwd())
+    #print('sourcePath', sourcePath)
     shutil.copy(sourcePath,'Tables')
 
 #%% Generate zip archive
 env7za = os.environ.copy()
-env7za['PATH'] = env7za['PATH'] + ':/export/durack1/bin/downloads/p7zip16.02/180204_build/p7zip_16.02/bin'
+env7za['PATH'] = env7za['PATH'] + ':/home/durack1/bin/downloads/p7zip16.02/180204_build/p7zip_16.02/bin'
 # Cleanup rogue files
 #os.chdir(demoPath)
 if os.path.exists('.DS_Store'):
@@ -1045,7 +1057,6 @@ if os.path.exists('../MRI-JMA-JRA55-do-1-3/demo.zip'):
     os.remove('../MRI-JMA-JRA55-do-1-3/demo.zip')
 # Jump up one directory
 os.chdir(demoPath.replace('/MRI-JMA-JRA55-do-1-3',''))
-print os.getcwd()
 # Zip demo dir
 p = subprocess.Popen(['7za','a','demo.zip','MRI-JMA-JRA55-do-1-3','tzip','-xr!demo/MRI-JMA-JRA55-do-1-3',
                       '-xr!MRI-JMA-JRA55-do-1-3/testFiles','-xr!MRI-JMA-JRA55-do-1-3/input4MIPs'],
@@ -1072,10 +1083,10 @@ os.chdir(outPath)
 
 # Now fill Tables subdir with required files
 cvTables = ['Afx', 'Lday', 'OyrC', 'coordinate', 'formula_terms']
-#print 'MRI-JMA-JRA55-do-1-3-2 demo:',os.getcwd()
+#print('MRI-JMA-JRA55-do-1-3-2 demo:',os.getcwd())
 for count,tableId in enumerate(cvTables):
     fileName = ''.join(['input4MIPs_',tableId,'.json'])
-    sourcePath = os.path.join('..','..','..','..','Tables',fileName)
+    sourcePath = os.path.join('..','..','..','Tables',fileName)
     shutil.copy(sourcePath,'.')
 
 #%% Generate MRI-JMA-JRA55-do-1-4-0 demo directory
@@ -1131,7 +1142,7 @@ versionId = '6.2.3'
 input4MIPs = {}
 input4MIPs['data'] = {}
 # Generate institutions
-keys = institution_id.keys(); keys.sort()
+keys = institution_id.keys(); sorted(keys)
 #for inst in keys:
 #    input4MIPs['data'][inst] = {}
 # Drop in version identifiers
@@ -1229,5 +1240,5 @@ jsonDict['input4MIPs_version'] = {}
 jsonDict['input4MIPs_version'] = input4MIPs
 # Write to file
 fH = open(outFile,'w')
-json.dump(jsonDict,fH,ensure_ascii=True,sort_keys=True,indent=4,separators=(',',':'),encoding="utf-8")
+json.dump(jsonDict,fH,ensure_ascii=True,sort_keys=True,indent=4,separators=(',',':'))#,encoding="utf-8")
 fH.close()
