@@ -111,7 +111,8 @@
             "CMIP2",
             "CMIP3",
             "CMIP5",
-            "CMIP6"
+            "CMIP6",
+            "CMIP6Plus"
         ],
         "nominal_resolution":[
             "0.5 km",

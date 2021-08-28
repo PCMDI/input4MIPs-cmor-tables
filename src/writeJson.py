@@ -91,7 +91,10 @@ PJD 27 Aug 2021     - Updated for Py3
 PJD 27 Aug 2021     - Updated upstreams 1.00.32 ->.33
 PJD 27 Aug 2021     - Added mip_era = 'CMIP6' to all existing source_id entries
 PJD 27 Aug 2021     - Comment out updated for all previous demo versions of MRI-JMA-JRA55-do-1-3 -> 1-5-0
+PJD 27 Aug 2021     - Update table "mip_era":"CMIP6" -> "CMIP6 CMIP6Plus"
+PJD 27 Aug 2021     - Add "CMIP6Plus" to mip_era; Update tables with mip_era":"CMIP6Plus"
                     - TODO: Deal with lab cert issue https://raw.githubusercontent.com -> http://rawgit.com (see requests library)
+                    - TODO: Generate versioning info
 
 @author: durack1
 """
@@ -99,7 +102,7 @@ PJD 27 Aug 2021     - Comment out updated for all previous demo versions of MRI-
 #%% Import statements
 import copy, gc, json, os, sys, time #, shutil, subprocess, pdb
 sys.path.append('/home/durack1/git/durolib/durolib/')
-sys.path.append('/Volumes/durack1ml/sync/git/durolib/durolib/')
+sys.path.append('/Users/durack1/sync/git/durolib/durolib/')
 from durolib import readJsonCreateDict
 
 #%% Determine path
@@ -245,18 +248,20 @@ for count,table in enumerate(tmp.keys()):
         vars()[table] = tmp[table].get(table)
     else:
         vars()[table] = tmp[table]
-del(tmp,count,table) ; gc.collect()
+del(tmp, count, table) ; gc.collect()
 
 # Cleanup by extracting only variable lists
-for count2,table in enumerate(tableSource):
+for count2, table in enumerate(tableSource):
     tableName = table[0]
-    print('tableName:',tableName)
+    print('tableName:', tableName)
     if tableName in notTable:
         continue
     else:
-        eval(tableName)['Header']['table_date'] = time.strftime('%d %B %Y')
+        eval(tableName)['Header']['mip_era'] = 'CMIP6Plus' #'CMIP6 CMIP6Plus'
         eval(tableName)['Header']['product'] = 'input4MIPs'
-        eval(tableName)['Header']['table_id'] = ''.join(['Table input4MIPs_',tableName])
+        eval(tableName)['Header']['table_date'] = time.strftime('%d %B %Y')
+        eval(tableName)['Header']['table_id'] = ''.join(['Table input4MIPs_',
+                                                         tableName])
 
 #%% Cleanup imported tables
 # Fixed fields
@@ -771,7 +776,8 @@ mip_era = [
  'CMIP2',
  'CMIP3',
  'CMIP5',
- 'CMIP6'
+ 'CMIP6',
+ 'CMIP6Plus'
 ] ;
 
 #%% Product

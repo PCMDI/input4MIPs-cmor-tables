@@ -6,7 +6,7 @@
         "data_specs_version":"01.00.33",
         "generic_levels":"",
         "int_missing_value":"-999",
-        "mip_era":"CMIP6",
+        "mip_era":"CMIP6Plus",
         "missing_value":"1e20",
         "product":"input4MIPs",
         "realm":"land",
