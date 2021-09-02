@@ -734,7 +734,6 @@
             "comment":"Based on Hurrell SST/sea ice consistency criteria applied to merged HadISST (1870-01 to 1981-10) & NCEP-0I2 (1981-11 to 2021-06)",
             "contact":"PCMDI (pcmdi-cmip@llnl.gov)",
             "dataset_category":"SSTsAndSeaIce",
-            "frequency":"mon",
             "further_info_url":"https://pcmdi.llnl.gov/mips/amip",
             "grid":"1x1 degree longitude x latitude",
             "grid_label":"gn",
