@@ -838,11 +838,13 @@ for count, key in enumerate(source_id.keys()):
 key = 'PCMDI-AMIP-1-2-0'
 source_id.pop(key, None) # Cleanup and start again
 source_id[key] = {}
+source_id[key]['calendar'] = 'gregorian'
 source_id[key]['comment'] = 'Based on Hurrell SST/sea ice consistency criteria applied to merged HadISST (1870-01 to 1981-10) & NCEP-0I2 (1981-11 to 2021-06)'
 source_id[key]['contact'] = 'PCMDI (pcmdi-cmip@llnl.gov)'
 source_id[key]['dataset_category'] = 'SSTsAndSeaIce'
 source_id[key]['grid'] = '1x1 degree longitude x latitude'
 source_id[key]['grid_label'] = 'gn'
+source_id[key]['frequency'] = 'mon'
 source_id[key]['further_info_url'] = 'https://pcmdi.llnl.gov/mips/amip'
 source_id[key]['institution_id'] = 'PCMDI'
 source_id[key]['institution'] = 'Program for Climate Model Diagnosis and Intercomparison, Lawrence Livermore National Laboratory, Livermore, CA 94550, USA'
@@ -867,6 +869,21 @@ source_id[key]['source_variables'] = ['areacello','sftof','siconc','siconcbcs',
 source_id[key]['source_version'] = '1.2.0'
 source_id[key]['target_mip'] = 'CMIP'
 source_id[key]['title'] = 'PCMDI-AMIP 1.2.0 dataset prepared for input4MIPs'
+
+'''Think about adding
+"#source":                       "PCMDI-AMIP 1.2.0: Merged SST based on UK MetOffice HadISST and NCEP OI2", <- already there
+"#contact ":                     "PCMDI (pcmdi-cmip@llnl.gov)", <- already there
+"#further_info_url":             "https://pcmdi.llnl.gov/mips/amip", <- already there
+
+"#dataset_category":             "SSTsAndSeaIce", <- already there
+"#calendar":                     "gregorian", <- already there
+"#frequency":                    "mon", <- already there
+"#grid_label":                   "gn", <- already there
+"#nominal_resolution":           "1x1 degree", <- already there
+"#region":                       "global_ocean", <- already there
+'''
+
+
 
 '''
 key = 'MRI-JRA55-do-1-5-0'
