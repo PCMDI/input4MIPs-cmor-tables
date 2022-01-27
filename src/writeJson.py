@@ -904,7 +904,7 @@ source_id[key]['references'] = ''.join(['Taylor, K.E., D. Williamson and F. Zwie
                                         'Lawrence Livermore National Laboratory, 25 pp. ',
                                         'Available online: https://pcmdi.llnl.gov/report/pdf/60.pdf'])
 source_id[key]['region'] = ['global_ocean']
-source_id[key]['release_year'] = '2021'
+source_id[key]['release_year'] = '2022'
 source_id[key]['source_description'] = ' '.join(['Sea surface temperature and',
                                                 'sea-ice datasets produced by',
                                                  'PCMDI (LLNL) for the AMIP',
@@ -947,7 +947,7 @@ source_id[key]['references'] = ''.join(['Taylor, K.E., D. Williamson and F. Zwie
                                         'Lawrence Livermore National Laboratory, 25 pp. ',
                                         'Available online: https://pcmdi.llnl.gov/report/pdf/60.pdf'])
 source_id[key]['region'] = ['global_ocean']
-source_id[key]['release_year'] = '2021'
+source_id[key]['release_year'] = '2022'
 source_id[key]['source_description'] = 'Sea surface temperature and sea-ice datasets produced by PCMDI (LLNL) for the AMIP (DECK) experiment of CMIP6'
 source_id[key]['source'] = 'PCMDI-AMIP 1.2.0: Merged SST based on UK MetOffice HadISST and NCEP OI2'
 source_id[key]['source_id'] = key

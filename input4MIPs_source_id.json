@@ -746,7 +746,7 @@
             "region":[
                 "global_ocean"
             ],
-            "release_year":"2021",
+            "release_year":"2022",
             "source":"PCMDI-AMIP 1.1.7: Merged SST based on UK MetOffice HadISST and NCEP OI2",
             "source_description":"Sea surface temperature and sea-ice datasets produced by PCMDI (LLNL) for the AMIP (DECK) experiment of CMIP6",
             "source_id":"PCMDI-AMIP-1-1-7",
