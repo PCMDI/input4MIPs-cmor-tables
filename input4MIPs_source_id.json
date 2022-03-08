@@ -763,6 +763,40 @@
             "target_mip":"CMIP",
             "title":"PCMDI-AMIP 1.1.7 dataset prepared for input4MIPs"
         },
+        "PCMDI-AMIP-1-2-0":{
+            "calendar":"gregorian",
+            "comment":"Based on Hurrell SST/sea ice consistency criteria applied to merged HadISST (1870-01 to 1981-10) & NCEP-0I2 (1981-11 to 2021-12)",
+            "contact":"PCMDI (pcmdi-cmip@llnl.gov)",
+            "dataset_category":"SSTsAndSeaIce",
+            "further_info_url":"https://pcmdi.llnl.gov/mips/amip",
+            "grid":"1x1 degree longitude x latitude",
+            "grid_label":"gn",
+            "institution":"Program for Climate Model Diagnosis and Intercomparison, Lawrence Livermore National Laboratory, Livermore, CA 94550, USA",
+            "institution_id":"PCMDI",
+            "mip_era":"CMIP6Plus",
+            "nominal_resolution":"1x1 degree",
+            "product":"observations",
+            "references":"Taylor, K.E., D. Williamson and F. Zwiers, 2000: The sea surface temperature and sea ice concentration boundary conditions for AMIP II simulations. PCMDI Report 60, Program for Climate Model Diagnosis and Intercomparison, Lawrence Livermore National Laboratory, 25 pp. Available online: https://pcmdi.llnl.gov/report/pdf/60.pdf",
+            "region":[
+                "global_ocean"
+            ],
+            "release_year":"2022",
+            "source":"PCMDI-AMIP 1.2.0: Merged SST based on UK MetOffice HadISST and NCEP OI2",
+            "source_description":"Sea surface temperature and sea-ice datasets produced by PCMDI (LLNL) for the AMIP (DECK) experiment of CMIP6",
+            "source_id":"PCMDI-AMIP-1-2-0",
+            "source_type":"satellite_blended",
+            "source_variables":[
+                "areacello",
+                "sftof",
+                "siconc",
+                "siconcbcs",
+                "tos",
+                "tosbcs"
+            ],
+            "source_version":"1.2.0",
+            "target_mip":"CMIP",
+            "title":"PCMDI-AMIP 1.2.0 dataset prepared for input4MIPs"
+        },
         "UKESM1-0-LL-ssp585-1-0":{
             "comment":"Prepared using CMIP6 model UKESM1-0-LL as input. A combination of historical and ssp585 datasets were used to create this ISMIP6 forcing dataset",
             "contact":"ISMIP6 Steering Team (ismip6@gmail.com)",
