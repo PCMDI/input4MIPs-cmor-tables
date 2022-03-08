@@ -98,6 +98,7 @@ PJD 24 Jul 2020     - Updated call to readJsonCreateDict(tableSource, rawGit) - 
 PJD  8 Sep 2020     - Register source_id MRI-JRA55-do-1-5-0 https://github.com/PCMDI/input4MIPs-cmor-tables/issues/109
 PJD 26 Jan 2022     - Update home path
 PJD  8 Mar 2022     - Register PCMDI-AMIP-1-2-0 https://github.com/PCMDI/input4MIPs-cmor-tables/issues/87
+PJD  8 Mar 2022     - Update source_id PCMDI-AMIP-1-2-0: add data_usage_tips, license; remove product https://github.com/PCMDI/amipbcs/issues/25
                     - TODO: Deal with lab cert issue https://raw.githubusercontent.com -> http://rawgit.com (see requests library)
 
 
@@ -884,6 +885,11 @@ source_id[key]['comment'] = ' '.join(['Based on Hurrell SST/sea ice consistency'
                                       '(1870-01 to 1981-10) & NCEP-0I2 (1981-11',
                                       'to 2021-12)'])
 source_id[key]['contact'] = 'PCMDI (pcmdi-cmip@llnl.gov)'
+source_id[key]['data_usage_tips'] = "".join(["The mid-month data should be linearly ",
+                                             "interpolated in time and then clipped ",
+                                             "for use as boundary conditions to ",
+                                             "drive AMIP simulations as described ",
+                                             "at: https://pcmdi.llnl.gov/mips/amip"])
 source_id[key]['dataset_category'] = 'SSTsAndSeaIce'
 source_id[key]['grid'] = '1x1 degree longitude x latitude'
 source_id[key]['grid_label'] = 'gn'
@@ -894,9 +900,28 @@ source_id[key]['institution'] = ' '.join(['Program for Climate Model Diagnosis',
                                           'and Intercomparison, Lawrence',
                                           'Livermore National Laboratory,',
                                           'Livermore, CA 94550, USA'])
+source_id[key]['license'] = ''.join(["AMIP boundary condition data produced by ",
+                                     "PCMDI is licensed under a Creative Commons ",
+                                     "Attribution 4.0 International License ",
+                                     "(CC BY 4.0; https://creativecommons.org/licenses/by/4.0/). ",
+                                     "Consult https://pcmdi.llnl.gov/CMIP6/TermsOfUse ",
+                                     "for terms of use governing input4MIPs output, ",
+                                     "including citation requirements and proper ",
+                                     "acknowledgment. Further information about ",
+                                     "this data, including some limitations, can ",
+                                     "be found via the further_info_url (recorded ",
+                                     "as a global attribute in this file). The data ",
+                                     "producers and data providers make no warranty, ",
+                                     "either express or implied, including, but ",
+                                     "not limited to, warranties of merchantability ",
+                                     "and fitness for a particular purpose. All ",
+                                     "liabilities arising from the supply of the ",
+                                     "information (including any liability arising ",
+                                     "in negligence) are excluded to the fullest ",
+                                     "extent permitted by law"])
 source_id[key]['nominal_resolution'] = '1x1 degree'
 source_id[key]['mip_era'] = 'CMIP6Plus'
-source_id[key]['product'] = 'observations'
+#source_id[key]['product'] = 'observations'  # Remove, per dataset defined
 source_id[key]['references'] = ''.join(['Taylor, K.E., D. Williamson and F. Zwiers, ',
                                         '2000: The sea surface temperature and sea ice ',
                                         'concentration boundary conditions for AMIP II ',
