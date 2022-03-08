@@ -97,6 +97,7 @@ PJD 24 Jul 2020     - Add new tables for ISMIP6 https://github.com/PCMDI/input4M
 PJD 24 Jul 2020     - Updated call to readJsonCreateDict(tableSource, rawGit) - added argument
 PJD  8 Sep 2020     - Register source_id MRI-JRA55-do-1-5-0 https://github.com/PCMDI/input4MIPs-cmor-tables/issues/109
 PJD 26 Jan 2022     - Update home path
+PJD  8 Mar 2022     - Register PCMDI-AMIP-1-2-0 https://github.com/PCMDI/input4MIPs-cmor-tables/issues/87
                     - TODO: Deal with lab cert issue https://raw.githubusercontent.com -> http://rawgit.com (see requests library)
 
 
@@ -873,15 +874,15 @@ for count, key in enumerate(source_id.keys()):
     print(count, key)
     source_id[key]['mip_era'] = 'CMIP6'
 
-# Add PCMDI-AMIP-1-1-7
-key = 'PCMDI-AMIP-1-1-7'
+# Add PCMDI-AMIP-1-2-0
+key = 'PCMDI-AMIP-1-2-0'
 source_id.pop(key, None)  # Cleanup and start again
 source_id[key] = {}
 source_id[key]['calendar'] = 'gregorian'
 source_id[key]['comment'] = ' '.join(['Based on Hurrell SST/sea ice consistency',
                                      'criteria applied to merged HadISST',
                                       '(1870-01 to 1981-10) & NCEP-0I2 (1981-11',
-                                      'to 2021-06)'])
+                                      'to 2021-12)'])
 source_id[key]['contact'] = 'PCMDI (pcmdi-cmip@llnl.gov)'
 source_id[key]['dataset_category'] = 'SSTsAndSeaIce'
 source_id[key]['grid'] = '1x1 degree longitude x latitude'
@@ -894,7 +895,7 @@ source_id[key]['institution'] = ' '.join(['Program for Climate Model Diagnosis',
                                           'Livermore National Laboratory,',
                                           'Livermore, CA 94550, USA'])
 source_id[key]['nominal_resolution'] = '1x1 degree'
-source_id[key]['mip_era'] = 'CMIP6'
+source_id[key]['mip_era'] = 'CMIP6Plus'
 source_id[key]['product'] = 'observations'
 source_id[key]['references'] = ''.join(['Taylor, K.E., D. Williamson and F. Zwiers, ',
                                         '2000: The sea surface temperature and sea ice ',
@@ -909,55 +910,14 @@ source_id[key]['source_description'] = ' '.join(['Sea surface temperature and',
                                                 'sea-ice datasets produced by',
                                                  'PCMDI (LLNL) for the AMIP',
                                                  '(DECK) experiment of CMIP6'])
-source_id[key]['source'] = 'PCMDI-AMIP 1.1.7: Merged SST based on UK MetOffice HadISST and NCEP OI2'
+source_id[key]['source'] = 'PCMDI-AMIP 1.2.0: Merged SST based on UK MetOffice HadISST and NCEP OI2'
 source_id[key]['source_id'] = key
 source_id[key]['source_type'] = 'satellite_blended'
 source_id[key]['source_variables'] = ['areacello', 'sftof', 'siconc', 'siconcbcs',
                                       'tos', 'tosbcs']
-source_id[key]['source_version'] = '1.1.7'
-source_id[key]['target_mip'] = 'CMIP'
-source_id[key]['title'] = 'PCMDI-AMIP 1.1.7 dataset prepared for input4MIPs'
-
-# Remove PCMDI-AMIP-1-2-0
-key = 'PCMDI-AMIP-1-2-0'
-source_id.pop(key, None)  # Cleanup and start again
-# Add PCMDI-AMIP-1-2-0 - placeholder
-"""
-key = 'PCMDI-AMIP-1-2-0'
-source_id.pop(key, None) # Cleanup and start again
-source_id[key] = {}
-source_id[key]['calendar'] = 'gregorian'
-source_id[key]['comment'] = 'Based on Hurrell SST/sea ice consistency criteria applied to merged HadISST (1870-01 to 1981-10) & NCEP-0I2 (1981-11 to 2021-06)'
-source_id[key]['contact'] = 'PCMDI (pcmdi-cmip@llnl.gov)'
-source_id[key]['dataset_category'] = 'SSTsAndSeaIce'
-source_id[key]['grid'] = '1x1 degree longitude x latitude'
-source_id[key]['grid_label'] = 'gn'
-#source_id[key]['frequency'] = 'mon' # See https://github.com/PCMDI/cmor/issues/628#issuecomment-912101615
-source_id[key]['further_info_url'] = 'https://pcmdi.llnl.gov/mips/amip'
-source_id[key]['institution_id'] = 'PCMDI'
-source_id[key]['institution'] = 'Program for Climate Model Diagnosis and Intercomparison, Lawrence Livermore National Laboratory, Livermore, CA 94550, USA'
-source_id[key]['nominal_resolution'] = '1x1 degree'
-source_id[key]['mip_era'] = 'CMIP6Plus'
-source_id[key]['product'] = 'observations'
-source_id[key]['references'] = ''.join(['Taylor, K.E., D. Williamson and F. Zwiers, ',
-                                        '2000: The sea surface temperature and sea ice ',
-                                        'concentration boundary conditions for AMIP II ',
-                                        'simulations. PCMDI Report 60, Program for ',
-                                        'Climate Model Diagnosis and Intercomparison, ',
-                                        'Lawrence Livermore National Laboratory, 25 pp. ',
-                                        'Available online: https://pcmdi.llnl.gov/report/pdf/60.pdf'])
-source_id[key]['region'] = ['global_ocean']
-source_id[key]['release_year'] = '2022'
-source_id[key]['source_description'] = 'Sea surface temperature and sea-ice datasets produced by PCMDI (LLNL) for the AMIP (DECK) experiment of CMIP6'
-source_id[key]['source'] = 'PCMDI-AMIP 1.2.0: Merged SST based on UK MetOffice HadISST and NCEP OI2'
-source_id[key]['source_id'] = key
-source_id[key]['source_type'] = 'satellite_blended'
-source_id[key]['source_variables'] = ['areacello','sftof','siconc','siconcbcs',
-                                      'tos','tosbcs']
 source_id[key]['source_version'] = '1.2.0'
 source_id[key]['target_mip'] = 'CMIP'
 source_id[key]['title'] = 'PCMDI-AMIP 1.2.0 dataset prepared for input4MIPs'
-"""
 
 # %% Create CV master
 CV = {}
