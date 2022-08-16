@@ -96,10 +96,14 @@ PJD 23 Jul 2020     - Variable correction to #103 following a review by @geresie
 PJD 24 Jul 2020     - Add new tables for ISMIP6 https://github.com/PCMDI/input4MIPs-cmor-tables/issues/107
 PJD 24 Jul 2020     - Updated call to readJsonCreateDict(tableSource, rawGit) - added argument
 PJD  8 Sep 2020     - Register source_id MRI-JRA55-do-1-5-0 https://github.com/PCMDI/input4MIPs-cmor-tables/issues/109
+"""
+# 2022
+"""
 PJD 26 Jan 2022     - Update home path
 PJD  8 Mar 2022     - Register PCMDI-AMIP-1-2-0 https://github.com/PCMDI/input4MIPs-cmor-tables/issues/87
 PJD 14 Jun 2022     - Register PCMDI-AMIP-1-1-8 https://github.com/PCMDI/input4MIPs-cmor-tables/issues/123
 PJD 14 Jun 2022     - Updated default license from CC BY-SA-NC 4.0 to CC BY 4.0
+PJD 15 Aug 2022     - Further PCMDI-AMIP-1-1-8 and license cleanup following https://github.com/PCMDI/cmor/issues/628
                     - TODO: Deal with lab cert issue https://raw.githubusercontent.com -> http://rawgit.com (see requests library)
 
 
@@ -107,11 +111,11 @@ PJD 14 Jun 2022     - Updated default license from CC BY-SA-NC 4.0 to CC BY 4.0
 """
 
 # %% Import statements
+from durolib import readJsonCreateDict
 import copy
 import gc, json, os, sys, time  # shutil, subprocess, pdb
 sys.path.append('~/git/durolib/durolib/')
 sys.path.append('~/sync/git/durolib/durolib/')
-from durolib import readJsonCreateDict
 
 # %% Determine path
 #homePath = os.path.join('/','/'.join(os.path.realpath(__file__).split('/')[0:-1]))
@@ -132,7 +136,7 @@ masterTargets = [
     'grids',
     'formula_terms',
     'institution_id',
-    'license1',
+    'license',
     'mip_era',
     'nominal_resolution',
     'product',
@@ -171,7 +175,7 @@ CVTargets = [
     'frequency',
     'grid_label',
     'institution_id',
-    'license1',
+    'license',
     'mip_era',
     'nominal_resolution',
     'product',
@@ -802,18 +806,18 @@ institution_id['VUA'] = 'Vrije Universiteit Amsterdam, De Boelelaan 1105, 1081 H
 #institution_id['institution_id']['RSS'] = 'Remote Sensing Systems, Santa Rosa, CA 95401, USA'
 
 # %% License
-license1 = ('<Your_Data_Identifier> data produced by <Your_Centre_Name> is licensed under a'
-            ' Creative Commons Attribution 4.0 International (CC BY 4.0;'
-            ' https://creativecommons.org/licenses/by/4.0/) License.'
-            ' Consult https://pcmdi.llnl.gov/CMIP6/TermsOfUse'
-            ' for terms of use governing input4MIPs output, including citation requirements and'
-            ' proper acknowledgment. Further information about this data, including some'
-            ' limitations, can be found via the further_info_url (recorded as a global'
-            ' attribute in this file). The data producers and data providers make no warranty,'
-            ' either express or implied, including, but not limited to, warranties of'
-            ' merchantability and fitness for a particular purpose. All liabilities arising'
-            ' from the supply of the information (including any liability arising in negligence)'
-            ' are excluded to the fullest extent permitted by law.')
+license = ('<Your_Data_Identifier> data produced by <Your_Centre_Name> is licensed under a'
+           ' Creative Commons Attribution 4.0 International License (CC BY 4.0;'
+           ' https://creativecommons.org/licenses/by/4.0/).'
+           ' Consult https://pcmdi.llnl.gov/CMIP6/TermsOfUse'
+           ' for terms of use governing input4MIPs output, including citation requirements and'
+           ' proper acknowledgment. Further information about this data, including some'
+           ' limitations, can be found via the further_info_url (recorded as a global'
+           ' attribute in this file). The data producers and data providers make no warranty,'
+           ' either express or implied, including, but not limited to, warranties of'
+           ' merchantability and fitness for a particular purpose. All liabilities arising'
+           ' from the supply of the information (including any liability arising in negligence)'
+           ' are excluded to the fullest extent permitted by law.')
 
 # %% Mip era
 mip_era = [
@@ -898,6 +902,19 @@ source_id[key]['institution'] = ' '.join(['Program for Climate Model Diagnosis',
                                           'and Intercomparison, Lawrence',
                                           'Livermore National Laboratory,',
                                           'Livermore, CA 94550, USA'])
+source_id[key]['license'] = ' '.join(['AMIP boundary condition data produced by PCMDI is licensed under',
+                                      'a Creative Commons Attribution 4.0 International License',
+                                      '(CC BY 4.0; https://creativecommons.org/licenses/by/4.0). Consult',
+                                      'https://pcmdi.llnl.gov/CMIP6/TermsOfUse for terms of use',
+                                      'governing input4MIPs output, including citation requirements and',
+                                      'proper acknowledgment. Further information about this data,',
+                                      'including some limitations, can be found via the further_info_url',
+                                      '(recorded as a global attribute in this file). The data producers',
+                                      'and data providers make no warranty, either express or implied,',
+                                      'including, but not limited to, warranties of merchantability and',
+                                      'fitness for a particular purpose. All liabilities arising from the',
+                                      'supply of the information (including any liability arising in',
+                                      'negligence) are excluded to the fullest extent permitted by law'])
 source_id[key]['nominal_resolution'] = '1x1 degree'
 source_id[key]['mip_era'] = 'CMIP6'
 source_id[key]['product'] = 'observations'
@@ -922,9 +939,6 @@ source_id[key]['source_variables'] = ['areacello', 'sftof', 'siconc', 'siconcbcs
 source_id[key]['source_version'] = '1.1.8'
 source_id[key]['target_mip'] = 'CMIP'
 source_id[key]['title'] = 'PCMDI-AMIP 1.1.8 dataset prepared for input4MIPs'
-# Remove PCMDI-AMIP-1-2-0
-key = "PCMDI-AMIP-1-2-0"
-source_id.pop(key)
 
 # %% Create CV master
 CV = {}
@@ -935,7 +949,7 @@ CV['CV']['frequency'] = frequency
 # CV['CV']['further_info_url'] = ['[[:alpha:]]\\{1,\\}'] ; # Not matching format
 CV['CV']['grid_label'] = grid_label
 CV['CV']['institution_id'] = institution_id
-CV['CV']['license'] = license1
+CV['CV']['license'] = license
 CV['CV']['mip_era'] = mip_era
 CV['CV']['nominal_resolution'] = nominal_resolution
 CV['CV']['product'] = product
@@ -968,9 +982,9 @@ for jsonName in masterTargets:
                 dictToClean[key][value2[0]] = string
         vars()[jsonName] = dictToClean
     # Write file
-    if jsonName == 'license1':
-        outFile = ''.join(['input4MIPs_license.json'])
-    elif jsonName in tableTargets:
+    # if jsonName == 'license':
+    #    outFile = ''.join(['input4MIPs_license.json'])
+    if jsonName in tableTargets:
         outFile = ''.join(['Tables/input4MIPs_', jsonName, '.json'])
     else:
         outFile = ''.join(['input4MIPs_', jsonName, '.json'])
