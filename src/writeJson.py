@@ -175,7 +175,7 @@ CVTargets = [
     'frequency',
     'grid_label',
     'institution_id',
-    'license1',
+    'license',
     'mip_era',
     'nominal_resolution',
     'product',
