@@ -7,7 +7,7 @@ Software contained in this repository is developed by climate and computer scien
 
 <p align="left">
     <img src="https://github.com/PCMDI/assets/blob/main/480px-DOE_Seal_Color.png?raw=true"
-         width="75"
+         width="65"
          title="United States Department of Energy"
          alt="United States Department of Energy"
     >
