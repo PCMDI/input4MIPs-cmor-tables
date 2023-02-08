@@ -8,13 +8,12 @@ Software contained in this repository is developed by climate and computer scien
 <p>
     <img src="https://github.com/PCMDI/assets/blob/main/DOE/480px-DOE_Seal_Color.png?raw=true"
          width="65"
-         style="width:80px ; height:0px"
+         style="margin-right: 30px"
          title="United States Department of Energy"
          alt="United States Department of Energy"
     >
     <img src="https://github.com/PCMDI/assets/blob/main/LLNL/212px-LLNLiconPMS286.png?raw=true"
          width="65"
-         style="width:80px ; height:0px"
          title="Lawrence Livermore National Laboratory"
          alt="Lawrence Livermore National Laboratory"
     >
