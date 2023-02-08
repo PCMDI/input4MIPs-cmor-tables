@@ -11,7 +11,7 @@ Software contained in this repository is developed by climate and computer scien
          style="margin-right: 30px"
          title="United States Department of Energy"
          alt="United States Department of Energy"
-    >
+    >&nbsp;
     <img src="https://github.com/PCMDI/assets/blob/main/LLNL/212px-LLNLiconPMS286.png?raw=true"
          width="65"
          title="Lawrence Livermore National Laboratory"
@@ -25,7 +25,7 @@ Software contained in this repository is developed by climate and computer scien
          style="margin-right: 30px"
          title="United States Department of Energy"
          alt="United States Department of Energy"
-    >
+    >&nbsp;
     <img src="https://github.com/PCMDI/assets/blob/main/LLNL/212px-LLNLiconPMS286.png?raw=true"
          width="65"
          title="Lawrence Livermore National Laboratory"
