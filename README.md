@@ -13,13 +13,13 @@ margin: 0px 30px;
 <div id="imgstyle"><p>
     <img src="https://github.com/PCMDI/assets/blob/main/DOE/480px-DOE_Seal_Color.png?raw=true"
          width="65"
-         style="horizontal-align:middle;margin:0px 1000px"
+         style="width:80px ; height:0px"
          title="United States Department of Energy"
          alt="United States Department of Energy"
     >
     <img src="https://github.com/PCMDI/assets/blob/main/LLNL/212px-LLNLiconPMS286.png?raw=true"
          width="65"
-         style="horizontal-align:middle;margin:10px 10px"
+         style="width:80px ; height:0px"
          title="Lawrence Livermore National Laboratory"
          alt="Lawrence Livermore National Laboratory"
     >
