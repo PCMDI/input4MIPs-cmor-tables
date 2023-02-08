@@ -5,7 +5,12 @@ JSON Tables for CMOR3 to create input4MIPs datasets
 
 Software contained in this repository is developed by climate and computer scientists from the Program for Climate Model Diagnosis and Intercomparison ([PCMDI][PCMDI]) at Lawrence Livermore National Laboratory ([LLNL][LLNL]). This work is sponsored by the Regional and Global Model Analysis ([RGMA][RGMA]) program, of the Earth and Environmental Systems Sciences Division ([EESSD][EESSD]) in the Office of Biological and Environmental Research ([BER][BER]) within the [Department of Energy][DOE]'s [Office of Science][OS]. The work is performed under the auspices of the U.S. Department of Energy by Lawrence Livermore National Laboratory under Contract DE-AC52-07NA27344.
 
-<p align="left">
+#imgstyle img {
+float: left;
+margin: 0px 30px;
+}
+
+<div id="imgstyle"><p>
     <img src="https://github.com/PCMDI/assets/blob/main/DOE/480px-DOE_Seal_Color.png?raw=true"
          width="65"
          style="horizontal-align:middle;margin:0px 1000px"
@@ -18,7 +23,7 @@ Software contained in this repository is developed by climate and computer scien
          title="Lawrence Livermore National Laboratory"
          alt="Lawrence Livermore National Laboratory"
     >
-</p>
+</p></div>
 
 ## Contributors
 
