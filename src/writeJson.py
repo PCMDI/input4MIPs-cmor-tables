@@ -104,6 +104,7 @@ PJD  8 Mar 2022     - Register PCMDI-AMIP-1-2-0 https://github.com/PCMDI/input4M
 PJD 14 Jun 2022     - Register PCMDI-AMIP-1-1-8 https://github.com/PCMDI/input4MIPs-cmor-tables/issues/123
 PJD 14 Jun 2022     - Updated default license from CC BY-SA-NC 4.0 to CC BY 4.0
 PJD 15 Aug 2022     - Further PCMDI-AMIP-1-1-8 and license cleanup following https://github.com/PCMDI/cmor/issues/628
+PJD  2 May 2023     - Augment notes to extract unique variables
                     - TODO: Deal with lab cert issue https://raw.githubusercontent.com -> http://rawgit.com (see requests library)
 
 
@@ -277,9 +278,9 @@ for count2, table in enumerate(tableSource):
         eval(tableName)['Header']['table_id'] = ''.join(
             ['Table input4MIPs_', tableName])
 
-# %% Cleanup imported tables
+# %% Cleanup imported tables, define new tables and variables
 # Fixed fields
-# Afx
+# %% Afx
 AfxCleanup = ['areacellr', 'mrsofc', 'orog', 'rootd', 'sftgif', 'zfull']
 for clean in AfxCleanup:
     tmp = Afx['variable_entry'].pop(clean)
@@ -298,7 +299,7 @@ Afx['variable_entry']['sftof']['modeling_realm'] = 'atmos'
 Afx['variable_entry']['sftof']['cell_measures'] = 'area: areacella'
 Afx['variable_entry']['sftof']['comment'] = 'Percentage of horizontal area occupied by ocean'
 
-# Ofx
+# %% Ofx
 OfxCleanup = ['basin', 'deptho', 'hfgeou',
               'masscello', 'thkcello', 'volcello']  # ugrid
 for clean in OfxCleanup:
@@ -306,11 +307,9 @@ for clean in OfxCleanup:
 Ofx['Header']['product'] = 'input4MIPs'
 Ofx['variable_entry']['sftof']['comment'] = 'Percentage of horizontal area occupied by ocean'
 
-
+# %% A3hr
 # Variable tables
 # Atmos
-
-# A3hr
 A3hrCleanup = ['clt', 'hfls', 'hfss', 'mrro', 'mrsos', 'pr', 'prc', 'ps',
                'rldscs', 'rlus', 'rsdscs', 'rsdsdiff', 'rsus', 'rsuscs', 'tos',
                'tslsi']
@@ -326,7 +325,7 @@ A3hr['variable_entry']['prra']['comment'] = ' '.join(['In accordance with common
 A3hr['variable_entry']['prra']['dimensions'] = 'longitude latitude time'
 A3hr['variable_entry']['prra']['cell_methods'] = 'area: time: mean'
 
-# Create A3hrPt
+# %% A3hrPt
 A3hrPt = {}
 A3hrPt['variable_entry'] = {}
 A3hrPt['Header'] = copy.deepcopy(A3hr['Header'])
@@ -347,7 +346,7 @@ A3hrPt['variable_entry']['vas'] = A3hr['variable_entry'].pop('vas')
 A3hrPt['variable_entry']['vas']['cell_measures'] = 'area: areacella'
 A3hrPt['variable_entry']['ts'] = CF3hr['variable_entry'].pop('ts')
 
-# Create Ayr
+# %% Ayr
 AyrCleanup = ['ccb', 'cct', 'cfc113global', 'cfc11global', 'cfc12global',
               'ch4', 'ch4Clim', 'ch4global', 'ch4globalClim', 'ci', 'cl',
               'cli', 'clivi', 'clt', 'clw', 'clwvi', 'co2', 'co2Clim',
@@ -369,8 +368,8 @@ print(Ayr['variable_entry'].keys())
 print(Ayr['Header'].keys())
 
 
+# %% Lyr
 # Land
-# Create Lyr
 LyrCleanup = ['baresoilFrac', 'burntFractionAll', 'c3PftFrac', 'c4PftFrac',
               'cCwd', 'cLeaf', 'cLitter', 'cLitterAbove', 'cLitterBelow',
               'cProduct', 'cRoot', 'cSoilFast', 'cSoilMedium', 'cSoilSlow',
@@ -400,9 +399,9 @@ Lyr['Header']['product'] = 'input4MIPs'
 # print(Lyr['variable_entry'].keys())
 # print(Lyr['Header'].keys())
 
-
+# %% LIfx
 # LandIce
-# LIfx
+
 LIfxCleanup = ['hfgeoubed', 'lithk', 'topg']
 for clean in LIfxCleanup:
     tmp = LIfx['variable_entry'].pop(clean)
@@ -411,7 +410,8 @@ LIfx['variable_entry']['areacellg'][
     'comment'] = 'Area of the target grid (not the interpolated area of the source grid)'
 LIfx['variable_entry']['areacellg']['modeling_realm'] = 'landIce'
 
-# Create LIyrC (before Omon is cleaned up)
+# %% LIyrC
+# Create (before Omon is cleaned up)
 LIyrC = {}
 LIyrC['variable_entry'] = {}
 LIyrC['Header'] = copy.deepcopy(Omon['Header'])
@@ -428,7 +428,8 @@ LIyrC['variable_entry']['licalvf']['dimensions'] = 'longitude latitude time2'
 LIyrC['variable_entry']['licalvf']['frequency'] = 'yrC'
 LIyrC['variable_entry']['licalvf']['modeling_realm'] = 'landIce'
 
-# Create LIyrC (before Omon is cleaned up)
+# %% LIday
+# Create (before Omon is cleaned up)
 LIday = {}
 LIday['variable_entry'] = {}
 LIday['Header'] = copy.deepcopy(Omon['Header'])
@@ -445,7 +446,7 @@ LIday['variable_entry']['licalvf']['dimensions'] = 'longitude latitude time'
 LIday['variable_entry']['licalvf']['frequency'] = 'day'
 LIday['variable_entry']['licalvf']['modeling_realm'] = 'landIce'
 
-# Create LIyr
+# %% Create LIyrs
 LIyrCleanup = ['acabfIs', 'agesno', 'hfdsn', 'hflsIs', 'hfssIs', 'icemIs',
                'litemptopIs', 'lwsnl', 'mrroIs', 'orogIs', 'pflw', 'prraIs',
                'prsnIs', 'rldsIs', 'rlusIs', 'rsdsIs', 'rsusIs', 'sbl',
@@ -495,9 +496,8 @@ LIyrGre['Header']['product'] = 'input4MIPs'
 # print(LIyrAnt['Header']['realm'])
 # print(LIyrAnt['Header']['table_id'])
 
-
-# Ocean
-# Create OyrC (before Omon is cleaned up)
+# %% OyrC
+# Create Ocean (before Omon is cleaned up)
 OyrC = {}
 OyrC['variable_entry'] = {}
 OyrC['Header'] = copy.deepcopy(Omon['Header'])
@@ -578,7 +578,7 @@ OmonCleanup = ['agessc', 'arag', 'bacc', 'bfe', 'bfeos',
                'nh4os', 'phos', 'phycalcos', 'phydiatos', 'phydiazos', 'phymiscos',
                'phypicoos', 'po4os', 'ppos', 'talkos', 'zmesoos', 'zmicroos',
                'zmiscos', 'zoocos']
-# Oday
+# %% Oday
 Oday = {}
 Oday['variable_entry'] = {}
 Oday['variable_entry']['friver'] = copy.deepcopy(
@@ -608,7 +608,8 @@ Oday['Header'] = copy.deepcopy(Omon['Header'])
 Oday['Header']['table_id'] = 'Table input4MIPs_Oday'
 Oday['Header']['realm'] = 'ocean'
 
-# Create Lday from Oday
+# %% Lday
+# Create from Oday
 Lday = {}
 Lday['variable_entry'] = {}
 Lday['variable_entry']['friver'] = copy.deepcopy(
@@ -620,7 +621,7 @@ Lday['Header']['table_id'] = 'Table input4MIPs_Lday'
 Lday['Header']['realm'] = 'land'
 Lday['Header']['generic_levels'] = ''
 
-# OmonC
+# %% OmonC
 OmonC = {}
 OmonC['variable_entry'] = {}
 OmonC['variable_entry']['sos'] = copy.deepcopy(Omon['variable_entry']['sos'])
@@ -630,7 +631,8 @@ OmonC['Header'] = copy.deepcopy(Omon['Header'])
 OmonC['Header']['table_id'] = 'Table input4MIPs_OmonC'
 OmonC['Header']['realm'] = 'ocean'
 
-# Oyr from Omon
+# %% Oyr
+# from Omon
 Oyr = {}
 Oyr['variable_entry'] = {}
 Oyr['variable_entry']['so'] = copy.deepcopy(Omon['variable_entry']['so'])
@@ -659,7 +661,7 @@ Oyr['Header']['realm'] = 'ocean'
 # print(Oyr['Header']['realm'])
 # print(Oyr['Header']['table_id'])
 
-# Omon
+# %% Omon
 for clean in OmonCleanup:
     tmp = Omon['variable_entry'].pop(clean)
 Omon['variable_entry']['tos']['cell_methods'] = 'time: mean'
