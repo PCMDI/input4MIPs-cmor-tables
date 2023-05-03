@@ -105,6 +105,8 @@ PJD 14 Jun 2022     - Register PCMDI-AMIP-1-1-8 https://github.com/PCMDI/input4M
 PJD 14 Jun 2022     - Updated default license from CC BY-SA-NC 4.0 to CC BY 4.0
 PJD 15 Aug 2022     - Further PCMDI-AMIP-1-1-8 and license cleanup following https://github.com/PCMDI/cmor/issues/628
 PJD  2 May 2023     - Augment notes to extract unique variables
+PJD  3 May 2023     - Augment with PCMDI-AMIP-1-1-9
+PJD  3 May 2023     - Augmented mip_era with AMIP1 & 2
                     - TODO: Deal with lab cert issue https://raw.githubusercontent.com -> http://rawgit.com (see requests library)
 
 
@@ -112,11 +114,10 @@ PJD  2 May 2023     - Augment notes to extract unique variables
 """
 
 # %% Import statements
-from durolib import readJsonCreateDict
-import copy
-import gc, json, os, sys, time  # shutil, subprocess, pdb
+import copy, gc, json, os, sys, time  # shutil, subprocess, pdb
 sys.path.append('~/git/durolib/durolib/')
 sys.path.append('~/sync/git/durolib/durolib/')
+from durolib import readJsonCreateDict
 
 # %% Determine path
 #homePath = os.path.join('/','/'.join(os.path.realpath(__file__).split('/')[0:-1]))
@@ -446,7 +447,7 @@ LIday['variable_entry']['licalvf']['dimensions'] = 'longitude latitude time'
 LIday['variable_entry']['licalvf']['frequency'] = 'day'
 LIday['variable_entry']['licalvf']['modeling_realm'] = 'landIce'
 
-# %% Create LIyrs
+# %% LIyr
 LIyrCleanup = ['acabfIs', 'agesno', 'hfdsn', 'hflsIs', 'hfssIs', 'icemIs',
                'litemptopIs', 'lwsnl', 'mrroIs', 'orogIs', 'pflw', 'prraIs',
                'prsnIs', 'rldsIs', 'rlusIs', 'rsdsIs', 'rsusIs', 'sbl',
@@ -823,6 +824,8 @@ license = ('<Your_Data_Identifier> data produced by <Your_Centre_Name> is licens
 
 # %% Mip era
 mip_era = [
+    'AMIP1',
+    'AMIP2',
     'CMIP1',
     'CMIP2',
     'CMIP3',
@@ -884,15 +887,14 @@ for count, key in enumerate(source_id.keys()):
     print(count, key)
     source_id[key]['mip_era'] = 'CMIP6'
 
-# Add PCMDI-AMIP-1-1-8
-key = 'PCMDI-AMIP-1-1-8'
-source_id.pop(key, None)  # Cleanup and start again
+# Add PCMDI-AMIP-1-1-9
+key = 'PCMDI-AMIP-1-1-9'
 source_id[key] = {}
 source_id[key]['calendar'] = 'gregorian'
 source_id[key]['comment'] = ' '.join(['Based on Hurrell SST/sea ice consistency',
                                      'criteria applied to merged HadISST',
                                       '(1870-01 to 1981-10) & NCEP-0I2 (1981-11',
-                                      'to 2021-12)'])
+                                      'to 2022-12)'])
 source_id[key]['contact'] = 'PCMDI (pcmdi-cmip@llnl.gov)'
 source_id[key]['dataset_category'] = 'SSTsAndSeaIce'
 source_id[key]['grid'] = '1x1 degree longitude x latitude'
@@ -918,7 +920,7 @@ source_id[key]['license'] = ' '.join(['AMIP boundary condition data produced by 
                                       'supply of the information (including any liability arising in',
                                       'negligence) are excluded to the fullest extent permitted by law'])
 source_id[key]['nominal_resolution'] = '1x1 degree'
-source_id[key]['mip_era'] = 'CMIP6'
+source_id[key]['mip_era'] = 'CMIP6Plus'
 source_id[key]['product'] = 'observations'
 source_id[key]['references'] = ''.join(['Taylor, K.E., D. Williamson and F. Zwiers, ',
                                         '2000: The sea surface temperature and sea ice ',
@@ -928,19 +930,19 @@ source_id[key]['references'] = ''.join(['Taylor, K.E., D. Williamson and F. Zwie
                                         'Lawrence Livermore National Laboratory, 25 pp. ',
                                         'Available online: https://pcmdi.llnl.gov/report/pdf/60.pdf'])
 source_id[key]['region'] = ['global_ocean']
-source_id[key]['release_year'] = '2022'
+source_id[key]['release_year'] = '2023'
 source_id[key]['source_description'] = ' '.join(['Sea surface temperature and',
                                                 'sea-ice datasets produced by',
                                                  'PCMDI (LLNL) for the AMIP',
-                                                 '(DECK) experiment of CMIP6'])
-source_id[key]['source'] = 'PCMDI-AMIP 1.1.8: Merged SST based on UK MetOffice HadISST and NCEP OI2'
+                                                 '(DECK) experiment of CMIP6Plus'])
+source_id[key]['source'] = 'PCMDI-AMIP 1.1.9: Merged SST based on UK MetOffice HadISST and NCEP OI2'
 source_id[key]['source_id'] = key
 source_id[key]['source_type'] = 'satellite_blended'
 source_id[key]['source_variables'] = ['areacello', 'sftof', 'siconc', 'siconcbcs',
                                       'tos', 'tosbcs']
-source_id[key]['source_version'] = '1.1.8'
+source_id[key]['source_version'] = '1.1.9'
 source_id[key]['target_mip'] = 'CMIP'
-source_id[key]['title'] = 'PCMDI-AMIP 1.1.8 dataset prepared for input4MIPs'
+source_id[key]['title'] = 'PCMDI-AMIP 1.1.9 dataset prepared for input4MIPs'
 
 # %% Create CV master
 CV = {}
