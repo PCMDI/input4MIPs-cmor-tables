@@ -1473,6 +1473,10 @@ for count, key in enumerate(source_id.keys()):
     print(count, key)
     source_id[key]["mip_era"] = "CMIP6"
 
+# Add PCMDI-AMIP-1-1-9
+key = "PCMDI-AMIP-1-1-9"
+source_id[key]["mip_era"] = "CMIP6Plus"
+
 # Add MRI-JRA55-do-1-6-0
 key = "MRI-JRA55-do-1-6-0"
 source_id[key] = {}
