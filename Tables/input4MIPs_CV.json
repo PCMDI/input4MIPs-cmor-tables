@@ -817,7 +817,7 @@
                 "comment":"Based on JRA-55 reanalysis (1958-01 to 2024-01)",
                 "contact":"Hiroyuki Tsujino (htsujino@mri-jma.go.jp)",
                 "dataset_category":"atmosphericState",
-                "further_info_url":"http://climate.mri-jma.go.jp/~htsujino/jra55do.html",
+                "further_info_url":"https://climate.mri-jma.go.jp/pub/ocean/JRA55-do/index.html",
                 "grid":"data regridded to the normal atmosphere TL319 gaussian grid (320x640 latxlon) from a reduced TL319 gaussian grid",
                 "grid_label":"gn",
                 "institution":"Meteorological Research Institute, Tsukuba, Ibaraki 305-0052, Japan",
