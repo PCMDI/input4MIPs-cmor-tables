@@ -112,6 +112,7 @@ PJD  3 May 2023     - Augmented mip_era with AMIP1 & 2
 # 2024
 """
 PJD 21 May 2024     - Register MRI-JMA-JRA55-do-1-6-0 https://github.com/PCMDI/input4MIPs-cmor-tables/issues/130
+PJD 29 May 2024     - Revised MRI-JMA-JRA55-do-1-6-0 https://github.com/PCMDI/input4MIPs-cmor-tables/issues/130
 """
 """
 @author: durack1
@@ -1532,7 +1533,7 @@ source_id[key]["references"] = "".join(
 )
 source_id[key]["region"] = ["global_ocean"]
 source_id[key]["release_year"] = "2024"
-source_id[key]["source_description"] = " ".join(
+source_id[key]["source_description"] = "".join(
     [
         "Atmospheric state and terrestrial runoff datasets produced ",
         "by MRI for the OMIP experiment of CMIP6Plus",
